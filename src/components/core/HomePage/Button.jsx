@@ -1,0 +1,16 @@
+import { Link } from "react-router-dom"
+
+
+const Button = ({ Children, active, linkTo}) =>{
+    return(
+        <Link to={linkTo}>
+            <div className={`text-center text-[13px] sm:text-[16px] px-6 py-3 rounded-md font-bold shadow-[2px-2px-0px-rgba(255, 255, 255, 0.18)] ${
+                active ? "bg-yellow-50 text-black" : "bg-richblack-800"
+            } hover:shadow-none hover:scale-95 transition-all duration-200`}>
+                {Children}
+            </div>
+        </Link>
+    )
+}
+
+export default Button
