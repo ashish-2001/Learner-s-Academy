@@ -1,77 +1,81 @@
-// Import the Mongoose library
-const mongoose = require("mongoose")
+import mongoose from "mongoose";
 
-// Define the user schema using the Mongoose Schema constructor
-const userSchema = new mongoose.Schema(
-    {
-        // Define the name field with type String, required, and trimmed
-        firstName: {
+const userSchema = new mongoose.Schema({
+    firstName: {
         type: String,
         required: true,
-        trim: true,
-        },
-        lastName: {
-        type: String,
-        required: true,
-        trim: true,
-        },
-        // Define the email field with type String, required, and trimmed
-        email: {
-        type: String,
-        required: true,
-        trim: true,
-        },
-
-        // Define the password field with type String and required
-        password: {
-        type: String,
-        required: true,
-        },
-        // Define the role field with type String and enum values of "Admin", "Student", or "Visitor"
-        accountType: {
-        type: String,
-        enum: ["Admin", "Student", "Instructor"],
-        required: true,
-        },
-        active: {
-        type: Boolean,
-        default: true,
-        },
-        approved: {
-        type: Boolean,
-        default: true,
-        },
-        additionalDetails: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: "Profile",
-        },
-        courses: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Course",
-        },
-        ],
-        token: {
-        type: String,
-        },
-        resetPasswordExpires: {
-        type: Date,
-        },
-        image: {
-        type: String,
-        },
-        courseProgress: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "courseProgress",
-        },
-        ],
-
-        // Add timestamps for when the document is created and last modified
+        trim: true
     },
-    { timestamps: true }
-)
 
-// Export the Mongoose model for the user schema, using the name "user"
-module.exports = mongoose.model("user", userSchema)
+    lastName: {
+        type: String,
+        required: true,
+        trim: true
+    },
+
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+
+    password: {
+        type: String,
+        required: true
+    },
+
+    accountType: {
+        type: String,
+        enum: ["Student", "Instructor"],
+        required: true
+    },
+
+    active:{
+        type: Boolean,
+        required: true
+    },
+
+    approved: {
+        type: Boolean,
+        required: true
+    },
+
+    courses: [
+        {
+            type: mongoose.Schema.types.ObjectId,
+            ref: "Course"
+        }
+    ],
+
+    additionalDetails: {
+        type: mongoose.Schema.types.ObjectId,
+        ref: "Profile"
+    },
+
+    image: {
+        type: String
+    },
+
+    resetPasswordExpires: {
+        type: Date
+    },
+
+    token: {
+        type: String
+    },
+
+    courseProgress: [
+        {
+            type: mongoose.Schema.types.ObjectId,
+            ref: "courseProgress"
+        }
+    ]
+}, { timestamps: true }
+
+);
+
+const User = mongoose.model("User", userSchema);
+
+export {
+    User
+}
