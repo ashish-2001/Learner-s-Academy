@@ -1,0 +1,22 @@
+import express from "express";
+import { changePassword, sendOtp, signIn, signUp } from "../controllers/Auth";
+
+const router = express.Router();
+
+
+router.post("/signup", signUp);
+
+router.post("/login", signIn);
+
+router.post("/otp", sendOtp);
+
+router.post("/change-password", auth, changePassword);
+
+router.post("/reset-password", resetPassword);
+
+router.post("/reset-password-token", resetPasswordToken);
+
+
+export {
+    router
+}
