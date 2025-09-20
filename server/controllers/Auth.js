@@ -232,7 +232,7 @@ const sendOtp = async (req, res) => {
         }
 
         const otpPayload = { email, otp };
-        const otpBody = await Otp.create({ otpPayload });
+        await Otp.create({ otpPayload });
         res.status(200).json({
             success: true,
             message: "Otp sent successfully",

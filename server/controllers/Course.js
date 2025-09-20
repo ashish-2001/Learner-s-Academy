@@ -3,6 +3,8 @@ import { User } from "../models/Users";
 import { Category } from "../models/Category";
 import { Course } from "../models/Course";
 import { data } from "react-router-dom";
+import { Section } from "../models/Section";
+import { SubSection } from "../models/SubSection";
 
 const courseValidator = z.object({
     courseName: z.string().min(1, "Course name is required"),
@@ -103,7 +105,7 @@ const createCourse = async (req, res) =>{
             new: true
         })
 
-        const categoryDetails2 = await Category.findByIdAndUpdate(
+        await Category.findByIdAndUpdate(
             {
                 _id: category
             }, {
@@ -336,7 +338,7 @@ async function getFullCourseDetails(req, res) {
         courseDetails.courseContent.forEach((content) => {
             content.subSection.forEach((subSection) => {
                 const timeDurationInSeconds = parseInt(subSection.timeDuration);
-                timeDurationInSeconds += timeDurationInSeconds;
+                totalDurationInSeconds += timeDurationInSeconds;
             })
         })
 

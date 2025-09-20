@@ -1,98 +1,172 @@
-// Importing required modules
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
-const User = require("../models/User");
-// Configuring dotenv to load environment variables from .env file
-dotenv.config();
+import { z } from "zod";
+import { jwt } from "jsonwebtoken";
+import { User } from "../models/Users";
 
-// This function is used as middleware to authenticate user requests
-exports.auth = async (req, res, next) => {
-	try {
-		// Extracting JWT from request cookies, body or header
-		const token =
-			req.cookies.token ||
-			req.body.token ||
-			req.header("Authorization").replace("Bearer ", "");
+const authValidator = z.object({
+    token: z.string().min(1, "Token cannot be empty").optional()
+})
 
-		// If JWT is missing, return 401 Unauthorized response
-		if (!token) {
-			return res.status(401).json({ success: false, message: `Token Missing` });
-		}
+async function auth(req, res, next){
+    try{
 
-		try {
-			// Verifying the JWT using the secret key stored in environment variables
-			const decode = await jwt.verify(token, process.env.JWT_SECRET);
-			console.log(decode);
-			// Storing the decoded JWT payload in the request object for further use
-			req.user = decode;
-		} catch (error) {
-			// If JWT verification fails, return 401 Unauthorized response
-			return res
-				.status(401)
-				.json({ success: false, message: "token is invalid" });
-		}
+        let token = req.cookies.token || req.header("authorization")?.replace("Bearer", "") || null ;
 
-		// If JWT is valid, move on to the next middleware or request handler
-		next();
-	} catch (error) {
-		// If there is an error during the authentication process, return 401 Unauthorized response
-		return res.status(401).json({
-			success: false,
-			message: `Something Went Wrong While Validating the Token`,
-		});
-	}
-};
-exports.isStudent = async (req, res, next) => {
-	try {
-		const userDetails = await User.findOne({ email: req.user.email });
+        try{
+            const parsedResult = authValidator.safeParse(req.user);
+            if(parsedResult.token){
+                token = parsedResult.token
+            }
+        }
+        catch(e){
+            if(e instanceof z.ZodError){
+                return res.status(400).json({
+                    success: false,
+                    errors:e.errors.map((err) => err.message)
+                })
+            }
+        }
 
-		if (userDetails.accountType !== "Student") {
-			return res.status(401).json({
-				success: false,
-				message: "This is a Protected Route for Students",
-			});
-		}
-		next();
-	} catch (error) {
-		return res
-			.status(500)
-			.json({ success: false, message: `User Role Can't be Verified` });
-	}
-};
-exports.isAdmin = async (req, res, next) => {
-	try {
-		const userDetails = await User.findOne({ email: req.user.email });
+        if(!token){
+            return res.status(401).json({
+                success: false,
+                message: "Token missing"
+            });
+        }
 
-		if (userDetails.accountType !== "Admin") {
-			return res.status(401).json({
-				success: false,
-				message: "This is a Protected Route for Admin",
-			});
-		}
-		next();
-	} catch (error) {
-		return res
-			.status(500)
-			.json({ success: false, message: `User Role Can't be Verified` });
-	}
-};
-exports.isInstructor = async (req, res, next) => {
-	try {
-		const userDetails = await User.findOne({ email: req.user.email });
-		console.log(userDetails);
+        try{
+            const decode = jwt.verify(token, process.env.JWT_SECRET);
+            req.user = decode
+        }
+        catch(e){
+            return res.status(401).json({
+                success: false, 
+                message: "Token is invalid",
+                error: e.message
+            })
+        }
 
-		console.log(userDetails.accountType);
+        next();
+    }
+    catch(e){
+        return res.status(401).json({
+            success: false,
+            message: "Something went wrong while validating the token",
+            error: e.message
+        })
+    }
+}
 
-		if (userDetails.accountType !== "Instructor") {
-			return res.status(401).json({
-				success: false,
-				message: "This is a Protected Route for Instructor",
-			});
-		}
-		next();
-	} catch (error) {
-		return res
-			.status(500)
-			.json({ success: false, message: `User Role Can't be Verified` });
-	}
-};
+
+const studentValidator = z.object({
+    email: z.string().email("Invalid email format")
+})
+
+async function isStudent(req, res, next){
+    try{
+            const parsedResult = studentValidator.safeParse(req.user);
+
+        const userDetails = await User.findOne({
+            email: parsedResult.email
+        })
+
+        if(userDetails.accountType !== "Student"){
+            return res.status(401).json({
+                success: false,
+                message: "This is a protected route for students"
+            })
+        }
+
+        next();
+    }
+    catch(e){
+        return res.status(500).json({
+            success: false,
+            errors: e.errors.map((err) =>err.message)
+        })
+    }
+
+    return res.status(500).json({
+        success: false,
+        message: "User role can't be verified"
+    })
+}
+
+const adminValidator = z.object({
+    email: z.string().email("Invalid email format")
+})
+
+async function isAdmin(req, res, next){
+    try{
+        const parsedResult = adminValidator.safeParse(req.user);
+
+        const userDetails = await User.findOne({
+            email: parsedResult.email
+        })
+
+        if(userDetails.accountType !== "Admin"){
+            return res.status(401).json({
+                success: false,
+                message: "This is a protected route for Admin"
+            })
+        }
+
+        next();
+    }
+    catch(e){
+        if(e instanceof z.ZodError){
+            return res.status(500).json({
+                success: false,
+                errors: e.errors.map((err) =>err.message)
+            })
+        }
+
+        return res.status(500).json({
+            success: false,
+            message: "Admin role can't be verified"
+        })
+    }
+}
+
+const instructorValidator = z.object({
+    email: z.string().email("Invalid email format")
+});
+
+async function isInstructor(req, res, next){
+    try{
+        const parsedResult = instructorValidator.safeParse(req.user);
+
+        const userDetails = await User.findOne({
+            email: parsedResult.email
+        })
+
+        if(userDetails.accountType !== "Instructor"){
+            return res.status(401).json({
+                success: false,
+                message: "This is a protected route for Instructor"
+            })
+        }
+
+        next()
+    }
+    catch(e){
+        if(e instanceof z.ZodError){
+            return res.status(400).json({
+                success: false,
+                errors: e.errors.map((err) => err.message)
+            })
+        }
+
+        return res.status(500).json({
+            success: false,
+            message: "instructor role can't be verified"
+        })
+    }
+}
+
+
+export { 
+    auth,
+    isStudent,
+    isAdmin,
+    isInstructor
+}

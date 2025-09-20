@@ -1,4 +1,4 @@
-import { success, z } from "zod";
+import { z } from "zod";
 import { Category } from "../models/Category";
 
 const categoryValidator = z.object({
@@ -76,7 +76,7 @@ async function categoryPageDetails(req, res){
             return res.status(400).json({
                 success: false,
                 message: "Invalid input",
-                errors: e.error.errors
+                errors: parsedResult.error.errors
             })
         }
 
@@ -152,5 +152,6 @@ async function categoryPageDetails(req, res){
 
 export {
     createCategory,
-    showAllCategories
+    showAllCategories,
+    categoryPageDetails
 }
