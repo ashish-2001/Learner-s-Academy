@@ -1,5 +1,5 @@
-exports.passwordUpdated = (email, name) => {
-	return `<!DOCTYPE html>
+function passwordUpdate(email, name){
+    return `<!DOCTYPE html>
     <html>
     
     <head>
@@ -72,4 +72,8 @@ exports.passwordUpdated = (email, name) => {
     </body>
     
     </html>`;
-};
+}
+
+export {
+    passwordUpdate
+}
