@@ -6,6 +6,7 @@ import { Section } from "../models/Section.js";
 import { SubSection } from "../models/SubSection.js";
 import { convertSecondsToDuration } from "../utils/secToDuration.js";
 import { uploadImageToCloudinary } from "../utils/ImageUploader.js";
+import { CourseProgress } from "../models/CourseProgress.js";
 
 const courseValidator = z.object({
     courseName: z.string().min(1, "Course name is required"),
@@ -36,7 +37,7 @@ const createCourse = async (req, res) =>{
             courseName, 
             courseDescription,
             whatWillYouLearn,
-            price,
+            // price,
             tag: _tag,
             category,
             status,
@@ -49,7 +50,7 @@ const createCourse = async (req, res) =>{
         const instructions = JSON.parse(_instructions);
 
         if(!status || status === undefined){
-            status === "Draft"
+            status == "Draft"
         }
 
         const instructorDetails = await User.findById(userIds, {
@@ -174,11 +175,11 @@ async function editCourse(req, res){
         }
 
     for (const key in updates) {
-        if (updates.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(updates, key)) {
             if (key === "tag" || key === "instructions") {
-            course[key] = JSON.parse(updates[key])
+            course[key] = JSON.parse(updates[key]);
             } else {
-            course[key] = updates[key]
+            course[key] = updates[key];
             }
         }
     }
@@ -311,7 +312,7 @@ async function getFullCourseDetails(req, res) {
             }
         }).exec();
 
-        let courseProgressCount = await courseProgressCount.findOne({
+        let courseProgress = await CourseProgress.findOne({
             courseId: courseId,
             userId: userId
         })
@@ -338,8 +339,8 @@ async function getFullCourseDetails(req, res) {
             data: {
                 courseDetails,
                 totalDuration,
-                completedVideos: courseProgressCount?.completedVideos
-                ? courseProgressCount?.completedVideos
+                completedVideos: courseProgress?.completedVideos
+                ? courseProgress?.completedVideos
                 : []
             }
         })

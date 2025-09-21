@@ -35,7 +35,7 @@ const courseSchema = new mongoose.Schema({
     },
 
     instructor: {
-        type: mongoose.Schema.types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "User"
     },
@@ -46,23 +46,23 @@ const courseSchema = new mongoose.Schema({
     },
 
     studentsEnrolled: {
-        type: mongoose.Schema.types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "User"
     },
 
     ratingAndReviews: {
-        type: mongoose.Schema.types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "RatingAndReviews"
     },
 
     courseContent: {
-        type: mongoose.Schema.types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Section"
     },
 
     categoryName: {
-        type: mongoose.Schema.types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Category"
     },
 

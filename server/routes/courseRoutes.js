@@ -1,36 +1,40 @@
 import express from "express";
-import { isInstructor } from "../middleware/auth";
-import { createCourse, deleteCourse, editCourse, getAllCourses, getCourseDetails, getFullCourseDetails, getInstructorCourses } from "../controllers/Course";
-import { createSection, deleteSection, updateSection } from "../controllers/Section";
-import { createSubSection, deleteSubSection, updateSubSection } from "../controllers/SubSection";
+import { auth, isInstructor, isStudent } from "../middleware/auth.js";
+import { createCourse, deleteCourse, editCourse, getAllCourses, getCourseDetails, getFullCourseDetails, getInstructorCourses } from "../controllers/Course.js";
+import { createSection, deleteSection, updateSection } from "../controllers/Section.js";
+import { createSubSection, deleteSubSection, updateSubSection } from "../controllers/SubSection.js";
+import { updateCourseProgress } from "../controllers/CourseProgress.js";
+
 const router = express.Router();
 
 
-router.post("/createCourse", isInstructor, createCourse);
+router.post("/createCourse", auth, isInstructor, createCourse);
 
-router.put("/updateCourse", isInstructor, editCourse);
+router.put("/updateCourse", auth, isInstructor, editCourse);
 
-router.delete("/deleteCourse", isInstructor, deleteCourse);
+router.delete("/deleteCourse", auth, isInstructor, deleteCourse);
 
 router.post("/createSection", isInstructor, createSection);
 
-router.put("/updateSection", isInstructor, updateSection);
+router.put("/updateSection", auth, isInstructor, updateSection);
 
-router.delete("/deleteSection", isInstructor, deleteSection);
+router.delete("/deleteSection", auth, isInstructor, deleteSection);
 
-router.post("/createSubSection", isInstructor, createSubSection);
+router.post("/createSubSection", auth, isInstructor, createSubSection);
 
-router.put("/updateSubSection", isInstructor, updateSubSection);
+router.put("/updateSubSection", auth, isInstructor, updateSubSection);
 
-router.delete("/deleteSubSection", isInstructor, deleteSubSection);
+router.delete("/deleteSubSection", auth, isInstructor, deleteSubSection);
 
-router.get("/getInstructorCourses", isInstructor, getInstructorCourses);
+router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses);
 
 router.get("/getAllCourses", getAllCourses);
 
 router.get("/getCourseDetails", getCourseDetails);
 
-router.get("/getFullCourseDetails", getFullCourseDetails);
+router.get("/getFullCourseDetails", auth, getFullCourseDetails);
+
+router.put("/updateCourseProgress", auth, isStudent, updateCourseProgress)
 
 
 

@@ -1,7 +1,7 @@
 import { z } from "zod";
 import mongoose from "mongoose";
 import { User } from "../models/Users.js";
-import { Profile } from "../models/profile.js";
+import { Profile } from "../models/Profile.js";
 import { Course } from "../models/Course.js";
 import { CourseProgress } from "../models/CourseProgress.js";
 import { uploadImageToCloudinary } from "../utils/ImageUploader.js";

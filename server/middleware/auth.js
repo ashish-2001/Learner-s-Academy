@@ -1,6 +1,8 @@
 import { z } from "zod";
-import { jwt } from "jsonwebtoken";
+import pkg from "jsonwebtoken";
 import { User } from "../models/Users.js";
+
+const { jwt } = pkg;
 
 const authValidator = z.object({
     token: z.string().min(1, "Token cannot be empty").optional()

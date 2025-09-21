@@ -1,6 +1,7 @@
 import { BsQuote } from "react-icons/bs"
 
 const About = () =>{
+    
     return(
         <div>
             <section className="bg-richblack-700">

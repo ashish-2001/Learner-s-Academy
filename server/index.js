@@ -1,16 +1,15 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser"
-import { contactRoutes } from "./routes/contactUsRoute";
-import { courseRoutes } from "./routes/courseRoutes";
-import { paymentRoutes } from "./routes/paymentRoutes";
-import { profileRoutes } from "./routes/profileRoutes";
-import { userRoutes } from "./routes/userRoutes";
-import dotenv from "dotenv";
-import { cloudinaryConnect } from "./config/cloudinary";
+import { router as contactUsRoutes } from "./routes/contactUsRoute.js";
+import { router as courseRoutes } from "./routes/courseRoutes.js";
+import { router as paymentRoutes } from "./routes/paymentRoutes.js";
+import { router as profileRoutes } from "./routes/profileRoutes.js";
+import { router as userRoutes } from "./routes/userRoutes.js";
+import { cloudinaryConnect } from "./config/cloudinary.js";
 import fileUpload from "express-fileupload";
-
-dotenv.config();
 
 const app = express();
 
@@ -36,7 +35,8 @@ cloudinaryConnect();
 
 app.use("api/v1/auth", userRoutes);
 app.use("api/v1/profile", profileRoutes);
-app.use("/api/v1/contact-us", contactRoutes);
+console.log("It is running")
+app.use("/api/v1/contact-us", contactUsRoutes);
 app.use("/api/v1/course", courseRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 

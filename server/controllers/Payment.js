@@ -2,8 +2,8 @@ import { z } from "zod";
 import { Course } from "../models/Course.js";
 import mongoose from "mongoose";
 import { CourseProgress } from "../models/CourseProgress.js";
-import { User } from "../models/Users";
-import { mailSender } from "../utils/MailSender.js";
+import { User } from "../models/Users.js";
+import { mailSender } from "../utils/mailSender.js";
 import { courseEnrollmentEmail } from "../mail/templates/CourseEnrollmentEmail.js";
 import { paymentSuccessEmail } from "../mail/templates/paymentSuccessEmail.js";
 import { instance } from "../config/razorpay.js";
@@ -134,7 +134,7 @@ async function verifyPayment(req, res){
 const sendPaymentSuccessfulEmailValidator = z.object({
     orderId: z.string().min(1, "order id is required"),
     paymentId: z.string().min(1, "Payment id is required"),
-    amount: z.string().positive(1, "Amount must be a positive number")
+    amount: z.number().positive("Amount must be greater than 0")
 })
 
 async function sendPaymentSuccessfulEmail(req, res){

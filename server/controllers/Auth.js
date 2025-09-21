@@ -1,12 +1,12 @@
 import { z } from "zod";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { User } from "../models/Users";
-import { Otp } from "../models/Otp";
-import { Profile } from "../models/profile";
-import { mailSender } from "../utils/MailSender";
-import otpGenerator from "otp-generator"
-import { passwordUpdate } from "../mail/templates/PasswordUpdate";
+import { User } from "../models/Users.js";
+import { Otp } from "../models/Otp.js";
+import { Profile } from "../models/Profile.js";
+import otpGenerator from "otp-generator";
+import { passwordUpdate } from "../mail/templates/PasswordUpdate.js";
+import { mailSender } from "../utils/mailSender.js";
 
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -17,9 +17,9 @@ const signUpValidator = z.object({
     email: z.string().email("Invalid email address"),
     password: z.string().min(6, "Password must be at least 6 characters"),
     confirmPassword: z.string().min(6, "Confirm Password must be at least 6 characters"),
-    contactNumber: z.number().regex(/^[0-9]{10}$/, "Contact number must be of 10 digits"),
+    contactNumber: z.string().regex(/^[0-9]{10}$/, "Contact number must be of 10 digits"),
     accountType: z.enum(["Student", "Instructor"]),
-    otp: z.number().length(6, "Otp must be of 6 characters")
+    otp: z.string().regex(/^\d{6}$/, "Otp must be of 6 characters")
 }).refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
     path: ["confirmPassword"]
