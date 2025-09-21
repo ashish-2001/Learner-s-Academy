@@ -4,6 +4,9 @@ import bcrypt from "bcrypt";
 import { User } from "../models/Users";
 import { Otp } from "../models/Otp";
 import { Profile } from "../models/profile";
+import { mailSender } from "../utils/MailSender";
+import otpGenerator from "otp-generator"
+import { passwordUpdate } from "../mail/templates/PasswordUpdate";
 
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -26,23 +29,24 @@ const signUpValidator = z.object({
 const signUp = async (req, res) =>{
 
     try{
-        const result = signUpValidator.safeParse(req.body);
+        const parsedResult = signUpValidator.safeParse(req.body);
 
-        if(!result.success){
+        if(!parsedResult.success){
             res.status(403).json({
                 message: "Incorrect input",
                 success: false
             })
         }
 
-        const { firstName, lastName, email, password, confirmPassword, accountType, contactNumber, otp} = result.data;
+        const { firstName, lastName, email, password, confirmPassword, accountType, contactNumber, otp} = parsedResult.data;
 
-        if(!firstName || !lastName || !email || !password || !confirmPassword || !otp ){
-
-            res.status(403).json({
-                message: "All fields are required"
+        if(password !== confirmPassword){
+            return res.status(400).json({
+                success: false,
+                message: "password and confirm password do not match. Please try again"
             })
         }
+
         const existingUser = await User.findOne({
             email
         });
@@ -214,7 +218,7 @@ const sendOtp = async (req, res) => {
             })
         }
 
-        let otp = otpGenerator.generate(6, {
+        var otp = otpGenerator.generate(6, {
             upperCaseAlphabets: false,
             lowerCaseAlphabets:false,
             specialChars: false
@@ -226,7 +230,7 @@ const sendOtp = async (req, res) => {
         console.log("Result:-", result);
 
         while(result){
-            otp: otpGenerator.generate(6, {
+            otp = otpGenerator.generate(6, {
                 upperCaseAlphabets: false
             })
         }
@@ -281,7 +285,7 @@ const changePassword = async (req, res) =>{
             const emailResponse = await mailSender(
                 updatedUserDetails.email,
                 "Password for your account has been updated",
-                passwordUpdated(
+                passwordUpdate(
                     updatedUserDetails.email,
                     `Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
                 )
@@ -292,14 +296,16 @@ const changePassword = async (req, res) =>{
 
             return res.status(500).json({
                 message: "Error occurred while sending email",
-                success: false
+                success: false,
+                error: e.message
             })
         }
     }
     catch(e){
         return res.status(500).json({
             message: "Error occurred while updating password",
-            success: false
+            success: false,
+            error: e.message
         })
     }
 };

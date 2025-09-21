@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { User } from "../models/Users";
 import bcrypt from "bcrypt"
+import { mailSender } from "../utils/MailSender";
 
 const resetPasswordValidator = z.object({
     email: z.string().min(1, "Email is required").email("Invalid email format")

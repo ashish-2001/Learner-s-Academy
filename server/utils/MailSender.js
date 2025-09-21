@@ -1,4 +1,6 @@
 import { nodemailer } from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
 
 async function mailSender(email, title, body){
     try{
@@ -12,7 +14,7 @@ async function mailSender(email, title, body){
         })
 
         let info = await transporter.sendMail({
-            from: `"Lerner's Academy " <${process.env.MAIL_USER}>`,
+            from: `"Learner's Academy "<${process.env.MAIL_USER}>`,
             to: `${email}`,
             subject: `${title}`, 
             html: `${body}`

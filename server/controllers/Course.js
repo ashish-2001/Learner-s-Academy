@@ -1,10 +1,11 @@
-import { safeParse, success, z } from "zod";
+import { z } from "zod";
 import { User } from "../models/Users";
 import { Category } from "../models/Category";
 import { Course } from "../models/Course";
-import { data } from "react-router-dom";
 import { Section } from "../models/Section";
 import { SubSection } from "../models/SubSection";
+import { convertSecondsToDuration } from "../utils/secToDuration";
+import { uploadImageToCloudinary } from "../utils/ImageUploader";
 
 const courseValidator = z.object({
     courseName: z.string().min(1, "Course name is required"),
@@ -179,20 +180,15 @@ async function editCourse(req, res){
             course.thumbnail = thumbnailImage.secure._url;
         }
 
-        for( const key in updates){
-            if(updates.hasOwnProperty(key)){
-                if(key === "tag" || key === "instructions"){
-                    if(typeof updates[key] === "string"){
-                        course[key] = JSON.parse(updates[key])
-                    } else{
-                        course[key] = updates[key]
-                    }
-                }
-                else{
-                    course[key] = updates[key]
-                }
+    for (const key in updates) {
+        if (updates.hasOwnProperty(key)) {
+            if (key === "tag" || key === "instructions") {
+            course[key] = JSON.parse(updates[key])
+            } else {
+            course[key] = updates[key]
             }
         }
+    }
 
         await course.save();
 

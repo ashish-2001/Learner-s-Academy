@@ -4,6 +4,8 @@ import { User } from "../models/Users";
 import { Profile } from "../models/profile";
 import { Course } from "../models/Course";
 import { CourseProgress } from "../models/CourseProgress";
+import { uploadImageToCloudinary } from "../utils/ImageUploader";
+import { convertSecondsToDuration } from "../utils/secToDuration";
 
 const updateProfileValidator = z.object({
     firstName: z.string().min(1, "First name is required").optional(),

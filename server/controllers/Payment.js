@@ -3,6 +3,10 @@ import { Course } from "../models/Course";
 import mongoose from "mongoose";
 import { CourseProgress } from "../models/CourseProgress";
 import { User } from "../models/Users";
+import { mailSender } from "../utils/MailSender";
+import { courseEnrollmentEmail } from "../mail/templates/CourseEnrollmentEmail";
+import { paymentSuccessEmail } from "../mail/templates/paymentSuccessEmail";
+import { instance } from "../config/razorpay";
 
 
 const capturePaymentValidator = z.object({
