@@ -1,7 +1,7 @@
 import { z } from "zod";
 import mongoose from "mongoose";
-import { Course } from "../models/Course";
-import { RatingAndReview } from "../models/RatingAndReviews";
+import { Course } from "../models/Course.js";
+import { RatingAndReview } from "../models/RatingAndReviews.js";
 
 const createRatingValidator = z.object({
     rating: z.number({

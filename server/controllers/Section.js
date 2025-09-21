@@ -1,5 +1,7 @@
-import { success, z } from "zod";
-import { Course } from "../models/Course";
+import { z } from "zod";
+import { Course } from "../models/Course.js";
+import { Section } from "../models/Section.js";
+import { SubSection } from "../models/SubSection.js";
 
 const sectionValidator = z.object({
     sectionName: z.string().min(1, "Section name is required"),
@@ -141,6 +143,8 @@ async function deleteSection(req, res){
                 errors: parsedResult.error.errors
             })
         }
+
+        const { courseId, sectionId } = parsedResult.data;
         
         await Course.findByIdAndUpdate(courseId, {
             $pull: {
@@ -189,5 +193,6 @@ async function deleteSection(req, res){
 
 export{
     createSection,
-    updateSection
+    updateSection,
+    deleteSection
 }

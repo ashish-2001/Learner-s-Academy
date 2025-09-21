@@ -1,4 +1,7 @@
-import { optional, success, z } from "zod";
+import { z } from "zod";
+import { uploadImageToCloudinary } from "../utils/ImageUploader.js";
+import { SubSection } from "../models/SubSection.js";
+import { Section } from "../models/Section.js";
 
 const subSectionValidator = z.object({
     sectionId: z.string().min(1, "Section id is required"),
@@ -38,7 +41,7 @@ async function createSubSection(req, res){
 
         const subSectionDetails = await subSectionValidator.create({
             title,
-            timeDuration,
+            timeDuration: `${uploadDetails.duration}`,
             description,
             videoUrl: uploadDetails.secure_url
         })

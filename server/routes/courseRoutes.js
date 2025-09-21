@@ -1,10 +1,14 @@
 import express from "express";
+import { isInstructor } from "../middleware/auth";
+import { createCourse, deleteCourse, editCourse, getAllCourses, getCourseDetails, getFullCourseDetails, getInstructorCourses } from "../controllers/Course";
+import { createSection, deleteSection, updateSection } from "../controllers/Section";
+import { createSubSection, deleteSubSection, updateSubSection } from "../controllers/SubSection";
 const router = express.Router();
 
 
 router.post("/createCourse", isInstructor, createCourse);
 
-router.put("/updateCourse", isInstructor, updateCourse);
+router.put("/updateCourse", isInstructor, editCourse);
 
 router.delete("/deleteCourse", isInstructor, deleteCourse);
 
@@ -28,7 +32,6 @@ router.get("/getCourseDetails", getCourseDetails);
 
 router.get("/getFullCourseDetails", getFullCourseDetails);
 
-router.get("/getCourseProgress", getCourseProgress);
 
 
 export {

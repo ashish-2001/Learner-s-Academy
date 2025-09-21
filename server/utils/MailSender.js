@@ -1,6 +1,4 @@
-import { nodemailer } from "nodemailer";
-import dotenv from "dotenv";
-dotenv.config();
+import nodemailer from "nodemailer";
 
 async function mailSender(email, title, body){
     try{

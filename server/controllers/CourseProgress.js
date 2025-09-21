@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { CourseProgress } from "../models/CourseProgress";
-import { SubSection } from "../models/SubSection";
+import { CourseProgress } from "../models/CourseProgress.js";
+import { SubSection } from "../models/SubSection.js";
 
 const updateCourseProgressValidator = z.object({
     courseId: z.string().min(1, "Course id is required"),

@@ -1,11 +1,11 @@
 import { z } from "zod";
-import { User } from "../models/Users";
-import { Category } from "../models/Category";
-import { Course } from "../models/Course";
-import { Section } from "../models/Section";
-import { SubSection } from "../models/SubSection";
-import { convertSecondsToDuration } from "../utils/secToDuration";
-import { uploadImageToCloudinary } from "../utils/ImageUploader";
+import { User } from "../models/Users.js";
+import { Category } from "../models/Category.js";
+import { Course } from "../models/Course.js";
+import { Section } from "../models/Section.js";
+import { SubSection } from "../models/SubSection.js";
+import { convertSecondsToDuration } from "../utils/secToDuration.js";
+import { uploadImageToCloudinary } from "../utils/ImageUploader.js";
 
 const courseValidator = z.object({
     courseName: z.string().min(1, "Course name is required"),
@@ -23,9 +23,9 @@ const createCourse = async (req, res) =>{
     const userIds = req.user.userId;
 
     try{
-        const result = courseValidator.safeParse(req.body);
+        const parsedResult = courseValidator.safeParse(req.body);
 
-        if(!result.success){
+        if(!parsedResult.success){
             return res.status(403).json({
                 message: "Incorrect input",
                 success: false
@@ -41,19 +41,12 @@ const createCourse = async (req, res) =>{
             category,
             status,
             instructions: _instructions
-        } = result.data;
+        } = parsedResult.data;
 
         const thumbnail = req.files.thumbnailImage;
 
         const tag = JSON.parse(_tag);
         const instructions = JSON.parse(_instructions);
-
-        if( !courseName || !courseDescription || !whatWillYouLearn || !price || !tag || !category || !instructions ){
-            return res.status(403).json({
-                message: "All fields are required",
-                success: false
-            })
-        }
 
         if(!status || status === undefined){
             status === "Draft"

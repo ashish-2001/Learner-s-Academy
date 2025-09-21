@@ -1,12 +1,12 @@
 import { z } from "zod";
-import { Course } from "../models/Course";
+import { Course } from "../models/Course.js";
 import mongoose from "mongoose";
-import { CourseProgress } from "../models/CourseProgress";
+import { CourseProgress } from "../models/CourseProgress.js";
 import { User } from "../models/Users";
-import { mailSender } from "../utils/MailSender";
-import { courseEnrollmentEmail } from "../mail/templates/CourseEnrollmentEmail";
-import { paymentSuccessEmail } from "../mail/templates/paymentSuccessEmail";
-import { instance } from "../config/razorpay";
+import { mailSender } from "../utils/MailSender.js";
+import { courseEnrollmentEmail } from "../mail/templates/CourseEnrollmentEmail.js";
+import { paymentSuccessEmail } from "../mail/templates/paymentSuccessEmail.js";
+import { instance } from "../config/razorpay.js";
 
 
 const capturePaymentValidator = z.object({

@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { mailSender } from "../utils/MailSender";
-import { contactUsEmail } from "../mail/templates/contactFormResponse";
+import { mailSender } from "../utils/mailSender.js";
+import { contactUsEmail } from "../mail/templates/contactFormResponse.js";
 
 
 const contactUsControllerValidator = z.object({

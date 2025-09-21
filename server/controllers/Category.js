@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Category } from "../models/Category";
+import { Category } from "../models/Category.js";
 
 const categoryValidator = z.object({
     name: z.string().min(1, "Name is required"),

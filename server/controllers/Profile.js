@@ -1,11 +1,11 @@
 import { z } from "zod";
 import mongoose from "mongoose";
-import { User } from "../models/Users";
-import { Profile } from "../models/profile";
-import { Course } from "../models/Course";
-import { CourseProgress } from "../models/CourseProgress";
-import { uploadImageToCloudinary } from "../utils/ImageUploader";
-import { convertSecondsToDuration } from "../utils/secToDuration";
+import { User } from "../models/Users.js";
+import { Profile } from "../models/profile.js";
+import { Course } from "../models/Course.js";
+import { CourseProgress } from "../models/CourseProgress.js";
+import { uploadImageToCloudinary } from "../utils/ImageUploader.js";
+import { convertSecondsToDuration } from "../utils/secToDuration.js";
 
 const updateProfileValidator = z.object({
     firstName: z.string().min(1, "First name is required").optional(),
@@ -307,6 +307,8 @@ async function getEnrolledCourses(req, res){
 const instructorDashboardValidator = z.object({
     id: z.string().min(1, "Instructor id is required")
 })
+
+
 async function instructorDashboard(req, res) {
     try{
         const parsedResult = instructorDashboardValidator.safeParse(req.body);
