@@ -1,4 +1,4 @@
-export default function GetAvgRating(ratingArr) {
+function GetAvgRating(ratingArr) {
     if (ratingArr?.length === 0) return 0
     const totalReviewCount = ratingArr?.reduce((acc, curr) => {
         acc += curr.rating
@@ -10,4 +10,8 @@ export default function GetAvgRating(ratingArr) {
         Math.round((totalReviewCount / ratingArr?.length) * multiplier) / multiplier
 
     return avgReviewCount
+}
+
+export {
+    GetAvgRating
 }

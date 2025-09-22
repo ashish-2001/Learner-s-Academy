@@ -1,3 +1,11 @@
+import React from "react";
+import { useState } from "react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { BiArrowBack } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { resetPassword } from "../services/operations/AuthApi";
+
 function UpdatePassword() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -108,4 +116,6 @@ function UpdatePassword() {
     )
 }
 
-export default UpdatePassword
+export {
+    UpdatePassword
+}

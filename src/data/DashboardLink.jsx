@@ -1,6 +1,6 @@
-import { ACCOUNT_TYPE }  from
+import { ACCOUNT_TYPE }  from ""
 
-export const SidebarLinks = [
+const SidebarLinks = [
     {
         id: 1,
         name: "My Profile",
@@ -43,3 +43,7 @@ export const SidebarLinks = [
         icon: "VscArchive"
     }
 ]
+
+export {
+    SidebarLinks
+}

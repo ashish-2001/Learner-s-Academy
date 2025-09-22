@@ -1,11 +1,35 @@
-import { useEffect } from 'react'
-import './App.css'
-
+import React from 'react';
+import { useEffect } from 'react';
+import './App.css';
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useNavigate } from 'react-router-dom';
-
 import Navbar from ".components/Common/Navbar";
-
+import { getUserDetails } from './services/operations/ProfileApi';
+import { Home } from './pages/Home';
+import About from './pages/About';
+import { Contact } from './pages/Contact';
+import { CourseDetails } from './pages/CourseDetails';
+import Catalog from './pages/Catalog';
+import OpenRoute from './components/core/Auth/OpenRoute';
+import { Login } from './pages/Login';
+import { ForgotPassword } from './pages/ForgotPassword';
+import UpdatePassword from './components/core/Dashboard/Settings/UpdatePassword';
+import { Signup } from './pages/Signup';
+import { VerifyEmail } from './pages/VerifyEmail';
+import PrivateRoute from './components/core/Auth/PrivateRoute';
+import { Dashboard } from './pages/Dashboard';
+import MyProfile from './components/core/Dashboard/MyProfile';
+import Settings from './components/core/Dashboard/Settings/Index';
+import { ACCOUNT_TYPE } from './utils/Constants';
+import Instructor from './components/core/Dashboard/Instructor';
+import MyCourses from './components/core/Dashboard/MyCourses';
+import EditCourse from './components/core/Dashboard/EditCourse/Index';
+import EnrolledCourses from './components/core/Dashboard/EnrolledCourses';
+import Cart from './components/core/Dashboard/Cart';
+import { ViewCourse } from './pages/ViewCourse';
+import { Error } from "./pages/Error";
+import VideoDetails from './components/core/Viewcourse/VideoDetails';
+import { AddCourse } from './components/core/Dashboard/AddCourse';
 
 
 

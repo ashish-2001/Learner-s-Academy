@@ -1,3 +1,5 @@
+import React from "react"
+
 export default function Cart(){
     const { total, totalItems } = useSelector((state) =>state.cart)
     const { paymentLoading } = useSelector((state) => state.course)

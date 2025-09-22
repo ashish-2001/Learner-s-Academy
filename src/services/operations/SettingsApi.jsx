@@ -1,3 +1,9 @@
+import toast from "react-hot-toast"
+import { settingsEndpoints } from "../Apis"
+import { apiConnector } from "../apiConnector"
+import { setUser } from "../../slices/ProfileSlice"
+import { logout } from "./AuthApi"
+
 const {
     UPDATE_DISPLAY_PICTURE_API,
     UPDATE_PROFILE_API,
@@ -5,7 +11,7 @@ const {
     DELETE_PROFILE_API,
     } = settingsEndpoints
 
-    export function updateDisplayPicture(token, formData) {
+    function updateDisplayPicture(token, formData) {
     return async (dispatch) => {
         const toastId = toast.loading("Loading...")
         try {
@@ -36,7 +42,7 @@ const {
     }
     }
 
-    export function updateProfile(token, formData) {
+    function updateProfile(token, formData) {
     return async (dispatch) => {
         const toastId = toast.loading("Loading...")
         try {
@@ -63,7 +69,7 @@ const {
     }
     }
 
-    export async function changePassword(token, formData) {
+    async function changePassword(token, formData) {
     const toastId = toast.loading("Loading...")
     try {
         const response = await apiConnector("POST", CHANGE_PASSWORD_API, formData, {
@@ -82,7 +88,7 @@ const {
     toast.dismiss(toastId)
     }
 
-    export function deleteProfile(token, navigate) {
+    function deleteProfile(token, navigate) {
     return async (dispatch) => {
         const toastId = toast.loading("Loading...")
         try {
@@ -102,4 +108,12 @@ const {
         }
         toast.dismiss(toastId)
     }
+}
+
+
+export {
+    updateDisplayPicture,
+    updateProfile,
+    changePassword,
+    deleteProfile
 }

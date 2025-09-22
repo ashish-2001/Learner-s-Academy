@@ -1,3 +1,17 @@
+import React from "react";
+import { FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import Banner from "../assets/images/banner.mp4";
+import { Footer } from "../components/common/Footer";
+import ReviewSlider from "../components/common/ReviewSlider";;
+import CTAButton from "../components/core/HomePage/Button";
+import CodeBlocks from "../components/core/HomePage/CodeBlocks";
+import ExploreMore from "../components/core/HomePage/ExploreMore";
+import HighLightText from "../components/core/HomePage/HighLightText";
+import InstructorSection from "../components/core/HomePage/InstructorSection";
+import LearningLanguageSection from "../components/core/HomePage/LearningLanguageSection";
+import TimelineSection from "../components/core/HomePage/Timeline";
+
 function Home() {
     return (
         <div>
@@ -16,7 +30,7 @@ function Home() {
             {/* Heading */}
             <div className="text-center text-4xl font-semibold">
             Empower Your Future with
-            <HighlightText text={"Coding Skills"} />
+            <HighLightText text={"Coding Skills"} />
             </div>
 
             {/* Sub Heading */}
@@ -56,7 +70,7 @@ function Home() {
                 heading={
                 <div className="text-4xl font-semibold">
                     Unlock your
-                    <HighlightText text={"coding potential"} /> with our online
+                    <HighLightText text={"coding potential"} /> with our online
                     courses.
                 </div>
                 }
@@ -86,7 +100,7 @@ function Home() {
                 heading={
                 <div className="w-[100%] text-4xl font-semibold lg:w-[50%]">
                     Start
-                    <HighlightText text={"coding in seconds"} />
+                    <HighLightText text={"coding in seconds"} />
                 </div>
                 }
                 subheading={
@@ -137,7 +151,7 @@ function Home() {
             <div className="mb-10 mt-[-100px] flex flex-col justify-between gap-7 lg:mt-20 lg:flex-row lg:gap-0">
                 <div className="text-4xl font-semibold lg:w-[45%] ">
                 Get the skills you need for a{" "}
-                <HighlightText text={"job that is in demand."} />
+                <HighLightText text={"job that is in demand."} />
                 </div>
                 <div className="flex flex-col items-start gap-10 lg:w-[40%]">
                 <div className="text-[16px]">
@@ -177,4 +191,6 @@ function Home() {
     )
 }
 
-export default Home
+export {
+    Home
+}

@@ -1,5 +1,9 @@
+import React from "react";;
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { GetAvgRating } from "../../../utils/AvgRating";
+import RatingStars from "../../common/RatingStars";
 
 function Course_Card({course, Height}) {
 

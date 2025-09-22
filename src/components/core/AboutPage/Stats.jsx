@@ -1,3 +1,5 @@
+import React from "react";
+
 const StatsComponent = () => {
     return(
         <div className="bg-richblack-700">
@@ -21,4 +23,6 @@ const StatsComponent = () => {
     )
 }
 
-export default StatsComponent
+export {
+    StatsComponent
+}

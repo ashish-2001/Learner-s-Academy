@@ -1,3 +1,12 @@
+import React, { useEffect, useState } from "react";import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import OtpInput from "react-otp-input";
+import { Link } from "react-router-dom";
+import { BiArrowBack } from "react-icons/bi";
+import { RxCountdownTimer } from "react-icons/rx";
+import { sendOtp, signUp } from "../services/operations/AuthApi";
+
+
 function VerifyEmail() {
     const [otp, setOtp] = useState("");
     const { signupData, loading } = useSelector((state) => state.auth);
@@ -9,7 +18,7 @@ function VerifyEmail() {
         if (!signupData) {
         navigate("/signup");
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        
     }, []);
 
     const handleVerifyAndSignup = (e) => {
@@ -98,4 +107,6 @@ function VerifyEmail() {
     );
 }
 
-export default VerifyEmail;
+export {
+    VerifyEmail
+}

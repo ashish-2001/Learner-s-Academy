@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { MdNavigateNext } from "react-icons/md";

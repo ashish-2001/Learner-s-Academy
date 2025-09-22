@@ -1,4 +1,18 @@
-export default function ViewCourse() {
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Outlet, useParams } from "react-router-dom";
+import { getFullDetailsOfCourse } from "../services/operations/CourseDetailsApi";
+import CourseReviewModal from "../components/core/Viewcourse/CourseReviewModal";
+import VideoDetailsSidebar from "../components/core/Viewcourse/VideoDetails";
+import {
+    setCompletedLectures,
+    setCourseSectionData,
+    setEntireCourseData,
+    setTotalNoOfLectures
+} from "../slices/ViewCourseSlice";
+
+
+function ViewCourse() {
     const { courseId } = useParams()
     const { token } = useSelector((state) => state.auth)
     const dispatch = useDispatch()
@@ -17,7 +31,6 @@ export default function ViewCourse() {
         })
         dispatch(setTotalNoOfLectures(lectures))
         })()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -33,4 +46,9 @@ export default function ViewCourse() {
         {reviewModal && <CourseReviewModal setReviewModal={setReviewModal} />}
         </>
     )
+}
+
+
+export { 
+    ViewCourse
 }

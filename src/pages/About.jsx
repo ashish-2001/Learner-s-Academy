@@ -1,4 +1,12 @@
-import { BsQuote } from "react-icons/bs"
+import React from "react";
+import { BsQuote } from "react-icons/bs";
+import HighLightText from "../components/core/HomePage/HighLightText";
+import BannerImage1 from "../assets/images/aboutus1.webp"
+import StatsComponent from "../components/core/AboutPage/Stats";
+import LearningGrid from "../components/core/AboutPage/LearningGrid";
+import ContactFormSection from "../components/core/AboutPage/ContactFormSection";
+import ReviewSlider from "../components/common/ReviewSlider";
+import Footer from "../components/common/Footer";
 
 const About = () =>{
     
@@ -8,18 +16,18 @@ const About = () =>{
                 <div className="relative mx-auto flex w-11/12 max-w-maxContent flex-col justify-between  gap-10 text-center text-white">
                     <header className="mx-auto py-20 text-4xl font-semibold lg:w-[70%]">
                         Driving Innovation in Online Education for a 
-                        <HighlightText text={"Brighter Future"}/>
+                        <HighLightText text={"Brighter Future"}/>
                         <p className="mx-auto mt-3 text-center text-base font-medium text-richblack-300 lg:w-[95%]">
-                            Learner's Academy is at the forefront of driving innovation in Onlineeducation. We're passionate about creating a brighter future by 
+                            Learners Academy is at the forefront of driving innovation in Online-Education. We are passionate about creating a brighter future by 
                             offering cutting edge courses, leveraging emerging technologies,
                             and nurturing a vibrant learning community.
                         </p>
                     </header>
                     <div className="sm:h[70px] lg:h-[150px]"></div>
                     <div className="absolute bottom-0 left-[50%] grid w-[100%] translate-x-[50%] translate-y-[30%] grid-cols-3 gap-3 lg:gap-5">
-                        <img src={BannerImage} alt=""/>
-                        <img src={BannerImage} alt=""/>
-                        <img src={BannerImage} alt=""/>
+                        <img src={BannerImage1} alt=""/>
+                        <img src={BannerImage2} alt=""/>
+                        <img src={BannerImage3} alt=""/>
                     </div>
                 </div>
             </section>
@@ -82,7 +90,7 @@ const About = () =>{
                 </div>
             </section>
 
-            <StatsComponenet />
+            <StatsComponent/>
             <section className="mx-auto mt-20 flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white">
                 <LearningGrid />
                 <ContactFormSection />

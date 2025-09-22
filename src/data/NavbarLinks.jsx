@@ -1,4 +1,4 @@
-export const NavbarLinks = [
+const NavbarLinks = [
     {
         title: "Home",
         path: "/"
@@ -10,9 +10,13 @@ export const NavbarLinks = [
     {
         title: "About us",
         path: "/about"
-    }
+    },
     {
         title: "Contact us",
         path: "/contact"
     }
 ]
+
+export {
+    NavbarLinks
+}

@@ -1,8 +1,14 @@
+import React from "react";
 import toast from "react-hot-toast"
 import { BsFillCaretRightFill } from "react-icons/bs"
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
+import copy from "copy-to-clipboard";
+import { addToCart } from "../../../slices/cartSlice";
+import { ACCOUNT_TYPE } from "../../../utils/Constants";
+import { FaShareSquare } from "react-icons/fa";
 
-function CourseDetailsCard({course, setConfirmationModal, handleCourse}){
+function CourseDetailsCard({course, setConfirmationModal, handleBuyCourse}){
 
     const {  user } = useSelector((state) => state.profile)
     const  { token } = useSelector((state) => state.auth)
@@ -38,7 +44,9 @@ function CourseDetailsCard({course, setConfirmationModal, handleCourse}){
             btn2Handler: () => setConfirmationModal(null)
         })
 
-        return(
+    }
+
+    return(
             <>
                 <div className={`flex flex-col gap-4 rounded bg-ricblack-700 p-4 text-richblack-5`}>
                     <img
@@ -91,7 +99,6 @@ function CourseDetailsCard({course, setConfirmationModal, handleCourse}){
                 </div>
             </>
         )
-    }
 }
 
 

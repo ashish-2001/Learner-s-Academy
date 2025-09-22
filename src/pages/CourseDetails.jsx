@@ -1,3 +1,20 @@
+import React, { useEffect, useState } from "react";
+import { BiInfoCircle } from "react-icons/bi";
+import { HiOutlineGlobeAlt } from "react-icons/hi";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { fetchCourseDetails } from "../services/operations/CourseDetailsApi";
+import GetAvgRating from "../utils/AvgRating";
+import { Error } from "./Error";
+import ConfirmationModal from "../components/common/ConfirmationModal";
+import Footer from "../components/common/Footer";
+import RatingStars from "../components/common/RatingStars";
+import CourseAccordionBar from "../components/core/Course/CourseAccordionBar";
+import CourseDetailsCard from "../components/core/Course/CourseDetailsCard";
+import { formatDate } from "../services/operations/CourseDetailsApi";
+import { BuyCourse } from "../services/operations/StudentsFeaturesApi";
+
 function CourseDetails() {
     const { user } = useSelector((state) => state.profile)
     const { token } = useSelector((state) => state.auth)
@@ -20,8 +37,8 @@ function CourseDetails() {
             const res = await fetchCourseDetails(courseId)
             // console.log("course details res: ", res)
             setResponse(res)
-        } catch (error) {
-            console.log("Could not fetch Course Details")
+        } catch (e) {
+            console.log("Could not fetch Course Details", e.message)
         }
         })()
     }, [courseId])
@@ -247,4 +264,7 @@ function CourseDetails() {
     )
 }
 
-export default CourseDetails
+
+export {
+    CourseDetails
+}

@@ -1,4 +1,4 @@
-export const formatDate = (dateString) => {
+const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" }
     const date = new Date(dateString)
     const formattedDate = date.toLocaleDateString("en-US", options)
@@ -11,4 +11,9 @@ export const formatDate = (dateString) => {
         .padStart(2, "0")} ${period}`
 
     return `${formattedDate} | ${formattedTime}`
+}
+
+
+export {
+    formatDate
 }

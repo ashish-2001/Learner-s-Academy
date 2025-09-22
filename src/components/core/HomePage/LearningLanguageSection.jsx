@@ -1,3 +1,4 @@
+import React from "react";
 import HighLightText from "./HighLightText"
 
 const LearningLanguageSection = () =>{

@@ -1,3 +1,5 @@
+import React from "react";
+
 const TimeLine = [
     {
         Logo: Logo1,

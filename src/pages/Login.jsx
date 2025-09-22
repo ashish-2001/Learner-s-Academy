@@ -1,3 +1,7 @@
+import React from "react";
+import loginImg from "../assets/images/login.webp";
+import Template from "../components/core/Auth/Template";
+
 function Login() {
     return (
         <Template
@@ -10,4 +14,6 @@ function Login() {
     )
 }
 
-export default Login
+export {
+    Login
+}

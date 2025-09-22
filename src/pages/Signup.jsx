@@ -1,3 +1,7 @@
+import React from "react";
+import signupImg from "../assets/images/signup.webp";
+import Template from "../components/core/Auth/Template";
+
 function Signup() {
     return (
         <Template
@@ -10,4 +14,6 @@ function Signup() {
     )
 }
 
-export default Signup
+export {
+    Signup
+}

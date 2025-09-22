@@ -1,11 +1,14 @@
+import React from "react";;
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../../services/operations/AuthApi";
 
 function LoginForm(){
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [ormDat, setFormData] = useState({
+    const [formData, setFormData] = useState({
         email:"",
         password:""
     })
@@ -71,7 +74,7 @@ function LoginForm(){
             <button type="submit" className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900">
                 Sign in
             </button>
-        </form>>
+        </form>
     )
 }
 

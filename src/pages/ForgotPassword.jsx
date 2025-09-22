@@ -1,3 +1,9 @@
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { BiArrowBack } from "react-icons/bi";
+import { Link } from "react-router-dom";
+import { getPasswordResetToken } from "../services/operations/AuthApi"
+
 function ForgotPassword() {
     const [email, setEmail] = useState("")
     const [emailSent, setEmailSent] = useState(false)
@@ -60,4 +66,6 @@ function ForgotPassword() {
     )
 }
 
-export default ForgotPassword
+export {
+    ForgotPassword
+}

@@ -1,10 +1,17 @@
+import toast from "react-hot-toast"
+import { apiConnector } from "../apiConnector"
+import { setLoading } from "../../slices/authSlice"
+import { logout } from "./AuthApi"
+import { setUser } from "../../slices/ProfileSlice"
+import { profileEndpoints } from "../Apis"
+
 const {
     GET_USER_DETAILS_API,
     GET_USER_ENROLLED_COURSES_API,
     GET_INSTRUCTOR_DATA_API,
     } = profileEndpoints
 
-    export function getUserDetails(token, navigate) {
+    function getUserDetails(token, navigate) {
     return async (dispatch) => {
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
@@ -31,7 +38,7 @@ const {
     }
     }
 
-    export async function getUserEnrolledCourses(token) {
+    async function getUserEnrolledCourses(token) {
     const toastId = toast.loading("Loading...")
     let result = []
     try {
@@ -60,7 +67,7 @@ const {
     return result
     }
 
-    export async function getInstructorData(token) {
+    async function getInstructorData(token) {
     const toastId = toast.loading("Loading...")
     let result = []
     try {
@@ -75,4 +82,11 @@ const {
     }
     toast.dismiss(toastId)
     return result
+}
+
+
+export {
+    getUserDetails,
+    getUserEnrolledCourses,
+    getInstructorData
 }

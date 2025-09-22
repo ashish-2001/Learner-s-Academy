@@ -1,4 +1,8 @@
-export const getCatalogPageData = async (categoryId) => {
+import toast from "react-hot-toast"
+import { apiConnector } from "../apiConnector"
+import { catalogData } from "../Apis"
+
+const getCatalogPageData = async (categoryId) => {
     const toastId = toast.loading("Loading...")
     let result = []
     try {
@@ -20,4 +24,8 @@ export const getCatalogPageData = async (categoryId) => {
     }
     toast.dismiss(toastId)
     return result
+}
+
+export {
+    getCatalogPageData
 }

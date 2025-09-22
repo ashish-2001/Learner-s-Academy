@@ -1,3 +1,10 @@
+import React from "react";
+import ContactDetails from "../components/core/ContactUsPage/ContactDetails";
+import ContactForm from "../components/core/ContactUsPage/ContactForm";
+import Footer from "../components/common/Footer";
+import ReviewSlider from "../components/common/ReviewSlider";;
+
+
 const Contact = () => {
     return (
         <div>
@@ -24,4 +31,6 @@ const Contact = () => {
     )
 }
 
-export default Contact
+export { 
+    Contact
+}

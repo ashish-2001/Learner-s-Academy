@@ -1,3 +1,10 @@
+import toast from "react-hot-toast"
+import { studentEndpoints } from "../Apis"
+import { apiConnector } from "../apiConnector"
+import { setPaymentLoading } from "../../slices/CourseSlice"
+import { resetCart } from "../../slices/cartSlice"
+import { rzpLogo } from "../../assets/logo/rzpLogo.png"
+
 const {
     COURSE_PAYMENT_API,
     COURSE_VERIFY_API,
@@ -20,7 +27,7 @@ const {
     }
 
     // Buy the Course
-    export async function BuyCourse(
+    async function BuyCourse(
     token,
     courses,
     user_details,
@@ -132,4 +139,9 @@ const {
     } catch (error) {
         console.log("PAYMENT SUCCESS EMAIL ERROR............", error)
     }
+}
+
+
+export {
+    BuyCourse
 }

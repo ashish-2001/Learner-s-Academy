@@ -1,7 +1,15 @@
+import React from "react";;
+
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setSignupData } from "../../../slices/authSlice";
+import { sendOtp } from "../../../services/operations/AuthApi";
+import { ACCOUNT_TYPE } from "../../../utils/Constants";
+import Tab from "../../common/Tab";
+
 
 function SignupForm(){
     const navigate = useNavigate();
@@ -18,7 +26,7 @@ function SignupForm(){
     })
 
     const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(flase);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const { firstName, lastName, email, password, confirmPassword } = formData
 
@@ -98,7 +106,7 @@ function SignupForm(){
                         type="text"
                         name="lastName"
                         value={lastName}
-                        onChange={handleOnChange}
+                        onChange={handleOnchange}
                         placeholder="Enter last name"
                         className="form-style w-full"
                         />
@@ -113,7 +121,7 @@ function SignupForm(){
                     type="text"
                     name="email"
                     value={email}
-                    onChange={handleOnChange}
+                    onChange={handleOnchange}
                     placeholder="Enter Email Address"
                     className="form-style- w-full"
                     />
@@ -128,7 +136,7 @@ function SignupForm(){
                         type={showPassword ? "text" : "password"}
                         name="password"
                         value={password}
-                        onChange={handleOnChange}
+                        onChange={handleOnchange}
                         placeholder="Enter Password"
                         className="form-style w-full !pr-10"
                         />

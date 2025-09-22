@@ -1,5 +1,7 @@
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineDown } from "react-icons/ai";
+import CourseSubSectionAccordion from "./CourseSubSectionAccordion"
 
 export default function CourseAccordionBar({ course, isActive,}){
 
@@ -41,7 +43,7 @@ export default function CourseAccordionBar({ course, isActive,}){
             <div className={`relative h-0 overflow-hidden bg-richblack-900 transition-[height] duration-[0.35s] ease-[ease]`} style={{height: sectionHeight}}>
                 <div className="text-textHead flex flex-col gap-2 px-7 py-6 font-semibold">
                     {course?.subSection?.map((subSec, i) =>{
-                        return <CourseSuSectionAccordion subSec={subSec} key={i}/>
+                        return <CourseSubSectionAccordion subSec={subSec} key={i}/>
                     })}
                 </div>
             </div>

@@ -1,3 +1,10 @@
+import toast from "react-hot-toast"
+import { endpoints } from "../Apis"
+import { setLoading, setToken } from "../../slices/authSlice"
+import { apiConnector } from "../apiConnector"
+import { setUser } from "../../slices/ProfileSlice"
+import { resetCart } from "../../slices/cartSlice"
+
 const {
     SENDOTP_API,
     SIGNUP_API,
@@ -6,7 +13,7 @@ const {
     RESETPASSWORD_API,
     } = endpoints
 
-    export function sendOtp(email, navigate) {
+    function sendOtp(email, navigate) {
     return async (dispatch) => {
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
@@ -34,7 +41,7 @@ const {
     }
     }
 
-    export function signUp(
+    function signUp(
     accountType,
     firstName,
     lastName,
@@ -75,7 +82,7 @@ const {
     }
     }
 
-    export function login(email, password, navigate) {
+    function login(email, password, navigate) {
     return async (dispatch) => {
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
@@ -108,7 +115,7 @@ const {
     }
     }
 
-    export function getPasswordResetToken(email, setEmailSent) {
+    function getPasswordResetToken(email, setEmailSent) {
     return async (dispatch) => {
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
@@ -134,7 +141,7 @@ const {
     }
     }
 
-    export function resetPassword(password, confirmPassword, token, navigate) {
+    function resetPassword(password, confirmPassword, token, navigate) {
     return async (dispatch) => {
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
@@ -162,7 +169,7 @@ const {
     }
     }
 
-    export function logout(navigate) {
+    function logout(navigate) {
     return (dispatch) => {
         dispatch(setToken(null))
         dispatch(setUser(null))
@@ -172,4 +179,13 @@ const {
         toast.success("Logged Out")
         navigate("/")
     }
+}
+
+export {
+    sendOtp,
+    signUp,
+    login,
+    getPasswordResetToken,
+    resetPassword,
+    logout
 }

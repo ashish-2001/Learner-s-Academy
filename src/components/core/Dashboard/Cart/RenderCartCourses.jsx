@@ -1,3 +1,4 @@
+import React from "react";
 import { FaStar } from "react-icons/fa"
 import { RiDeleteBin6Line } from "react-icons/ri"
 
@@ -8,7 +9,7 @@ export default function RenderCartCourses(){
     return(
         <div className="flex flex-1 flex-col">
             {cart.map((cart, index) => (
-                <div className={`flex w-full flex-wrap items-start justify-between gap-6 ${
+                <div key={index} className={`flex w-full flex-wrap items-start justify-between gap-6 ${
                     index !== cart.length - 1 && "border-b-richblack-400 pb-6"
                 } ${index !== 0 && "mt-6"}`}>
                     <div className="flex flex-1 flex-col gap-4 xl:flex-row">

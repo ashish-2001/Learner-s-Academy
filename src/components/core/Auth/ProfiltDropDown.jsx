@@ -1,7 +1,12 @@
+import React from "react";
+
 import { useRef, useState } from "react"
 import { AiOutlineCaretDown } from "react-icons/ai"
 import { VscDashboard, VscSignOut } from "react-icons/vsc"
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom"
+import { useOnclickOutside } from "../../../hooks/UseOnclickOutside";
+import { logout } from "../../../services/operations/AuthApi";
 
 export default function ProfileDropDown(){
     const { user } = useSelector((state) => state.profile)
@@ -10,7 +15,7 @@ export default function ProfileDropDown(){
     const [open, setOpen] = useState(false)
     const ref = useRef(null);
 
-    useOnClickOutside(ref, () => setOpen(false))
+    useOnclickOutside(ref, () => setOpen(false))
 
     if(!user){
         return null

@@ -1,9 +1,6 @@
+import React from "react";
 import { FaFacebook, FaGoogle, FaTwitter, FaYoutube } from "react-icons/fa"
 import { Link } from "react-router-dom"
-
-
-
-
 
 const BottomFooter = ["Privacy Policy", "Cookie Policy", "Terms"];
 const Resources = ["Articles", "Blog", "Chart Sheet", "Code Challenges", "Docs", "Projects", "VIdeos", "Workspaces"];
