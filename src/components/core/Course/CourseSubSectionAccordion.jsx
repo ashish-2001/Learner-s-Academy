@@ -2,9 +2,8 @@ import React from "react";
 import { HiOutlineVideoCamera } from "react-icons/hi";
 
 function CourseSubSectionAccordion({subSec}){
-
     return(
-        <div >
+        <div>
             <div className="flex justify-between py-2">
                 <div className="flex items-center gap-2">
                     <span>
@@ -17,4 +16,6 @@ function CourseSubSectionAccordion({subSec}){
     )
 }
 
-export default CourseSubSectionAccordion
+export {
+    CourseSubSectionAccordion
+}

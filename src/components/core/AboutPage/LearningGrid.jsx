@@ -1,81 +1,91 @@
 import React from "react";
-import HighLightText from "../HomePage/HighLightText";
-import CTAButton from "../../../components/core/HomePage/Button";
+import HighLightText from "../../../components/Core/HomePage/HighLightText";
+import CTAButton from "../../../components/core/HomePage/HighLightText";
 
 const LearningGridArray = [
-{
-    order: -1,
-    heading: "World-class Learning for",
-    highLightText: "AnyOne, AnyWhere",
-    description: "Learners Academy partners with more than 275+ leading universities and companies to bring flexible, affordable, job-relevant online learning to individuals and organizations worldwide.",
-    BtnText: "Learn More",
-    BtnLink: "/"
-}, {
-    order: 1,
-    heading: "Curriculum Based on Industry Needs",
-    description: "Save time and money. The curriculum is made to be easier to understand and in line with industry needs.",
-}, {
-    order: 2,
-    heading: "Our Leading methods",
-    description:"Learners Academy partners with more than 275+ leading universities and companies to bring flexible, affordable, job-relevant online learning to individuals and organizations worldwide."
-}, {
-    order: 3,
-    heading: "Certification",
-    description: "Learners Academy partners with more than 275+ leading universities and companies to bring flexible, affordable, job-relevant online learning to individuals and organizations worldwide."
-}, {
-    order: 4,
-    heading: 'Rating "Auto-grading"',
-    description: "Learners Academy partners with more than 275+ leading universities and companies to bring flexible, affordable, job-relevant online learning to individuals and organizations worldwide."
-}, {
-    order: 5,
-    heading: "Ready to Work",
-    description: "Learners Academy partners with more than 275+ leading universities and companies to bring flexible, affordable, job-relevant online learning to individuals and organizations worldwide."
-}];
+    {
+        order: -1,
+        heading: "WorldClass Learning for",
+        highlightText: "Anyone, Anywhere",
+        description: "Learners Academy partners with more than 275+ universities",
+        BtnText: "Learn More",
+        BtnLink: "/"
+    },
+    {
+        order: 1,
+        heading: "Curriculum Based on Industry Needs",
+        description: "Save time and money! The Belajar curriculum is made to be easier to understand and in line with industry needs."
+    },
+    {
+        order: 2,
+    heading: "Our Learning Methods",
+    description:
+        "Lerners Academy partners with more than 275+ leading universities and companies to bring",
+    },
+    {
+        order: 3,
+        heading: "Certification",
+        description:
+        "Studynotion partners with more than 275+ leading universities and companies to bring",
+    },
+    {
+        order: 4,
+        heading: `Rating "Auto-grading"`,
+        description:
+        "Studynotion partners with more than 275+ leading universities and companies to bring",
+    },
+    {
+        order: 5,
+        heading: "Ready to Work",
+        description:
+        "Studynotion partners with more than 275+ leading universities and companies to bring",
+    }
+];
 
-const LearningGrid = () =>{
+
+function LerningGrid(){
     return(
-        <div className="grid max-auto w-[350px] xl:w-fit grid-cols-1 xl:grid-cols-4 mb-12">
-            {
-                LearningGridArray.map((card, i) =>{
-                    return(
-                        <div key={i}
-                        className={`${ i === 0 && "xl:col-span-2 xl:h-[294px]"} ${
-                            card.order % 2 === 1 ? "bg-richblack-700 h-[294px]"
-                            : card.order % 2 === 0
-                            ? "bg-richblack-800 h-[294px]"
-                            : "bg-transparent"
-                        } ${card.order === 3 && "xl:col-start-2"}`}>
-                            {
-                                card.order < 0 ? (
-                                    <div className="xl:w-[90%] flex flex-col gap-3 pb-10 xl:pb-0">
-                                        <div className="text-4xl font-semibold">
-                                            {card.heading}
-                                            <HighLightText text={card.HighlightText}/>
-                                        </div>
-                                        <p className="text-richblack-300 font-medium">
-                                            {card.description}
-                                        </p>
-                                        <div className="w-fit mt-2">
-                                            <CTAButton active={true} linkTO={card.BtnLink}>
-                                                {card.BtnText}
-                                            </CTAButton>
-                                        </div>    
-                                    </div>
-                                ) : (
-                                    <div className="p-8 flex flex-col gap-8">
-                                        <h1 className="text richblack-5 text-lg">{card.heading}</h1>
-                                        <p className="text-richblack-300 font-medium">
-                                            {card.description}
-                                        </p>
-                                    </div>
-                                )
-                            }
-                        </div>
-                    )
-                })
-            }
+        <div className="grid mx-auto w-[350px] xl:w-fit grid-cols-1 xl:grid-cols-4 mb-12">
+            {LearningGridArray.map((card, i) => {
+                return (
+                    <div className={`${i === 0 && "xl:col-span-2 xl:h-[294px]"} ${
+                        card.order % 2 === 1
+                        ? "bg-richblack-700 h-[294px]"
+                        : card.order % 2 === 0
+                        ? "bg-richblack-800 h-[294px]"
+                        : "bg-transparent" 
+                    } ${card.order === 3 && "xl:col-start-2"}`} key={i}>
+                        {card.order < 0 ? (
+                            <div className="xl:w-[90%] flex flex-col gap-3 pb-10 xl:pb-0">
+                                <div className="text-4xl font-semibold">
+                                    {card.heading}
+                                    <HighLightText text={card.highlightText}/>
+                                </div>
+                                <p className="text-richblack-300 font-medium">
+                                    {card.description}
+                                </p>
+                                <div className="w-fit mt-2">
+                                    <CTAButton active={true} linkTo={card.BtnLink}>
+                                        {card.BtnText}
+                                    </CTAButton>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="p-8 flex-col gap-8">
+                                <h1 className="text-richblack-5 text-lg">{card.heading}</h1>
+                                <p className="text-richblack-300 font-medium">
+                                    {card.description}
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                )
+            })}
         </div>
     )
 }
 
-export default LearningGrid;
+
+export {
+    LerningGrid
+}

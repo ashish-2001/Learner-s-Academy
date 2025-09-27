@@ -1,32 +1,27 @@
 import React from "react";
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-export default function RequirementsField({
-    name,
-    label,
-    setValue,
-    errors,
-    getValues
-}){
-    const { editCourse, course } = useSelector((state) => state.course)
-    const [ requirement, setRequirement ] = useState("")
-    const [requirementsList, setRequirementsList] = useState([])
+function RequirementsField({name, label, register, setValue, errors, getValues}){
+    const { editCourse, course } = useSelector((state) => state.course);
+    const [requirements, setRequirements] = useState("");
+    const [requirementsList, setRequirementsList] = useState([]);
 
-    useEffect(() =>{
+    useEffect(() => {
         if(editCourse){
-            setRequirementsList(course?.instructions)
+            setRequirementsList(course?.instructions);
         }
-        register(name, { required: true, validate: (value) => value.length > 0 })
+        register(name, { required: true, validate: (value) => value.length > 0})
     }, [])
 
     useEffect(() => {
         setValue(name, requirementsList)
-    }, [requirementsList]);
+    }, [requirementsList])
 
     const handleAddRequirement = () => {
         if(requirement){
-            setRequirementsList([...requirementsList, requirement])
-            setRequirement("")
+            setRequirementsList([...requirementsList, requirements])
+            setRequirements("");
         }
     }
 
@@ -39,38 +34,38 @@ export default function RequirementsField({
     return(
         <div className="flex flex-col space-y-2">
             <label className="text-sm text-richblack-5" htmlFor={name}>
-                {label} <sup className="text-pink-200">*</sup>
+                {label} <sup className="text-red-200">*</sup>
             </label>
-            <div className="flex fex-col items-start space-y-2">
+            <div className="flex flex-col items-start space-y-2">
                 <input
                     type="text"
                     id={name}
-                    value={requirement}
-                    onChange={(e) => setRequirement(e.target.value)}
+                    value={requirements}
+                    onChange={(e) => setRequirements(e.target.value)}
                     className="form-style w-full"
                 />
-                <button className="font-semibold text-yellow-50" type="button">
+                <button
+                    type="button"
+                    onClick={handleAddRequirement}
+                    className="font-semibold text-yellow-50"
+                >
                     Add
                 </button>
             </div>
             {requirementsList.length > 0 && (
                 <ul className="mt-2 list-inside list-disc">
-                    {requirementsList.map((requirement, index) =>(
+                    {requirements.localeCompare((requirement, index) => (
                         <li key={index} className="flex items-center text-richblack-5">
                             <span>{requirement}</span>
-                            <button
-                                type="button"
-                                className="ml-2 text-xs text-pure-greys-300"
-                                onClick={() => handleRemoveRequirement(index)}
-                            >
-                                clear
+                            <button type="button" className="ml-2 text-xs text-pure-grays-300" onClick={() => handleRemoveRequirement(index)}>
+                                Clear
                             </button>
                         </li>
                     ))}
                 </ul>
             )}
             {errors[name] && (
-                <span className="ml-2 text-xs tracking-wide text-pink-200">
+                <span className="ml-2 text-xs tracking-wide text-red-200">
                     {label} is required
                 </span>
             )}
@@ -78,3 +73,6 @@ export default function RequirementsField({
     )
 }
 
+export {
+    RequirementsField
+}
