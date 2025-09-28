@@ -9,7 +9,7 @@ import { SidebarLink } from "./SidebarLink";
 import { VscSignOut } from "react-icons/vsc";
 
 function Sidebar(){
-    const { user, loading, profileLoading } = useSelector((state) => state.profile)
+    const { user, loading: profileLoading } = useSelector((state) => state.profile)
     const { loading: authLoading } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -59,4 +59,8 @@ function Sidebar(){
             {confirmationModal && <ConfirmationModal modalData={confirmationModal}/>}
         </div>
     )
+}
+
+export {
+    Sidebar
 }
