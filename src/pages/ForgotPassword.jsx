@@ -28,7 +28,7 @@ function ForgotPassword(){
                     <p className="my-4 text-[1.125rem] leading-[1.625rem] text-richblack-100">
                         {!emailSent ? "Have no fear. We'll email you instructions to reset your password. If you dont have access to your email we can try account recovery" : `We have sent the reset email to ${email}`}
                     </p>
-                    <form onSubmit={handleOnSubmit}>
+                    <form onSubmit={handleSubmit}>
                         {!emailSent && (
                             <label className="w-full">
                                 <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">

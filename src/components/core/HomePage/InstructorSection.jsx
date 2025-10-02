@@ -22,7 +22,7 @@ function InstructorSection(){
                     </h1>
                     <p className="font-medium text-[16px] text-justify w-[90%] text-richblack-300">
                         Instructor from around the world can teach millions of students on
-                        Learner's Academy. We provide the tools and skills to teach what you
+                        Learners Academy. We provide the tools and skills to teach what you
                         love.
                     </p>
                     <div className="w-fit">

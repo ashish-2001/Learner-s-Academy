@@ -1,7 +1,7 @@
 import React from "react";
 import IconBtn from "./IconBtn";
 
-function ConfirmationModal({modalData}){
+function ConfirmationModalData({ modalData }){
 
     return(
         <div className="fixed inset-0 z.[1000] !mt-0 grid place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
@@ -27,5 +27,5 @@ function ConfirmationModal({modalData}){
 }
 
 export {
-    ConfirmationModal
+    ConfirmationModalData
 }

@@ -1,8 +1,9 @@
+import React from "react";
 import { useSelector } from "react-redux";
 import { RenderCartCourses } from "./RenderCartCourses";
 import { RenderTotalAmount } from "./RenderTotalAmount";
 
-function function Cart(){
+function Cart(){
     const { total, totalItems } = useSelector((state) => state.cart);
     const { paymentLoading } = useSelector((state) => state.course);
 
@@ -30,4 +31,8 @@ function function Cart(){
                 )}
             </>
         )
+}
+
+export {
+    Cart
 }

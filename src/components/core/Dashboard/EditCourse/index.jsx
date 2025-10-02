@@ -41,3 +41,6 @@ function EditCourse(){
         9"></div>
     )
 }
+
+
+export { EditCourse}

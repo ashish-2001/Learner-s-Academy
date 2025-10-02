@@ -6,11 +6,11 @@ import { RiDeleteBin6Line, RxDropdownMenu } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteSection, deleteSubSection } from "../../../../../services/operations/courseDetailsAPI";
 import { setCourse } from "../../../../../slices/courseSlice";
-import ConfirmationModal from "../../../../Common/ConfirmationModal";
+import { ConfirmationModalData } from "../../../../Common/ConfirmationModal";
 import SubSectionModal from "./SubSectionModal";
 import { useState } from "react";
 
-function NestedView({handleChangeEditSectionName}){
+function NestedView({ handleChangeEditSectionName }){
     const { course } = useSelector((state) => state.course);
     const { token } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
@@ -132,7 +132,7 @@ function NestedView({handleChangeEditSectionName}){
             )
         )}
         {confirmationModal ? (
-            <ConfirmationModal modalData={confirmationModal}/>
+            <ConfirmationModalData modalData={confirmationModal}/>
         ) : (
             <></>
         )}

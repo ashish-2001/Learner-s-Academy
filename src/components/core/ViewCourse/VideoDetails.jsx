@@ -7,7 +7,7 @@ import { IconBtn } from "../../Common/IconBtn";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-function ViewDetails(){
+function VideoDetails(){
     const { courseId, sectionId, subSectionId } = useParams();
     const navigate = useNavigate();
     const location = useLocation();
@@ -187,5 +187,5 @@ function ViewDetails(){
 }
 
 export {
-    ViewDetails
+    VideoDetails
 }
