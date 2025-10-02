@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteSection, deleteSubSection } from "../../../../../services/operations/courseDetailsAPI";
 import { setCourse } from "../../../../../slices/courseSlice";
 import { ConfirmationModalData } from "../../../../Common/ConfirmationModal";
-import SubSectionModal from "./SubSectionModal";
+import { SubSectionModal } from "./SubSectionModal";
 import { useState } from "react";
 
 function NestedView({ handleChangeEditSectionName }){

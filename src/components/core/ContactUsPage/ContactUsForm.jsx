@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import CountryCode from "../../../data/countryCode.json";
 import { ContactUsEndpoint } from "../../../services/apis";
+import { apiConnector } from "../../../services/apiConnector";
 
 function ContactUsForm(){
 
@@ -16,11 +17,12 @@ function ContactUsForm(){
     const submitContactForm = async (data) => {
         try{
             setLoading(true)
-            const res = await apiConnector(
+            await apiConnector(
                 "POST",
                 ContactUsEndpoint.CONTACT_US_API,
                 data
             )
+
             setLoading(false)
         }
         catch(e){

@@ -12,10 +12,10 @@ import { COURSE_STATUS } from "../../../../../utils/constants";
 import { IconBtn } from "../../../../Common/IconBtn";
 import { Upload } from "../Upload";
 import { ChipInput } from "./ChipInput";
-import RequirementsField from "./RequirementsField";
+import { RequirementsField } from "./RequirementsField";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 function CourseInformationForm(){
     const { register, handleSubmit, setValue, getValues, formState: { errors}} = useForm();

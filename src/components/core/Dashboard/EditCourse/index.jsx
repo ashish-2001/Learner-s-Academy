@@ -2,10 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import {
-    fetchCourseDetails,
-    getFullDetailsOfCourse
-} from "../../../../services/operations/courseDetailsAPI";
+import { getFullDetailsOfCourse } from "../../../../services/operations/courseDetailsAPI";
 import { setCourse, setEditCourse } from "../../../../slices/courseSlice";
 import { RenderSteps } from "../AddCourse/RenderSteps";
 
@@ -37,10 +34,24 @@ function EditCourse(){
     }
 
     return(
-        <div className="mb-
-        9"></div>
+        <div>
+            <h1 className="mb-14 text-3xl font-medium text-richblack-5">
+            Edit Course
+            </h1>
+            <div className="mx-auto max-w-[600px]">
+                {course ? (
+                    <RenderSteps/>
+                ) : (
+                    <p className="mt-14 text-center text-3xl font-semibold text-richblack-100">
+                        Course not found
+                    </p>
+                )}
+            </div>
+        </div>
     )
 }
 
 
-export { EditCourse}
+export { 
+    EditCourse
+}

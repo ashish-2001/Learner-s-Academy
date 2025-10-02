@@ -1,12 +1,12 @@
 import React from "react";
-import { useEffect, useRef, usestae, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiOutlineDown } from "react-icons/ai";
 import CourseSubSectionAccordion from "./CourseSubSectionAccordion";
 
 function CourseAccordionBar({course, isActive, handleActive}){
     const contentEl = useRef();
 
-    const [active, setActive] = usestate(false)
+    const [active, setActive] = useState(false)
 
     useEffect(() => {
         setActive(isActive?.includes(course._id))

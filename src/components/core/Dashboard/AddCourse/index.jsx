@@ -1,5 +1,5 @@
 import React from "react";
-import RenderSteps from "./RenderSteps";
+import { RenderSteps } from "./RenderSteps";
 
 function AddCourse(){
     return (

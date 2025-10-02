@@ -45,7 +45,7 @@ function RenderCartCourses(){
                         </div>
                     </div>
                     <div className="flex flex-col items-end space-y-2">
-                        <button className="flex items-center gap-x-1 rounded-md border border-richblack-600 bg-richblack-700 py-3 px-[12px] text-pink-200">
+                        <button onClick={() => dispatch(removeFromCart(course._id))} className="flex items-center gap-x-1 rounded-md border border-richblack-600 bg-richblack-700 py-3 px-[12px] text-pink-200">
                             <RiDeleteBin6Line/>
                             <span>Remove</span>
                         </button>

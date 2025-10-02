@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -9,15 +10,15 @@ import {
 } from "../../../../../services/operations/courseDetailsAPI";
 import { setCourse } from "../../../../../slices/courseSlice";
 import { IconBtn } from "../../../../Common/IconBtn";
-import Upload from "./Upload";
+import { Upload } from "./Upload";
 
-function SubSectionModal(){(
-    MdOutlineCalendarToday,
+function SubSectionModal({
+    modalData,
     setModalData,
     add = false,
     view = false,
     edit = false
-)}{
+}){
     const {
         register,
         handleSubmit,
@@ -47,7 +48,7 @@ function SubSectionModal(){(
         ){
             return true
         }
-        return true
+        return false
     }
 
     const handleEditSubSection = async () => {
@@ -55,7 +56,7 @@ function SubSectionModal(){(
         const formData = new FormData();
         formData.append("sectionId", modalData.sectionId)
         formData.append("subSectionId", modalData._id)
-        if(currentValues.lectureTitle !== modalData.sectionId){
+        if(currentValues.lectureTitle !== modalData.title){
             formData.append("title", currentValues.lectureTitle)
         }
         if(currentValues.lectureDesc !== modalData.description){

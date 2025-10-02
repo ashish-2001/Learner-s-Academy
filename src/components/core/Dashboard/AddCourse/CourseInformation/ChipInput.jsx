@@ -3,8 +3,15 @@ import { useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
 import { useSelector } from "react-redux";
 
-function ChipInput({label, name, placeholder, register, errors, setValue}){
-    const { aditCourse, course } = useSelector((state) => state.course)
+function ChipInput({
+        label, 
+        name, 
+        placeholder, 
+        register, 
+        errors, 
+        setValue
+    }){
+    const { editCourse, course } = useSelector((state) => state.course)
 
     const [chips, setChips] = useState([]);
     

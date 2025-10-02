@@ -11,12 +11,11 @@ function Upload({
     label, 
     register, 
     setValue, 
-    errors, 
+    errors,
     video = false,
     viewData = null, 
     editData = null
 }){
-    const { course } = useSelector((State) => State.course)
     const [selectedFile, setSelectedFile] = useState(null);
     const [previewSource, setPreviewSource] = useState(
         viewData ? viewData : editData ? editData : ""

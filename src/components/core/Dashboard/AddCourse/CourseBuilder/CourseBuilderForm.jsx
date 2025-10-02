@@ -4,12 +4,15 @@ import { MdNavigateNext } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { createSection, updateSection } from "../../../../../services/operations/courseDetailsAPI";
 import{ setCourse, setEditCourse, setStep } from "../../../../../slices/courseSlice";
-import IconBtn from "../../../../Common/IconBtn";
-import NestedView from "./NestedView";
+import { IconBtn } from "../../../../Common/IconBtn";
+import { NestedView } from "./NestedView";
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
+import { useForm } from "react-hook-form";
+
 
 function CourseBuilderForm(){
+
     const { register, handleSubmit, setValue, formState: { errors }} = useForm();
 
     const { course } = useSelector((state) => state.course);
