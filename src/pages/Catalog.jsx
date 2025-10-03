@@ -1,18 +1,19 @@
-import React, { act, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Footer } from "../Common/Footer";
 import { Course_Card } from "../../components/Core/Catalog/Course_Card";
 import { apiConnector } from "../services/apiConnector";
 import { categories } from "../services/apis";
-import { getCatalogPageData } from "../services/operations/pageAndComponentData";
+import { getCatalogPageData } from "../services/operations/pageAndComponentData"
 import { Error } from "./Error";
+import { Course_Slider } from "../components/Core/Catalog/Course_Slider";
 
 function Catalog(){
     const { loading } = useSelector((state) => state.profile)
     const { catalogName } = useParams();
     const [active, setActive] = useState(1);
-    const [getCatalogPageData, setCatalogPageData] = useState(null);
+    const [catalogPageData, setCatalogPageData] = useState(null);
     const [categoryId, setCategoryId] = useState("");
 
     useEffect(() => {
@@ -115,4 +116,8 @@ function Catalog(){
             <Footer/>
         </>
     )
+}
+
+export {
+    Catalog
 }

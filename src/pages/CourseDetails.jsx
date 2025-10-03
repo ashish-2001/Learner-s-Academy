@@ -3,15 +3,15 @@ import { BiInfoCircle } from "react-icons/bi";
 import { HiOutlineGlobeAlt } from "react-icons/hi2";
 import { ReactMarkDown } from "react-markdown/lib/react-markdown";
 import { useDispatch, useSelector } from "react-redux";
-import { ConfirmationModal } from "../../components/Common/ConfirmationModal";
+import { ConfirmationModalData } from "../../components/Common/ConfirmationModalData";
 import { Footer } from "../Common/Footer";
 import { RatingStars } from "../Common/RatingStars";
 import { CourseAccordionBar } from "../../components/Core/Course/CourseAccordionbar";
-import { CourseDetailsCard, CourseDetailsCard } from "../../components/Core/Course/CourseDetailscard";
+import { CourseDetailsCard } from "../../components/Core/Course/CourseDetailscard";
 import { formatDate } from "../services/formatDate";
 import { fetchCourseDetails } from "../services/operations/courseDetailsAPI";
 import { BuyCourse } from "../services/operations/studentFeaturesAPI";
-import { GetAvgRating } from "../uti;s/avgRating"
+import { GetAvgRating } from "../utils/avgRating"
 import { Error } from "./Error";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -24,7 +24,7 @@ function CourseDetails(){
     const navigate = useNavigate();
     const { courseId } = useParams();
     const [response, setResponse] = useState(null);
-    const [ConfirmationModal, setConfirmationModal] = useState(null);
+    const [confirmationModal, setConfirmationModal] = useState(null);
 
     useEffect(() => {
         ;(async ()=> {
@@ -40,7 +40,7 @@ function CourseDetails(){
 
     const [avgReviewCount, setAvgReviewCount] = useState(0);
     useEffect(() => {
-        const count = GetAvgRating(response?.data?.CourseDetails.ratingAndReviews)
+        const count = GetAvgRating(response?.data?.courseDetails?.ratingAndReviews)
         setAvgReviewCount(count)
     }, [response])
 
@@ -56,8 +56,8 @@ function CourseDetails(){
     const [totalNoOfLectures, setTotalNoOfLectures] = useState(0);
     useEffect(() => {
         let lectures = 0;
-        response?.data?.CourseDetails?.courseContent?.forEach((sec) =>{
-            lectures += sec.subSection.length || 0
+        response?.data?.courseDetails?.courseContent?.forEach((sec) =>{
+            lectures += sec?.subSection?.length || 0
         })
         setTotalNoOfLectures(lectures)
     }, [response])
@@ -73,8 +73,8 @@ function CourseDetails(){
         return <Error/>
     }
 
+    const courseDetails = response?.data?.courseDetails ?? {}
     const {
-        _id: course_id,
         courseName,
         courseDescription,
         thumbnail,
@@ -85,7 +85,7 @@ function CourseDetails(){
         instructor,
         studentsEnrolled,
         createdAt
-    } = response.data?.CourseDetails;
+    } = courseDetails;
 
     function handleBuyCourse(){
         if(token){
@@ -133,8 +133,8 @@ function CourseDetails(){
                             <div className="text-md flex flex-wrap items-center gap-2">
                                 <span className="text-yellow-25">{avgReviewCount}</span>
                                 <RatingStars Review_Count={avgReviewCount} Star_Size={24}/>
-                                <span>{`${ratingAndReviews.length} reviews`}</span>
-                                <span>{`${studentsEnrolled.length} students enrolled`}</span>
+                                <span>{`${ratingAndReviews?.length} reviews`}</span>
+                                <span>{`${studentsEnrolled?.length} students enrolled`}</span>
                             </div>
                             <div>
                                 <p>
@@ -166,7 +166,7 @@ function CourseDetails(){
                     </div>
                     <div className="right-[1rem] top-[60px] mx-auto hidden min-h-[600px] w-1/3 max-w-[410px] translate-y-24 md:translate-y-0 lg:absolute  lg:block">
                         <CourseDetailsCard
-                            course={response?.data?.CourseDetails}
+                            course={response?.data?.courseDetails}
                             setConfirmationModal={setConfirmationModal}
                             handleBuyCourse={handleBuyCourse}
                         />
@@ -176,7 +176,7 @@ function CourseDetails(){
             <div className="mx-auto box-content px-4 text-start text-richblack-5 lg:w-[1260px]">
                 <div className="mx-auto max-w-maxContentTab lg:mx-0 xl:max-w-[810px]">
                     <div className="my-8 border border-richblack-600 p-8">
-                        <p className="text-3xl font-semibold">What you'll learn</p>
+                        <p className="text-3xl font-semibold">What you will learn</p>
                         <div className="mt-5">
                             <ReactMarkDown>{whatWillYouLearn}</ReactMarkDown>
                         </div>
@@ -187,12 +187,12 @@ function CourseDetails(){
                             <div className="flex flex-wrap justify-between gap-2">
                                 <div className="flex gap-2">
                                     <span>
-                                        {courseContent.length} {`section(5)`}
+                                        {courseContent?.length ?? 0} {`section(5)`}
                                     </span>
                                     <span>
                                         {totalNoOfLectures} {`lecture(S)`}
                                     </span>
-                                    <span>{response.data?.totalDuration} total length</span>
+                                    <span>{response?.data?.totalDuration} total length</span>
                                 </div>
                                 <div>
                                     <button className="text-yellow-25" onClick={() => setIsActive([])}>Collapse all sections</button>
@@ -228,7 +228,7 @@ function CourseDetails(){
                 </div>
             </div>
             <Footer/>
-            {ConfirmationModal && <ConfirmationModal modalData={ConfirmationModal}/>}
+            {confirmationModal && <ConfirmationModalData modalData={confirmationModal}/>}
         </>
     )
 }
