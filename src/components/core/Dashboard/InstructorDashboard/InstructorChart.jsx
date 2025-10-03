@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Chart, registerables } from "chart.js";
-import { Pie } from "react-chartja-2";
+import { Pie } from "react-chartjs-2";
 Chart.register(...registerables)
 
 function InstructorChart({ courses }){
