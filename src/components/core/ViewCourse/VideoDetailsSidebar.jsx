@@ -6,7 +6,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function VideoDetailsSidebar({ setReviewModal }){
-    const [activeStatus, setActiveStatus] = useState("";
+    const [activeStatus, setActiveStatus] = useState("");
         const [videoBarActive, setVideoBarActive] = useState("");
         const navigate = useNavigate();
         const location = useLocation();
@@ -29,7 +29,7 @@ function VideoDetailsSidebar({ setReviewModal }){
                 setVideoBarActive(activeSubSectionId)
             })()
         }, [courseSectionData, courseEntireData, location.pathname])
-    )
+    
 
     return (
         <>

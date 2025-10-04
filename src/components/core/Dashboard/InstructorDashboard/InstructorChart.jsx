@@ -26,10 +26,6 @@ function InstructorChart({ courses }){
         ]
     }
 
-    const options = {
-        maintainAspectRatio: false
-    }
-
     const chartIncomeData = {
         labels: courses.map((course) => course.courseName),
         datasets: [

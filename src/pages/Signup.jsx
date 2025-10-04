@@ -1,5 +1,5 @@
 import React from "react";
-import { signupImg } from "../../assets/images/signup.webp";
+import { signup } from "../assets/images";
 import { Template } from "../components/Core/Auth/Template";
 
 function Signup(){
@@ -8,7 +8,7 @@ function Signup(){
             title={"Join the millions learning to code with StudyNotion for free"}
             description1={"Build skills for today, tomorrow, and beyond."}
             description2={"Education to future-proof your career"}
-            image={signupImg}
+            image={signup}
             formType={"signup"}
         />
     )

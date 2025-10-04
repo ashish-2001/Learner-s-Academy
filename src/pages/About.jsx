@@ -1,15 +1,15 @@
 import React from "react"
-import { HighLightText } from "../Core/HomePage/HighLightText";
-import { FoundingStory } from "../../assets/images/FoundingStory";
-import { BannerImage1 } from "../../assets/images/aboutus.webp";
-import { BannerImage2 } from "../../assets/images/aboutus2.webp"
-import { BannerImage3 } from "../../assets/images/aboutus3.webp"
-import { Footer } from "../../components/Common/Footer";
-import { ReviewSlider } from "../../components/Common/ReviewSlider";
-import { ContactFormSection } from "../../components/Core/AboutPage/LearningGrid";
-import { LearningGrid } from "../../components/Core/AboutPage/LearningGrid";
-import { Quote } from "../../components/Core/AboutPage/Quote";
-import { StatsComponent } from "../../components/Core/AboutPage/Stats";
+import { HighLightText } from "../components/Core/HomePage/HighLightText";
+import { FoundingStory } from "../assets/images";
+import { aboutus1 } from "../assets/images";
+import { aboutus2 } from "../assets/images";
+import { aboutus3 } from "../assets/images";
+import { Footer } from "../components/Common/Footer";
+import { ReviewSlider } from "../components/Common/ReviewSlider";
+import { ContactFormSection } from "../components/Core/ContactUsPage/ContactUsForm"
+import { LearningGrid } from "../components/Core/AboutPage/LearningGrid";
+import { Quote } from "../components/Core/AboutPage/Quote";
+import { StatsComponent } from "../components/Core/AboutPage/Stats";
 
 
 function About(){
@@ -30,15 +30,15 @@ function About(){
                     <div className="sm:h-[70px] lg:h-[150px]"></div>
                     <div className="absolute bottom-0 left-[50%] grid w-[100%] translate-x-[-50%] translate-y-[30%] grid-cols-3 gap-3 lg:gap-5">
                         <img
-                            src={BannerImage1} 
+                            src={aboutus1} 
                             alt=""
                         />
                         <img
-                            src={BannerImage2} 
+                            src={aboutus2} 
                             alt=""
                         />
                         <img
-                            src={BannerImage3} 
+                            src={aboutus3} 
                             alt=""
                         />
                     </div>

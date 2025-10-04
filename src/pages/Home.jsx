@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Banner } from "../../assets/images/banner.mp4";
+import { banner } from "../assets/images";
 import { Footer } from "../components/Common/Footer";
 import { ReviewSlider } from "../components/Common/ReviewSlider";
 import { CTAButton } from "../components/Core/HomePage/Button";
@@ -49,7 +49,7 @@ function Home(){
                         loop
                         autoPlay
                     >
-                        <source src={Banner} type="video/mp4"/>
+                        <source src={banner} type="video/mp4"/>
                     </video>
                 </div>
                 <div>

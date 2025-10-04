@@ -1,7 +1,8 @@
 import React from "react";
 import { useRef, useState } from "react";
 import { AiOutlineCaretDown } from "react-icons/ai";
-import { useDispatch, useSelector, VscDashboard, VscSignOut } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { VscDashboard, VscSignOut } from "react-icons/vsc";
 import { Link, useNavigate } from "react-router-dom";
 import { useOnClickOutside } from "../../../hooks/useOnClickOutside";
 import { logout } from "../../../services/operations/authAPI";

@@ -16,7 +16,7 @@ const initialState = {
 const cartSlice = createSlice({
     name: "cart",
     initialState,
-    reducer{
+    reducers: {
     addToCart: (state, action) => {
         const course = action.payload
         const index = state.cart.findIndex((item) => item._id === course._id)
@@ -43,7 +43,7 @@ const cartSlice = createSlice({
 
         if(index >= 0){
             state.totalItems--
-            state.total -=state.cat[index].price
+            state.total -=state.cart[index].price
             state.cart.splice(index, 1)  
 
             localStorage.setItem("cart", JSON.stringify(state.cart))

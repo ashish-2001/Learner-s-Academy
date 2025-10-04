@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import CountryCode from "../../../data/countryCode.json";
+import { CountryCode } from "../../../data/CountryCode";
 import { ContactUsEndpoint } from "../../../services/apis";
 import { apiConnector } from "../../../services/apiConnector";
 

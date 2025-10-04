@@ -4,8 +4,8 @@ import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
 import { BsChevronDown } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { Link, matchPath, useLocation } from "react-router-dom";
-import logo from "../../assets/logo/Logo-Full-Light.png";
-import { NavbarLinks } from "../../data/navbar-links";
+import { Logo_Full_Light } from "../../assets/logo";
+import { NavbarLinks } from "../../data/NavbarLinks";
 import { apiConnector } from "../../services/apiConnector";
 import { categories } from "../../services/apis";
 import { ACCOUNT_TYPE } from "../../utils/constants";
@@ -49,7 +49,7 @@ function Navbar(){
         } transition-all duration-200`}>
             <div className="flex w-11/12 max-w-maxContent items-center justify-between">
             <Link to={"/"}>
-                <img src={logo} alt="Logo" width={160} height={32} loading="lazy"/>
+                <img src={Logo_Full_Light} alt="Logo" width={160} height={32} loading="lazy"/>
             </Link>
 
             <nav className="hidden md:block">

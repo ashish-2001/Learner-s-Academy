@@ -4,10 +4,10 @@ import { useForm } from "react-hook-form";
 import { RxCross2 } from "react-icons/rx";
 import { ReactStars } from "react-rating-stars-component";
 import { useSelector } from "react-redux";
-import { createRating } from "../../services/operations/courseDetailsAPI";
+import { createRating } from "../../../services/operations/courseDetailsAPI";
 import { IconBtn } from "../../Common/IconBtn";
 
-function CourseReviewModal(){
+function CourseReviewModal({ setReviewModal }){
     const { user } = useSelector((state) => state.profile);
     const { token } = useSelector((state) => state.auth) ;
     const { courseEntireData } = useSelector((state) => state.viewCourse);

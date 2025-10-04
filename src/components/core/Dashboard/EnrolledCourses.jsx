@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { ProgressBar } from "@/ramonak/react-progress-bar";
+import  ProgressBar from "@ramonak/react-progress-bar";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getUserEnrolledCourses } from "../../../services/operations/profileAPI";

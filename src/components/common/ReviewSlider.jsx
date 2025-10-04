@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import ReactStars from "react-rating-stars-components";
+import ReactStars from "react-rating-stars-component";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/free-code";
+import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import "../../App.css";
 import { FaStar } from "react-icons/fa";
-import { AutoPlay, FreeMode, Pagination } from "swiper";
-import { apiConnector } from "../../apiConnector";
+import { Autoplay, FreeMode, Pagination } from "swiper";
+import { apiConnector } from "../../services/apiConnector";
 import { ratingsEndpoints } from "../../services/apis";
 
 function ReviewSlider(){
@@ -27,15 +27,15 @@ function ReviewSlider(){
         <div className="text-white">
             <div className="my-[50px] h-[184px] max-w-maxContentTab lg:max-w-maxContent">
                 <Swiper
-                    slidePerView={4}
+                    slidesPerView={4}
                     spaceBetween={25}
                     loop={true}
                     freeMode={true}
-                    autoPlay={{
+                    autoplay={{
                         delay: 2500,
                         disableOnInteraction: false
                     }}
-                    modules={[FreeMode, Pagination, AutoPlay]}
+                    modules={[FreeMode, Pagination, Autoplay]}
                     className="w-full"
                 >
                     {reviews.map((review, i) => {

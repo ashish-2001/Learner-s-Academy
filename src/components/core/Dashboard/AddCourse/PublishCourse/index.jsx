@@ -1,8 +1,9 @@
+import React from "react";
 import { useForm } from "react-hook-form";
-import { editCourseDetails } from "../../../../../services/operations/courseDetails";
+import { editCourseDetails } from "../../../../../services/operations/courseDetailsAPI";
 import { resetCourseState, setStep } from "../../../../../slices/courseSlice";
 import { COURSE_STATUS } from "../../../../../utils/constants";
-import IconBtn from "../../../../Common/IconBtn";
+import { IconBtn } from "../../../../Common/IconBtn";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -32,8 +33,10 @@ function PublishCourse(){
     }
 
     const handleCoursesPublish = async () => {
-        if((course?.status === COURSE_STATUS.PUBLISHED) && 
-    getValues("public") === true) || (course?.status === COURSE_STATUS.DRAFT && getValues("public") === false){
+        if(
+            (course?.status === COURSE_STATUS.PUBLISHED && 
+        getValues("public") === true) || 
+        (course?.status === COURSE_STATUS.DRAFT && getValues("public") === false)){
         goToCourses()
         return
     }
@@ -50,7 +53,7 @@ function PublishCourse(){
     setLoading(false)
     }
 
-    const onSubmit = (data) => {
+    const onSubmit = () => {
         handleCoursesPublish()
     }
 

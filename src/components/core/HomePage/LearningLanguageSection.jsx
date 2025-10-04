@@ -1,8 +1,9 @@
 import React from "react";
 import { HighLightText } from "./HighLightText";
-import CTAButton from "../../../components/Core/HomePage/Button";
-import Know_your_progress from "../../../assets/images/Compare_with_others.svg";
-import Plan_your_lessons from "../../../assets/images/Plan_your_lessons";
+import CTAButton from "../../Core/HomePage/Button";
+import { Know_your_progress } from "../../../assets/images";
+import { Plan_your_progress } from "../../../assets/images";
+import { Compare_with_others } from "../../../assets/images";
 
 function LearningLanguageSection(){
     return(

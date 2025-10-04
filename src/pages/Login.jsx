@@ -1,5 +1,5 @@
 import React from "react";
-import { loginImg } from "../../assets/images/login.webp";
+import { login } from "../assets/images";
 import { Template } from "../components/Core/Auth/Template";
 
 function Login(){
@@ -8,7 +8,7 @@ function Login(){
             title={"Welcome back"}
             description1={"Build skills for today, tomorrow, and beyond."}
             description2={"Education to future-proof your career"}
-            image={loginImg}
+            image={login}
             formType={"login"}
         />
     )

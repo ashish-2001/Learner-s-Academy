@@ -1,9 +1,9 @@
 import React from "react";
-import TimeLineImage from "../../../assets/images/TimeLineImage";
-import Logo1 from "../../../assets/timelineLogo/Logo1.svg";
-import Logo2 from "../../../assets/timelineLogo/Logo2.svg";
-import Logo3 from "../../../assets/timelineLogo/Logo3.svg";
-import Logo4 from "../../../assets/timelineLogo/Logo4.svg";
+import { TimelineImage } from "../../../assets/images";
+import { Logo1 } from "../../../assets/timelineLogo";
+import { Logo2 } from "../../../assets/timelineLogo";
+import { Logo3 } from "../../../assets/timelineLogo";
+import { Logo4 } from "../../../assets/timelineLogo";
 
 const TimeLine = [
     {
@@ -74,7 +74,7 @@ function TimelineSection(){
                         <div></div>
                     </div>
                     <img
-                        src={TimeLineImage}
+                        src={TimelineImage}
                         alt="timelineImage"
                         className="shadow-white shadow-[20px_20px_0px_0px] object-cover h-[400px] lg:h-fit"
                     />

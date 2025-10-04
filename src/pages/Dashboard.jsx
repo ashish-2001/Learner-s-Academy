@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
-import { Sidebar } from "../../components/Core/Dashboard/Sidebar";
+import { Sidebar } from "../components/Core/Dashboard/Sidebar";
 
 function Dashboard(){
     const { loading: profileLoading} = useSelector((State)=> State.profile)
