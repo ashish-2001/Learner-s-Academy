@@ -52,7 +52,7 @@ const catalogData = {
     CATALOGPAGEDATA_API: BASE_URL + "/course/getCategoryPageDetails",
 }
 
-const contactusEndpoint = {
+const contactUsEndpoint = {
     CONTACT_US_API: BASE_URL + "/reach/contact",
 }
 
@@ -72,6 +72,6 @@ export {
     ratingsEndpoints,
     categories,
     catalogData,
-    contactusEndpoint,
+    contactUsEndpoint,
     settingsEndpoints
 }

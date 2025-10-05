@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ReactPlayer } from "react-player";
-import { markLectureAsComplete } from "../../../services/operations/courseDetailsAPI";
+import ReactPlayer from "react-player";
+import { markLectureAsCompleted } from "../../../services/operations/courseDetailsAPI";
 import { updateCompletedLectures } from "../../../slices/viewCourseSlice";
 import { IconBtn } from "../../Common/IconBtn";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -116,7 +116,7 @@ function VideoDetails(){
 
         const handleLectureCompletion = async() => {
             setLoading(true)
-            const res = await markLectureAsComplete(
+            const res = await markLectureAsCompleted(
                 {courseId: courseId, subSectionId:subSectionId},
                 token
             )

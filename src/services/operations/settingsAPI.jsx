@@ -1,7 +1,7 @@
 import { toast } from "react-hot-toast";
 import { setUser } from "../../slices/profileSlice";
-import { apiConnector } from "../apis";
-import { settingEndpoints } from "../apis";
+import { apiConnector } from "../apiConnector";
+import { settingsEndpoints } from "../apis";
 import { logout } from "./authAPI";
 
 const {
@@ -9,7 +9,7 @@ const {
     UPDATE_PROFILE_API,
     CHANGE_PASSWORD_API,
     DELETE_PROFILE_API
-} = settingEndpoints;
+} = settingsEndpoints;
 
 async function updateDisplayPicture(token, formData){
     return async (dispatch) => {

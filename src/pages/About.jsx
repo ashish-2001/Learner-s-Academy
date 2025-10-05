@@ -6,7 +6,7 @@ import { aboutus2 } from "../assets/images";
 import { aboutus3 } from "../assets/images";
 import { Footer } from "../components/Common/Footer";
 import { ReviewSlider } from "../components/Common/ReviewSlider";
-import { ContactFormSection } from "../components/Core/ContactUsPage/ContactUsForm"
+import { ContactFormSection } from "../components/core/AboutPage/ContactFormSection";
 import { LearningGrid } from "../components/Core/AboutPage/LearningGrid";
 import { Quote } from "../components/Core/AboutPage/Quote";
 import { StatsComponent } from "../components/Core/AboutPage/Stats";

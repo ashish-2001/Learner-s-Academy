@@ -1,9 +1,9 @@
 import React from "react";
 import { HighLightText } from "./HighLightText";
-import CTAButton from "../../Core/HomePage/Button";
-import { Know_your_progress } from "../../../assets/images";
-import { Plan_your_progress } from "../../../assets/images";
-import { Compare_with_others } from "../../../assets/images";
+import { CTAButton } from "./Button";
+import { Know_your_progress } from "../../../assets/images/index";
+import { Plan_your_lessons } from "../../../assets/images/index"
+import { Compare_with_others } from "../../../assets/images/index";
 
 function LearningLanguageSection(){
     return(
@@ -28,7 +28,7 @@ function LearningLanguageSection(){
                         className="object-contain lg:-mb-10 lg:-mt-0 -mt-12"
                     />
                     <img
-                        src={Plan_your_progress}
+                        src={Plan_your_lessons}
                         alt=""
                         className="object-contain lg:-ml-36 lg:-mt-5 -mt-16"
                     />

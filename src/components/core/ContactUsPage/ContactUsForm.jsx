@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { CountryCode } from "../../../data/CountryCode";
-import { ContactUsEndpoint } from "../../../services/apis";
+import { contactUsEndpoint } from "../../../services/apis";
 import { apiConnector } from "../../../services/apiConnector";
 
 function ContactUsForm(){
@@ -19,7 +19,7 @@ function ContactUsForm(){
             setLoading(true)
             await apiConnector(
                 "POST",
-                ContactUsEndpoint.CONTACT_US_API,
+                contactUsEndpoint.CONTACT_US_API,
                 data
             )
 

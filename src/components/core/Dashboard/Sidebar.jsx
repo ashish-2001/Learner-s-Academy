@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { sidebarLinks } from "../../../data/dashboard-links";
 import { logout } from "../../../services/operations/authAPI";
-import { ConfirmationModal } from "../../Common/ConfirmationModal";
+import { ConfirmationModalData } from "../../Common/ConfirmationModal";
 import { SidebarLink } from "./SidebarLink";
 import { VscSignOut } from "react-icons/vsc";
 
@@ -56,7 +56,7 @@ function Sidebar(){
                         </button>
                 </div>
             </div>
-            {confirmationModal && <ConfirmationModal modalData={confirmationModal}/>}
+            {confirmationModal && <ConfirmationModalData modalData={confirmationModal}/>}
         </div>
     )
 }
