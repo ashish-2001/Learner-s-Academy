@@ -32,19 +32,19 @@ function CoursesTable({ courses, setCourses }){
 
     return(
         <>
-            <Table className="rounded-xl border border-richblack-800">
+            <Table className="rounded-xl border border-white">
                 <Thead>
-                    <Tr className="flex gap-x-10 rounded-t-md border-b border-b-richblack-800 px-6 py-2">
-                        <Th className="flex-1 text-left text-sm font-medium uppercase text-richblack-100">
+                    <Tr className="flex gap-x-10 rounded-t-md border-b border-b-white px-6 py-2">
+                        <Th className="flex-1 text-left text-sm font-medium uppercase text-white">
                             Courses
                         </Th>
-                        <Th className="text-left text-sm font-medium uppercase text-richblack-100">
+                        <Th className="text-left text-sm font-medium uppercase text-white">
                             Duration
                         </Th>
-                        <Th className="text-left text-sm font-medium uppercase text-richblack-100">
+                        <Th className="text-left text-sm font-medium uppercase text-white">
                             Price
                         </Th>
-                        <Th className="text-left text-sm font-medium uppercase text-richblack-100">
+                        <Th className="text-left text-sm font-medium uppercase text-white">
                             Actions
                         </Th>
                     </Tr>
@@ -52,13 +52,13 @@ function CoursesTable({ courses, setCourses }){
                 <Tbody>
                     {courses?.length === 0 ? (
                         <Tr>
-                            <Td className="py-10 text-center text-2xl font-medium text-richblack-100">
+                            <Td className="py-10 text-center text-2xl font-medium text-white">
                                 Courses
                             </Td>
                         </Tr>
                     ) : (
                         courses?.map((course) => (
-                            <Tr key={course._id} className="flex gap-x-10 border-b border-richblack-800 px-6 py-8">
+                            <Tr key={course._id} className="flex gap-x-10 border-b border-white px-6 py-8">
                                 <Td className="flex flex-1 gap-x-4">
                                     <img
                                         src={course?.thumbnail}
@@ -66,21 +66,21 @@ function CoursesTable({ courses, setCourses }){
                                         className="h-[148px] w-[220px] rounded-lg object-cover"
                                     />
                                     <div className="flex flex-col justify-between">
-                                        <p className="text-lg font-semibold text-richblack-5">
+                                        <p className="text-lg font-semibold text-white">
                                             {course.courseName}
                                         </p>
-                                        <p className="text-xs text-richblack-300">
+                                        <p className="text-xs text-white">
                                             {course.courseDescription.split(" ").length > TRUNCATE_LENGTH ? course.courseDescription.split(" ").slice(0, TRUNCATE_LENGTH).join(" ") + "..." : course.courseDescription }
                                         </p>
                                         <p className="text-[12px] text-white"> Created: {formatDate(course.createdAt)}</p>
                                         {course.status === COURSE_STATUS.DRAFT ? (
-                                            <p className="flex w-fit flex-row items-center gap-2 rounded-full bg-richblack-700 px-2 py-[2px] text-[12px] font-medium text-pink-100">
+                                            <p className="flex w-fit flex-row items-center gap-2 rounded-full bg-blue-950 px-2 py-[2px] text-[12px] font-medium text-red-600">
                                                 <HiClock size={14}/>
                                                 Drafted
                                             </p>
                                         ) : (
-                                            <p className="flex w-fit flex-row items-center gap-2 rounded-full bg-richblack-700 px-2 py-[2px] text-[12px] font-medium text-yellow-100">
-                                                <div className="flex h-3 w-3 items-center justify-center rounded-full bg-yellow-100 text-richblack-700">
+                                            <p className="flex w-fit flex-row items-center gap-2 rounded-full bg-blue-950 px-2 py-[2px] text-[12px] font-medium text-yellow-600">
+                                                <div className="flex h-3 w-3 items-center justify-center rounded-full bg-blue-950 text-white">
                                                     <FaCheck size={8}/>
                                                 </div>
                                                 Published
@@ -88,20 +88,20 @@ function CoursesTable({ courses, setCourses }){
                                         )}
                                     </div>
                                 </Td>
-                                <Td className="text-sm font-medium text-richblack-100">
+                                <Td className="text-sm font-medium text-white">
                                     2hr 30min
                                 </Td>
-                                <Td className="text-sm font-medium text-richblack-100">
+                                <Td className="text-sm font-medium text-white">
                                     Rs.{course.price}
                                 </Td>
-                                <Td className="text-sm font-medium text-richblack-100 ">
+                                <Td className="text-sm font-medium text-white ">
                                     <button
                                         disabled={loading}
                                         onClick={() => {
                                             navigate(`/dashboard/edit-course/${course._id}`)
                                         }}
                                         title="Edit"
-                                        className="px-2 transition-all duration-200 hover:scale-110 hover:text-caribbeangreen-300"
+                                        className="px-2 transition-all duration-200 hover:scale-110 hover:text-green-700"
                                     >
                                         <FiEdit2 size={20}/>
                                     </button>

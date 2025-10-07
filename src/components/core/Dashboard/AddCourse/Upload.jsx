@@ -54,12 +54,12 @@ function Upload({
 
     return(
         <div className="flex flex-col space-y-2">
-            <label className="text-sm text-richblack-5" htmlFor={name}>
-                {label} {!viewData && <sup className="text-red-200">*</sup>}
+            <label className="text-sm text-black" htmlFor={name}>
+                {label} {!viewData && <sup className="text-red-600">*</sup>}
             </label>
             <div className={`${
-                isDragActive ? "bg-richblack-600" : "bg-richblack-700"
-            } flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-richblack-500`}>
+                isDragActive ? "bg-blue-950" : "bg-blue-800"
+            } flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-white`}>
                 {previewSource ? (
                     <div className="flex w-full flex-col p-6">
                         {!video ? (
@@ -72,7 +72,7 @@ function Upload({
                             <Player aspectRatio="16:9" playsInline src={previewSource}/>
                         )}
                         {!viewData && (
-                            <button className="mt-3 text-richblack-400 underline" type="button" onClick={() => {
+                            <button className="mt-3 text-white underline" type="button" onClick={() => {
                                 setPreviewSource("")
                                 setSelectedFile(null)
                                 setValue(name, null)
@@ -87,14 +87,14 @@ function Upload({
                             ref={inputRef}
                             {...getInputProps()}
                         />
-                        <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
+                        <div className="grid aspect-square w-14 place-items-center rounded-full bg-gray-800">
                             <FiUploadCloud className="text-2xl text-yellow-50"/>
                         </div>
-                        <p className="mt-2 max-w-[200px] text-center text-sm text-richblack-200">
+                        <p className="mt-2 max-w-[200px] text-center text-sm text-white">
                             Drag and drop an {!video ? "image" : "video"}, or click to{" "}
-                            <span className="font-semibold text-yellow-50">Browse</span>a file
+                            <span className="font-semibold text-yellow-600">Browse</span>a file
                         </p>
-                        <ul className="mt-10 flex list-disc justify-between space-x-12 text-center text-xs text-richblack-200">
+                        <ul className="mt-10 flex list-disc justify-between space-x-12 text-center text-xs text-white">
                             <li>Aspect ratio 16:9</li>
                             <li>Recommended size 1024*576</li>
                         </ul>
@@ -102,7 +102,7 @@ function Upload({
                 )}
             </div>
             {errors[name] && (
-                <span className="ml-2 text-xs tracking-wide text-red-200">
+                <span className="ml-2 text-xs tracking-wide text-red-600">
                     {label} is required
                 </span>
             )}

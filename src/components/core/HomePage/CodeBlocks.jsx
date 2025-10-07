@@ -43,7 +43,7 @@ function CodeBlocks({position, heading, subHeading, ctaBtn1, ctaBtn2, codeBlock,
                     <TypeAnimation
                         sequence={[codeBlock, 1000, ""]}
                         cursor={true}
-                        repeat={infinity}
+                        repeat={Infinity}
                         style={{
                             whiteSpace: "pre-line",
                             display: "block"

@@ -44,19 +44,19 @@ function NestedView({ handleChangeEditSectionName }){
 
     return(
         <>
-        <div id="nestedViewContainer" className="rounded-lg bg-richblack-700 p-6 px-8">
+        <div id="nestedViewContainer" className="rounded-lg bg-blue-950 p-6 px-8">
             {course?.courseContent?.map((section) => (
                 <details key={section._id} open>
-                    <summary className="flex cursor-pointer items-center justify-between border-b-2 border-b-richblack-600 py-2">
+                    <summary className="flex cursor-pointer items-center justify-between border-b-2 border-b-blue-950 py-2">
                         <div className="flex items-center gap-x-3">
-                            <RxDropdownMenu className="text-2xl text-richblack-50"/>
-                            <p className="font-semibold text-richblack-50">
+                            <RxDropdownMenu className="text-2xl text-white"/>
+                            <p className="font-semibold text-white">
                                 {section.sectionName}
                             </p>
                         </div>
                         <div className="flex items-center gap-x-3">
                             <button onClick={() => handleChangeEditSectionName(section._id, section.sectionName)}>
-                                <MdEdit className="text-xl text-richblack-300"/>
+                                <MdEdit className="text-xl text-white"/>
                             </button>
                             <button onClick={() => setConfirmationModal({
                                 text1: "Delete this section",
@@ -66,43 +66,43 @@ function NestedView({ handleChangeEditSectionName }){
                                 btn1Handler: () => handleDeleteSection(section._id),
                                 btn2Handler: () => setConfirmationModal(null)
                             })}>
-                                <RiDeleteBin6Line className="text-xl text-richblack-300"/>
+                                <RiDeleteBin6Line className="text-xl text-white"/>
                             </button>
-                            <span className="font-medium text-richblack-300">|</span>
-                            <AiFillCaretDown className="text-xl text-richblack-300"/>
+                            <span className="font-medium text-white">|</span>
+                            <AiFillCaretDown className="text-xl text-white"/>
                         </div>
                     </summary>
                     <div className="px-6 pb-4">
                         {section.subSection.map((data) => (
                             
-                                <div key={data?.id} onClick={() => setViewSubSection(data)} className="flex cursor-pointer items-center justify-between gap-x-3 border-b-2 border-b-richblack-600 py-2">
+                                <div key={data?.id} onClick={() => setViewSubSection(data)} className="flex cursor-pointer items-center justify-between gap-x-3 border-b-2 border-b-blue-950 py-2">
                                     <div className="flex items-center gap-x-3 py-2">
-                                        <RxDropdownMenu className="text-2xl text-richblack-50"/>
-                                        <p className="font-semibold text-richblack-50">
+                                        <RxDropdownMenu className="text-2xl text-white"/>
+                                        <p className="font-semibold text-white">
                                             {data.title}
                                         </p>
                                     </div>
                                     <div onClick={(e) => e.stopPropagation()} className="flex items-center gap-x-3">
                                         <button onClick={() => setEditSubSection({...data, sectionId: section._id})}>
-                                            <MdEdit className="text-xl text-richblack-300"/>
+                                            <MdEdit className="text-xl text-white"/>
                                         </button>
                                         <button onClick={() => 
                                             setConfirmationModal({
                                                 text1:"Delete this Sub-Section",
                                                 text2: "This lecture will be deleted",
                                                 btn1Text: "Delete",
-                                                btn2Delete: "Cancle",
+                                                btn2Delete: "Cancel",
                                                 btn1Handler: () => handleDeleteSubSection(data._id, section._id),
                                                 btn2Handler: () => setConfirmationModal(null)
                                             })
                                             }
                                             >
-                                                <RiDeleteBin6Line className="text-xl text-richblack-300"/>
+                                                <RiDeleteBin6Line className="text-xl text-white"/>
                                             </button>
                                     </div>
                                 </div>
                         ))}
-                        <button onClick={() => setAddSubSection(section._id)} className="mt-3 flex items-center gap-x-1 text-yellow-50">
+                        <button onClick={() => setAddSubSection(section._id)} className="mt-3 flex items-center gap-x-1 text-yellow-600">
                             <FaPlus className="text-lg"/>
                             <p>Add Lecture</p>
                         </button>

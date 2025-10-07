@@ -74,10 +74,10 @@ function SignupForm(){
             <div>
                 <Tab tabData={tabData} field={accountType} setField={setAccountType}/>
                 <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">
-                    <div className="flex gap-x-4">
+                    <div className="flex flex-col gap-4">
                         <label>
-                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-                                First Name <sup className="text-red-200">*</sup>
+                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-black">
+                                First Name <sup className="text-red-600 top-1 text-[20px]">*</sup>
                             </p>
                             <input
                                 required
@@ -86,12 +86,12 @@ function SignupForm(){
                                 value={firstName}
                                 placeholder="Enter first name"
                                 onChange={handleOnchange}
-                                className="form-style w-full"
+                                className="form-style w-full px-3 py-2 border-2 border-blue-950 rounded-xl"
                             />
                         </label>
                         <label>
-                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-                                Last Name <sup className="text-red-200">*</sup>
+                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-black">
+                                Last Name <sup className="text-red-600 text-[20px] top-1">*</sup>
                             </p>
                             <input
                                 required
@@ -99,12 +99,12 @@ function SignupForm(){
                                 name="lastName"
                                 value={lastName}
                                 placeholder="Enter last name"
-                                className="form-style w-full"
+                                className="form-style w-full px-3 py-2 border-2 border-blue-950 rounded-xl"
                             />
                         </label>
                         <label>
-                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-                                Email Address <sup className="text-red-300">*</sup>
+                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-black">
+                                Email Address <sup className="text-red-600 text-[20px] top-1">*</sup>
                             </p>
                             <input
                                 required
@@ -112,13 +112,13 @@ function SignupForm(){
                                 name="email"
                                 value={email}
                                 placeholder="Enter Email Address"
-                                className="form-style w-full"
+                                className="form-style w-full px-3 py-2 border-2 border-blue-950 rounded-xl"
                             />
                         </label>
                         <div className="flex gap-x-4">
                             <label className="relative">
-                                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-                                    Create Password <sup className="text-red-200">*</sup>
+                                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-black">
+                                    Create Password <sup className="text-red-600 text-[20px] top-1">*</sup>
                                 </p>
                                 <input
                                     required
@@ -126,7 +126,7 @@ function SignupForm(){
                                     value={password}
                                     onChange={handleOnchange}
                                     placeholder="Enter Password"
-                                    className="form-style w-full !pr-10"
+                                    className="form-style w-full !pr-10 px-3 py-2 border-2 border-blue-950 rounded-xl"
                                 />
                                 <span onClick={() => setShowPassword((prev) => !prev)} className="absolute right-3 top-[38px] z-[10px] cursor-pointer">
                                     {showPassword ? (
@@ -137,8 +137,8 @@ function SignupForm(){
                                 </span>
                             </label>
                             <label className="relative">
-                                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-                                    Confirm Password <sup className="text-red-200">*</sup>
+                                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-black">
+                                    Confirm Password <sup className="text-red-600 text-[20px] top-1">*</sup>
                                 </p>
                                 <input
                                     required
@@ -146,7 +146,7 @@ function SignupForm(){
                                     name="confirmPassword"
                                     value={confirmPassword}
                                     placeholder="Confirm Password"
-                                    className="form-style w-full !pr-10"
+                                    className="form-style w-full !pr-10 px-3 py-2 border-2 border-blue-950 rounded-xl"
                                 />
                                 <span className="absolute right-3 top-[38px] z-[10] cursor-pointer"
                                     onClick={() => setShowConfirmPassword((prev) => !prev)}
@@ -159,7 +159,7 @@ function SignupForm(){
                                 </span>
                             </label>
                         </div>
-                        <button type="submit" className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900">
+                        <button type="submit" className="mt-6 rounded-[8px] bg-yellow-600 py-[8px] px-[12px] font-medium text-black">
                             Create Account
                         </button>
                     </div>

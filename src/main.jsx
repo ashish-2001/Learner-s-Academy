@@ -1,8 +1,8 @@
 import React from 'react';
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './App.css'
 import App from './App.jsx'
+import "./App.css"
 import { BrowserRouter } from 'react-router-dom'
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from "react-redux"

@@ -50,9 +50,9 @@ function LearningGrid(){
                 return (
                     <div className={`${i === 0 && "xl:col-span-2 xl:h-[294px]"} ${
                         card.order % 2 === 1
-                        ? "bg-richblack-700 h-[294px]"
+                        ? "bg-blue-950 h-[294px]"
                         : card.order % 2 === 0
-                        ? "bg-richblack-800 h-[294px]"
+                        ? "bg-blue-950 h-[294px]"
                         : "bg-transparent" 
                     } ${card.order === 3 && "xl:col-start-2"}`} key={i}>
                         {card.order < 0 ? (
@@ -61,7 +61,7 @@ function LearningGrid(){
                                     {card.heading}
                                     <HighLightText text={card.highlightText}/>
                                 </div>
-                                <p className="text-richblack-300 font-medium">
+                                <p className="text-white font-medium">
                                     {card.description}
                                 </p>
                                 <div className="w-fit mt-2">
@@ -72,8 +72,8 @@ function LearningGrid(){
                             </div>
                         ) : (
                             <div className="p-8 flex-col gap-8">
-                                <h1 className="text-richblack-5 text-lg">{card.heading}</h1>
-                                <p className="text-richblack-300 font-medium">
+                                <h1 className="text-white text-lg">{card.heading}</h1>
+                                <p className="text-white font-medium">
                                     {card.description}
                                 </p>
                             </div>

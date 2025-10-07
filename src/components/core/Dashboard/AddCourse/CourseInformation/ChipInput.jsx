@@ -44,12 +44,12 @@ function ChipInput({
 
     return (
         <div className="flex flex-coll space-y-2">
-            <label className="text-sm text-richblack-5" htmlFor={name}>
+            <label className="text-sm text-white" htmlFor={name}>
                 {label} <sup className="text-red-200">*</sup>
             </label>
             <div className="flex w-full flex-wrap gap-y-2">
                 {chips.map((chip, index) => (
-                    <div className="m-1 items-center rounded-full bg-yellow-400 px-2 py-1 text-sm text-richblack-5" key={index}>
+                    <div className="m-1 items-center rounded-full bg-blue-950 px-2 py-1 text-sm text-white" key={index}>
                         {chip}
                         <button className="ml-2 focus:outline-none" onClick={() => handleDeleteChip(index)}>
                             <MdClose className="text-sm"/>
@@ -62,11 +62,11 @@ function ChipInput({
                     type="text"
                     placeholder={placeholder}
                     onKeyDown={handleKeyDown}
-                    className="form-style w-full"
+                    className="form-style w-full py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
                 />
             </div>
             {errors[name] && (
-                <span className="ml-2 text-xs tracking-wide text-pink-200">
+                <span className="ml-2 text-xs tracking-wide text-red-600">
                     {label} is required
                 </span>
             )}

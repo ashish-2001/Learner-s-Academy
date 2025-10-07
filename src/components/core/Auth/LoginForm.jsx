@@ -31,10 +31,10 @@ function LoginForm(){
     }
 
     return (
-        <form onSubmit={handleOnSubmit} className="mt-6 flex w-full flex-col gap-y-4">
+        <form onSubmit={handleOnSubmit} className="mt-6 flex w-full flex-col gap-y-4 ">
             <label className="w-full">
-                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-                    Email Address <sup className="text-red-300">*</sup>
+                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-gray-800">
+                    Email Address <sup className="text-red-600 text-[20px] top-1">*</sup>
                 </p>
                 <input
                     required
@@ -43,12 +43,13 @@ function LoginForm(){
                     value={email}
                     onChange={handleOnChange}
                     placeholder="Enter email address"
-                    className="form-style w-full"
+                    className="form-style w-full px-3 py-2 border-gray-800 rounded-md border-2 focus:outline-none hover:border-blue-950 hover:border-2"
                 />
+                <span></span>
             </label>
             <label className="relative">
-                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-                    Password <sup className="text-red-200">*</sup>
+                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-gray-800">
+                    Password <sup className="text-red-600 text-[20px] top-1">*</sup>
                 </p>
                 <input
                     required
@@ -56,7 +57,7 @@ function LoginForm(){
                     placeholder="Enter password"
                     name="password"
                     value={password}
-                    className="form-style w-full !pr-10"
+                    className="form-style w-full px-3 py-2 border-gray-800 rounded-md border-2 focus:outline-none hover:border-blue-950 hover:border-2"
                     onChange={handleOnChange}
                 />
                 <span onClick={() =>  setShowPassword((prev) => !prev)} className="absolute right-3 top-[38px] z-[10] cursor-pointer">
@@ -67,12 +68,12 @@ function LoginForm(){
                     )}
                 </span>
                 <Link to={"/forgot-password"}>
-                    <p className="mt-1 ml-auto max-w-max text-xs text-blue-100">
+                    <p className="mt-1 ml-auto max-w-max text-xs text-white">
                         Forgot Password
                     </p>
                 </Link>
             </label>
-            <button type="submit" className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900">
+            <button type="submit" className="mt-6 rounded-[8px] bg-blue-950 py-[8px] px-[12px] font-medium text-white">
                 Sign in
             </button>
         </form>

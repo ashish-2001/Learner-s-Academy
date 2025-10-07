@@ -47,7 +47,7 @@ function ContactUsForm(){
         <form className="flex flex-col gap-7" onSubmit={handleSubmit(submitContactForm)}>
             <div className="flex flex-col gap-5 lg:flex-row">
                 <div className="flex flex-col gap-2 lg:w-[48%]">
-                    <label htmlFor="firstName" className="label-style">\
+                    <label htmlFor="firstName" className="label-style ">
                         First Name
                     </label>
                     <input
@@ -55,11 +55,11 @@ function ContactUsForm(){
                         name="firstName"
                         id="firstName"
                         placeholder="Enter first name"
-                        className="form-style"
+                        className="form-style py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
                         {...register("firstName", { required: true})}
                     />
                     {errors.firstName && (
-                        <span className="-mt-1 text-[12px] text-yellow-100">
+                        <span className="-mt-1 text-[12px] text-red-600">
                             Please enter your name
                         </span>
                     )}
@@ -73,11 +73,11 @@ function ContactUsForm(){
                         name="lastName"
                         id="lastName"
                         placeholder="Enter last name"
-                        className="form-style"
+                        className="form-style py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
                         {...register("lastName", {required: true})}
                     />
                     {errors.lastName && (
-                        <span className="-mt-1 text-[12px] text-yellow-100">
+                        <span className="-mt-1 text-[12px] text-red-600">
                             Enter your last name
                         </span>
                     )}
@@ -92,11 +92,11 @@ function ContactUsForm(){
                     id="email"
                     name="email"
                     placeholder="Enter email address"
-                    className="form-style"
+                    className="form-style py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
                     {...register("email", { required: true})}
                 />
                 {errors.email && (
-                    <span className="-mt-1 text-[12px] text-yellow-100">
+                    <span className="-mt-1 text-[12px] text-red-600">
                         Please enter your email address.
                     </span>
                 )}
@@ -114,7 +114,7 @@ function ContactUsForm(){
                             name="countryCode"
                             id="countryCode"
                             placeholder="Enter first name"
-                            className="form-style"
+                            className="form-style py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
                             {...register("countryCode", { required: true})}
                         >
                             {CountryCode.map((ele, i) => {
@@ -132,7 +132,7 @@ function ContactUsForm(){
                             id="phoneNumber"
                             name="phoneNumber"
                             placeholder="12345 67890"
-                            className="form-style"
+                            className="form-style py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
                             {...register("phoneNumber", {
                                 required: {
                                     value: true,
@@ -145,7 +145,7 @@ function ContactUsForm(){
                     </div>
                 </div>
                 {errors.phoneNumber && (
-                    <span className="-mt-1 text-[12px] text-yellow-100">
+                    <span className="-mt-1 text-[12px] text-red-600">
                         {errors.phoneNumber.message}
                     </span>
                 )}
@@ -161,11 +161,11 @@ function ContactUsForm(){
                     cols={30}
                     rows={7}
                     placeholder="Enter your message"
-                    className="form-style"
+                    className="form-stylem py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
                     {...register("message", { required: true})}
                 />
                 {errors.message && (
-                    <span className="-mt-1 text-[12px] text-yellow-100">
+                    <span className="-mt-1 text-[12px] text-red-600">
                         Please enter your message
                     </span>
                 )}
@@ -174,10 +174,10 @@ function ContactUsForm(){
             <button 
                 disabled={loading}
                 type="submit"
-                className={`rounded-md bg-yellow-50 px-6 py-3 text-center text-[13px] font-bold text-black shadow-[2px_2px_0px_0px_rgba(255,255,255,0.18)]
+                className={`rounded-md bg-yellow-600 px-6 py-3 text-center text-[13px] font-bold text-black shadow-[2px_2px_0px_0px_rgba(255,255,255,0.18)]
                     ${
                         !loading && "transition-all duration-200 hover:scale-95 hover:shadow-none"
-                    } disabled:bg-richblack-500 sm:text-[16px]`}
+                    } disabled:bg-blue-950 sm:text-[16px]`}
             > Send Message</button>
         </form>
     )

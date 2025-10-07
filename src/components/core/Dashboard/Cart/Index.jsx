@@ -17,8 +17,8 @@ function Cart(){
 
     return (
             <>
-                <h1 className="mb-14 text3xl font-medium text-richblack-5">Cart</h1>
-                <p className="border-b border-b-richblack-400 pb-2 font-semibold text-richblack-400">
+                <h1 className="mb-14 text3xl font-medium text-blue-950">Cart</h1>
+                <p className="border-b border-b-blue-950 pb-2 font-semibold textwhite">
                     {totalItems} Courses in Cart
                 </p>
                 {total > 0 ? (
@@ -27,7 +27,7 @@ function Cart(){
                         <RenderTotalAmount/>
                     </div>
                 ) : (
-                    <p className="mt-14 text-center text-3xl text-richblack-100">Your Cart is empty</p>
+                    <p className="mt-14 text-center text-3xl text-blue-950">Your Cart is empty</p>
                 )}
             </>
         )
