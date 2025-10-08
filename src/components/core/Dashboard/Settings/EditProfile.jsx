@@ -30,8 +30,8 @@ function EditProfile(){
     return(
         <>
             <form onSubmit={handleSubmit(submitProfileForm)}>
-                <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-white bg-blue-950 p-8 px-12">
-                    <h2 className="text-lg font-semibold text-white">
+                <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-[#2C333F] bg-[#161D29] p-8 px-12">
+                    <h2 className="text-lg font-semibold text-[#F1F2FF]">
                         Profile Information
                     </h2>
                     <div className="flex flex-col gap-5 lg:flex-row">
@@ -44,12 +44,12 @@ function EditProfile(){
                                 name="firstName"
                                 id="firstName"
                                 placeholder="Enter  first name"
-                                className="form-style py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
+                                className="form-style "
                                 {...register("firstName", { required : true})}
                                 defaultValue={user?.firstName}
                             />
                             {errors.firstName && (
-                                <span className="-mt-1 text-[12px] text-yellow-600">
+                                <span className="-mt-1 text-[12px] text-[#E7C009]">
                                     Please enter your first name
                                 </span>
                             )}
@@ -63,12 +63,12 @@ function EditProfile(){
                                 name="lastName"
                                 id="lastName"
                                 placeholder="Enter last name"
-                                className="form-style py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
+                                className="form-style "
                                 {...register("lastName", { required: true })}
                                 defaultValue={user?.lastName}
                             />
                             {errors.lastName && (
-                                <span className="-mt-1 text-[12px] text-yellow-600">
+                                <span className="-mt-1 text-[12px] text-[#E7C009]">
                                     Please enter your last name
                                 </span>
                             )}
@@ -83,7 +83,7 @@ function EditProfile(){
                                 type="date"
                                 name="dateOfBirth"
                                 id="dateOfBirth"
-                                className="form-style py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
+                                className="form-style "
                                 {...register("dateOfBirth", {
                                     required :{
                                         value: true,
@@ -97,7 +97,7 @@ function EditProfile(){
                                 defaultValue={user?.additionalDetails?.dateOfBirth}
                             />
                             {errors.dateOfBirth && (
-                                <span className="-mt-1 text-[12px] text-yellow-600">
+                                <span className="-mt-1 text-[12px] text-[#E7C009]">
                                     {errors.dateOfBirth.message}
                                 </span>
                             )}
@@ -110,7 +110,7 @@ function EditProfile(){
                                 type="text"
                                 name= "gender"
                                 id="gender"
-                                className="form-style py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
+                                className="form-style "
                                 {...register("gender", { required: true})}
                                 defaultValue={user?.additionalDetails?.gender}
                             >
@@ -123,7 +123,7 @@ function EditProfile(){
                                 })}
                             </select>
                             {errors.gender && (
-                                <span className="-mt-1 text-[12px] text-yellow-600">
+                                <span className="-mt-1 text-[12px] text-[#E7C009]">
                                     Please enter your date of birth
                                 </span>
                             )}
@@ -140,7 +140,7 @@ function EditProfile(){
                                 name="contactNumber"
                                 id="contactNumber"
                                 placeholder="Enter Contact number"
-                                className="form-style py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
+                                className="form-style "
                                 {...register("contactNumber", {
                                     required:{ 
                                         value: true,
@@ -152,7 +152,7 @@ function EditProfile(){
                                 defaultValue={user?.additionalDetails?.contactNumber}
                             />
                             {errors.contactNumber && (
-                                <span className="-mt-1 text-[12px] text-yellow-600">
+                                <span className="-mt-1 text-[12px] text-[#E7C009]">
                                     {errors.contactNumber.message}
                                 </span>
                             )} 
@@ -171,7 +171,7 @@ function EditProfile(){
                                 defaultValue={user?.additionalDetails?.about}
                             />
                             {errors.about && (
-                                <span className="-mt-1 text-[12px] text-yellow-600">Please Enter your bio</span>
+                                <span className="-mt-1 text-[12px] text-[#E7C009]">Please Enter your bio</span>
                             )}
                         </div>
                     </div>
@@ -182,7 +182,7 @@ function EditProfile(){
                         onClick={() => {
                             navigate("/dashboard/my-profile")
                         }}
-                        className="cursor-pointer rounded-md bg-blue py-2 px-5 font-semibold text-white"
+                        className="cursor-pointer rounded-md bg-[#2C333F] py-2 px-5 font-semibold text-[#C5C7D4]"
                     >
                         Cancel
                     </button>

@@ -15,20 +15,20 @@ import { FaArrowRight } from "react-icons/fa";
 function Home(){
     return(
         <div>
-            <div className="relative mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 text-white">
+            <div className="relative mx-auto flex w-11/12 max-w-[1260px] flex-col items-center justify-between gap-8 text-white">
                 <Link to={"/signup"}>
-                    <div className="group mx-auto mt-16 w-fit rounded-full bg-richblack-800 p-1 font-bold text-richblack-200 drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] transition-all duration-200 hover:scale-95 hover:drop-shadow-none">
-                        <div className="flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-richblack-900">
+                    <div className="group mx-auto mt-16 w-fit rounded-full bg-blue-950 p-1 font-bold text-white drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] transition-all duration-200 hover:scale-95 hover:drop-shadow-none">
+                        <div className="flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-blue-950">
                             <p>Become an instructor</p>
                             <FaArrowRight/>
                         </div>
                     </div>
                 </Link>
                 <div className="text-center text-4xl font-semibold">
-                    Empower YOur Future with
+                    Empower Your Future with
                     <HighLightText text={"Coding Skills"}/>
                 </div>
-                <div className="-mt-3 w-[90%] text-center text-lg font-bold text-richblack-300">
+                <div className="-mt-3 w-[90%] text-center text-lg font-bold text-white">
                     With our online coding courses, you can learn at your own pace, from
                     anywhere in the world, and get access to a wealth of resources,
                     including hands-on projects, quizzes, and personalized feedback from
@@ -106,9 +106,9 @@ function Home(){
                 </div>
                 <ExploreMore/>
             </div>
-            <div className="bg-pure-greys-5 text-richblack-700">
+            <div className="bg-pure-greys-5 text-white">
                 <div className="homepage_bg h-[320px]">
-                    <div className="mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8">
+                    <div className="mx-auto flex w-11/12 max-w-[1260px] flex-col items-center justify-between gap-8">
                         <div className="lg:h-[150px]"></div>
                         <div className="flex flex-row gap-7 text-white lg:mt-8">
                             <CTAButton
@@ -128,7 +128,7 @@ function Home(){
                         </div>
                     </div>
                 </div>
-                <div className="mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 ">
+                <div className="mx-auto flex w-11/12 max-w-[1260px] flex-col items-center justify-between gap-8 ">
                     <div className="mb-10 mt-[-100px] flex flex-col justify-between gap-7 lg:mt-20 lg:flex-row lg:gap-0">
                         <div className="text-4xl font-semibold lg:w-[45%] ">
                             Get the skills you need for a{" "}
@@ -152,7 +152,7 @@ function Home(){
                     <LearningLanguageSection/>
                 </div>
             </div>
-            <div className="relative mx-auto my-20 flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 bg-richblack-900 text-white">
+            <div className="relative mx-auto my-20 flex w-11/12 max-w-[1260px] flex-col items-center justify-between gap-8 bg-blue-950 text-white">
                 <InstructorSection/>
                 <h1 className="text-center text-4xl font-semibold mt-8">
                     Reviews from other learners

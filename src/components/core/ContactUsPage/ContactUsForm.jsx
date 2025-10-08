@@ -55,7 +55,7 @@ function ContactUsForm(){
                         name="firstName"
                         id="firstName"
                         placeholder="Enter first name"
-                        className="form-style py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
+                        className="form-style "
                         {...register("firstName", { required: true})}
                     />
                     {errors.firstName && (
@@ -73,7 +73,7 @@ function ContactUsForm(){
                         name="lastName"
                         id="lastName"
                         placeholder="Enter last name"
-                        className="form-style py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
+                        className="form-style "
                         {...register("lastName", {required: true})}
                     />
                     {errors.lastName && (
@@ -92,7 +92,7 @@ function ContactUsForm(){
                     id="email"
                     name="email"
                     placeholder="Enter email address"
-                    className="form-style py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
+                    className="form-style "
                     {...register("email", { required: true})}
                 />
                 {errors.email && (
@@ -114,7 +114,7 @@ function ContactUsForm(){
                             name="countryCode"
                             id="countryCode"
                             placeholder="Enter first name"
-                            className="form-style py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
+                            className="form-style "
                             {...register("countryCode", { required: true})}
                         >
                             {CountryCode.map((ele, i) => {
@@ -132,7 +132,7 @@ function ContactUsForm(){
                             id="phoneNumber"
                             name="phoneNumber"
                             placeholder="12345 67890"
-                            className="form-style py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
+                            className="form-style "
                             {...register("phoneNumber", {
                                 required: {
                                     value: true,
@@ -161,7 +161,7 @@ function ContactUsForm(){
                     cols={30}
                     rows={7}
                     placeholder="Enter your message"
-                    className="form-stylem py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
+                    className="form-style "
                     {...register("message", { required: true})}
                 />
                 {errors.message && (
@@ -174,10 +174,10 @@ function ContactUsForm(){
             <button 
                 disabled={loading}
                 type="submit"
-                className={`rounded-md bg-yellow-600 px-6 py-3 text-center text-[13px] font-bold text-black shadow-[2px_2px_0px_0px_rgba(255,255,255,0.18)]
+                className={`rounded-md bg-[#FFD60A] px-6 py-3 text-center text-[13px] font-bold text-black shadow-[2px_2px_0px_0px_rgba(255,255,255,0.18)]
                     ${
                         !loading && "transition-all duration-200 hover:scale-95 hover:shadow-none"
-                    } disabled:bg-blue-950 sm:text-[16px]`}
+                    } disabled:bg-[#585D69] sm:text-[16px]`}
             > Send Message</button>
         </form>
     )

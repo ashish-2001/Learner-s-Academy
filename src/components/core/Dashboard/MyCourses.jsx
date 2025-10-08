@@ -25,7 +25,7 @@ function MyCourses(){
     return(
         <div>
             <div className="mb-14 flex items-center justify-between">
-                <h1 className="text-3xl font-medium text-richblack-5">My courses</h1>
+                <h1 className="text-3xl font-medium text-[#F1F2FF]">My courses</h1>
                 <IconBtn 
                     text={"Add Course"}
                     onClick={() => navigate("/dashboard/add-course")}

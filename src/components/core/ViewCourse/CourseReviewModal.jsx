@@ -42,11 +42,11 @@ function CourseReviewModal({ setReviewModal }){
 
     return(
         <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
-            <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-richblack-400 bg-richblack-800">
-                <div className="flex items-center justify-between rounded-t-lg bg-richblack-700 p-5">
-                    <p className="text-xl font-semibold text-richblack-5">Add Review</p>
+            <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-white bg-blue-950">
+                <div className="flex items-center justify-between rounded-t-lg bg-blue-950 p-5">
+                    <p className="text-xl font-semibold text-white">Add Review</p>
                     <button onClick={() => setReviewModal(false)}>
-                        <RxCross2 className="text-2xl text-richblack-5"/>
+                        <RxCross2 className="text-2xl text-white"/>
                     </button>
                 </div>
                 <div className="p-6">
@@ -57,10 +57,10 @@ function CourseReviewModal({ setReviewModal }){
                             className="aspect-square w-[50px] rounded-full object-cover"
                         />
                         <div>
-                            <p className="font-semibold text-richblack-5">
+                            <p className="font-semibold text-white">
                                 {user?.firstName} {user?.lastName}
                             </p>
-                            <p className="text-sm text-richblack-5">Posting Publicly</p>
+                            <p className="text-sm text-white">Posting Publicly</p>
                         </div>
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)} className="mt-6 flex flex-col items-center">
@@ -71,7 +71,7 @@ function CourseReviewModal({ setReviewModal }){
                             activeColor="#ffd700"
                         />
                         <div className="flex w-11/12 flex-col space-y-2">
-                            <label className="text-sm text-richblack-5" htmlFor="courseExperience">
+                            <label className="text-sm text-white" htmlFor="courseExperience">
                                 Add your experience
                             </label>
                             <textarea
@@ -87,7 +87,7 @@ function CourseReviewModal({ setReviewModal }){
                             )}
                         </div>
                         <div className="mt-6 flex w-11/12 justify-end gap-x-2">
-                            <button className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900`}>
+                            <button className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-blue-950 py-[8px] px-[20px] font-semibold text-white`}>
                                 Cancel
                             </button>
                             <IconBtn text={"Save"}/>

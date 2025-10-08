@@ -8,7 +8,7 @@ import { UpdatePassword } from "./UpdatePassword";
 function Settings(){
     return(
         <>
-            <h1 className="mb-14 text-3xl font-medium text-white">Edit Profile</h1>
+            <h1 className="mb-14 text-3xl font-medium text-[#F1F2FF]">Edit Profile</h1>
             <ChangeProfilePicture/>
             <EditProfile/>
             <UpdatePassword/>

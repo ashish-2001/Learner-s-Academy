@@ -20,7 +20,7 @@ function InstructorSection(){
                         Become an
                         <HighLightText text={"instructor"}/>
                     </h1>
-                    <p className="font-medium text-[16px] text-justify w-[90%] text-richblack-300">
+                    <p className="font-medium text-[16px] text-justify w-[90%] text-white">
                         Instructor from around the world can teach millions of students on
                         Learners Academy. We provide the tools and skills to teach what you
                         love.

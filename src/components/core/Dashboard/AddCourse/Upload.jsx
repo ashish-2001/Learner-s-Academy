@@ -54,12 +54,12 @@ function Upload({
 
     return(
         <div className="flex flex-col space-y-2">
-            <label className="text-sm text-black" htmlFor={name}>
+            <label className="text-sm text-[#F1F2FF]" htmlFor={name}>
                 {label} {!viewData && <sup className="text-red-600">*</sup>}
             </label>
             <div className={`${
-                isDragActive ? "bg-blue-950" : "bg-blue-800"
-            } flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-white`}>
+                isDragActive ? "bg-[#424854]" : "bg-[#2C333F]"
+            } flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-[#585D69]`}>
                 {previewSource ? (
                     <div className="flex w-full flex-col p-6">
                         {!video ? (
@@ -72,7 +72,7 @@ function Upload({
                             <Player aspectRatio="16:9" playsInline src={previewSource}/>
                         )}
                         {!viewData && (
-                            <button className="mt-3 text-white underline" type="button" onClick={() => {
+                            <button className="mt-3 text-[#6E727F] underline" type="button" onClick={() => {
                                 setPreviewSource("")
                                 setSelectedFile(null)
                                 setValue(name, null)
@@ -88,13 +88,13 @@ function Upload({
                             {...getInputProps()}
                         />
                         <div className="grid aspect-square w-14 place-items-center rounded-full bg-gray-800">
-                            <FiUploadCloud className="text-2xl text-yellow-50"/>
+                            <FiUploadCloud className="text-2xl text-[#FFD60A]"/>
                         </div>
-                        <p className="mt-2 max-w-[200px] text-center text-sm text-white">
+                        <p className="mt-2 max-w-[200px] text-center text-sm text-[#999DAA]">
                             Drag and drop an {!video ? "image" : "video"}, or click to{" "}
-                            <span className="font-semibold text-yellow-600">Browse</span>a file
+                            <span className="font-semibold text-[#FFD60A]">Browse</span>a file
                         </p>
-                        <ul className="mt-10 flex list-disc justify-between space-x-12 text-center text-xs text-white">
+                        <ul className="mt-10 flex list-disc justify-between space-x-12 text-center text-xs text-[#CFAB08]">
                             <li>Aspect ratio 16:9</li>
                             <li>Recommended size 1024*576</li>
                         </ul>

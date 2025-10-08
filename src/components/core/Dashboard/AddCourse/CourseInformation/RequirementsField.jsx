@@ -39,7 +39,7 @@ function RequirementsField({
 
     return(
         <div className="flex flex-col space-y-2">
-            <label className="text-sm textwhite" htmlFor={name}>
+            <label className="text-sm text-[#F1F2FF]" htmlFor={name}>
                 {label} <sup className="text-red-600">*</sup>
             </label>
             <div className="flex flex-col items-start space-y-2">
@@ -48,12 +48,12 @@ function RequirementsField({
                     id={name}
                     value={requirements}
                     onChange={(e) => setRequirements(e.target.value)}
-                    className="form-style w-full py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
+                    className="form-style w-full "
                 />
                 <button
                     type="button"
                     onClick={handleAddRequirement}
-                    className="font-semibold text-yellow-600"
+                    className="font-semibold text-[#FFD60A]"
                 >
                     Add
                 </button>
@@ -61,9 +61,9 @@ function RequirementsField({
             {requirementsList.length > 0 && (
                 <ul className="mt-2 list-inside list-disc">
                     {requirements.localeCompare((requirement, index) => (
-                        <li key={index} className="flex items-center text-white">
+                        <li key={index} className="flex items-center text-[#F1F2FF]">
                             <span>{requirement}</span>
-                            <button type="button" className="ml-2 text-xs text-gray-300" onClick={() => handleRemoveRequirement(index)}>
+                            <button type="button" className="ml-2 text-xs text-[#888888]" onClick={() => handleRemoveRequirement(index)}>
                                 Clear
                             </button>
                         </li>

@@ -131,16 +131,16 @@ function CourseInformationForm(){
     }
 
     return(
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 rounded-md border-[1px] border-white bg-blue-950 p-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 rounded-md border-[1px] border-[#2C333F] bg-[#161D29] p-6">
             <div className="flex flex-col space-y-2">
-                <label className="text-sm text-white" htmlFor="courseTitle">
-                    Course Title <sup className="text-red-200">*</sup>
+                <label className="text-sm text-[#F1F2FF]" htmlFor="courseTitle">
+                    Course Title <sup className="text-red-600">*</sup>
                 </label>
                 <input
                     id="courseTitle"
                     placeholder="Enter Course Title"
                     {...register("courseTitle", { required: true})}
-                    className="form-style w-full py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
+                    className="form-style w-full "
                 />
                 {errors.courseTitle && (
                     <span className="ml-2 text-xs tracking-wide text-red-600">
@@ -149,7 +149,7 @@ function CourseInformationForm(){
                 )}
             </div>
             <div className="flex flex-col space-y-2">
-                <label className="text-sm text-white" htmlFor="courseShortDesc">
+                <label className="text-sm text-[#F1F2FF]" htmlFor="courseShortDesc">
                     Course Short Description <sup className="text-red-600">*</sup>
                 </label>
                 <textarea
@@ -165,7 +165,7 @@ function CourseInformationForm(){
                 )}
             </div>
             <div className="flex flex-col space-y-2">
-                <label className="text-sm text-richblack-5" htmlFor="CoursePrice">
+                <label className="text-sm text-[#F1F2FF]" htmlFor="CoursePrice">
                     Course Price <sup className="text-red-600">*</sup>
                 </label>
                 <div className="relative">
@@ -179,9 +179,9 @@ function CourseInformationForm(){
                                 value: /^(0|[1-9]\d*)(\.\d+)?$/
                             }
                         })} 
-                        className="form-style w-full py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
+                        className="form-style w-full "
                     />
-                    <HiOutlineCurrencyRupee className="absolute left-3 top-1/2 inline-block -translate-y-1/2 text-2xl text-richblack-400"/>
+                    <HiOutlineCurrencyRupee className="absolute left-3 top-1/2 inline-block -translate-y-1/2 text-2xl text-[#6E727F] "/>
                 </div>
                 {errors.coursePrice && (
                     <span className="ml-2 text-xs tracking-wide text-red-600">
@@ -190,7 +190,7 @@ function CourseInformationForm(){
                 )}
             </div>
             <div className="flex flex-col space-y-2">
-                <label className="text-sm text-richblack-5" htmlFor="courseCategory">
+                <label className="text-sm text-[#F1F2FF]" htmlFor="courseCategory">
                     Course Category <sup className="text-red-600">*</sup>
                 </label>
                 <select {...register("courseCategory", { required: true })} className="form-style w-full" defaultValue="" id="courseCategory">
@@ -224,7 +224,7 @@ function CourseInformationForm(){
                 editCourse={editCourse ? course?.thumbnail : null}
             />
             <div className="flex flex-col space-y-2">
-                <label className="text-sm text-richblack-5" htmlFor="courseBenefits">
+                <label className="text-sm text-[F1F2FF]" htmlFor="courseBenefits">
                     Benefits of the Course <sup className="text-red-600">*</sup>
                 </label>
                 <textarea
@@ -249,7 +249,7 @@ function CourseInformationForm(){
             />
             <div className="flex justify-end gap-x-2">
                 {editCourse && (
-                    <button className="flex cursor-pointer items-center gap-x-2 rounded-md bg-blue-950 py-[8px] px-[20px] font-semibold text-white">
+                    <button className="flex cursor-pointer items-center gap-x-2 rounded-md bg-[#838894] py-[8px] px-[20px] font-semibold text-[#000814]">
                         Continue Without Saving
                     </button>
                 )}

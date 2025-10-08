@@ -40,15 +40,15 @@ function UpdatePassword(){
                 <div className="spinner"></div>
             ) : (
                 <div className="max-w-[500px] p-4 lg:p-8">
-                    <h1 className="text-[1.875rem] font-semibold leading-[2.375rem] text-richblack-5">
+                    <h1 className="text-[1.875rem] font-semibold leading-[2.375rem] text-white">
                         Choose new password
                     </h1>
-                    <p className="my-4 text-[1.125rem] leading-[1.625rem] text-richblack-100">
+                    <p className="my-4 text-[1.125rem] leading-[1.625rem] text-white">
                         Almost done. Enter your new password and your all set.
                     </p>
                     <form onSubmit={handleOnSubmit}>
                         <label className="relative">
-                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-white">
                                 New password <sup className="text-red-200">*</sup>
                             </p>
                             <input
@@ -68,7 +68,7 @@ function UpdatePassword(){
                             </span>
                         </label>
                         <label className="relative mt-3 block" htmlFor="confirmPassword">
-                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-white">
                                 Confirm New Password <sup className="text-red-200">*</sup>
                             </p>
                             <input
@@ -88,13 +88,13 @@ function UpdatePassword(){
                                 )}
                             </span>
                         </label>
-                        <button type="submit" className="mt-6 w-full rounded-[8px] bg-yellow-50 py-[12px] px-[12px] font-medium text-richblack-900">
+                        <button type="submit" className="mt-6 w-full rounded-[8px] bg-blue-950 py-[12px] px-[12px] font-medium text-white">
                             Reset password
                         </button>
                     </form>
                     <div className="mt-6 flex items-center justify-between">
                         <Link to={"/login"}>
-                            <p className="flex items-center gap-2 text-richblack-5">
+                            <p className="flex items-center gap-2 text-white">
                                 <BiArrowBack/> Back to login
                             </p>
                         </Link>

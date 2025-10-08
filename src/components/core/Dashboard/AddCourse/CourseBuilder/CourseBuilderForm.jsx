@@ -86,11 +86,11 @@ function CourseBuilderForm(){
     }
 
     return (
-        <div className="space-y-8 rounded-md border-[1px] border-white bg-blue-950 p-6">
-            <p className="text-2xl font-semibold text-white">Course Builder</p>
+        <div className="space-y-8 rounded-md border-[1px] border-[#2C333F] bg-[#161D29] p-6">
+            <p className="text-2xl font-semibold text-[#F1F2FF]">Course Builder</p>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="flex flex-col space-y-2">
-                    <label className="text-sm text-white" htmlFor="sectionName">
+                    <label className="text-sm text-[#F1F2FF]" htmlFor="sectionName">
                         Section Name <sup className="text-red-600 text-[20px] top-1">*</sup>
                     </label>
                     <input
@@ -99,7 +99,7 @@ function CourseBuilderForm(){
                         disabled={loading}
                         placeholder="add a section to build a course"
                         {...register("sectionName", { required: true })}
-                        className="form-style w-full px-3 py-2 border-2 hover:border-2 hover:border-blue-950 rounded-xl "
+                        className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline w-full "
                     />
                     {errors.sectionName && (
                         <span className="ml-2 text-xs tracking-wide text-red-600">
@@ -112,10 +112,10 @@ function CourseBuilderForm(){
                         type="submit"
                         disabled={loading}
                         text={editSectionName ? "Edit Section Name" : "Create Section"} outline={true}>
-                            <IoAddCircleOutline size={20} className="text-yellow-600"/>
+                            <IoAddCircleOutline size={20} className="text-[#FFD60A]"/>
                     </IconBtn>
                     {editSectionName && (
-                        <button type="button" onClick={cancelEdit} className="text-sm text-white underline">
+                        <button type="button" onClick={cancelEdit} className="text-sm text-[#838894] underline">
                             Cancel Edit
                         </button>
                     )}
@@ -125,7 +125,7 @@ function CourseBuilderForm(){
                 <NestedView handleChangedEditSectionName={handleChangeEditSectionName}/>
             )}
             <div className="flex justify-end gap-x-3">
-                <button onClick={goBack} className="flex cursor-pointer items-center gap-x-2 rounded-md bg-blue-950 py-[8px] px-[20px] font-semibold text-white">
+                <button onClick={goBack} className="flex cursor-pointer items-center gap-x-2 rounded-md bg-[#838894] py-[8px] px-[20px] font-semibold text-#000814">
                     Back
                 </button>
                 <IconBtn disabled={loading} text="text" onClick={goToNext}>

@@ -13,19 +13,19 @@ const Community = ["Forums", "Chapters", "Events"];
 function Footer(){
 
     return(
-        <div className="bg-blue-950">
-            <div className="flex lg:flex-row gap-8 items-center justify-between w-11/12 max-w-1260px text-white leading-6 mx-auto relative py-14">
-                <div className="border-b w-[100%] flex flex-col lg:flex-row pb-5 border-white">
-                    <div className="lg:[50%] flex flex-wrap flex-row justify-between lg:border-white lg:pr-5 gap-30" >
+        <div className="bg-[#161D29]">
+            <div className="flex lg:flex-row gap-8 items-center justify-between w-11/12 max-w-1260px text-[#6E727F] leading-6 mx-auto relative py-14">
+                <div className="border-b w-[100%] flex flex-col lg:flex-row pb-5 border-[#2C333F]">
+                    <div className="lg:[50%] flex flex-wrap flex-row justify-between lg:border-[#2C333F] lg:pr-5 gap-3" >
                         <div className="w-[30%] flex flex-col gap-3 lg:w-[30%] mb-7 lg:pl-0">
                             <img src={Logo_Full_Light} alt="" className="object-obtain"/>
-                            <h1 className="text-white font-semibold text-[16px]">
+                            <h1 className="text-[#838894] font-semibold text-[16px]">
                                 Company
                             </h1>
                             <div className="flex flex-col gap-2">
                                 {["About", "Careers", "Affiliates"].map((ele, i) => {
                                     return (
-                                        <div className="text-[14px] cursor-pointer hover:text-white transition-all duration-200" key={i}>
+                                        <div className="text-[14px] cursor-pointer hover:text-[#C5C7D4] transition-all duration-200" key={i}>
                                             <Link to={ele.toLowerCase()}>{ele}</Link>
                                         </div>
                                     );
@@ -40,50 +40,50 @@ function Footer(){
                             <div></div>
                         </div>
                         <div className="w-[48%] lg:w-[30%] mb-7 lg:pl-0">
-                            <h1 className="text-white font-semibold text-[16px]">
+                            <h1 className="text-[#C5C7D4] font-semibold text-[16px]">
                                 Resources
                             </h1>
                             <div className="flex flex-col gap-2 mt-2">
                                 {Resources.map((ele, i)=>{
                                     return (
-                                        <div className="text-[14px] cursor-pointer hover:text-white transition-all duration-200" key={i}>
+                                        <div className="text-[14px] cursor-pointer hover:text-[#C5C7D4] transition-all duration-200" key={i}>
                                             <Link to={ele.split(" ").join("-").toLowerCase()}>{ele}</Link>
                                         </div>
                                     )
                                 })}
                             </div>
 
-                            <h1 className="text-white font-semibold text-[16px] mt-7">
+                            <h1 className="text-[#C5C7D4] font-semibold text-[16px] mt-7">
                                 Support
                             </h1>
-                            <div className="text-[14px] cursor-pointer hover:text-white transition-all duration-200 mt-2">
+                            <div className="text-[14px] cursor-pointer hover:text-[#C5C7D4] transition-all duration-200 mt-2">
                                 <Link to={"/help-center"}>Help Center</Link>
                             </div>
                         </div>
 
                         <div className="w-[48%] lg:w-[30%] mb-7 lg:pl-0">
-                            <h1 className="text-white font-semibold text-[16px]">
+                            <h1 className="text-[#C5C7D4] font-semibold text-[16px]">
                                 Plans
                             </h1>
 
                             <div className="flex flex-col gap-2 mt-2">
                                 {Plans.map((ele, i)=> {
                                     return(
-                                        <div className="text-[14px] cursor-pointer hover:text-white transition-all duration-200" key={i}>
+                                        <div className="text-[14px] cursor-pointer hover:text-[#C5C7D4] transition-all duration-200" key={i}>
                                             <Link to={ele.split(" ").join("-").toLowerCase()}>{ele}</Link>
                                         </div>
                                     )
                                 })}
                             </div>
 
-                            <h1 className="text-white font-semibold text-[16px] mt-7">
+                            <h1 className="text-[#C5C7D4] font-semibold text-[16px] mt-7">
                                 Community
                             </h1>
 
                             <div className="flex flex-col gap-2 mt-2">
                                 {Community.map((ele, i) =>{
                                     return(
-                                        <div className="text-[14px] cursor-pointer hover:text-white transition-all duration-200" key={i}>
+                                        <div className="text-[14px] cursor-pointer hover:text-[#C5C7D4] transition-all duration-200" key={i}>
                                             <Link to={ele.split(" ").join("-").toLowerCase()}>{ele}</Link>
                                         </div>
                                     )
@@ -96,13 +96,13 @@ function Footer(){
                         {FooterLink2.map((ele, i) => {
                             return (
                                 <div className="w-[48%] lg:[30%] mb-7 lg:pl-0" key={i}>
-                                    <h1 className="text-white font-semibold text-[16px]">
+                                    <h1 className="text-[#C5C7D4] font-semibold text-[16px]">
                                         {ele.title}
                                     </h1>
                                     <div className="flex flex-col gap-2 mt-2">
                                         {ele.links.map((link, index) =>{
                                             return (
-                                                <div className="text-[14px] cursor-pointer hover:text-white transition-all duration-200" key={index}>
+                                                <div className="text-[14px] cursor-pointer hover:text-[#C5C7D4] transition-all duration-200" key={index}>
                                                     <Link to={link.link}>{link.title}</Link>
                                                 </div>
                                             )

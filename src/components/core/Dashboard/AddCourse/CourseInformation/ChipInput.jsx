@@ -43,13 +43,13 @@ function ChipInput({
     }
 
     return (
-        <div className="flex flex-coll space-y-2">
-            <label className="text-sm text-white" htmlFor={name}>
-                {label} <sup className="text-red-200">*</sup>
+        <div className="flex flex-col space-y-2">
+            <label className="text-sm text-[#F1F2FF]" htmlFor={name}>
+                {label} <sup className="text-red-600">*</sup>
             </label>
             <div className="flex w-full flex-wrap gap-y-2">
                 {chips.map((chip, index) => (
-                    <div className="m-1 items-center rounded-full bg-blue-950 px-2 py-1 text-sm text-white" key={index}>
+                    <div className="m-1 items-center rounded-full bg-[#9E8006] px-2 py-1 text-sm text-[#F1F2FF]" key={index}>
                         {chip}
                         <button className="ml-2 focus:outline-none" onClick={() => handleDeleteChip(index)}>
                             <MdClose className="text-sm"/>

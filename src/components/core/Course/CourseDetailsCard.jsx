@@ -48,7 +48,7 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }){
 
     return(
         <>
-            <div className="flex flex-col gap-4 rounded-md bg-blue-950 p-4 text-white">
+            <div className="flex flex-col gap-4 rounded-md bg-[#2C333F] p-4 text-[#F1F2FF]">
                 <img
                     src={ThumbnailImage}
                     alt={course?.courseName}
@@ -59,7 +59,7 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }){
                         Rs. {CurrentPrice}
                     </div>
                     <div className="flex flex-col gap-4">
-                        <button className="cursor-pointer rounded-md bg-blue-950 px-[20px] py-[8px] font-semibold text-white" onClick={ user && course?.studentsEnrolled.includes(user?._id)
+                        <button className="cursor-pointer rounded-md bg-[#FFD60A] px-[20px] py-[8px] font-semibold text-[#000814]" onClick={ user && course?.studentsEnrolled.includes(user?._id)
                             ? () => navigate("/dashboard/enrolled-courses")
                             : handleBuyCourse
                         }>
@@ -68,13 +68,13 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }){
                             : "Buy Now"}
                         </button>
                         {(!user || !course?.studentsEnrolled.includes(user?._id)) && (
-                            <button onClick={handleAddToCart} className="cursor-pointer rounded-md bg-blue-950 px-[20px] py-[8px] font-semibold text-white">
+                            <button onClick={handleAddToCart} className="cursor-pointer rounded-md bg-[#161D29] px-[20px] py-[8px] font-semibold text-[#F1F2FF]">
                                 Add to cart
                             </button>
                         )}
                     </div>
                     <div>
-                        <p className="pb-3 pt-6 text-center text-sm text-white">
+                        <p className="pb-3 pt-6 text-center text-sm text-[#DBDDEA]">
                             30-Day Money back guarantee
                         </p>
                     </div>
@@ -82,7 +82,7 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }){
                         <p className={'my-2 text-xl font-semibold'}>
                             This course includes: 
                         </p>
-                        <div className="flex flex-col gap-3 text-sm text-white">
+                        <div className="flex flex-col gap-3 text-sm text-[#06D6A0]">
                             {course?.instructions?.map((item, i)=> {
                                 return (
                                     <p className="flex gap-2" key={i}>
@@ -94,7 +94,7 @@ function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse }){
                         </div>
                     </div>
                     <div className="text-center">
-                        <button onClick={handleShare} className="mx-auto flex items-center gap-2 py-6 text-yellow-600">
+                        <button onClick={handleShare} className="mx-auto flex items-center gap-2 py-6 text-[#E7C009]">
                             <FaShareSquare size={15}/> Share
                         </button>
                     </div>

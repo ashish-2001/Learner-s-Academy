@@ -9,16 +9,16 @@ const Stats = [
 
 function StatsComponent(){
     return (
-        <div className="bg-blue-950">
+        <div className="bg-[#2C333F]">
             <div className="flex flex-col gap-10 justify-between w-11/12 max-w-1260px text-white mx-auto">
                 <div className="grid grid-cols-2 md:grid-cols-4 text-center">
                     {Stats.map((data, index) => {
                         return (
                             <div className="flex flex-col py-10" key={index}>
-                                <h1 className="text-[30px] font-bold text-white">
+                                <h1 className="text-[30px] font-bold text-[#F1F2FF]">
                                     {data.count}
                                 </h1>
-                                <h2 className="font-semibold text-[16px] text-white">
+                                <h2 className="font-semibold text-[16px] text-[#585D69]">
                                     {data.label}
                                 </h2>
                             </div>

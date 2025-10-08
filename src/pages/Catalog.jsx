@@ -57,36 +57,36 @@ function Catalog(){
 
     return(
         <>
-            <div className="box-content bg-richblack-800 px-4">
-                <div className="mx-auto flex min-h-[260px] max-w-maxContentTab flex-col justify-center gap-4 lg:max-w-maxContent ">
-                    <p className="text-sm text-richblack-300">
+            <div className="box-content bg-blue-950 px-4">
+                <div className="mx-auto flex min-h-[260px] max-w-620px flex-col justify-center gap-4 lg:max-w-[1260px] ">
+                    <p className="text-sm text-white">
                         {`Home / Catalog / `}
                         <span className="text-yellow-25">
                             {catalogPageData?.data?.selectedCategory?.name}
                         </span>
                     </p>
-                    <p className="text-3xl text-richblack-5">
+                    <p className="text-3xl text-white">
                         {catalogPageData?.data?.selectedCategory?.name}
                     </p>
-                    <p className="max-w-[870px] text-richblack-200">
+                    <p className="max-w-[870px] text-white">
                         {catalogPageData?.data?.selectedCategory?.description}
                     </p>
                 </div>
             </div>
             <div className="mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
                 <div className="section_heading">Courses to get you started</div>
-                <div className="my-4 flex border-b border-b-richblack-600 text-sm">
+                <div className="my-4 flex border-b border-b-white text-sm">
                     <p className={`px-4 py-2 ${
                         active === 1
                         ? "border-b border-b-yellow-25 text-yellow-25"
-                        : "text-richblack-50"
+                        : "text-white"
                     } cursor-pointer`} onClick={() => setActive(1)}>
                         Most Popular
                     </p>
                     <p className={`px-4 py-2 ${
                         active === 2
                         ? "border-b border-b-yellow-25 text-yellow-25"
-                        : "text-richblack-50"
+                        : "text-white"
                     } cursor-pointer`} onClick={() => setActive(2)}>
                         New
                     </p>
@@ -95,7 +95,7 @@ function Catalog(){
                     <Course_Slider Courses={catalogPageData?.data?.selectedCategory?.courses}/>
                 </div>
             </div>
-            <div className="mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+            <div className="mx-auto box-content w-full max-w[620px] px-4 py-12 lg:max-w-[1260px]">
                 <div className="section_heading">
                     Top courses in {catalogPageData?.data?.differentCategory?.name}
                 </div>
@@ -103,7 +103,7 @@ function Catalog(){
                     <Course_Slider courses={catalogPageData?.data?.differentCategory?.courses}/>
                 </div>
             </div>
-            <div className="mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+            <div className="mx-auto box-content w-full max-w-[620px] px-4 py-12 lg:max-w-1260px">
                 <div className="section_heading">Frequently Bought</div>
                 <div className="py-6">
                     <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">

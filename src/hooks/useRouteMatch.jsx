@@ -1,7 +1,7 @@
 import { matchPath, useLocation } from "react-router-dom";
 
 function useRouteMatch(path){
-    const locaation = useLocation();
+    const location = useLocation();
     return matchPath(location.pathname, { path });
 }
 

@@ -107,13 +107,13 @@ function SubSectionModal({
     
     return (
         <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
-            <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-white bg-blue-950">
-                <div className="flex items-center justify-between rounded-t-lg bg-blue-950 p-5">
+            <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-[#6E727F] bg-[#161D29]">
+                <div className="flex items-center justify-between rounded-t-lg bg-[#2C333F] p-5">
                     <p className="text-xl font-semibold text-white">
                         {view && "Viewing"} {add && "Adding"} {edit && "Editing"} Lecture
                     </p>
                     <button onClick={() => (!loading ? setModalData(null) : {})}>
-                        <RxCross2 className="text-2xl text-white"/>
+                        <RxCross2 className="text-2xl text-[#F1F2FF]"/>
                     </button>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 px-8 py-10">
@@ -128,7 +128,7 @@ function SubSectionModal({
                         editData={edit ? modalData.videoUrl : null}
                     />
                     <div className="flex flex-col space-y-2">
-                        <label className="text-sm text-white" htmlFor="lectureTitle">
+                        <label className="text-sm text-[#F1F2FF]" htmlFor="lectureTitle">
                             Lecture title {!view && <sup className="text-red-200">*</sup>}
                         </label>
                         <input
@@ -145,14 +145,14 @@ function SubSectionModal({
                         )}
                     </div>
                     <div className="flex flex-col space-y-2">
-                        <label className="text-sm text-white" htmlFor="lectureDesc">
+                        <label className="text-sm text-[#F1F2FF]" htmlFor="lectureDesc">
                             Lecture Description{" "}
                             {!view && <sup className="text-red-200">*</sup>}
                         </label>
                         <textarea
                             disabled={view || loading}
                             id="lectureDesc"
-                            placeholder="enter lecture Description"
+                            placeholder="Enter lecture Description"
                             {...register("lectureDesc", { required: true})}
                             className="form-style resize-x-none min-h-[130px] w-full py-2 px-3 hover:border-2 hover:border-white border-2 border-white"
                         />

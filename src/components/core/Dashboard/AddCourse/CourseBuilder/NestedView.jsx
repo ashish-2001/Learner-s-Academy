@@ -44,19 +44,19 @@ function NestedView({ handleChangeEditSectionName }){
 
     return(
         <>
-        <div id="nestedViewContainer" className="rounded-lg bg-blue-950 p-6 px-8">
+        <div id="nestedViewContainer" className="rounded-lg bg-[#2C333F] p-6 px-8">
             {course?.courseContent?.map((section) => (
                 <details key={section._id} open>
-                    <summary className="flex cursor-pointer items-center justify-between border-b-2 border-b-blue-950 py-2">
+                    <summary className="flex cursor-pointer items-center justify-between border-b-2 border-b-[#424854] py-2">
                         <div className="flex items-center gap-x-3">
-                            <RxDropdownMenu className="text-2xl text-white"/>
-                            <p className="font-semibold text-white">
+                            <RxDropdownMenu className="text-2xl text-[#C5C7D4]"/>
+                            <p className="font-semibold text-[#C5C7D4]">
                                 {section.sectionName}
                             </p>
                         </div>
                         <div className="flex items-center gap-x-3">
                             <button onClick={() => handleChangeEditSectionName(section._id, section.sectionName)}>
-                                <MdEdit className="text-xl text-white"/>
+                                <MdEdit className="text-xl text-[#838894]"/>
                             </button>
                             <button onClick={() => setConfirmationModal({
                                 text1: "Delete this section",
@@ -66,10 +66,10 @@ function NestedView({ handleChangeEditSectionName }){
                                 btn1Handler: () => handleDeleteSection(section._id),
                                 btn2Handler: () => setConfirmationModal(null)
                             })}>
-                                <RiDeleteBin6Line className="text-xl text-white"/>
+                                <RiDeleteBin6Line className="text-xl text-[#838894]"/>
                             </button>
-                            <span className="font-medium text-white">|</span>
-                            <AiFillCaretDown className="text-xl text-white"/>
+                            <span className="font-medium text-[#838894]">|</span>
+                            <AiFillCaretDown className="text-xl text-[#838894]"/>
                         </div>
                     </summary>
                     <div className="px-6 pb-4">
@@ -77,14 +77,14 @@ function NestedView({ handleChangeEditSectionName }){
                             
                                 <div key={data?.id} onClick={() => setViewSubSection(data)} className="flex cursor-pointer items-center justify-between gap-x-3 border-b-2 border-b-blue-950 py-2">
                                     <div className="flex items-center gap-x-3 py-2">
-                                        <RxDropdownMenu className="text-2xl text-white"/>
-                                        <p className="font-semibold text-white">
+                                        <RxDropdownMenu className="text-2xl text-[#C5C7D4]"/>
+                                        <p className="font-semibold text-[#C5C7D4]">
                                             {data.title}
                                         </p>
                                     </div>
                                     <div onClick={(e) => e.stopPropagation()} className="flex items-center gap-x-3">
                                         <button onClick={() => setEditSubSection({...data, sectionId: section._id})}>
-                                            <MdEdit className="text-xl text-white"/>
+                                            <MdEdit className="text-xl text-[#838894]"/>
                                         </button>
                                         <button onClick={() => 
                                             setConfirmationModal({
@@ -97,12 +97,12 @@ function NestedView({ handleChangeEditSectionName }){
                                             })
                                             }
                                             >
-                                                <RiDeleteBin6Line className="text-xl text-white"/>
+                                                <RiDeleteBin6Line className="text-xl text-[#838894]"/>
                                             </button>
                                     </div>
                                 </div>
                         ))}
-                        <button onClick={() => setAddSubSection(section._id)} className="mt-3 flex items-center gap-x-1 text-yellow-600">
+                        <button onClick={() => setAddSubSection(section._id)} className="mt-3 flex items-center gap-x-1 text-[#FFD60A]">
                             <FaPlus className="text-lg"/>
                             <p>Add Lecture</p>
                         </button>

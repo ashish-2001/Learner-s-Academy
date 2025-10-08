@@ -41,22 +41,22 @@ function InstructorChart({ courses }){
     }
 
     return(
-        <div className="flex flex-1 flex-col gap-y-4 rounded-md bg-blue-950 p-6">
-            <p className="text-lg font-bold text-white">Visualize</p>
+        <div className="flex flex-1 flex-col gap-y-4 rounded-md bg-[#161D29] p-6">
+            <p className="text-lg font-bold text-[#C1FFFD]">Visualize</p>
             <div className="space-x-4 font-semibold">
                 <button
                     onClick={() => setCurrChart("students")}
                     className={`rounded-sm p-1 px-3 transition-all duration-200 ${
                         currChart === "students"
-                        ? "bg-blue-950 text-yellow-600"
-                        : "text-yellow-400"
+                        ? "bg-[#2C333F] text-[#FFD60A]"
+                        : "text-[#9E8006]"
                     }`}
                 > Students</button>
                 <button onClick={() => setCurrChart("income")}
                     className={`rounded-sm p-1 px-3 transition-all duration-200 ${
                         currChart === "income"
-                        ? "bg-blue-950 text-yellow-600"
-                        : "text-yellow-400"
+                        ? "bg-[#2C333F] text-[#FFD60A]"
+                        : "text-[#9E8006]"
                     }`}>Income</button>
             </div>
             <div className="relative mx-auto aspect-square h-full w-full">

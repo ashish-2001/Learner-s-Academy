@@ -50,13 +50,13 @@ function TimelineSection(){
                                 </div>
                                 <div className={`${
                                     TimeLine.length -1 === i ? "hidden" : "lg:block"
-                                } h-14 border-dotted border-r border-richblack-100 bg-richblack400/0 w-[26px]`}></div>
+                                } h-14 border-dotted border-r border-white bg-blue-950 w-[26px]`}></div>
                             </div>
                         )
                     })}
                 </div>
                 <div className="relative w-fit h-fit shadow-blue-200 shadow-[0px_0px_30px_0px]">
-                    <div className="absolute lg:left-[50%] lg:bottom-0 lg:translate-x-[-50%] lg:translate-y-[50%] bg-caribbeangreen-700 flex lg:flex-row flex-col text-white uppercase py-5 gap-4 lg:gap-0 lg:py-10 ">
+                    <div className="absolute lg:left-[50%] lg:bottom-0 lg:translate-x-[-50%] lg:translate-y-[50%] bg-green-600 flex lg:flex-row flex-col text-white uppercase py-5 gap-4 lg:gap-0 lg:py-10 ">
                         <div className="flex gap-5 items-center lg:border-r border-caribbean-300 px-7 lg:px-14">
                             <h1 className="text-3xl font-bold w-[75px]"> 
                                 10
@@ -67,7 +67,7 @@ function TimelineSection(){
                         </div>
                         <div className="flex gap-5 items-center lg:px-14 px-7">
                             <h1 className="text-3xl font-bold w-[75px]">250</h1>
-                            <h1 className="text-caribbean-300 text-sm w-[75px]">
+                            <h1 className="text-green-300 text-sm w-[75px]">
                                 types of courses
                             </h1>
                         </div>

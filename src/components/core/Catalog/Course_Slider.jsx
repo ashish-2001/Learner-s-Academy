@@ -29,7 +29,7 @@ function Course_Slider({ Courses }){
                     ))}
                 </Swiper>
             ) : (
-                <p className="text-xl text-white">No Course Found</p>
+                <p className="text-xl text-[#F1F2FF]">No Course Found</p>
             )}
         </>
     )

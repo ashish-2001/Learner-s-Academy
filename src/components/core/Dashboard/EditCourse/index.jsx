@@ -35,14 +35,14 @@ function EditCourse(){
 
     return(
         <div>
-            <h1 className="mb-14 text-3xl font-medium text-blue-950">
+            <h1 className="mb-14 text-3xl font-medium text-[#F1F2FF]">
             Edit Course
             </h1>
             <div className="mx-auto max-w-[600px]">
                 {course ? (
                     <RenderSteps/>
                 ) : (
-                    <p className="mt-14 text-center text-3xl font-semibold text-blue-950">
+                    <p className="mt-14 text-center text-3xl font-semibold text-[#AFB2BF]">
                         Course not found
                     </p>
                 )}

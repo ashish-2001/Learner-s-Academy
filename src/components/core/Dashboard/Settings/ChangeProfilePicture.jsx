@@ -57,7 +57,7 @@ function ChangeProfilePicture(){
 
     return(
         <>
-            <div className="flex items-center justify-between rounded-md border-[1px] border-white bg-blue-950 p-8 px-12 text-white">
+            <div className="flex items-center justify-between rounded-md border-[1px] border-[#2C333F] bg-[#161D29] p-8 px-12 text-[#F1F2FF]">
                 <div className="flex items-center gap-x-4">
                     <img
                         src={previewSource || user?.image}
@@ -77,7 +77,7 @@ function ChangeProfilePicture(){
                             <button 
                                 onClick={handleClick}
                                 disabled={loading}
-                                className="cursor-pointer rounded-md bg-blue-950 py-2 px-5 font-semibold text-white"
+                                className="cursor-pointer rounded-md bg-[#2C333F] py-2 px-5 font-semibold text-[#C5C7D4]"
                             >
                                 Select
                             </button>
@@ -86,7 +86,7 @@ function ChangeProfilePicture(){
                                 onClick={handleFileUpload}
                             >
                                 {!loading && (
-                                    <FiUpload className="text-lg text-white"/>
+                                    <FiUpload className="text-lg text-[#000814]"/>
                                 )}
                             </IconBtn>
                         </div>

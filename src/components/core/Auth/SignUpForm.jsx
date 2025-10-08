@@ -76,7 +76,7 @@ function SignupForm(){
                 <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">
                     <div className="flex flex-col gap-4">
                         <label>
-                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-black">
+                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-[#F1F2FF]">
                                 First Name <sup className="text-red-600 top-1 text-[20px]">*</sup>
                             </p>
                             <input
@@ -90,7 +90,7 @@ function SignupForm(){
                             />
                         </label>
                         <label>
-                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-black">
+                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-[#F1F2FF]">
                                 Last Name <sup className="text-red-600 text-[20px] top-1">*</sup>
                             </p>
                             <input
@@ -103,7 +103,7 @@ function SignupForm(){
                             />
                         </label>
                         <label>
-                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-black">
+                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-[#F1F2FF]">
                                 Email Address <sup className="text-red-600 text-[20px] top-1">*</sup>
                             </p>
                             <input
@@ -117,7 +117,7 @@ function SignupForm(){
                         </label>
                         <div className="flex gap-x-4">
                             <label className="relative">
-                                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-black">
+                                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-[#F1F2FF]">
                                     Create Password <sup className="text-red-600 text-[20px] top-1">*</sup>
                                 </p>
                                 <input
@@ -137,7 +137,7 @@ function SignupForm(){
                                 </span>
                             </label>
                             <label className="relative">
-                                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-black">
+                                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-[#F1F2FF]">
                                     Confirm Password <sup className="text-red-600 text-[20px] top-1">*</sup>
                                 </p>
                                 <input
@@ -159,7 +159,7 @@ function SignupForm(){
                                 </span>
                             </label>
                         </div>
-                        <button type="submit" className="mt-6 rounded-[8px] bg-yellow-600 py-[8px] px-[12px] font-medium text-black">
+                        <button type="submit" className="mt-6 rounded-[8px] bg-[#FFD60A] py-[8px] px-[12px] font-medium text-[#000814]">
                             Create Account
                         </button>
                     </div>

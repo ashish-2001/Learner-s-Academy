@@ -9,7 +9,7 @@ function CodeBlocks({position, heading, subHeading, ctaBtn1, ctaBtn2, codeBlock,
         <div className={`flex ${position} my-20 justify-between flex flex-col lg:gap-10 gap-10`}>
             <div className="w-[100%] lg:w-[50%] flex flex-col gap-8">
                 {heading}
-                <div className="text-richblack-300 text-base font-bold w-[85%] -mt-3">
+                <div className="text-[#838894] text-base font-bold w-[85%] -mt-3">
                     {subHeading}
                 </div>
                 <div className="flex gap-7 mt-7">
@@ -26,7 +26,7 @@ function CodeBlocks({position, heading, subHeading, ctaBtn1, ctaBtn2, codeBlock,
             </div>
             <div className="h-fit code-border flex flex-row py-3 text-[10px] sm:text-sm leading-[18px] sm:leading-6 relative w-[100%] lg:w-[470px]">
                 {backgroundGradient}
-                <div className="text-center flex flex-col   w-[10%] select-none text-richblack-400 font-inter font-bold">
+                <div className="text-center flex flex-col   w-[10%] select-none text-[#6E727F] font-inter font-bold">
                     <p>1</p>
                     <p>2</p>
                     <p>3</p>
