@@ -42,11 +42,11 @@ function CourseReviewModal({ setReviewModal }){
 
     return(
         <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
-            <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-white bg-blue-950">
-                <div className="flex items-center justify-between rounded-t-lg bg-blue-950 p-5">
-                    <p className="text-xl font-semibold text-white">Add Review</p>
+            <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-[#6E727F] bg-[#6E727F]">
+                <div className="flex items-center justify-between rounded-t-lg bg-[#2C333F] p-5">
+                    <p className="text-xl font-semibold text-[#F1F2FF]">Add Review</p>
                     <button onClick={() => setReviewModal(false)}>
-                        <RxCross2 className="text-2xl text-white"/>
+                        <RxCross2 className="text-2xl text-[#F1F2FF]"/>
                     </button>
                 </div>
                 <div className="p-6">
@@ -57,10 +57,10 @@ function CourseReviewModal({ setReviewModal }){
                             className="aspect-square w-[50px] rounded-full object-cover"
                         />
                         <div>
-                            <p className="font-semibold text-white">
+                            <p className="font-semibold text-[#F1F2FF]">
                                 {user?.firstName} {user?.lastName}
                             </p>
-                            <p className="text-sm text-white">Posting Publicly</p>
+                            <p className="text-sm text-[#F1F2FF]">Posting Publicly</p>
                         </div>
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)} className="mt-6 flex flex-col items-center">
@@ -71,8 +71,8 @@ function CourseReviewModal({ setReviewModal }){
                             activeColor="#ffd700"
                         />
                         <div className="flex w-11/12 flex-col space-y-2">
-                            <label className="text-sm text-white" htmlFor="courseExperience">
-                                Add your experience
+                            <label className="text-sm text-[#F1F2FF]" htmlFor="courseExperience">
+                                Add your experience <sup className="text-red-600">*</sup>
                             </label>
                             <textarea
                                 id="courseExperience"
@@ -81,13 +81,13 @@ function CourseReviewModal({ setReviewModal }){
                                 className="form-style resize-x-none min-h-[130px] w-full"
                             />
                             {errors.courseExperience && (
-                                <span className="ml-2 text-xs tracking-wide text-pink-200">
+                                <span className="ml-2 text-xs tracking-wide text-red-600">
                                     Please Add Your Experience
                                 </span>
                             )}
                         </div>
                         <div className="mt-6 flex w-11/12 justify-end gap-x-2">
-                            <button className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-blue-950 py-[8px] px-[20px] font-semibold text-white`}>
+                            <button className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-[#838894] py-[8px] px-[20px] font-semibold text-white`}>
                                 Cancel
                             </button>
                             <IconBtn text={"Save"}/>

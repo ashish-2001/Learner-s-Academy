@@ -15,7 +15,7 @@ function Contact(){
                     <ContactForm/>
                 </div>
             </div>
-            <div className="relative mx-auto my-20 flex w-11/12 max-w-[1260px] flex-col items-center justify-between gap-8 bg-blue-950 text-white">
+            <div className="relative mx-auto my-20 flex w-11/12 max-w-[1260px] flex-col items-center justify-between gap-8 bg-[#000814] text-white">
                 <h1 className="text-center text-4xl font-semibold mt-8">
                     Reviews from other learners
                 </h1>

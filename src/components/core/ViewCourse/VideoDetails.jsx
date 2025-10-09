@@ -171,14 +171,14 @@ function VideoDetails(){
                                         <button
                                             disabled={loading}
                                             onClick={goToPrevVideo}
-                                            className="cursor-pointer rounded-md bg-blue-950 px-[20px] py-[8px] font-semibold text-white"
+                                            className="cursor-pointer rounded-md bg-[#161D29] px-[20px] py-[8px] font-semibold text-[#F1F2FF]"
                                         >Prev</button>
                                     )}
                                     {!isLastVideo() && (
                                         <button 
                                             disabled={loading}
                                             onClick={goToNextVideo}
-                                            className="cursor-pointer rounded-md bg-blue-950 px-[20px] py-[8px] font-semibold text-white"
+                                            className="cursor-pointer rounded-md bg-[#161D29] px-[20px] py-[8px] font-semibold text-[#F1F2FF]"
                                         >Next</button>
                                     )}
                                 </div>

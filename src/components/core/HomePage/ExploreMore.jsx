@@ -30,17 +30,17 @@ function ExploreMore(){
                 <div className="text-4xl font-semibold text-center my-10">
                     Unlock the
                     <HighLightText text={"Power of code"}/>
-                    <p className="text-center text-white text-lg font-semibold mt-1">
+                    <p className="text-center text-[#838894] text-lg font-semibold mt-1">
                         Learn to Build Anything You Can Imagine
                     </p>
                 </div>
             </div>
-            <div className="hidden lg:flex gap-5 -mt-5 mx-auto w-max bg-blue-950 text-white p-1 rounded-full font-medium drop-shadow-[0_1.5px_rgba(155, 255, 255, 0.25)]">
+            <div className="hidden lg:flex gap-5 -mt-5 mx-auto w-max bg-[#161D29] text-[#999DAA] p-1 rounded-full font-medium drop-shadow-[0_1.5px_rgba(155, 255, 255, 0.25)]">
                 {tabsName.map((ele, index) => {
                     return(
                         <div className={`text-[16px] flex flex-row items-center gap-2 ${
-                            currentTab === ele ? "bg-blue-950 text-white font-medium" : "text-white"
-                        } px-7 py-[7px] rounded-full transition-all duration-200 cursor-pointer hover:bg-blue-950 hover:text-white`} key={index} onClick={() => setMyCards(ele)}>
+                            currentTab === ele ? "bg-[#000814] text-[#F1F2FF] font-medium" : "text-[999DAA]"
+                        } px-7 py-[7px] rounded-full transition-all duration-200 cursor-pointer hover:bg-[#000814] hover:text-[#F1F2FF]`} key={index} onClick={() => setMyCards(ele)}>
                             {ele}
                         </div>
                     )

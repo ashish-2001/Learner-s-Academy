@@ -15,12 +15,12 @@ import { StatsComponent } from "../components/Core/AboutPage/Stats";
 function About(){
     return(
         <div>
-            <section className="bg-blue-950">
+            <section className="bg-[#2C333F]">
                 <div className="relative mx-auto flex w-11/12 max-w-[1260px] flex-col justify-between gap-10 text-center text-white">
                     <header className="mx-auto py-20 text-4xl font-semibold lg:w-[70%]">
                         Driving Innovation in Online Education for a
                         <HighLightText text={"Brighter Future"}/>
-                        <p className="mx-auto mt-3 text-center text-base font-medium text-white lg:w-[95%]">
+                        <p className="mx-auto mt-3 text-center text-base font-medium text-[#838894] lg:w-[95%]">
                             is at the forefront of driving innovation in online
                             education. We are passionate about creating a brighter future by
                             offering cutting-edge courses, leveraging emerging technologies,
@@ -44,27 +44,27 @@ function About(){
                     </div>
                 </div>
             </section>
-            <section className="border-b border-white">
-                <div className="mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white">
+            <section className="border-b border-[#2C333F]">
+                <div className="mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-[#585D69]">
                     <div className="h-[100px]"></div>
                     <Quote/>
                 </div>
             </section>
             <section>
-                <div className="mx-auto flex w-11/12 max-w-[1260px] flex-col justify-between gap-10 text-white">
+                <div className="mx-auto flex w-11/12 max-w-[1260px] flex-col justify-between gap-10 text-[#585D69]">
                     <div className="flex flex-col items-center gap-10 lg:flex-row justify-between">
                         <div className="my-24 flex lg:w-[50%] flex-col gap-10">
                             <h1 className="bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCB045] bg-clip-text text-4xl font-semibold text-transparent lg:w-[70%] ">
                                 Our Founding Story
                             </h1>
-                            <p className="text-base font-medium text-white lg:w-[95%]">
+                            <p className="text-base font-medium text-[#838894] lg:w-[95%]">
                                 Our e-learning platform was born out of a shared vision and
                                 passion for transforming education. It all began with a group of
                                 educators, technologists, and lifelong learners who recognized
                                 the need for accessible, flexible, and high-quality learning
                                 opportunities in a rapidly evolving digital world.
                             </p>
-                            <p className="text-base font-medium text-white lg:w-[95%]">
+                            <p className="text-base font-medium text-[#838894] lg:w-[95%]">
                                 As experienced educators ourselves, we witnessed firsthand the
                                 limitations and challenges of traditional education systems. We
                                 believed that education should not be confined to the walls of a
@@ -86,7 +86,7 @@ function About(){
                                 <h1 className="bg-gradient-to-b from-[#FF512F] to-[#F09819] bg-clip-text text-4xl font-semibold text-transparent lg:w-[70%] ">
                                     Our Vision
                                 </h1>
-                                <p className="text-base font-medium text-white lg:w-[95%]">
+                                <p className="text-base font-medium text-[#838894] lg:w-[95%]">
                                     With this vision in mind, we set out on a journey to create an
                                     e-learning platform that would revolutionize the way people
                                     learn. Our team of dedicated experts worked tirelessly to
@@ -99,7 +99,7 @@ function About(){
                                 <h1 className="bg-gradient-to-b from-[#1FA2FF] via-[#12D8FA] to-[#A6FFCB] text-transparent bg-clip-text text-4xl font-semibold lg:w-[70%] ">
                                     Our mission
                                 </h1>
-                                <p className="text-base font-medium text-white lg:w-[95%]">
+                                <p className="text-base font-medium text-[#838894] lg:w-[95%]">
                                     Our mission goes beyond just delivering courses online. We wanted to create a vibrant community of learners, where individuals can connect, collaborate, and learn from one another. We believe that knowledge thrives in an environment of sharing and dialogue, and we foster this spirit of collaboration through forums, live sessions, and networking opportunities.
                                 </p>
                             </div>
@@ -113,7 +113,7 @@ function About(){
                 <ContactFormSection/>
             </section>
 
-            <div className="relative mx-auto my-20 flex w-11/12 max-w-[1260px] flex-col items-center justify-between gap-8 bg-blue-950 text-white">
+            <div className="relative mx-auto my-20 flex w-11/12 max-w-[1260px] flex-col items-center justify-between gap-8 bg-[#000814] text-white">
                 <h1 className="text-center text-4xl font-semibold mt-8">
                     Reviews from other learners
                 </h1>
