@@ -13,7 +13,7 @@ function SignupForm(){
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT);
-    const [formData, setFormDta] = useState({
+    const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
         email: "",
@@ -25,7 +25,7 @@ function SignupForm(){
         const { firstName, lastName, email, password, confirmPassword} = formData
 
         const handleOnchange = (e) => {
-            setFormDta((prevData) => ({
+            setFormData((prevData) => ({
                 ...prevData,
                 [e.target.name]: e.target.value
             }))
@@ -46,7 +46,7 @@ function SignupForm(){
             dispatch(setSignupData(signupData));
             dispatch(sendOtp(formData.email, navigate));
 
-            setFormDta({
+            setFormData({
                 firstName: "",
                 lastName: "",
                 email: "",
@@ -86,7 +86,7 @@ function SignupForm(){
                                 value={firstName}
                                 placeholder="Enter first name"
                                 onChange={handleOnchange}
-                                className="form-style w-full px-3 py-2 border-2 border-blue-950 rounded-xl"
+                                className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[6E727F] focus:outline-none w-full "
                             />
                         </label>
                         <label>
@@ -98,8 +98,9 @@ function SignupForm(){
                                 type="text"
                                 name="lastName"
                                 value={lastName}
+                                onChange={handleOnchange}
                                 placeholder="Enter last name"
-                                className="form-style w-full px-3 py-2 border-2 border-blue-950 rounded-xl"
+                                className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full "
                             />
                         </label>
                         <label>
@@ -112,7 +113,8 @@ function SignupForm(){
                                 name="email"
                                 value={email}
                                 placeholder="Enter Email Address"
-                                className="form-style w-full px-3 py-2 border-2 border-blue-950 rounded-xl"
+                                onChange={handleOnchange}
+                                className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full"
                             />
                         </label>
                         <div className="flex gap-x-4">
@@ -122,11 +124,12 @@ function SignupForm(){
                                 </p>
                                 <input
                                     required
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
+                                    name="password"
                                     value={password}
                                     onChange={handleOnchange}
                                     placeholder="Enter Password"
-                                    className="form-style w-full !pr-10 px-3 py-2 border-2 border-blue-950 rounded-xl"
+                                    className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10"
                                 />
                                 <span onClick={() => setShowPassword((prev) => !prev)} className="absolute right-3 top-[38px] z-[10px] cursor-pointer">
                                     {showPassword ? (
@@ -146,7 +149,8 @@ function SignupForm(){
                                     name="confirmPassword"
                                     value={confirmPassword}
                                     placeholder="Confirm Password"
-                                    className="form-style w-full !pr-10 px-3 py-2 border-2 border-blue-950 rounded-xl"
+                                    onChange={handleOnchange}
+                                    className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10 "
                                 />
                                 <span className="absolute right-3 top-[38px] z-[10] cursor-pointer"
                                     onClick={() => setShowConfirmPassword((prev) => !prev)}

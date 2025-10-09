@@ -2,7 +2,7 @@ import React from "react";
 import { FooterLink2 } from "../../data/FooterLink2";
 import { Link } from "react-router-dom";
 import { Logo_Full_Light } from "../../assets/logo";
-
+import { FaHeart } from "react-icons/fa";
 import { FaFacebook, FaGoogle, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const BottomFooter = ["Privacy Policy", "Cookie Policy", "Terms"];
@@ -126,8 +126,10 @@ function Footer(){
                             )
                         })}
                     </div>
-
-                    <div className="text-center">Made with love Ashish pal Learners Academy</div>
+                    <div className="text-center flex justify-center items-center gap-2">Made with <FaHeart className="text-red-600" /> from Ashish pal</div>
+                    <div>
+                        Learner's Academy
+                    </div>
                 </div>
             </div>
         </div>

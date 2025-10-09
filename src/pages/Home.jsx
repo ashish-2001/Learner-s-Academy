@@ -17,8 +17,8 @@ function Home(){
         <div>
             <div className="relative mx-auto flex w-11/12 max-w-[1260px] flex-col items-center justify-between gap-8 text-white">
                 <Link to={"/signup"}>
-                    <div className="group mx-auto mt-16 w-fit rounded-full bg-blue-950 p-1 font-bold text-white drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] transition-all duration-200 hover:scale-95 hover:drop-shadow-none">
-                        <div className="flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-blue-950">
+                    <div className="group mx-auto mt-16 w-fit rounded-full bg-[#161D29] p-1 font-bold text-[#999DAA] drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] transition-all duration-200 hover:scale-95 hover:drop-shadow-none">
+                        <div className="flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-[#000814]">
                             <p>Become an instructor</p>
                             <FaArrowRight/>
                         </div>
@@ -28,7 +28,7 @@ function Home(){
                     Empower Your Future with
                     <HighLightText text={"Coding Skills"}/>
                 </div>
-                <div className="-mt-3 w-[90%] text-center text-lg font-bold text-white">
+                <div className="-mt-3 w-[90%] text-center text-lg font-bold text-[#838894]">
                     With our online coding courses, you can learn at your own pace, from
                     anywhere in the world, and get access to a wealth of resources,
                     including hands-on projects, quizzes, and personalized feedback from
@@ -42,7 +42,7 @@ function Home(){
                         Book a Demo
                     </CTAButton>
                 </div>
-                <div className="mx-3 my-7 shadow-[10px_-5px_50px_-5px] shadow-blue-200">
+                <div className="mx-3 my-7 shadow-[10px_-5px_50px_-5px] shadow-[#118AB2]">
                     <video 
                         className="shadow-[20px_20px_rgba(255,255,255)]"
                         muted
@@ -106,7 +106,7 @@ function Home(){
                 </div>
                 <ExploreMore/>
             </div>
-            <div className="bg-pure-greys-5 text-white">
+            <div className="bg-[#F9F9F9] text-[#2C333F]">
                 <div className="homepage_bg h-[320px]">
                     <div className="mx-auto flex w-11/12 max-w-[1260px] flex-col items-center justify-between gap-8">
                         <div className="lg:h-[150px]"></div>
@@ -152,7 +152,7 @@ function Home(){
                     <LearningLanguageSection/>
                 </div>
             </div>
-            <div className="relative mx-auto my-20 flex w-11/12 max-w-[1260px] flex-col items-center justify-between gap-8 bg-blue-950 text-white">
+            <div className="relative mx-auto my-20 flex w-11/12 max-w-[1260px] flex-col items-center justify-between gap-8 bg-[#000814] text-white">
                 <InstructorSection/>
                 <h1 className="text-center text-4xl font-semibold mt-8">
                     Reviews from other learners

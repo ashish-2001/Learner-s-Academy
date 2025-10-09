@@ -10,6 +10,7 @@ import { router as profileRoutes } from "./routes/profileRoutes.js";
 import { router as userRoutes } from "./routes/userRoutes.js";
 import { cloudinaryConnect } from "./config/cloudinary.js";
 import fileUpload from "express-fileupload";
+import mongoose from "mongoose";
 
 const app = express();
 
@@ -20,21 +21,21 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-	origin: "*",
+	origin: "http://localhost:5173",
 	credentials: true
 }));
 
 app.use(
 	fileUpload({
-		useTempfiles: true,
+		useTempFiles: true,
 		tempFileDir: "/temp/"
 	})
 );
 
 cloudinaryConnect();
 
-app.use("api/v1/auth", userRoutes);
-app.use("api/v1/profile", profileRoutes);
+app.use("/api/v1/auth", userRoutes);
+app.use("/api/v1/profile", profileRoutes);
 console.log("It is running")
 app.use("/api/v1/contact-us", contactUsRoutes);
 app.use("/api/v1/course", courseRoutes);
@@ -46,6 +47,11 @@ app.get("/", (req, res) => {
 		message: "Your server is up and running..."
 	})
 })
+
+mongoose.connect(process.env.MONGO_URL, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true
+}).then(() => console.log("Mongodb connected")).catch((err) => console.log("Mongodb connection error:", err))
 
 app.listen(PORT, () => {
 	console.log(`App is running on port ${PORT}`)

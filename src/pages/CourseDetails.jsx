@@ -112,7 +112,7 @@ function CourseDetails(){
 
     return(
         <>
-            <div className="relative w-full bg-blue-950">
+            <div className="relative w-full bg-[#161D29]">
                 <div className="mx-auto box-content px-4 lg:w-[1260px] 2xl:relative ">
                     <div className="mx-auto grid min-h-[450px] max-w-[620px] justify-items-center py-8 lg:mx-0 lg:justify-items-start lg:py-0 xl:max-w-[810px]">
                         <div className="relative block max-h-[30rem] lg:hidden">
@@ -123,13 +123,13 @@ function CourseDetails(){
                                 className="aspect-auto w-full"
                             />
                         </div>
-                        <div className={`z-30 my-5 flex flex-col justify-center gap-4 py-5 text-lg text-white`}>
+                        <div className={`z-30 my-5 flex flex-col justify-center gap-4 py-5 text-lg text-[#F1F2FF]`}>
                             <div>
-                                <p className="text-4xl font-bold text-white sm:text-[42px]">
+                                <p className="text-4xl font-bold text-[#F1F2FF] sm:text-[42px]">
                                     {courseName}
                                 </p>
                             </div>
-                            <p className="text-white">{courseDescription}</p>
+                            <p className="text-[#999DAA]">{courseDescription}</p>
                             <div className="text-md flex flex-wrap items-center gap-2">
                                 <span className="text-yellow-25">{avgReviewCount}</span>
                                 <RatingStars Review_Count={avgReviewCount} Star_Size={24}/>
@@ -152,14 +152,14 @@ function CourseDetails(){
                                 </p>
                             </div>
                         </div>
-                        <div className="flex w-full flex-col gap-4 border-y border-y-white py-4 lg:hidden">
-                            <p className="space-x-3 pb-4 text-3xl font-semibold text-white">
+                        <div className="flex w-full flex-col gap-4 border-y border-y-[#585D69] py-4 lg:hidden">
+                            <p className="space-x-3 pb-4 text-3xl font-semibold text-[#F1F2FF]">
                                 Rs. {price}
                             </p>
-                            <button className="cursor-pointer rounded-md bg-blue-950 px-[20px] py-[8px] font-semibold text-white" onClick={handleBuyCourse}>
+                            <button className="cursor-pointer rounded-md bg-[#FFD60A] px-[20px] py-[8px] font-semibold text-[#000814]" onClick={handleBuyCourse}>
                                 Buy Now
                             </button>
-                            <button className="cursor-pointer rounded-md bg-blue-950 px-[20px] py-[8px] font-semibold text-white">
+                            <button className="cursor-pointer rounded-md bg-[#161D29] px-[20px] py-[8px] font-semibold text-[#F1F2FF]">
                                 Add to cart
                             </button>
                         </div>
@@ -173,9 +173,9 @@ function CourseDetails(){
                     </div>
                 </div>
             </div>
-            <div className="mx-auto box-content px-4 text-start text-richblack-5 lg:w-[1260px]">
+            <div className="mx-auto box-content px-4 text-start text-[#F1F2FF] lg:w-[1260px]">
                 <div className="mx-auto max-w-maxContentTab lg:mx-0 xl:max-w-[810px]">
-                    <div className="my-8 border border-richblack-600 p-8">
+                    <div className="my-8 border border-[#424854] p-8">
                         <p className="text-3xl font-semibold">What you will learn</p>
                         <div className="mt-5">
                             <ReactMarkDown>{whatWillYouLearn}</ReactMarkDown>
@@ -195,7 +195,7 @@ function CourseDetails(){
                                     <span>{response?.data?.totalDuration} total length</span>
                                 </div>
                                 <div>
-                                    <button className="text-yellow-25" onClick={() => setIsActive([])}>Collapse all sections</button>
+                                    <button className="text-[#FFE83D]" onClick={() => setIsActive([])}>Collapse all sections</button>
                                 </div>
                             </div>
                         </div>

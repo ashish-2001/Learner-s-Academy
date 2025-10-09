@@ -17,9 +17,7 @@ const signUpValidator = z.object({
     email: z.string().email("Invalid email address"),
     password: z.string().min(6, "Password must be at least 6 characters"),
     confirmPassword: z.string().min(6, "Confirm Password must be at least 6 characters"),
-    contactNumber: z.string().regex(/^[0-9]{10}$/, "Contact number must be of 10 digits"),
-    accountType: z.enum(["Student", "Instructor"]),
-    otp: z.string().regex(/^\d{6}$/, "Otp must be of 6 characters")
+    
 }).refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
     path: ["confirmPassword"]
@@ -32,7 +30,7 @@ const signUp = async (req, res) =>{
         const parsedResult = signUpValidator.safeParse(req.body);
 
         if(!parsedResult.success){
-            res.status(403).json({
+            return res.status(403).json({
                 message: "Incorrect input",
                 success: false
             })
@@ -61,7 +59,7 @@ const signUp = async (req, res) =>{
         const response = await Otp.find({email}).sort({createdAt: -1}).limit(1);
 
         if(response.length === 0){
-            res.status(403).json({
+            return res.status(403).json({
                 message: "Otp is not valid",
                 success: false
             })
@@ -74,9 +72,7 @@ const signUp = async (req, res) =>{
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        let approved = "";
-
-        approved === "Instructor" ? (approved == false) : (approved == true);
+        const approved = accountType === "Instructor" ? false : true;
 
         const profileDetails = await Profile.create({
             gender: null,
@@ -86,7 +82,7 @@ const signUp = async (req, res) =>{
         });
 
         const user = await User.create({
-            fistName: firstName,
+            firstName: firstName,
             lastName: lastName,
             email: email,
             password: hashedPassword,
@@ -103,7 +99,7 @@ const signUp = async (req, res) =>{
             userId
         }, JWT_SECRET)
 
-        return req.status(200).json({
+        return res.status(200).json({
             message: "User registered successfully",
             token,
             success: true
@@ -199,7 +195,7 @@ const sendOtp = async (req, res) => {
         const result1 = otpValidator.safeParse(req.body);
 
         if(!result1.success){
-            return res.status({
+            return res.status(400).json({
                 message: "Incorrect input",
                 success: false
             })

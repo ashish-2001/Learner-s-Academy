@@ -43,7 +43,7 @@ function LoginForm(){
                     value={email}
                     onChange={handleOnChange}
                     placeholder="Enter email address"
-                    className="form-style w-full px-3 py-2 border-gray-800 rounded-md border-2 focus:outline-none hover:border-blue-950 hover:border-2"
+                    className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full"
                 />
                 <span></span>
             </label>
@@ -57,7 +57,7 @@ function LoginForm(){
                     placeholder="Enter password"
                     name="password"
                     value={password}
-                    className="form-style w-full px-3 py-2 rounded-md border-2 focus:outline-none hover:border-blue-950 hover:border-2"
+                    className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full "
                     onChange={handleOnChange}
                 />
                 <span onClick={() =>  setShowPassword((prev) => !prev)} className="absolute right-3 top-[38px] z-[10] cursor-pointer">
