@@ -16,13 +16,11 @@ async function createCategory(req, res){
             const parsedResult = categoryValidator.safeParse(req.body);
 
         if(!parsedResult.success){
-            return res.setInterval(() => {
-                
-            }, (400).json({
+            return res.status(400).json({
                 success: false,
                 message: "Invalid input",
                 errors: parsedResult.error.errors
-            }));
+            });
         }
 
         const { name, description } = parsedResult.data;
@@ -70,7 +68,7 @@ const categoryPageValidator = z.object({
 
 async function categoryPageDetails(req, res){
     try{
-        const parsedResult = categoryPageValidator.safeParse(req.body);
+        const parsedResult = categoryPageValidator.safeParse(req.params);
 
         if(!parsedResult.success){
             return res.status(400).json({
@@ -112,9 +110,9 @@ async function categoryPageDetails(req, res){
 
         let differentCategory = null;
         if(categoriesExceptSelected.length > 0){
-            differentCategory = await Category.findOne(
-                categoriesExceptSelected[getRandomInt(categoriesExceptSelected.length)]._id
-            ).populate({
+            const randomCategoryId = categoriesExceptSelected[getRandomInt(categoriesExceptSelected.length)]._id
+            
+            differentCategory = await Category.findById(randomCategoryId).populate({
                 path: "courses",
                 match: {
                     status: "Published"
@@ -127,12 +125,12 @@ async function categoryPageDetails(req, res){
             match: {
                 status: "Published"
             }
-        }).exec()
+        }).lean().exec()
 
-        const allCourses = allCategories.flatMap((category) => category.courses)
+        const allCourses = allCategories.flatMap((category) => category.courses || [])
         const mostSellingCourses = allCourses.sort((a, b) => b.sold - a.sold).slice(0, 10)
 
-        return res.stauts(200).json({
+        return res.status(200).json({
             success: true,
             data: {
                 selectedCategory,

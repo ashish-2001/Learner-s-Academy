@@ -160,7 +160,7 @@ async function deleteAccount(req, res){
     }
 }
 
-async function getAllUserDetails(req, res){
+async function getUserDetails(req, res){
     try{
         const id = req.user.id;
         const userDetails = await User.findById(id).populate("additionalDetails").exec();
@@ -359,7 +359,7 @@ async function instructorDashboard(req, res) {
 export {
     updateProfile,
     deleteAccount,
-    getAllUserDetails,
+    getUserDetails,
     updateDisplayPicture,
     getEnrolledCourses,
     instructorDashboard

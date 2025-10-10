@@ -17,7 +17,8 @@ const signUpValidator = z.object({
     email: z.string().email("Invalid email address"),
     password: z.string().min(6, "Password must be at least 6 characters"),
     confirmPassword: z.string().min(6, "Confirm Password must be at least 6 characters"),
-    
+    accountType: z.enum(["Student", "Instructor"]),
+    otp: z.string().length(6, "Otp must be digits")
 }).refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
     path: ["confirmPassword"]
@@ -64,7 +65,7 @@ const signUp = async (req, res) =>{
                 success: false
             })
         } else if(otp !== response[0].otp){
-            res.status(403).json({
+            return res.status(403).json({
                 message: "Otp is not valid",
                 success: false
             })
@@ -74,12 +75,7 @@ const signUp = async (req, res) =>{
 
         const approved = accountType === "Instructor" ? false : true;
 
-        const profileDetails = await Profile.create({
-            gender: null,
-            dateOfBirth: null,
-            contactNumber: null,
-            about: null
-        });
+        const profileDetails = await Profile.create({});
 
         const user = await User.create({
             firstName: firstName,
@@ -90,7 +86,8 @@ const signUp = async (req, res) =>{
             accountType: accountType,
             approved: approved,
             additionalDetails: profileDetails._id,
-            image: ""
+            image: "",
+            active: true
         })
 
         const userId = user._id;
@@ -227,12 +224,16 @@ const sendOtp = async (req, res) => {
 
         while(result){
             otp = otpGenerator.generate(6, {
-                upperCaseAlphabets: false
+                upperCaseAlphabets: false,
+                lowerCaseAlphabets: false,
+                specialChars: false
             })
+            
         }
 
-        const otpPayload = { email, otp };
-        await Otp.create({ otpPayload });
+        
+        await Otp.create({ email, otp });
+
         res.status(200).json({
             success: true,
             message: "Otp sent successfully",

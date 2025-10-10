@@ -129,6 +129,39 @@ const createCourse = async (req, res) =>{
 
 }
 
+async function showAllCategories(req, res) {
+    try {
+        const categories = await Category.find();
+        res.status(200).json({
+            success: true,
+            data: categories
+        });
+    } catch (e) {
+        res.status(500).json({
+            success: false,
+            message: e.message
+        });
+    }
+}
+
+async function getReviews(req, res) {
+    try {
+        const reviews = await Course.find()
+            .select("courseName ratingAndReview")
+            .populate("ratingAndReview");
+        
+        res.status(200).json({
+            success: true,
+            data: reviews
+        });
+    } catch (e) {
+        res.status(500).json({
+            success: false,
+            message: e.message
+        });
+    }
+}
+
 const editCourseValidator = z.object({
     courseId: z.string().min(1, "CourseId is required"),
     courseName: z.string().optional(),
@@ -428,6 +461,8 @@ async function deleteCourse(req, res){
 
 export {
     createCourse,
+    getReviews,
+    showAllCategories,
     editCourse,
     getAllCourses,
     getCourseDetails,

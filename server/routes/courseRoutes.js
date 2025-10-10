@@ -1,9 +1,10 @@
 import express from "express";
 import { auth, isInstructor, isStudent } from "../middleware/auth.js";
-import { createCourse, deleteCourse, editCourse, getAllCourses, getCourseDetails, getFullCourseDetails, getInstructorCourses } from "../controllers/Course.js";
+import { createCourse, deleteCourse, editCourse, getAllCourses, getCourseDetails, getFullCourseDetails, getInstructorCourses, getReviews, showAllCategories } from "../controllers/Course.js";
 import { createSection, deleteSection, updateSection } from "../controllers/Section.js";
 import { createSubSection, deleteSubSection, updateSubSection } from "../controllers/SubSection.js";
 import { updateCourseProgress } from "../controllers/CourseProgress.js";
+import { RxShadowOuter } from "react-icons/rx";
 
 const router = express.Router();
 
@@ -33,6 +34,10 @@ router.get("/getAllCourses", getAllCourses);
 router.get("/getCourseDetails", getCourseDetails);
 
 router.get("/getFullCourseDetails", auth, getFullCourseDetails);
+
+router.get("/showAllCategories", showAllCategories);
+
+router.get("/getReviews", getReviews);
 
 router.put("/updateCourseProgress", auth, isStudent, updateCourseProgress)
 

@@ -5,9 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { RxCountdownTimer } from "react-icons/rx";
-import  OtpInput  from "react-otp-input";
-
-
+import OtpInput from "react-otp-input";
 
 function VerifyEmail(){
     const [otp, setOtp] = useState("");
@@ -19,7 +17,7 @@ function VerifyEmail(){
         if(!signupData){
             navigate("/signup");
         }
-    }, []);
+    }, [signupData, navigate]);
 
     function handleVerifyAndSignup(e){
         e.preventDefault();
@@ -62,19 +60,20 @@ function VerifyEmail(){
                         <OtpInput
                             value={otp}
                             onChange={setOtp}
-                            numInputs={(props) => (
+                            numInputs={6}   // Number of OTP digits
+                            renderInput={(props) => (
                                 <input
-                                    {...props}
-                                    placeholder="-"
-                                    style={{
-                                        boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)"
-                                    }}
-                                    className="w-[48px] lg:w-[60px] border-0 bg-[#161D29] rounded-[0.5rem] text-[#F1F2FF] aspect-square text-center focus:border-0 focus:outline-2 focus:outline-[#FFD60A]"
+                                {...props}
+                                placeholder="-"
+                                style={{
+                                    boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                                }}
+                                className="w-[48px] lg:w-[60px] border-0 bg-[#161D29] rounded-[0.5rem] text-[#F1F2FF] aspect-square text-center focus:border-0 focus:outline-2 focus:outline-[#FFD60A]"
                                 />
                             )}
                             containerStyle={{
                                 justifyContent: "space-between",
-                                gap:"0 6px"
+                                gap: "0 6px",
                             }}
                         />
                         <button type="submit" className="w-full bg-[#FFD60A] py-[12px] px-[12px] rounded-[8px] mt-6 font-medium text-[#000814]">

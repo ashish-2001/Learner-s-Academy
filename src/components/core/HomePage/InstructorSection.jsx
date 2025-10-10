@@ -1,7 +1,7 @@
 import React from "react";
 import { CTAButton } from "./Button";
 import { FaArrowRight } from "react-icons/fa";
-import { Instructor } from "../Dashboard/Instructor";
+import { Instructor } from "../../../assets/images";
 import { HighLightText } from "./HighLightText";
 
 function InstructorSection(){

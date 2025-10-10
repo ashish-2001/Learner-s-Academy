@@ -1,5 +1,5 @@
 import React from "react";
-import * as Icons from "react-redux";
+import * as Icons from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { NavLink, matchPath, useLocation } from "react-router-dom";
 import { resetCourseState } from "../../../slices/courseSlice";
@@ -25,7 +25,7 @@ function SidebarLink({ link, iconName }){
                 matchRoute(link.path) ? "opacity-100" : "opacity"
             }`}></span>
             <div className="flex items-center gap-x-2">
-                <Icon className="text-lg"/>
+                { Icon && <Icon className="text-lg"/>}
                 <span>{link.name}</span>
             </div>
         </NavLink>

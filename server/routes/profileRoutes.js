@@ -1,6 +1,5 @@
 import express from "express";
-import { updateProfile } from "../controllers/Profile.js";
-import { deleteAccount, getAllUserDetails, getEnrolledCourses, instructorDashboard, updateDisplayPicture } from "../controllers/Profile.js";
+import { updateProfile, deleteAccount, getUserDetails, getEnrolledCourses, instructorDashboard, updateDisplayPicture } from "../controllers/Profile.js";
 import { auth, isInstructor } from "../middleware/auth.js";
 const router = express.Router();
 
@@ -9,7 +8,7 @@ router.delete("/deleteProfile", auth, deleteAccount);
 
 router.put("/updateProfile", auth, updateProfile);
 
-router.get("/getUserDetails", auth, getAllUserDetails);
+router.get("/getUserDetails", auth, getUserDetails);
 
 router.get("/getEnrolledCourses", auth, getEnrolledCourses);
 

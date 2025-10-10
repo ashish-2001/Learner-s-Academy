@@ -4,22 +4,22 @@ const profileSchema = new mongoose.Schema({
 
     gender: {
         type: String,
-        required: true
+        required: false
     },
 
     dateOfBirth: {
         type: String,
-        required: true
+        required: false
     },
 
     about: {
         type: String,
-        required: true
+        required: false
     },
 
     contactNumber: {
         type: Number,
-        required: true
+        required: false
     }
 })
 
