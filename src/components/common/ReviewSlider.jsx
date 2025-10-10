@@ -43,9 +43,12 @@ function ReviewSlider(){
                             <SwiperSlide key={i}>
                                 <div className="flex flex-col gap-3 bg-[#161D29] p-3 text-[14px] text-[#DBDDEA]">
                                     <div className="flex items-center gap-4">
-                                        <img src={review?.user?.image ? review?.user?.image : `https://api.dicebar.com/5.x/initials/svg?seed=${review?.user?.firstName} ${review?.user?.lastName}`
+                                        <img src={
+                                            review?.user?.image
+                                            ? review?.user?.image 
+                                            : `https://ui-avatars.com/api/?name=${encodeURIComponent(review?.user?.firstName || "")}+${encodeURIComponent(review?.user?.firstName || "")}&background=random&size=128`
                                     }
-                                        alt=""
+                                        alt={review?.user?.firstName || "User"}
                                         className="h-9 w-9 rounded-full object-cover"
                                     />
                                     <div className="flex flex-col">

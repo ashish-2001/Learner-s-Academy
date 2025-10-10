@@ -45,10 +45,13 @@ async function updateProfile(token, formData){
         if(!response.data.success){
             throw new Error(response.data.message)
         }
-        const userImage = response.data.updatedUserDetails.image
-        ? response.data.updatedUserDetails.image
-        : `https://api.dicebar.com/5.x/initials/svg?seed=${response.data.updatedUserDetails.firstName} ${response.data.updatedUserDetails.lastName}`
-        dispatch(setUser({ ...response.data.updatedUserDetails, image: userImage}))
+
+        const userData = response.data?.updatedUserDetails;
+
+        const userImage = userData?.image 
+        ? userData.image
+        : `https://ui-avatars.com/api/?name=${encodeURIComponent(userData?.firstName || "")}+${encodeURIComponent(userData?.lastName || "")}&background=random&size=128`
+        dispatch(setUser({ ...userData, image: userImage}))
         toast.success("Profile updated successfully")
     }catch(error){
         console.log("Update profile api error..........", error)

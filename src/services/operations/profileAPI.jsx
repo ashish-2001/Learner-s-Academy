@@ -16,26 +16,32 @@ function getUserDetails(token ,navigate){
         dispatch(setLoading(true))
         try{
             const response = await apiConnector("GET", GET_USER_DETAILS_API, null, {
-                Authorization: `Bearer${token}`
+                Authorization: `Bearer ${token}`
             })
             console.log("get user details api response......", response)
             if(!response.data.success){
-                throw new Error(response.data.message)
+                throw new Error(response.data.message || "User data not found")
             }
-            const userImage = response.data.data.image
-            ? response.data.data.image
-            : `https://api.dicebar.com/5.x/initials/svg?seed=${response.data.data.firstName} ${response.data.data.lastName}`
-            dispatch(setUser({...response.data.data, image: userImage}))
+
+            const userData = response.data.data;
+
+            const userImage = userData?.image
+            ? userData.image
+            : `https://ui-avatars.com/api/?name=${userData?.firstName}+${userData?.lastName}&background=random&size=128`
+
+            dispatch(setUser({...userData, image: userImage}))
+
         } catch(error){
             dispatch(logout(navigate))
             console.log("Get user details api error.....", error)
             toast.error("Could not get user details")
+        } finally{
+            toast.dismiss(toastId)
+            dispatch(setLoading(false))
         }
-        toast.dismiss(toastId)
-        dispatch(setLoading(false))
+        
     } 
 }
-
 
 async function getUserEnrolledCourses(token){
     const toastId = toast.loading("Loading...")

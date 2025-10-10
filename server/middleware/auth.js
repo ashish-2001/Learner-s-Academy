@@ -1,8 +1,7 @@
-import { z } from "zod";
-import pkg from "jsonwebtoken";
+import { success, z } from "zod";
+import jwt from "jsonwebtoken";
 import { User } from "../models/Users.js";
-
-const { jwt } = pkg;
+import { parse } from "dotenv";
 
 const authValidator = z.object({
     token: z.string().min(1, "Token cannot be empty").optional()
@@ -11,12 +10,12 @@ const authValidator = z.object({
 async function auth(req, res, next){
     try{
 
-        let token = req.cookies.token || req.header("authorization")?.replace("Bearer", "") || null ;
+        let token = req.cookies.token || req.header("authorization")?.replace("Bearer ", "") || null ;
 
         try{
-            const parsedResult = authValidator.safeParse(req.user);
-            if(parsedResult.token){
-                token = parsedResult.token
+            const parsedResult = authValidator.safeParse({ token });
+            if(parsedResult.success){
+                token = parsedResult.data.token
             }
         }
         catch(e){
@@ -67,11 +66,18 @@ async function isStudent(req, res, next){
     try{
             const parsedResult = studentValidator.safeParse(req.user);
 
+            if(!parsedResult.success){
+                return res.status(400).json({
+                    success: false,
+                    errors: parsedResult.error.errors.map(err => err.message)
+                })
+            }
+
         const userDetails = await User.findOne({
-            email: parsedResult.email
+            email: parsedResult.data.email
         })
 
-        if(userDetails.accountType !== "Student"){
+        if(!userDetails || userDetails.accountType !== "Student"){
             return res.status(401).json({
                 success: false,
                 message: "This is a protected route for students"
@@ -83,7 +89,8 @@ async function isStudent(req, res, next){
     catch(e){
         return res.status(500).json({
             success: false,
-            errors: e.errors.map((err) =>err.message)
+            message: "User role can't be verified",
+            error: e.message
         })
     }
 
@@ -101,11 +108,18 @@ async function isAdmin(req, res, next){
     try{
         const parsedResult = adminValidator.safeParse(req.user);
 
+        if(!parsedResult.success){
+            return res.status(400).json({
+                success: false,
+                errors: parsedResult.error.errors.map(err => err.message)
+            })
+        }
+
         const userDetails = await User.findOne({
-            email: parsedResult.email
+            email: parsedResult.data.email
         })
 
-        if(userDetails.accountType !== "Admin"){
+        if(!userDetails || userDetails.accountType !== "Admin"){
             return res.status(401).json({
                 success: false,
                 message: "This is a protected route for Admin"
@@ -115,16 +129,10 @@ async function isAdmin(req, res, next){
         next();
     }
     catch(e){
-        if(e instanceof z.ZodError){
-            return res.status(500).json({
-                success: false,
-                errors: e.errors.map((err) =>err.message)
-            })
-        }
-
         return res.status(500).json({
             success: false,
-            message: "Admin role can't be verified"
+            message: "Admin role can't be verified",
+            error: e.message
         })
     }
 }
@@ -137,11 +145,17 @@ async function isInstructor(req, res, next){
     try{
         const parsedResult = instructorValidator.safeParse(req.user);
 
+        if(!parsedResult.success){
+            return res.status(400).json({
+                success: false,
+                errors: parsedResult.error.errors.map(err => err.message)
+            })
+        }
         const userDetails = await User.findOne({
             email: parsedResult.email
         })
 
-        if(userDetails.accountType !== "Instructor"){
+        if(!userDetails || userDetails.accountType !== "Instructor"){
             return res.status(401).json({
                 success: false,
                 message: "This is a protected route for Instructor"
@@ -151,16 +165,10 @@ async function isInstructor(req, res, next){
         next()
     }
     catch(e){
-        if(e instanceof z.ZodError){
-            return res.status(400).json({
-                success: false,
-                errors: e.errors.map((err) => err.message)
-            })
-        }
-
         return res.status(500).json({
             success: false,
-            message: "instructor role can't be verified"
+            message: "instructor role can't be verified",
+            error: e.message
         })
     }
 }

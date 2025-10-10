@@ -160,14 +160,36 @@ async function deleteAccount(req, res){
     }
 }
 
+const userValidator = z.object({
+    userId: z.string().min(1, "User id is required")
+});
+
 async function getUserDetails(req, res){
     try{
-        const id = req.user.id;
+        const parsedResult = userValidator.safeParse(req.user);
+
+        if(!parsedResult.success){
+            return res.status(400).json({
+                success: false,
+                message: "Invalid user data",
+                errors: parsedResult.error.errors.map(err => err.message)
+            })
+        }
+
+        const id = parsedResult.data.userId;
+
         const userDetails = await User.findById(id).populate("additionalDetails").exec();
 
+        if(!userDetails){
+            return res.status(404).json({
+                success: false,
+                message: "User not found",
+                data: null
+            })
+        }
         return res.status(200).json({
             success: true,
-            message: "user data fetched successfully",
+            message: "User data fetched successfully",
             data: userDetails
         })
     }
