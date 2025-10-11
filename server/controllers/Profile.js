@@ -7,13 +7,14 @@ import { CourseProgress } from "../models/CourseProgress.js";
 import { uploadImageToCloudinary } from "../utils/ImageUploader.js";
 import { convertSecondsToDuration } from "../utils/secToDuration.js";
 
+
 const updateProfileValidator = z.object({
     firstName: z.string().min(1, "First name is required").optional(),
     lastName: z.string().min(1, "Last name is required").optional(),
     dateOfBirth: z.string().optional(),
     about: z.string().optional(),
     contactNumber: z.string().regex(/^[0-9]{10}$/, "Contact number must be of 10 digits").optional(),
-    gender: z.enum(["male", "female", "other"]).optional()
+    gender: z.enum(["Male", "Female", "Non-Binary", "Prefer not to say", "other"]).optional()
 })
 
 async function updateProfile(req, res){
@@ -43,7 +44,7 @@ async function updateProfile(req, res){
 
         const profile = await Profile.findById(userDetails.additionalDetails)
 
-        if(profile){
+        if(!profile){
             return res.status(404).json({
                 success: false,
                 message: "Profile not found"

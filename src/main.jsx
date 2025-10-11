@@ -10,7 +10,7 @@ import { Toaster } from 'react-hot-toast';
 
 
 const store = configureStore({
-    reducer: rootReducer,
+    reducer: rootReducer
 })
 
 createRoot(document.getElementById('root')).render(

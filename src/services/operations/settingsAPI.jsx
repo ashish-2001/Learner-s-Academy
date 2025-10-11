@@ -33,36 +33,45 @@ async function updateDisplayPicture(token, formData){
     }
 }
 
-async function updateProfile(token, formData){
+function updateProfile(token, formData){
     return async (dispatch) => {
         const toastId = toast.loading("Loading...")
     
     try{
-        const response = await apiConnector("POST", UPDATE_PROFILE_API, formData, {
+        const response = await apiConnector("PUT", UPDATE_PROFILE_API, formData, {
             Authorization: `Bearer ${token}`
         })
+        
         console.log("Update profile api response...........", response)
+
         if(!response.data.success){
             throw new Error(response.data.message)
         }
 
-        const userData = response.data?.updatedUserDetails;
+        const userData = response.data.updatedUserDetails;
 
-        const userImage = userData?.image 
+        const userImage = userData.image 
         ? userData.image
         : `https://ui-avatars.com/api/?name=${encodeURIComponent(userData?.firstName || "")}+${encodeURIComponent(userData?.lastName || "")}&background=random&size=128`
-        dispatch(setUser({ ...userData, image: userImage}))
+
+        dispatch(setUser({ ...userData, image: userImage }))
+
         toast.success("Profile updated successfully")
+
     }catch(error){
         console.log("Update profile api error..........", error)
         toast.error("Could not update profile")
+    } finally{
+        toast.dismiss(toastId)
     }
-    toast.dismiss(toastId)
+    
 }
 }
 
 async function changePassword(token, formData){
+
     const toastId = toast.loading("Loading...")
+
     try{
         const response = await apiConnector("POST", CHANGE_PASSWORD_API, formData, {
             Authorization: `Bearer ${token}`
@@ -79,7 +88,7 @@ async function changePassword(token, formData){
     toast.dismiss(toastId)
 }
 
-async function deleteProfile(token, navigate){
+function deleteProfile(token, navigate){
     return async (dispatch) => {
         const toastId = toast.loading("Loading...")
         try{

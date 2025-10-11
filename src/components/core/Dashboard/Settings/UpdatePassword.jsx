@@ -34,15 +34,16 @@ function UpdatePassword(){
                     <h2 className="text-lg font-semibold text-[#F1F2FF]">Password</h2>
                     <div className="flex flex-col gap-5 lg:flex-row">
                         <div className="relative flex flex-col gap-2 lg:w-[48%]">
-                            <label htmlFor="oldPassword" className="label-style">
-                                Current Password
-                            </label>
+                            <label>
+                                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-[#F1F2FF]">
+                                    Current Password <sup className="text-red-600 text-[20px] top-1">*</sup>
+                                </p>
                             <input
                                 type={showOldPassword ? "text" : "password"}
                                 name="oldPassword"
                                 id="oldPassword"
                                 placeholder="Enter Current Password"
-                                className="form-style py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
+                                className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[6E727F] focus:outline-none w-full"
                                 {...register("oldPassword", { required: true})}
                             />
                             <span onClick={() => setShowOldPassword((prev) => !prev)} className="absolute right-3 top-[38px] z-[10] cursor-pointer">
@@ -52,6 +53,7 @@ function UpdatePassword(){
                                     <AiOutlineEye fontSize={24} fill="#AFB2BF"/>
                                 )}
                             </span>
+                            </label>
                             {errors.oldPassword && (
                                 <span className="-mt-1 text-[12px] text-[#E7C009]">
                                     Please enter your current password
@@ -59,17 +61,19 @@ function UpdatePassword(){
                             )}
                         </div>
                         <div className="relative flex flex-col gap-2 lg:w-[48%]">
-                            <label htmlFor="newPassword" className="label-style">
-                                New Password
-                            </label>
+                            <label>
+                                <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-[#F1F2FF]">
+                                    New Password <sup className="text-red-600 text-[20px] top-1">*</sup>
+                                </p>
                             <input
                                 type={showNewPassword ? "text" : "password"}
                                 name="newPassword"
                                 id="newPassword"
                                 placeholder="Enter new password"
-                                className="form-style py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
+                                className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[6E727F] focus:outline-none w-full"
                                 {...register("newPassword", { required: true})}
                             />
+                            </label>
                             <span onClick={()=> setShowNewPassword((prev) => !prev)} className="absolute right-3 top-[38px] z-[10] cursor-pointer">
                                 {showNewPassword ? (
                                     <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF"/>

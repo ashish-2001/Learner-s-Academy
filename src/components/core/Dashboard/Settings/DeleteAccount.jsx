@@ -1,6 +1,6 @@
 import React from "react";
 import { FiTrash2 } from "react-icons/fi";
-import { deleteProfile } from "../../../../services/operations/settingsAPI";
+import { deleteProfile } from "../../../../services/operations/SettingsAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -36,7 +36,7 @@ function DeleteAccount(){
                     </div>
                     <button
                         type="button"
-                        className="w-fit cursor-pointer italic text-red-600"
+                        className="w-fit cursor-pointer italic text-red-600 hover:scale-103 border-1 p-2 rounded-md border-gray-400 transition-all duration-200"
                         onClick={handleDeleteAccount}
                     >I want to delete my account</button>
                 </div>
