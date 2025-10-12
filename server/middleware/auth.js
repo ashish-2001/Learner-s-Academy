@@ -1,7 +1,6 @@
-import { success, z } from "zod";
+import { z } from "zod";
 import jwt from "jsonwebtoken";
 import { User } from "../models/Users.js";
-import { parse } from "dotenv";
 
 const authValidator = z.object({
     token: z.string().min(1, "Token cannot be empty").optional()
@@ -152,7 +151,7 @@ async function isInstructor(req, res, next){
             })
         }
         const userDetails = await User.findOne({
-            email: parsedResult.email
+            email: parsedResult.data.email
         })
 
         if(!userDetails || userDetails.accountType !== "Instructor"){

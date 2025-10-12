@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProfile } from "../../../../services/operations/SettingsAPI";
+import { UpdateProfile } from "../../../../services/operations/settingsAPI";
 import { IconBtn } from "../../../Common/IconBtn";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -17,12 +17,34 @@ function EditProfile(){
         register,
         handleSubmit,
         formState: { errors }
-    } = useForm();
+    } = useForm({
+        defaultValues: {
+            firstName:user?.firstName || "",
+            lastName: user?.lastName || "",
+            dateOfBirth: user?.additionalDetails?.dateOfBirth || "",
+            gender: user?.additionalDetails?.gender || "",
+            contactNumber: user?.additionalDetails?.contactNumber || "",
+            about: user?.additionalDetails?.about || ""
+        }
+    });
 
-    const submitProfileForm = async(data) => {
+    const submitProfileForm = async (data) => {
+
+        const profileData = {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            dateOfBirth: data.dateOfBirth,
+            gender: data.gender,
+            contactNumber: data.contactNumber,
+            about: data.about
+        }
         try{
-            dispatch(updateProfile(token, data))
+            console.log("Profile Data:", profileData)
+            dispatch(UpdateProfile(token, profileData))
+            console.log("This is after dispatch:", profileData)
+
         } catch(error){
+
             console.log("Error message", error.message)
         }
     }

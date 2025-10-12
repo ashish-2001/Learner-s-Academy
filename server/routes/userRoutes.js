@@ -14,11 +14,11 @@ router.post("/login", signIn);
 
 router.post("/sendotp", sendOtp);
 
-router.post("/change-password", auth, changePassword);
+router.put("/changepassword", auth, changePassword);
 
-router.post("/reset-password", resetPassword);
+router.post("/resetpassword", resetPassword);
 
-router.post("/reset-password-token", resetPasswordToken);
+router.post("/resetpasswordtoken", resetPasswordToken);
 
 
 export {

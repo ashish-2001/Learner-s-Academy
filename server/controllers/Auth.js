@@ -1,4 +1,4 @@
-import { z } from "zod";
+import {  z } from "zod";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { User } from "../models/Users.js";
@@ -211,49 +211,40 @@ const sendOtp = async (req, res) => {
             })
         }
 
-        var otp = otpGenerator.generate(6, {
-            upperCaseAlphabets: false,
-            lowerCaseAlphabets:false,
-            specialChars: false
-        })
+        let otp;
+        let otpExists;
 
-        const result = await Otp.findOne({ otp })
-
-        console.log("Otp:-", otp);
-        console.log("Result:-", result);
-
-        while(result){
-            otp = otpGenerator.generate(6, {
+        do { otp = otpGenerator.generate(6, {
                 upperCaseAlphabets: false,
-                lowerCaseAlphabets: false,
+                lowerCaseAlphabets:false,
                 specialChars: false
-            })
+            });
+            otpExists = await Otp.findOne({ otp });
+        } while(otpExists)
+
+        await Otp.create({ email, otp });
             
+        }catch(e){
+            console.error(e);
+            return res.status(500).json({
+                success: false,
+                message: e.message
+            })
         }
 
-        
-        await Otp.create({ email, otp });
-
-        res.status(200).json({
-            success: true,
-            message: "Otp sent successfully",
-            otp
-        })
-
     }
-    catch(e){
-        console.error(e.message);
-        return res.status(500).json({
-            success: false,
-            message: e.message
-        })
-    }
-};
 
 const changePassword = async (req, res) =>{
 
     try{
         const userDetails = await User.findById(req.user.userId);
+
+        if(!userDetails){
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            })
+        }
 
         const { oldPassword, newPassword } = req.body;
 
@@ -270,35 +261,38 @@ const changePassword = async (req, res) =>{
         }
 
         const encryptedPassword = await bcrypt.hash(newPassword, 10);
-        const updatedUserDetails = await User.findByIdAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
             req.user.userId,
             {
                 password: encryptedPassword,
+            }, 
+            {
                 new: true
             }
         )
 
         try{
             const emailResponse = await mailSender(
-                updatedUserDetails.email,
+                updatedUser.email,
                 "Password for your account has been updated",
                 passwordUpdate(
-                    updatedUserDetails.email,
-                    `Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
+                    updatedUser.email,
+                    `Password updated successfully for ${updatedUser.firstName} ${updatedUser.lastName}`
                 )
             )
             console.log("Email sent successfully", emailResponse.response)
         }
         catch(e){
+            console.error(e)
+            }
 
-            return res.status(500).json({
-                message: "Error occurred while sending email",
-                success: false,
-                error: e.message
+            return res.status(200).json({
+                success: true,
+                message: "Password updated successfully"
             })
-        }
     }
     catch(e){
+        console.error(e);
         return res.status(500).json({
             message: "Error occurred while updating password",
             success: false,

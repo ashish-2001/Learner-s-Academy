@@ -15,29 +15,39 @@ async function updateDisplayPicture(token, formData){
     return async (dispatch) => {
         const toastId = toast.loading("Loading...");
         try{
-            const response = await apiConnector("PUT", UPDATE_DISPLAY_PICTURE_API, formData, {
-                "Content-type": "multipart/form-data", 
-                Authorization: `Bearer ${token}`
+            const response = await apiConnector(
+                "PUT",
+                UPDATE_DISPLAY_PICTURE_API, 
+                formData, 
+                {
+                    "Content-type": "multipart/form-data", 
+                    Authorization: `Bearer ${token}`
             })
+
             console.log("Update display picture api response...........", response)
+
             if(!response.data.success){
                 throw new Error(response.data.message)
             }
+
             toast.success("Display picture updated successfully")
             dispatch(setUser(response.data.data))
+
         }catch(error){
-            console.log("update display picture api error", error)
+            console.log("Update display picture api error", error)
             toast.error("Could not update display picture")
         }
         toast.dismiss(toastId)
     }
 }
 
-function updateProfile(token, formData){
+function UpdateProfile(token, formData){
     return async (dispatch) => {
         const toastId = toast.loading("Loading...")
+        console.log("This is a toastId", toastId)
     
     try{
+        console.log("This is inside try block")
         const response = await apiConnector("PUT", UPDATE_PROFILE_API, formData, {
             Authorization: `Bearer ${token}`
         })
@@ -50,7 +60,7 @@ function updateProfile(token, formData){
 
         const userData = response.data.updatedUserDetails;
 
-        const userImage = userData.image 
+        const userImage = userData?.image 
         ? userData.image
         : `https://ui-avatars.com/api/?name=${encodeURIComponent(userData?.firstName || "")}+${encodeURIComponent(userData?.lastName || "")}&background=random&size=128`
 
@@ -73,7 +83,7 @@ async function changePassword(token, formData){
     const toastId = toast.loading("Loading...")
 
     try{
-        const response = await apiConnector("POST", CHANGE_PASSWORD_API, formData, {
+        const response = await apiConnector("PUT", CHANGE_PASSWORD_API, formData, {
             Authorization: `Bearer ${token}`
         })
         console.log("Change password api response........", response)
@@ -83,7 +93,7 @@ async function changePassword(token, formData){
         toast.success("Password changed successfully")
     } catch(error){
         console.log("Change password api error..........", error)
-        toast.error(error.response.data.message)
+        toast.error(error.response?.data?.message || error.message)
     }
     toast.dismiss(toastId)
 }
@@ -111,7 +121,7 @@ function deleteProfile(token, navigate){
 
 export {
     updateDisplayPicture,
-    updateProfile,
+    UpdateProfile,
     changePassword,
     deleteProfile
 }
