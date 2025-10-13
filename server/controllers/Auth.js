@@ -59,14 +59,9 @@ const signUp = async (req, res) =>{
 
         const response = await Otp.find({email}).sort({createdAt: -1}).limit(1);
 
-        if(response.length === 0){
+        if(response.length === 0 || otp !== response[0].otp){
             return res.status(403).json({
-                message: "Otp is not valid",
-                success: false
-            })
-        } else if(otp !== response[0].otp){
-            return res.status(403).json({
-                message: "Otp is not valid",
+                message: "Invalid otp",
                 success: false
             })
         }
@@ -82,6 +77,7 @@ const signUp = async (req, res) =>{
             lastName: lastName,
             email: email,
             password: hashedPassword,
+            confirmPassword: confirmPassword,
             contactNumber: contactNumber,
             accountType: accountType,
             approved: approved,
@@ -123,7 +119,7 @@ const signIn = async(req, res) => {
             const result = signInValidator.safeParse(req.body);
         
         if(!result.success){
-            res.status(403).json({
+            return res.status(403).json({
                 message: "Incorrect Input",
                 success: false
             })
@@ -136,7 +132,7 @@ const signIn = async(req, res) => {
         }).populate("additionalDetails");
 
         if(!user){
-            res.status({
+            return res.status(404).json({
                 message: "User does not exist! Signup first",
                 success: false
             })
@@ -145,9 +141,16 @@ const signIn = async(req, res) => {
         const isPasswordMatch = await bcrypt.compare(password, user.password);
 
         if(!isPasswordMatch){
-            res.status(403).json({
+            return res.status(403).json({
                 message: "Incorrect email or password",
                 success: false
+            })
+        }
+
+        if(user.accountType === "Instructor" && !user.approved){
+            return res.status(403).json({
+                success: false,
+                message: "Instructor account not approved yet. Please wait for admin approval"
             })
         }
 
@@ -165,7 +168,7 @@ const signIn = async(req, res) => {
             httpOnly: true
         }
 
-        res.cookie("token", token, options).status(200).json({
+        return res.cookie("token", token, options).status(200).json({
             token,
             user,
             success: true,
@@ -174,7 +177,7 @@ const signIn = async(req, res) => {
     }
     catch(e){
         console.error(e.message)
-        res.status(500).json({
+        return res.status(500).json({
             message: "Internal server error",
             success: false
         })
@@ -205,11 +208,13 @@ const sendOtp = async (req, res) => {
         })
 
         if(checkUserPresent){
-            res.status(403).json({
+            return res.status(403).json({
                 message: "User already exists!",
                 success: false
             })
         }
+
+        await Otp.deleteMany({ email });
 
         let otp;
         let otpExists;
@@ -220,9 +225,21 @@ const sendOtp = async (req, res) => {
                 specialChars: false
             });
             otpExists = await Otp.findOne({ otp });
-        } while(otpExists)
+        } while(otpExists);
 
         await Otp.create({ email, otp });
+
+        await mailSender(
+            email,
+            "Your Otp for Signup",
+            `Hello! Your Otp for Signup is: ${otp}. It will expire in 10 minutes.`
+        )
+
+        return res.status(200).json({
+            success: true,
+            message: "Otp sent successfully",
+            otp
+        })
             
         }catch(e){
             console.error(e);

@@ -26,11 +26,12 @@ function RenderSteps(){
     return(
         <>
             <div className="relative mb-2 flex w-full justify-center">
-                {steps.map((item) => (
-                    <>
-                        <div className="flex flex-col items-center" key={item.id}>
+                {steps.map((item, index) => (
+                    <React.Fragment key={item.id}>
+                        <div className="flex flex-col items-center">
                             <button className={`grid cursor-default aspect-square w-[34px] item-center rounded-full border-[1px] ${
-                                step === item.id? "border-[#FFD60A] bg-[#251400] text-[#838894]"
+                                step === item.id 
+                                ? "border-[#FFD60A] bg-[#251400] text-[#838894]"
                                 : "border-[#2C333F] bg-[#161D29] text-[#838894]"
                             } ${step > item.id && "bg-[#FFD60A] text-[#FFD60A]"}`}>
                                 {step > item.id ? (
@@ -40,14 +41,14 @@ function RenderSteps(){
                                 )}
                             </button>
                         </div>
-                        {item.id !== steps.length && (
+                        {index !== steps.length - 1 && (
                             <>
                                 <div className={`h-[calc(34px/2)] w-[33%] border-dashed border-b-2 ${
                                     step > item.id ? "border-[#FFD60A]" : "border-[#585D69]"
                                 }`}></div>
                             </>
                         )}
-                    </>
+                    </React.Fragment>
                 ))}
             </div>
 

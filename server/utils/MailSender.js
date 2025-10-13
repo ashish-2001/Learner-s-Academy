@@ -3,16 +3,16 @@ import nodemailer from "nodemailer";
 async function mailSender(email, title, body){
     try{
         let transporter = nodemailer.createTransport({
-            host: process.env.MAIL_HOST,
+            host: process.env.SMTP_HOST,
+            port: process.env.SMTP_PORT,
             auth: {
                 user: process.env.MAIL_USER,
                 pass: process.env.MAIL_PASS
             },
-            port: 587,
             secure: false
         })
 
-        let info = await transporter.sendMail({
+        const info = await transporter.sendMail({
             from: `"Learner's Academy "<${process.env.MAIL_USER}>`,
             to: `${email}`,
             subject: `${title}`, 

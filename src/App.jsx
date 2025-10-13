@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Navbar } from "./components/Common/Navbar";
-import { getUserDetails } from './services/operations/ProfileApi';
+import { getUserDetails } from "./services/operations/profileAPI";
 import { Home } from './pages/Home';
 import { About } from "./pages/About";
 import { Contact } from './pages/Contact';
@@ -37,12 +37,29 @@ function App() {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.profile);
 
+  const hasFetchedUser = useRef(false);
+
   useEffect(() =>{
-    if(localStorage.getItem("token")){
-      const token =  JSON.parse(localStorage.getItem("token"))
-      dispatch(getUserDetails(token, navigate));
+
+    if(hasFetchedUser.current){
+      return;
     }
-  }, [])
+    else{
+      hasFetchedUser.current = true;
+    }
+
+    const storedToken = localStorage.getItem("token");
+
+    if(!storedToken){
+      console.log("No token found");
+      return;
+    }
+
+    const token = JSON.parse(storedToken);
+
+    console.log("Found token, fetching user details...");
+    dispatch(getUserDetails(token, navigate))
+  }, [dispatch, navigate]);
 
   return (
       <div className='flex min-h-screen flex-col bg-[#000814] font-inter'>

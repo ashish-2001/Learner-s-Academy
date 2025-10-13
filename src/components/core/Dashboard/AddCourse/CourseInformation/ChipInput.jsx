@@ -11,35 +11,44 @@ function ChipInput({
         errors, 
         setValue
     }){
+
     const { editCourse, course } = useSelector((state) => state.course)
 
     const [chips, setChips] = useState([]);
     
     useEffect(() => {
         if(editCourse){
-            setChips(course?.tag)
+            setChips(course?.tag || [])
         }
-        register(name, { required: true, validate: (value) => value.length > 0})
-    }, [])
+        if(register && typeof register === "function"){
+            register(name, { required: true, validate: (value) => value.length > 0 });
+        }
+    }, [editCourse, course, register, name])
+
     useEffect(() => {
-        setValue(name, chips)
-    }, [chips])
+        if(setValue && typeof setValue === "function"){
+            setValue(name, chips);
+        }
+    }, [chips, setValue, name]);
 
     const handleKeyDown = (e) => {
         if(e.key === "Enter" || e.key === ","){
             e.preventDefault()
             const chipValue = e.target.value.trim()
-            if(chipValue && !chips.inCludes(chipValue)){
-                const newChips = [...chips, chipValue]
-                setChips(newChips)
+            if(chipValue && !chips.includes(chipValue)){
+                
+                setChips([...chips, chipValue]);
+                
                 e.target.value = "";
+
             }
         }
     }
 
     const handleDeleteChip = (chipIndex) => {
-        const newChips = chips.filter((_, index) => index !== chipIndex)
-        setChips(newChips);
+
+        setChips(chips.filter((_, index) => index !== chipIndex))
+        
     }
 
     return (
@@ -65,7 +74,7 @@ function ChipInput({
                     className="form-style w-full py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
                 />
             </div>
-            {errors[name] && (
+            {errors && errors[name] && (
                 <span className="ml-2 text-xs tracking-wide text-red-600">
                     {label} is required
                 </span>

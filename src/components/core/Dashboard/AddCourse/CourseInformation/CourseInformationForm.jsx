@@ -140,7 +140,7 @@ function CourseInformationForm(){
                     id="courseTitle"
                     placeholder="Enter Course Title"
                     {...register("courseTitle", { required: true})}
-                    className="form-style w-full "
+                    className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none !pr-10 w-full "
                 />
                 {errors.courseTitle && (
                     <span className="ml-2 text-xs tracking-wide text-red-600">
@@ -156,7 +156,7 @@ function CourseInformationForm(){
                     id="courseShortDesc"
                     placeholder="Enter Description"
                     {...register("courseShortDesc", { required: true })}
-                    className="form-style resize-x-none min-h-[130px] w-full"
+                    className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none !pr-10 resize-x-none min-h-[130px] w-full"
                 />
                 {errors.courseShortDesc && (
                     <span className="ml-2 text-xs tracking-wide text-red-600">
@@ -179,7 +179,7 @@ function CourseInformationForm(){
                                 value: /^(0|[1-9]\d*)(\.\d+)?$/
                             }
                         })} 
-                        className="form-style w-full "
+                        className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none !pr-10 w-full "
                     />
                     <HiOutlineCurrencyRupee className="absolute left-3 top-1/2 inline-block -translate-y-1/2 text-2xl text-[#6E727F] "/>
                 </div>
@@ -193,7 +193,7 @@ function CourseInformationForm(){
                 <label className="text-sm text-[#F1F2FF]" htmlFor="courseCategory">
                     Course Category <sup className="text-red-600">*</sup>
                 </label>
-                <select {...register("courseCategory", { required: true })} className="form-style w-full" defaultValue="" id="courseCategory">
+                <select {...register("courseCategory", { required: true })} className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10" defaultValue="" id="courseCategory">
                     <option value="" disabled>
                         Choose a Category
                     </option>
@@ -210,7 +210,8 @@ function CourseInformationForm(){
             <ChipInput
                 label={"Tags"}
                 name={"courseTags"}
-                placeholder={register}
+                placeholder={"Enter tags..."}
+                register={register}
                 errors={errors}
                 setValue={setValue}
                 getValues={getValues}
@@ -231,7 +232,7 @@ function CourseInformationForm(){
                     id="courseBenefits"
                     placeholder="Enter benefits of the course"
                     {...register("courseBenefits", { required: true})}
-                    className="form-style resize-x-none min-h-[130px] w-full"
+                    className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10 resize-x-none min-h-[130px] "
                 />
                 {errors.courseBenefits && (
                     <span className="ml-2 text-xs tracking-wide text-red-600">

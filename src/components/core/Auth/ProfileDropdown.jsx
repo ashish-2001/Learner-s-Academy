@@ -21,7 +21,7 @@ function ProfileDropdown(){
     }
 
     return(
-        <div className="relative" onClick={() => setOpen(true)}>
+        <div className="relative hover:cursor-pointer" onClick={() => setOpen(true)}>
             <div className="flex items-center gap-x-1">
                 <img 
                     className="aspect-square w-[30px] rounded-full object-cover"

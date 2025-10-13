@@ -8,19 +8,30 @@ import { IconBtn } from "../../Common/IconBtn";
 import { CoursesTable } from "./InstructorCourses/CoursesTable";
 
 function MyCourses(){
+    
     const { token } = useSelector((state) => state.auth);
-    const { navigate } = useNavigate();
+    const navigate = useNavigate();
     const [courses, setCourses] = useState([]);
 
     useEffect(() => {
+        if(!token){
+            return;
+        }
+
         const fetchCourses = async () => {
-            const result = await fetchInstructorCourses(token)
-            if(token){
-                setCourses(result);
+            try{
+                const result = await fetchInstructorCourses(token)
+                if(token){
+                    setCourses(result);
+                }
+            }catch(error){
+                console.error("Failed to fetch courses:", error);
             }
         }
-        fetchCourses()
-    }, [])
+
+        fetchCourses();
+
+    }, [token])
 
     return(
         <div>

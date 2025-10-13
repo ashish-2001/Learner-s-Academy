@@ -57,7 +57,7 @@ function UpdatePassword(){
                                 value={password}
                                 onChange={handleOnChange}
                                 placeholder="enter password"
-                                className="form-style !pr-10"
+                                className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10"
                             />
                             <span onClick={() => setShowPassword((prev) => !prev)} className="absolute right-3 top-[38px] z-[10] cursor-pointer">
                                 {showPassword ? (
@@ -78,7 +78,7 @@ function UpdatePassword(){
                                 value={confirmPassword}
                                 onChange={handleOnChange}
                                 placeholder="Enter Confirm Password"
-                                className="form-style w-full !pr-10"
+                                className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10"
                             />
                             <span className="absolute right-3 top-[38px] z-[10] cursor-pointer" onClick={() => setShowConfirmPassword((prev) => !prev)}>
                                 {showConfirmPassword ? (

@@ -18,7 +18,8 @@ function SignupForm(){
         lastName: "",
         email: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
+        accountType: ""
     })
         const [showPassword, setShowPassword] = useState(false)
         const [showConfirmPassword, setShowConfirmPassword] = useState(false)
@@ -51,7 +52,8 @@ function SignupForm(){
                 lastName: "",
                 email: "",
                 password:"",
-                confirmPassword: ""
+                confirmPassword: "",
+                accountType:""
             })
 
             setAccountType(ACCOUNT_TYPE.STUDENT)

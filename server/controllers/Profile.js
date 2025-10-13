@@ -23,7 +23,7 @@ async function updateProfile(req, res){
 
         if(!parsedResult.success){
             return res.status(400).json({
-                success: true,
+                success: false,
                 message: "Invalid input",
                 errors: parsedResult.error.errors
             })
@@ -31,8 +31,8 @@ async function updateProfile(req, res){
 
         const { firstName, lastName, dateOfBirth, contactNumber, about, gender } = parsedResult.data;
 
-        const id = req.user.userId
-        const userDetails = await User.findById(id);
+        const userId = req.user.userId
+        const userDetails = await User.findById(userId);
 
         if(!userDetails){
             return res.status(404).json({
@@ -78,7 +78,7 @@ async function updateProfile(req, res){
 
         await profile.save();
 
-        const updatedUserDetails = await User.findById(id).populate("additionalDetails").exec();
+        const updatedUserDetails = await User.findById(userId).populate("additionalDetails").exec();
 
         return res.status(200).json({
             success: true,
@@ -101,9 +101,9 @@ const deleteAccountValidator = z.object({
 
 async function deleteAccount(req, res){
     try{
-        const id = req.user.userId;
+        const userId = req.user.userId;
 
-        const parsedResult = deleteAccountValidator.safeParse({ id })
+        const parsedResult = deleteAccountValidator.safeParse({ id: userId })
 
         if(!parsedResult.success){
             return res.status(400).json({
@@ -113,7 +113,7 @@ async function deleteAccount(req, res){
             })
         }
 
-        const user = await User.findById(id);
+        const user = await User.findById(userId);
 
         if(!user){
             return res.status(404).json({
@@ -126,13 +126,13 @@ async function deleteAccount(req, res){
             await Profile.findByIdAndDelete(user.additionalDetails)
         }
         
-        if(user.courses && user.courses.length > 0){
+        if(user.courses.length > 0){
             for(const courseId of user.courses){
             await Course.findByIdAndUpdate(
                 courseId,
                 {
                     $pull: {
-                        studentsEnrolled: id
+                        studentsEnrolled: userId
                     }
                 }, 
                 {
@@ -143,10 +143,10 @@ async function deleteAccount(req, res){
         }
 
         await CourseProgress.deleteMany({
-            userid: id
+            userId
         })
 
-        await User.findByIdAndDelete(id);
+        await User.findByIdAndDelete(userId);
 
         return res.status(200).json({
             success: true,
@@ -168,7 +168,7 @@ const userValidator = z.object({
 
 async function getUserDetails(req, res){
     try{
-        const parsedResult = userValidator.safeParse(req.user);
+        const parsedResult = userValidator.safeParse({ userId: req.user.userId });
 
         if(!parsedResult.success){
             return res.status(400).json({
@@ -178,9 +178,7 @@ async function getUserDetails(req, res){
             })
         }
 
-        const id = parsedResult.data.userId;
-
-        const userDetails = await User.findById(id).populate("additionalDetails").exec();
+        const userDetails = await User.findById(parsedResult.data.userId).populate("additionalDetails").exec();
 
         if(!userDetails){
             return res.status(404).json({
@@ -203,24 +201,11 @@ async function getUserDetails(req, res){
     }
 }
 
-const updateDisplayPictureValidator = z.object({
-    id: z.string().min(1, "User id is required")
-})
 
 async function updateDisplayPicture(req, res){
     try{
 
-        const parsedResult = updateDisplayPictureValidator.safeParse(req.body);
-
-        if(!parsedResult.success){
-            return res.status(400).json({
-                success: false,
-                message: "Invalid input",
-                errors: parsedResult.error.errors
-            })
-        }
-
-        const { id } = parsedResult.data;
+        const userId = req.user.userId;
 
         if(!req.files || !req.files.displayPicture){
             return res.status(400).json({
@@ -228,6 +213,7 @@ async function updateDisplayPicture(req, res){
                 message: "No display picture file provided"
             })
         }
+
         const displayPicture = req.files.displayPicture;
 
         const image = await uploadImageToCloudinary(
@@ -237,8 +223,8 @@ async function updateDisplayPicture(req, res){
             1000
         )
 
-        const updatedProfile = await User.findByIdAndUpdate({
-            id
+        const updatedUser = await User.findByIdAndUpdate({
+            userId
         }, {
             image: image.secure_url
         }, {
@@ -246,7 +232,7 @@ async function updateDisplayPicture(req, res){
             select: "-password"
         })
 
-        if(!updateProfile){
+        if(!updatedUser){
             return res.status(404).json({
                 success: false,
                 message: "User not found"
@@ -256,7 +242,7 @@ async function updateDisplayPicture(req, res){
         return res.status(200).json({
             success: true,
             message: "Image updated successfully",
-            data: updatedProfile
+            data: updatedUser
         })
     } catch(e){
         return res.status(500).json({
@@ -272,17 +258,17 @@ const enrolledCoursesValidator = z.object({
 
 async function getEnrolledCourses(req, res){
     try{
-        const parsedResult = enrolledCoursesValidator.safeParse(req.body);
+        const parsedResult = enrolledCoursesValidator.safeParse({userId:req.user.userId});
 
         if(!parsedResult.success){
-            return res.status(404).json({
+            return res.status(400).json({
                 success: false,
-                message: "User id is required",
+                message: "Invalid user id",
                 errors: parsedResult.error.errors
             })
         }
 
-        const { userId } = parsedResult.data;
+        const userId = parsedResult.data.userId;
 
         let userDetails = await User.findById(userId).populate({
             path: "courses",
@@ -297,7 +283,7 @@ async function getEnrolledCourses(req, res){
         if(!userDetails){
             return res.status(404).json({
                 success: false,
-                message: `Could not find user with id: ${userId}`
+                message: `User not found`
             })
         }
 
@@ -350,7 +336,7 @@ const instructorDashboardValidator = z.object({
 
 async function instructorDashboard(req, res) {
     try{
-        const parsedResult = instructorDashboardValidator.safeParse({ userId: req.user.id });
+        const parsedResult = instructorDashboardValidator.safeParse({ userId: req.user.userId });
 
         if(!parsedResult.success){
             return res.status(400).json({
@@ -367,15 +353,12 @@ async function instructorDashboard(req, res) {
         })
 
         const courseData = courseDetails.map((course) => {
-            const totalStudentsEnrolled = course.studentsEnrolled.length;
-            const totalAmountGenerated = totalStudentsEnrolled * (course.price || 0);
-
             return {
                 _id: course._id,
                 courseName: course.courseName,
                 courseDescription: course.courseDescription,
-                totalStudentsEnrolled,
-                totalAmountGenerated
+                totalStudentsEnrolled: course.studentsEnrolled.length,
+                totalAmountGenerated: course.studentsEnrolled.length * (course.price || 0)
             }
         })
 
