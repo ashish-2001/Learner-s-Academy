@@ -136,7 +136,7 @@ function SubSectionModal({
                             id="lectureTitle"
                             placeholder="Enter lecture title"
                             {...register("lectureTitle", {required: true})}
-                            className="form-style w-full py-2 px-3 border-2 border-white hover:border-2 hover:border-white"
+                            className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10 py-2 px-3 border-2 border-white hover:border-2 hover:border-white"
                         />
                         {errors.lectureTitle &&(
                             <span className="ml-2 text-xs tracking-wide text-red-600">
@@ -154,7 +154,7 @@ function SubSectionModal({
                             id="lectureDesc"
                             placeholder="Enter lecture Description"
                             {...register("lectureDesc", { required: true})}
-                            className="form-style resize-x-none min-h-[130px] w-full py-2 px-3 hover:border-2 hover:border-white border-2 border-white"
+                            className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none !pr-10 resize-x-none min-h-[130px] w-full py-2 px-3 hover:border-2 hover:border-white border-2 border-white"
                         />
                         {errors.lectureDesc && (
                             <span className="mi-2 text-xs tracking-wide text-red-600">

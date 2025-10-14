@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import cors from "cors";
-import cookieParser from "cookie-parser"
+import cookieParser from "cookie-parser";
 import { router as contactUsRoutes } from "./routes/contactUsRoute.js";
 import { router as courseRoutes } from "./routes/courseRoutes.js";
 import { router as paymentRoutes } from "./routes/paymentRoutes.js";
@@ -28,7 +28,7 @@ app.use(cors({
 app.use(
 	fileUpload({
 		useTempFiles: true,
-		tempFileDir: "/temp/"
+		tempFileDir: "./temp/"
 	})
 );
 

@@ -25,12 +25,19 @@ async function createCategory(req, res){
 
         const { name, description } = parsedResult.data;
 
+        const existingCategory = await Category.findOne({ name });
+
+        if(existingCategory){
+            return res.status(400).json({
+                success: false,
+                message: "Category already exists"
+            });
+        }
+
         const categoryDetails = await Category.create({
             name, 
             description
-        })
-
-        console.log(categoryDetails);
+        });
 
         return res.status(200).json({
             success: true,
@@ -48,16 +55,23 @@ async function createCategory(req, res){
 
 async function showAllCategories(req, res){
     try{
-        const allCategories = await Category.find()
+        const allCategories = await Category.find().populate({
+            path: "courses",
+            match: {
+                status: "Published"
+            }
+        }).lean().exec();
+
         res.status(200).json({
             success: true,
             data: allCategories
-        })
+        });
     }
     catch(e){
         return res.status(500).json({
             success: false,
-            message: e.message
+            message: "Internal server error",
+            error:e.message
         })
     }
 }
@@ -109,6 +123,7 @@ async function categoryPageDetails(req, res){
         })
 
         let differentCategory = null;
+
         if(categoriesExceptSelected.length > 0){
             const randomCategoryId = categoriesExceptSelected[getRandomInt(categoriesExceptSelected.length)]._id
             

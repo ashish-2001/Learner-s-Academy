@@ -48,7 +48,7 @@ function RequirementsField({
                     id={name}
                     value={requirements}
                     onChange={(e) => setRequirements(e.target.value)}
-                    className="form-style w-full "
+                    className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10"
                 />
                 <button
                     type="button"

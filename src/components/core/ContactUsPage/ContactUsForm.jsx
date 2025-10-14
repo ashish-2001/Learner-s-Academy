@@ -55,7 +55,7 @@ function ContactUsForm(){
                         name="firstName"
                         id="firstName"
                         placeholder="Enter first name"
-                        className="form-style "
+                        className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10 "
                         {...register("firstName", { required: true})}
                     />
                     {errors.firstName && (
@@ -73,7 +73,7 @@ function ContactUsForm(){
                         name="lastName"
                         id="lastName"
                         placeholder="Enter last name"
-                        className="form-style "
+                        className=" rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10"
                         {...register("lastName", {required: true})}
                     />
                     {errors.lastName && (
@@ -92,7 +92,7 @@ function ContactUsForm(){
                     id="email"
                     name="email"
                     placeholder="Enter email address"
-                    className="form-style "
+                    className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10"
                     {...register("email", { required: true})}
                 />
                 {errors.email && (
@@ -114,7 +114,7 @@ function ContactUsForm(){
                             name="countryCode"
                             id="countryCode"
                             placeholder="Enter first name"
-                            className="form-style "
+                            className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10"
                             {...register("countryCode", { required: true})}
                         >
                             {CountryCode.map((ele, i) => {
@@ -132,7 +132,7 @@ function ContactUsForm(){
                             id="phoneNumber"
                             name="phoneNumber"
                             placeholder="12345 67890"
-                            className="form-style "
+                            className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10"
                             {...register("phoneNumber", {
                                 required: {
                                     value: true,
@@ -161,7 +161,7 @@ function ContactUsForm(){
                     cols={30}
                     rows={7}
                     placeholder="Enter your message"
-                    className="form-style "
+                    className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10"
                     {...register("message", { required: true})}
                 />
                 {errors.message && (

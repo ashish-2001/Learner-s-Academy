@@ -4,40 +4,39 @@ import { createCourse, deleteCourse, editCourse, getAllCourses, getCourseDetails
 import { createSection, deleteSection, updateSection } from "../controllers/Section.js";
 import { createSubSection, deleteSubSection, updateSubSection } from "../controllers/SubSection.js";
 import { updateCourseProgress } from "../controllers/CourseProgress.js";
-import { RxShadowOuter } from "react-icons/rx";
+
 
 const router = express.Router();
-
 
 router.post("/createCourse", auth, isInstructor, createCourse);
 
 router.put("/updateCourse", auth, isInstructor, editCourse);
 
-router.delete("/deleteCourse", auth, isInstructor, deleteCourse);
+router.delete("/deleteCourse/:courseId", auth, isInstructor, deleteCourse);
 
-router.post("/createSection", isInstructor, createSection);
+router.post("/createSection", auth, isInstructor, createSection);
 
-router.put("/updateSection", auth, isInstructor, updateSection);
+router.put("/updateSection/:sectionId", auth, isInstructor, updateSection);
 
-router.delete("/deleteSection", auth, isInstructor, deleteSection);
+router.delete("/deleteSection/:sectionId", auth, isInstructor, deleteSection);
 
 router.post("/createSubSection", auth, isInstructor, createSubSection);
 
-router.put("/updateSubSection", auth, isInstructor, updateSubSection);
+router.put("/updateSubSection/:subSectionId", auth, isInstructor, updateSubSection);
 
-router.delete("/deleteSubSection", auth, isInstructor, deleteSubSection);
+router.delete("/deleteSubSection/:subSectionId", auth, isInstructor, deleteSubSection);
 
 router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses);
 
 router.get("/getAllCourses", getAllCourses);
 
-router.get("/getCourseDetails", getCourseDetails);
+router.get("/getCourseDetails/:courseId", getCourseDetails);
 
-router.get("/getFullCourseDetails", auth, getFullCourseDetails);
+router.get("/getFullCourseDetails/:courseId", auth, getFullCourseDetails);
 
 router.get("/showAllCategories", showAllCategories);
 
-router.get("/getReviews", getReviews);
+router.get("/getReviews/:courseId", getReviews);
 
 router.put("/updateCourseProgress", auth, isStudent, updateCourseProgress)
 

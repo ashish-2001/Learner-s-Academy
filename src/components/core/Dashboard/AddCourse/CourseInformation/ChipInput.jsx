@@ -71,7 +71,7 @@ function ChipInput({
                     type="text"
                     placeholder={placeholder}
                     onKeyDown={handleKeyDown}
-                    className="form-style w-full py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
+                    className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none !pr-10 w-full py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
                 />
             </div>
             {errors && errors[name] && (

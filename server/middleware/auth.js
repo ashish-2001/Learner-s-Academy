@@ -9,7 +9,7 @@ const authValidator = z.object({
 async function auth(req, res, next){
     try{
 
-        let token = req.cookies.token || req.header("authorization")?.replace("Bearer ", "") || null ;
+        let token = req.cookies.token || req.header("Authorization")?.replace("Bearer ", "") || null ;
 
         try{
             const parsedResult = authValidator.safeParse({ token });

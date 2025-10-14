@@ -225,7 +225,7 @@ function CourseInformationForm(){
                 editCourse={editCourse ? course?.thumbnail : null}
             />
             <div className="flex flex-col space-y-2">
-                <label className="text-sm text-[F1F2FF]" htmlFor="courseBenefits">
+                <label className="text-sm text-[#F1F2FF]" htmlFor="courseBenefits">
                     Benefits of the Course <sup className="text-red-600">*</sup>
                 </label>
                 <textarea
