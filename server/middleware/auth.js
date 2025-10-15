@@ -5,47 +5,29 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const authValidator = z.object({
-    token: z.string().min(1, "Token cannot be empty").optional()
-})
-
 async function auth(req, res, next){
     try{
 
-        let token = req.cookies.token || req.header("Authorization")?.replace("Bearer ", "") || null ;
-
-        try{
-            const parsedResult = authValidator.safeParse({ token });
-            if(parsedResult.success){
-                token = parsedResult.data.token
-            }
-        }
-        catch(e){
-            if(e instanceof z.ZodError){
-                return res.status(400).json({
-                    success: false,
-                    errors:e.errors.map((err) => err.message)
-                })
-            }
-        }
+        let token = req.cookies.token || req.header("Authorization")?.replace("Bearer ", "") || req.body.token ;
 
         if(!token){
             return res.status(401).json({
                 success: false,
-                message: "Token missing"
-            });
+                message: "Token Missing"
+            })
         }
 
         try{
-            const decode = jwt.verify(token, process.env.JWT_SECRET);
-            req.user = decode
-        }
-        catch(e){
-            return res.status(401).json({
-                success: false, 
-                message: "Token is invalid",
-                error: e.message
-            })
+            
+            const decode = await jwt.verify(token, process.env.JWT_SECRET);
+            console.log(decode);
+            req.user = decode;
+
+        } catch(e){
+                return res.status(401).json({
+                    success: false,
+                    message: ("Token is invalid", e.message)
+                })
         }
 
         next();
@@ -157,6 +139,8 @@ async function isInstructor(req, res, next){
             email: parsedResult.data.email
         })
 
+        console.log(userDetails.accountType);
+        
         if(!userDetails || userDetails.accountType !== "Instructor"){
             return res.status(401).json({
                 success: false,
