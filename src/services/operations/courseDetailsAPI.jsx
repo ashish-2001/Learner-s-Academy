@@ -4,6 +4,7 @@ import { courseEndpoints } from "../apis";
 
 const { 
     COURSE_DETAILS_API,
+    UPDATE_SECTION_API,
     COURSE_CATEGORIES_API,
     GET_ALL_COURSE_API,
     CREATE_COURSE_API,
@@ -168,7 +169,7 @@ async function updateSection(data, token){
     let result = null;
     const toastId = toast.loading("Loading...")
     try{
-        const response = await apiConnector("POST", UPDATE_SUBSECTION_API, data, {
+        const response = await apiConnector("POST", UPDATE_SECTION_API, data, {
             Authorization: `Bearer ${token}`
         })
         console.log("UPDATE SECTION API RESPONSE..........", response)

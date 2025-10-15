@@ -1,10 +1,10 @@
 import React from "react";
 import { CTAButton } from "./Button";
-import { TypeAnimation } from "react-type-animation";
 import { FaArrowRight } from "react-icons/fa";
+import { HtmlAnimation } from "../../../utils/CodeAnimation";
 
 
-function CodeBlocks({position, heading, subHeading, ctaBtn1, ctaBtn2, codeBlock, backgroundGradient, codeColor}){
+function CodeBlocks({ position, heading, subHeading, ctaBtn1, ctaBtn2, codeBlock, backgroundGradient }){
     return(
         <div className={`flex ${position} my-20 justify-between flex flex-col lg:gap-10 gap-10`}>
             <div className="w-[100%] lg:w-[50%] flex flex-col gap-8">
@@ -26,30 +26,13 @@ function CodeBlocks({position, heading, subHeading, ctaBtn1, ctaBtn2, codeBlock,
             </div>
             <div className="h-fit code-border flex flex-row py-3 text-[10px] sm:text-sm leading-[18px] sm:leading-6 relative w-[100%] lg:w-[470px]">
                 {backgroundGradient}
-                <div className="text-center flex flex-col   w-[10%] select-none text-[#6E727F] font-inter font-bold">
-                    <p>1</p>
-                    <p>2</p>
-                    <p>3</p>
-                    <p>4</p>
-                    <p>5</p>
-                    <p>6</p>
-                    <p>7</p>
-                    <p>8</p>
-                    <p>9</p>
-                    <p>10</p>
-                    <p>11</p>
+                <div className="text-center flex flex-col w-[10%] select-none text-[#6E727F] font-inter font-bold">
+                    {[ ...Array(11)].map((_, i) => (
+                        <p key={i}>{i + 1}</p>
+                    ))}
                 </div>
-                <div className={`w-[90%] flex flex-col gap-2 font-bold font-mono ${codeColor} pr-1`}>
-                    <TypeAnimation
-                        sequence={[codeBlock, 1000, ""]}
-                        cursor={true}
-                        repeat={Infinity}
-                        style={{
-                            whiteSpace: "pre-line",
-                            display: "block"
-                        }}
-                        omitDeletionAnimation={true}
-                    />
+                <div className={`w-[90%] flex flex-col gap-2 font-bold font-mono text-yellow-300 pr-1`}>
+                    <HtmlAnimation htmlSequence={codeBlock} speed={50}/>
                 </div>
             </div>
         </div>

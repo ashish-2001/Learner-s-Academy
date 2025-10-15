@@ -58,7 +58,8 @@ function Home(){
                         heading={
                             <div className="text-4xl font-semibold">
                                 Unlock your
-                                <HighLightText text={"coding potential"}/> with our online courses.
+                                <HighLightText text={"coding potential"}/> with our online 
+                                courses.
                             </div>
                         }
                         subHeading={
@@ -74,9 +75,20 @@ function Home(){
                             link: "/signup",
                             active: false
                         }}
-                        codeColor={"text-yellow-25"}
-                        codeblock={`<!DOCTYPE html>\n <html lang="en">\n<head>\n<title>This is myPage</title>\n</head>\n<body>\n<h1><a href="/">Header</a></h1>\n<nav> <a href="/one">One</a> <a href="/two">Two</a> <a href="/three">Three</a>\n</nav>\n</body>`}
-                        backgroundGradient={<div className="codeblock1 absolute"></div>}
+                        codeBlock={[
+                            `<!DOCTYPE html>
+                            <html lang="en">
+                            <head>
+                            <title>This is myPage</title>
+                            </head>
+                            <body>
+                            <h1><a href="/">Header</a></h1>
+                            <nav> <a href="/one">One</a> <a href="/two">Two</a>
+                            <a href="/three">Three</a>
+                            </nav>
+                            </body>`
+                        ]}
+                        backgroundGradient={<div className="top-0 left-0 w-full h-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-lg -z-10 absolute"></div>}
                         />
                 </div>
                 <div>
@@ -99,9 +111,20 @@ function Home(){
                             link: "/signup",
                             active: false
                         }}
-                        codeColor={"text-white"}
-                        codeblock={`import React from "react";\n import CTAButton from "./Button";\nimport TypeAnimation from "react-type";\nimport { FaArrowRight } from "react-icons/fa";\n\nconst Home = () => {\nreturn (\n<div>Home</div>\n)\n}\nexport default Home;`}
-                        backgroundGradient={<div className="codeblock2 absolute"></div>}
+                        codeBlock={[
+                                `import React from "react";
+                                import CTAButton from "./Button";
+                                import TypeAnimation from "react-type";
+                                import { FaArrowRight } from "react-icons/fa";
+                                const Home = 
+                                () => {
+                                return (
+                                <div>Home</div>
+                                )
+                                }
+                                export default Home;`
+                            ]}
+                        backgroundGradient={<div className="top-0 left-0 w-full h-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-lg -z-10 absolute"></div>}
                     />
                 </div>
                 <ExploreMore/>
@@ -121,7 +144,7 @@ function Home(){
                             </CTAButton>
                             <CTAButton
                                 active={false}
-                                linkTo={"/linkTo"}
+                                linkTo={"/login"}
                             >
                                 Learn More
                             </CTAButton>
