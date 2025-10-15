@@ -1,5 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -10,11 +8,16 @@ import { router as profileRoutes } from "./routes/profileRoutes.js";
 import { router as userRoutes } from "./routes/userRoutes.js";
 import { cloudinaryConnect } from "./config/cloudinary.js";
 import fileUpload from "express-fileupload";
-import mongoose from "mongoose";
+import { database } from "./config/database.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 
 const PORT = process.env.PORT || 4000;
+
+database.connect()
 
 app.use(express.json());
 
@@ -28,7 +31,7 @@ app.use(cors({
 app.use(
 	fileUpload({
 		useTempFiles: true,
-		tempFileDir: "./temp/"
+		tempFileDir: "/temp/"
 	})
 );
 
@@ -37,7 +40,7 @@ cloudinaryConnect();
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/profile", profileRoutes);
 console.log("It is running")
-app.use("/api/v1/contact-us", contactUsRoutes);
+app.use("/api/v1/reach", contactUsRoutes);
 app.use("/api/v1/course", courseRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 
@@ -46,12 +49,7 @@ app.get("/", (req, res) => {
 		success: true,
 		message: "Your server is up and running..."
 	})
-})
-
-mongoose.connect(process.env.MONGO_URL, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true
-}).then(() => console.log("Mongodb connected")).catch((err) => console.log("Mongodb connection error:", err))
+});
 
 app.listen(PORT, () => {
 	console.log(`App is running on port ${PORT}`)

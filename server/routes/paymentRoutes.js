@@ -3,8 +3,8 @@ import { capturePayment, sendPaymentSuccessfulEmail, verifyPayment } from "../co
 import { auth, isStudent } from "../middleware/auth.js";
 const router = express.Router();
 
-router.post("/capturePayment", capturePayment);
-router.post("/verifyPayment", verifyPayment);
+router.post("/capturePayment", auth, isStudent, capturePayment);
+router.post("/verifyPayment", auth, isStudent, verifyPayment);
 router.post("/sendPaymentSuccessfulEmail", auth, isStudent, sendPaymentSuccessfulEmail)
 
 export {

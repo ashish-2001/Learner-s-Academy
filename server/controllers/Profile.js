@@ -166,9 +166,11 @@ const userValidator = z.object({
     userId: z.string().min(1, "User id is required")
 });
 
-async function getUserDetails(req, res){
+async function getAllUserDetails(req, res){
     try{
-        const parsedResult = userValidator.safeParse({ userId: req.user.userId });
+
+        const userId = req.user.userId
+        const parsedResult = userValidator.safeParse({ userId });
 
         if(!parsedResult.success){
             return res.status(400).json({
@@ -178,7 +180,7 @@ async function getUserDetails(req, res){
             })
         }
 
-        const userDetails = await User.findById(parsedResult.data.userId).populate("additionalDetails").exec();
+        const userDetails = await User.findById(userId).populate("additionalDetails").exec();
 
         if(!userDetails){
             return res.status(404).json({
@@ -378,7 +380,7 @@ async function instructorDashboard(req, res) {
 export {
     updateProfile,
     deleteAccount,
-    getUserDetails,
+    getAllUserDetails,
     updateDisplayPicture,
     getEnrolledCourses,
     instructorDashboard

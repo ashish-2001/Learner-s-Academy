@@ -11,18 +11,19 @@ const courseSchema = new mongoose.Schema({
         required: true
     },
 
+
     price: {
         type: Number,
         required: true
     },
 
     thumbnail: {
-        type: String,
-        required: true
+        type: String
     },
 
     tag: {
-        type: [String]
+        type: [String],
+        required: true
     },
 
     instructions: {
@@ -61,7 +62,7 @@ const courseSchema = new mongoose.Schema({
         ref: "Section"
     },
 
-    categoryName: {
+    category: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Category"
     },

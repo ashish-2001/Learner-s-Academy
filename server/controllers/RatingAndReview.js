@@ -87,7 +87,7 @@ const getAllAverageRatingValidator = z.object({
     courseId:  z.string().min(1, "Course id is required").refine((val)=> mongoose.Types.Objectid.isValid(val))
 })
 
-async function getAllAverageRating(req, res){
+async function getAverageRating(req, res){
 
     try{
         const { courseId } = getAllAverageRatingValidator.safeParse(req.body);
@@ -136,7 +136,7 @@ async function getAllAverageRating(req, res){
     }
 }
 
-async function getAllRatingReview(req, res){
+async function getAllRating(req, res){
     try{
         const allReviews = await RatingAndReview.find({}).sort({rating: "desc"}).populate({
             path: "user",
@@ -164,6 +164,6 @@ async function getAllRatingReview(req, res){
 
 export {
     createRating,
-    getAllAverageRating,
-    getAllRatingReview
+    getAverageRating,
+    getAllRating
 }

@@ -116,8 +116,8 @@ function Home(){
                                 import CTAButton from "./Button";
                                 import TypeAnimation from "react-type";
                                 import { FaArrowRight } from "react-icons/fa";
-                                const Home = 
-                                () => {
+
+                                const Home = () => {
                                 return (
                                 <div>Home</div>
                                 )

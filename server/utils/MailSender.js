@@ -13,16 +13,16 @@ async function mailSender(email, title, body){
         })
 
         const info = await transporter.sendMail({
-            from: `"Learner's Academy "<${process.env.MAIL_USER}>`,
+            from: "Learner's || Academy - by Ashish",
             to: `${email}`,
             subject: `${title}`, 
             html: `${body}`
         })
-        console.log(info.response)
+        console.log(info)
         return info
     }
     catch(e){
-        return e.message
+        console.log(e.message);
     }
 }
 

@@ -16,7 +16,8 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        trim: true
     },
 
     password: {
@@ -26,7 +27,7 @@ const userSchema = new mongoose.Schema({
 
     accountType: {
         type: String,
-        enum: ["Student", "Instructor"],
+        enum: ["Student", "Instructor", "Admin"],
         required: true
     },
 
@@ -37,7 +38,7 @@ const userSchema = new mongoose.Schema({
 
     approved: {
         type: Boolean,
-        required: true
+        default: true
     },
 
     courses: [
@@ -49,7 +50,8 @@ const userSchema = new mongoose.Schema({
 
     additionalDetails: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Profile"
+        ref: "Profile",
+        required: true
     },
 
     image: {

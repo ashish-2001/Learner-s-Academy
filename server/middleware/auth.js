@@ -1,6 +1,9 @@
 import { z } from "zod";
 import jwt from "jsonwebtoken";
 import { User } from "../models/Users.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const authValidator = z.object({
     token: z.string().min(1, "Token cannot be empty").optional()
