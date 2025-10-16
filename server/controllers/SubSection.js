@@ -25,32 +25,35 @@ async function createSubSection(req, res){
 
         const { sectionId, title, description } = parsedResult.data;
 
-        if(!req.files || !req.files.video){
-            return res.status(400).json({
+        const video = req.files.video;
+
+        if(!sectionId || !title || !description || !video){
+            return res.status(404).json({
                 success: false,
-                message:"Video file is required"
+                message: "All fields are required"
             })
         }
 
-        const video = req.files.video;
+        console.log(video);
 
         const uploadDetails = await uploadImageToCloudinary(
             video,
             process.env.FOLDER_NAME
         )
+        console.log(uploadDetails)
 
-        const subSectionDetails = await subSectionValidator.create({
-            title,
+        const SubSectionDetails = await SubSection.create({
+            title: title,
             timeDuration: `${uploadDetails.duration}`,
-            description,
+            description: description,
             videoUrl: uploadDetails.secure_url
         })
 
-        const updatedSection = await sectionId.findByIdAndUpdate({
+        const updatedSection = await Section.findByIdAndUpdate({
             _id: sectionId
         }, {
             $push: {
-                subSection: subSectionDetails._id
+                subSection: SubSectionDetails._id
             }
         }, {
             new: true
@@ -123,15 +126,18 @@ async function updateSubSection(req, res) {
 
         await subSection.save();
 
-        const updatedSection = await sectionId.findById(sectionId).populate(
+        const updatedSection = await Section.findById(sectionId).populate(
             "subSection"
         )
+
+        console.log("Updated section:", updatedSection);
 
         return res.status(200).json({
             success: true,
             message: "Sub section updated successfully",
             data: updatedSection
-        })
+        });
+        
     }
     catch(e){
         return res.status(500).json({
@@ -149,6 +155,7 @@ const deleteSubSectionValidator = z.object({
 
 async function deleteSubSection(req, res){
     try{
+
         const parsedResult = deleteSubSectionValidator.safeParse(req.body);
 
         if(!parsedResult.success){
@@ -161,7 +168,7 @@ async function deleteSubSection(req, res){
 
         const{ subSectionId, sectionId } = parsedResult.data;
 
-        await sectionId.findByIdAndUpdate({
+        await Section.findByIdAndUpdate({
             _id: sectionId
         }, {
             $pull: {
@@ -169,7 +176,7 @@ async function deleteSubSection(req, res){
             }
         })
 
-        const subSection = await subSection.findByIdAndDelete({_id: subSectionId})
+        const subSection = await SubSection.findByIdAndDelete({_id: subSectionId})
 
         if(!subSection){
             return res.status(404).json({
