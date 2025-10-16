@@ -16,7 +16,7 @@ async function createRating(req, res){
 
     try{
         const { rating , review, courseId } = createRatingValidator.safeParse(req.body);
-        const userId = req.user.id;
+        const userId = req.user.userId;
 
         const courseDetails = await Course.findOne({
             _id: courseId,
@@ -53,13 +53,13 @@ async function createRating(req, res){
             user: userId
         })
 
-        await Course.findByIdAndUpdate(courseId, {
+        const updatedCourseDetails = await Course.findByIdAndUpdate({ _id: courseId}, {
             $push: {
                 ratingAndReview: ratingReview
             }
         })
 
-        await courseDetails.save();
+        console.log(updatedCourseDetails)
 
         return res.status(201).json({
             success: true,
@@ -83,14 +83,11 @@ async function createRating(req, res){
     }
 }
 
-const getAllAverageRatingValidator = z.object({
-    courseId:  z.string().min(1, "Course id is required").refine((val)=> mongoose.Types.Objectid.isValid(val))
-})
-
 async function getAverageRating(req, res){
 
     try{
-        const { courseId } = getAllAverageRatingValidator.safeParse(req.body);
+
+        const { courseId } = req.body.courseId;
 
         const result = await RatingAndReview.aggregate([
             {
@@ -138,9 +135,10 @@ async function getAverageRating(req, res){
 
 async function getAllRating(req, res){
     try{
+
         const allReviews = await RatingAndReview.find({}).sort({rating: "desc"}).populate({
             path: "user",
-            select: "FirstName lastName email image"
+            select: "firstName lastName email image"
         }).populate({
             path: "course",
             select: "courseName"
@@ -148,6 +146,7 @@ async function getAllRating(req, res){
 
         return res.status(200).json({
             success: true,
+            message: "All reviews fetched successfully",
             data: allReviews
         })
     }

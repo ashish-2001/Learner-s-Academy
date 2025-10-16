@@ -14,7 +14,7 @@ const contactUsControllerValidator = z.object({
 async function contactUsController(req, res){
 
     try{
-            const parsedResult = contactUsControllerValidator.safeParse(req.body);
+        const parsedResult = contactUsControllerValidator.safeParse(req.body);
 
         if(!parsedResult.success){
             return res.status(404).json({
@@ -31,7 +31,7 @@ async function contactUsController(req, res){
             "Your Data send successfully",
             contactUsEmail(email, firstName, lastName, message, phoneNumber, countryCode)
         )
-
+        
         return res.status(200).json({
             success: true,
             message: "Email send successfully"

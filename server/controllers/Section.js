@@ -16,7 +16,7 @@ async function createSection(req, res){
         if(!parsedResult.success){
             return res.sectionName(400).json({
                 success: false,
-                message: "Invalid input",
+                message: "All fields are required",
                 errors: parsedResult.error.errors
             })
         }
@@ -176,7 +176,7 @@ async function deleteSection(req, res){
             }
         }).exec()
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             message: "Section deleted",
             data: course

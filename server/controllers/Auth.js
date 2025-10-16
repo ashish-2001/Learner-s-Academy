@@ -1,4 +1,4 @@
-import {  z } from "zod";
+import {  success, z } from "zod";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { User } from "../models/Users.js";
@@ -7,7 +7,6 @@ import { Profile } from "../models/Profile.js";
 import otpGenerator from "otp-generator";
 import { passwordUpdate } from "../mail/templates/PasswordUpdate.js";
 import { mailSender } from "../utils/mailSender.js";
-
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -42,7 +41,7 @@ const signUp = async (req, res) =>{
         if(password !== confirmPassword){
             return res.status(400).json({
                 success: false,
-                message: "password and confirm password do not match. Please try again"
+                message: "Password and Confirm password do not match. Please try again"
             })
         }
 
@@ -58,7 +57,7 @@ const signUp = async (req, res) =>{
         }
 
         const response = await Otp.find({email}).sort({createdAt: -1}).limit(1);
-
+        console.log(response);
         if(response.length === 0 || otp !== response[0].otp){
             return res.status(403).json({
                 message: "Invalid otp",
@@ -68,22 +67,26 @@ const signUp = async (req, res) =>{
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const approved = accountType === "Instructor" ? false : true;
+        let approved = "";
+        approved === "Instructor" ? ( approved = false) : ( approved = true)
 
-        const profileDetails = await Profile.create({});
+        const profileDetails = await Profile.create({
+            gender: null,
+            dateOfBirth: null,
+            about: null,
+            contactNumber: null
+        });
 
         const user = await User.create({
             firstName: firstName,
             lastName: lastName,
             email: email,
             password: hashedPassword,
-            confirmPassword: confirmPassword,
             contactNumber: contactNumber,
             accountType: accountType,
             approved: approved,
             additionalDetails: profileDetails._id,
-            image: "",
-            active: true
+            image: ""
         })
 
         const userId = user._id;
@@ -94,6 +97,7 @@ const signUp = async (req, res) =>{
 
         return res.status(200).json({
             message: "User registered successfully",
+            user,
             token,
             success: true
         })
@@ -115,12 +119,12 @@ const signInValidator = z.object({
 
 const signIn = async(req, res) => {
 
-    try{
+    
             const result = signInValidator.safeParse(req.body);
         
         if(!result.success){
             return res.status(403).json({
-                message: "Incorrect Input",
+                message: "All the fields are required",
                 success: false
             })
         }
@@ -140,25 +144,14 @@ const signIn = async(req, res) => {
 
         const isPasswordMatch = await bcrypt.compare(password, user.password);
 
-        if(!isPasswordMatch){
-            return res.status(403).json({
-                message: "Incorrect email or password",
-                success: false
-            })
-        }
-
-        if(user.accountType === "Instructor" && !user.approved){
-            return res.status(403).json({
-                success: false,
-                message: "Instructor account not approved yet. Please wait for admin approval"
-            })
-        }
-
-        const token = jwt.sign({
+        if(isPasswordMatch){
+            const token = jwt.sign({
             userId: user._id,
             role: user.role,
             email: user.email
-        }, JWT_SECRET);
+        }, JWT_SECRET, {
+            expiresIn: "24h"
+        });
 
         user.token = token;
         user.password = undefined;
@@ -174,16 +167,15 @@ const signIn = async(req, res) => {
             success: true,
             message: "User login success"
         });
-    }
-    catch(e){
-        console.error(e.message)
-        return res.status(500).json({
-            message: "Internal server error",
-            success: false
+    } else{
+        return res.status(401).json({
+            success: false,
+            message: "Password is incorrect"
         })
     }
+}
 
-};
+
 
 const otpValidator = z.object({
     email: z.string().email("Invalid Email Address")
@@ -196,7 +188,7 @@ const sendOtp = async (req, res) => {
 
         if(!result1.success){
             return res.status(400).json({
-                message: "Incorrect input",
+                message: "Input field is required",
                 success: false
             })
         }
@@ -208,7 +200,7 @@ const sendOtp = async (req, res) => {
         })
 
         if(checkUserPresent){
-            return res.status(403).json({
+            return res.status(401).json({
                 message: "User already exists!",
                 success: false
             })
@@ -278,7 +270,7 @@ const changePassword = async (req, res) =>{
         }
 
         const encryptedPassword = await bcrypt.hash(newPassword, 10);
-        const updatedUser = await User.findByIdAndUpdate(
+        const updatedUserDetails = await User.findByIdAndUpdate(
             req.user.userId,
             {
                 password: encryptedPassword,
@@ -290,17 +282,21 @@ const changePassword = async (req, res) =>{
 
         try{
             const emailResponse = await mailSender(
-                updatedUser.email,
+                updatedUserDetails.email,
                 "Password for your account has been updated",
                 passwordUpdate(
-                    updatedUser.email,
-                    `Password updated successfully for ${updatedUser.firstName} ${updatedUser.lastName}`
+                    updatedUserDetails.email,
+                    `Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
                 )
             )
             console.log("Email sent successfully", emailResponse.response)
         }
         catch(e){
             console.error(e)
+            return res.status(500).json({
+                success: false,
+                message: "Error occurred while sending email"
+            })
             }
 
             return res.status(200).json({
@@ -316,7 +312,7 @@ const changePassword = async (req, res) =>{
             error: e.message
         })
     }
-};v
+};
 
 
 export {
