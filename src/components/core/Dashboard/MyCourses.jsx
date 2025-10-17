@@ -14,14 +14,10 @@ function MyCourses(){
     const [courses, setCourses] = useState([]);
 
     useEffect(() => {
-        if(!token){
-            return;
-        }
-
         const fetchCourses = async () => {
             try{
                 const result = await fetchInstructorCourses(token)
-                if(token){
+                if(result){
                     setCourses(result);
                 }
             }catch(error){

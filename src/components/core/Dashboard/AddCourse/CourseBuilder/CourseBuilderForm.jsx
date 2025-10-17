@@ -36,8 +36,7 @@ function CourseBuilderForm(){
                 },
                 token
             )
-        }
-        else{
+        } else{
             result = await createSection(
                 {
                     sectionName: data.sectionName,
@@ -68,7 +67,7 @@ function CourseBuilderForm(){
         setValue("sectionName", sectionName)
     }
 
-    const goToNext = ()=> {
+    const goToNext = () => {
         if(course.courseContent.length === 0){
             toast.error("Please add at least one section")
             return;
@@ -94,7 +93,6 @@ function CourseBuilderForm(){
                         Section Name <sup className="text-red-600 text-[20px] top-1">*</sup>
                     </label>
                     <input
-                        required
                         id="sectionName"
                         disabled={loading}
                         placeholder="add a section to build a course"
@@ -122,7 +120,7 @@ function CourseBuilderForm(){
                 </div>
             </form>
             {course.courseContent.length > 0 && (
-                <NestedView handleChangedEditSectionName={handleChangeEditSectionName}/>
+                <NestedView handleChangeEditSectionName={handleChangeEditSectionName}/>
             )}
             <div className="flex justify-end gap-x-3">
                 <button onClick={goBack} className="flex cursor-pointer items-center gap-x-2 rounded-md bg-[#838894] py-[8px] px-[20px] font-semibold text-#000814">

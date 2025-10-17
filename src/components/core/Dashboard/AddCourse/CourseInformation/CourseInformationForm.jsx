@@ -18,13 +18,19 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 function CourseInformationForm(){
-    const { register, handleSubmit, setValue, getValues, formState: { errors}} = useForm();
+    const { 
+        register, 
+        handleSubmit, 
+        setValue, 
+        getValues, 
+        formState: { errors} 
+    } = useForm();
 
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.auth)
     const { course, editCourse } = useSelector((state) => state.course);
     const [loading, setLoading] = useState(false);
-    const [courseCategories, setCourseCategories] = useState();
+    const [courseCategories, setCourseCategories] = useState([]);
 
     useEffect(() => {
         const getCategories = async () => {
@@ -58,8 +64,7 @@ function CourseInformationForm(){
             currentValues.courseTags.toString() !== course.tag.toString() || 
             currentValues.courseBenefits !== course.whatWillYouLearn ||
             currentValues.courseCategory._id !== course.category._id ||
-            currentValues.courseRequirements.toString() ||
-            course.instructions.toString() ||
+            currentValues.courseRequirements.toString() !== course.instructions.toString() ||
             currentValues.courseImage !== course.thumbnail
         ){
             return true
@@ -98,7 +103,8 @@ function CourseInformationForm(){
                     formData.append("thumbnailImage", data.courseImage)
                 }
 
-                setLoading(true)
+                setLoading(true);
+
                 const result = await editCourseDetails(formData, token)
                 setLoading(false)
                 if(result){
@@ -193,7 +199,12 @@ function CourseInformationForm(){
                 <label className="text-sm text-[#F1F2FF]" htmlFor="courseCategory">
                     Course Category <sup className="text-red-600">*</sup>
                 </label>
-                <select {...register("courseCategory", { required: true })} className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10" defaultValue="" id="courseCategory">
+                <select 
+                    {...register("courseCategory", { required: true })} 
+                    className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10" 
+                    defaultValue="" 
+                    id="courseCategory"
+                >
                     <option value="" disabled>
                         Choose a Category
                     </option>
@@ -250,7 +261,11 @@ function CourseInformationForm(){
             />
             <div className="flex justify-end gap-x-2">
                 {editCourse && (
-                    <button className="flex cursor-pointer items-center gap-x-2 rounded-md bg-[#838894] py-[8px] px-[20px] font-semibold text-[#000814]">
+                    <button 
+                        onClick={() => dispatch(setStep(2))}
+                        disabled={loading}
+                        className="flex cursor-pointer items-center gap-x-2 rounded-md bg-[#838894] py-[8px] px-[20px] font-semibold text-[#000814]"
+                    >
                         Continue Without Saving
                     </button>
                 )}

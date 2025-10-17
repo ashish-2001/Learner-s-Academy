@@ -18,12 +18,11 @@ function SignupForm(){
         lastName: "",
         email: "",
         password: "",
-        confirmPassword: "",
-        accountType: ""
+        confirmPassword: ""
     })
         const [showPassword, setShowPassword] = useState(false)
         const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-        const { firstName, lastName, email, password, confirmPassword} = formData
+        const { firstName, lastName, email, password, confirmPassword} = formData;
 
         const handleOnchange = (e) => {
             setFormData((prevData) => ({
@@ -52,8 +51,7 @@ function SignupForm(){
                 lastName: "",
                 email: "",
                 password:"",
-                confirmPassword: "",
-                accountType:""
+                confirmPassword: ""
             })
 
             setAccountType(ACCOUNT_TYPE.STUDENT)

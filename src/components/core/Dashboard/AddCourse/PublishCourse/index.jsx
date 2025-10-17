@@ -9,7 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function PublishCourse(){
-    const { register, handleSubmit, setValue, getValues } = useForm();
+    const { 
+        register, 
+        handleSubmit, 
+        setValue, 
+        getValues 
+    } = useForm();
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -35,27 +40,27 @@ function PublishCourse(){
     const handleCoursesPublish = async () => {
         if(
             (course?.status === COURSE_STATUS.PUBLISHED && 
-        getValues("public") === true) || 
-        (course?.status === COURSE_STATUS.DRAFT && getValues("public") === false)){
-        goToCourses()
-        return
-    }
+            getValues("public") === true) || 
+            (course?.status === COURSE_STATUS.DRAFT && getValues("public") === false)){
+            goToCourses()
+            return
+        }
 
-    const formData = new FormData();
-    formData.append("courseId", course._id)
-    const courseStatus = getValues("public") ? COURSE_STATUS.PUBLISHED : COURSE_STATUS.DRAFT
-    formData.append("status", courseStatus)
-    setLoading(true)
-    const result = await editCourseDetails(formData, token)
-    if(result){
-        goToCourses()
-    }
-    setLoading(false)
-    }
+        const formData = new FormData();
+        formData.append("courseId", course._id)
+        const courseStatus = getValues("public") ? COURSE_STATUS.PUBLISHED : COURSE_STATUS.DRAFT
+        formData.append("status", courseStatus)
+        setLoading(true)
+        const result = await editCourseDetails(formData, token)
+        if(result){
+            goToCourses()
+        }
+        setLoading(false)
+        }
 
-    const onSubmit = () => {
-        handleCoursesPublish()
-    }
+        const onSubmit = (data) => {
+            handleCoursesPublish(data);
+        }
 
     return (
         <div className="rounded-md border-[1px] border-[#2C333F] bg-[#161D29] p-6">

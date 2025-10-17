@@ -10,7 +10,7 @@ function MyProfile(){
     const navigate = useNavigate();
 
     return (
-        <div>
+        <>
             <h1 className="mb-14text-3xl font-medium text-[#F1F2FF]">
                 My Profile
             </h1>
@@ -108,7 +108,7 @@ function MyProfile(){
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

@@ -112,7 +112,7 @@ function CoursesTable({ courses, setCourses }){
                                         onClick={() => {
                                             setConfirmationModal({
                                                 text1: "Do you want to delete this course?",
-                                                text: "All the data related to this course will be deleted",
+                                                text2: "All the data related to this course will be deleted",
                                                 bt1Text: !loading ? "Delete" : "Loading...",
                                                 btn2text: "Cancel",
                                                 bt1Handler: !loading ? () => handleCourseDelete(course._id)

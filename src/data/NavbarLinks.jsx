@@ -11,7 +11,7 @@ const NavbarLinks = [
         path: "/about"
     },
     {
-        title : "Contact",
+        title : "Contact Us",
         path: "/contact"
     }
 ]

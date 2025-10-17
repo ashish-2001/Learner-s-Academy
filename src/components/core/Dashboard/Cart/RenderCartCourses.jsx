@@ -12,7 +12,7 @@ function RenderCartCourses(){
         <div className="flex flex-1 flex-col">
             {cart.map((course, index) => (
                 <div className={`flex w-full flex-wrap items-start justify-between gap-6 ${
-                    index !== cart.length - 1 && "border-b-[#6E727F] pb-6" 
+                    index !== cart.length - 1 && "border-b border-b-[#6E727F] pb-6" 
                 } ${index !== 0 && 'mt-6'}`} key={course._id}>
                     <div className="flex flex-1 flex-col gap-4 xl:flex-row">
                         <img
@@ -45,7 +45,10 @@ function RenderCartCourses(){
                         </div>
                     </div>
                     <div className="flex flex-col items-end space-y-2">
-                        <button onClick={() => dispatch(removeFromCart(course._id))} className="flex items-center gap-x-1 rounded-md border border-[#424854] bg-[#2C333F] py-3 px-[12px] text-pink-600">
+                        <button 
+                            onClick={() => dispatch(removeFromCart(course._id))} 
+                            className="flex items-center gap-x-1 rounded-md border border-[#424854] bg-[#2C333F] py-3 px-[12px] text-pink-600"
+                        >
                             <RiDeleteBin6Line/>
                             <span>Remove</span>
                         </button>

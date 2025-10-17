@@ -47,7 +47,7 @@ function ContactUsForm(){
         <form className="flex flex-col gap-7" onSubmit={handleSubmit(submitContactForm)}>
             <div className="flex flex-col gap-5 lg:flex-row">
                 <div className="flex flex-col gap-2 lg:w-[48%]">
-                    <label htmlFor="firstName" className="label-style ">
+                    <label htmlFor="firstName" className="text-[14px] text-[#F1F2FF]">
                         First Name
                     </label>
                     <input
@@ -65,7 +65,7 @@ function ContactUsForm(){
                     )}
                 </div>
                 <div className="flex flex-col gap-2 lg:w-[48%]">
-                    <label className="label-style" htmlFor="lastName">
+                    <label className="text-[14px] text-[#F1F2FF]" htmlFor="lastName">
                         Last Name
                     </label>
                     <input
@@ -84,7 +84,7 @@ function ContactUsForm(){
                 </div>
             </div>
             <div className="flex flex-col gap-2">
-                <label htmlFor="email" className="label-style">
+                <label htmlFor="email" className="text-[14px] text-[#F1F2FF]">
                     Email Address
                 </label>
                 <input
@@ -103,7 +103,7 @@ function ContactUsForm(){
             </div>
 
             <div className="flex flex-col gap-2">
-                <label htmlFor="phoneNumber" className="label-style">
+                <label htmlFor="phoneNumber" className="text-[14px] text-[#F1F2FF]">
                     Phone Number
                 </label>
 
@@ -152,7 +152,7 @@ function ContactUsForm(){
             </div>
 
             <div className="flex flex-col gap-2">
-                <label htmlFor="message" className="label-style">
+                <label htmlFor="message" className="text-[14px] text-[#F1F2FF]">
                     Message
                 </label>
                 <textarea

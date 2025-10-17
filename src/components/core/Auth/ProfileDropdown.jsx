@@ -21,7 +21,7 @@ function ProfileDropdown(){
     }
 
     return(
-        <div className="relative hover:cursor-pointer" onClick={() => setOpen(true)}>
+        <button className="relative hover:cursor-pointer" onClick={() => setOpen(true)}>
             <div className="flex items-center gap-x-1">
                 <img 
                     className="aspect-square w-[30px] rounded-full object-cover"
@@ -32,8 +32,9 @@ function ProfileDropdown(){
             </div>
             {open && (
                 <div 
-                className="absolute top-[118%] right-0 z-[1000] divide-y-[1px] divide-[#2C333F] overflow-hidden rounded-md border-[1px] border-[#2C333F] bg-[#161D29]"
-                ref={ref}
+                    onClick={(e) => e.preventDefault()}
+                    className="absolute top-[118%] right-0 z-[1000] divide-y-[1px] divide-[#2C333F] overflow-hidden rounded-md border-[1px] border-[#2C333F] bg-[#161D29]"
+                    ref={ref}
                 >
                     <Link to="/dashboard/my-profile" onClick={() => setOpen(false)}>
                         <div className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-[#AFB2BF] hover:bg-[#2C333F] hover:text-[#DBDDEA]">
@@ -52,7 +53,7 @@ function ProfileDropdown(){
                     </div>
                 </div>
             )}
-        </div>
+        </button>
     )
 }
 

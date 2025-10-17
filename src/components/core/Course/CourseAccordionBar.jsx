@@ -4,7 +4,7 @@ import { AiOutlineDown } from "react-icons/ai";
 import { CourseSubSectionAccordion } from "./CourseSubSectionAccordion";
 
 function CourseAccordionBar({course, isActive, handleActive}){
-    const contentEl = useRef();
+    const contentEl = useRef(null);
 
     const [active, setActive] = useState(false)
 
@@ -30,12 +30,16 @@ function CourseAccordionBar({course, isActive, handleActive}){
                     </div>
                     <div className="space-x-4">
                         <span className="text-[#FFE83D]">
-                            {`${course.subSection.length || 0} lectures`}
+                            {`${course.subSection.length || 0} lecture(s)`}
                         </span>
                     </div>
                 </div>
             </div>
-            <div className={`relative h-0 overflow-hidden bg-[#000814] transition-[height] duration-[0.35s] ease-[ease]`} style={{height: sectionHeight}}>
+            <div 
+                className={`relative h-0 overflow-hidden bg-[#000814] transition-[height] duration-[0.35s] ease-[ease]`} 
+                style={{height: sectionHeight}}
+                ref={contentEl}
+            >
                 <div className="text-textHead flex flex-col gap-2 px-7 py-6 font-semibold">
                     {course?.subSection?.map((subSec, i) => {
                         return (

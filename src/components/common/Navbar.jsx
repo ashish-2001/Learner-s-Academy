@@ -45,8 +45,8 @@ function Navbar(){
     return(
 
         <div className={`flex h-14 items-center justify-center border-b-[1px] border-b-[#2C333F] ${
-            location.pathname !== "/" ? "bg-[#161D29]" : ""
-        } transition-all duration-200`}>
+                location.pathname !== "/" ? "bg-[#161D29]" : ""
+            } transition-all duration-200`}>
             <div className="flex w-11/12 max-w-1260px items-center justify-between">
             <Link to={"/"}>
                 <img src={Logo_Full_Light} alt="Logo" width={160} height={32} loading="lazy"/>
@@ -68,7 +68,7 @@ function Navbar(){
                                         <div className="absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-[#F1F2FF]"></div>
                                         {loading ? (
                                             <p className="text-center">Loading...</p>
-                                        ) : subLinks.length ? (
+                                        ) : (subLinks && subLinks.length) ? (
                                             <>
                                                 {subLinks ?.filter(
                                                     (subLink) => subLink?.courses?.length > 0
@@ -88,7 +88,7 @@ function Navbar(){
                             <Link to={link?.path}>
                                 <p className={`${
                                     matchRoute(link?.path) ? "text-[#FFE83D]" : "text-[#DBDDEA]"
-                                }`}></p>
+                                }`}>{link.title}</p>
                             </Link>
                         )}</li>
                     ))}

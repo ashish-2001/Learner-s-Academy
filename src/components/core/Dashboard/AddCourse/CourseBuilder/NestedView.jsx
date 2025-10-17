@@ -36,7 +36,7 @@ function NestedView({ handleChangeEditSectionName }){
         const result = await deleteSubSection({subSectionId, sectionId, token})
         if(result){
             const updatedCourseContent = course.courseContent.map((section) => section._id === sectionId ? result : section)
-            const updatedCourse = {...course, courseContent: updatedCourseContent}
+            const updatedCourse = { ...course, courseContent: updatedCourseContent }
             dispatch(setCourse(updatedCourse))
         }
         setConfirmationModal(null)
@@ -58,7 +58,9 @@ function NestedView({ handleChangeEditSectionName }){
                             <button onClick={() => handleChangeEditSectionName(section._id, section.sectionName)}>
                                 <MdEdit className="text-xl text-[#838894]"/>
                             </button>
-                            <button onClick={() => setConfirmationModal({
+                            <button 
+                                onClick={() => 
+                                setConfirmationModal({
                                 text1: "Delete this section",
                                 text2: "All the lectures in this section will be deleted",
                                 btn1text: "Delete",
@@ -75,19 +77,31 @@ function NestedView({ handleChangeEditSectionName }){
                     <div className="px-6 pb-4">
                         {section.subSection.map((data) => (
                             
-                                <div key={data?.id} onClick={() => setViewSubSection(data)} className="flex cursor-pointer items-center justify-between gap-x-3 border-b-2 border-b-blue-950 py-2">
+                                <div 
+                                    key={data?.id} 
+                                    onClick={() => 
+                                    setViewSubSection(data)} 
+                                    className="flex cursor-pointer items-center justify-between gap-x-3 border-b-2 border-b-blue-950 py-2"
+                                >
                                     <div className="flex items-center gap-x-3 py-2">
                                         <RxDropdownMenu className="text-2xl text-[#C5C7D4]"/>
                                         <p className="font-semibold text-[#C5C7D4]">
                                             {data.title}
                                         </p>
                                     </div>
-                                    <div onClick={(e) => e.stopPropagation()} className="flex items-center gap-x-3">
-                                        <button onClick={() => setEditSubSection({...data, sectionId: section._id})}>
+                                    <div 
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="flex items-center gap-x-3"
+                                    >
+                                        <button 
+                                            onClick={() => 
+                                            setEditSubSection({...data, sectionId: section._id})
+                                            }
+                                        >
                                             <MdEdit className="text-xl text-[#838894]"/>
                                         </button>
                                         <button onClick={() => 
-                                            setConfirmationModal({
+                                                setConfirmationModal({
                                                 text1:"Delete this Sub-Section",
                                                 text2: "This lecture will be deleted",
                                                 btn1Text: "Delete",
@@ -102,7 +116,10 @@ function NestedView({ handleChangeEditSectionName }){
                                     </div>
                                 </div>
                         ))}
-                        <button onClick={() => setAddSubSection(section._id)} className="mt-3 flex items-center gap-x-1 text-[#FFD60A]">
+                        <button 
+                            onClick={() => setAddSubSection(section._id)} 
+                            className="mt-3 flex items-center gap-x-1 text-[#FFD60A]"
+                        >
                             <FaPlus className="text-lg"/>
                             <p>Add Lecture</p>
                         </button>
@@ -110,13 +127,13 @@ function NestedView({ handleChangeEditSectionName }){
                 </details>
             ))}
         </div>
-        {addSubSection ? (
+        { addSubSection ? (
             <SubSectionModal
                 modalData={addSubSection}
+                setModalData={setAddSubSection}
                 add={true}
             />
-        ) : (
-            viewSubSection ? (
+        ) : viewSubSection ? (
                 <SubSectionModal
                     modalData={viewSubSection}
                     setModalData={setViewSubSection}
@@ -124,19 +141,18 @@ function NestedView({ handleChangeEditSectionName }){
                 />
             ) : editSubSection ? (
                 <SubSectionModal
-                    modalData={viewSubSection}
-                    setModalData={setViewSubSection}
-                    view={true}
+                    modalData={editSubSection}
+                    setModalData={setEditSubSection}
+                    edit={true}
                 />
             ) : (
                 <></>
-            )
-        )}
-        {confirmationModal ? (
-            <ConfirmationModalData modalData={confirmationModal}/>
-        ) : (
-            <></>
-        )}
+            )}
+            {confirmationModal ? (
+                <ConfirmationModalData modalData={confirmationModal}/>
+            ) : (
+                <></>
+            )}
         </>
     )
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { LoginForm } from "./LoginForm";
 import { SignupForm } from "./SignupForm";
+import { frame } from "../../../assets/images";
 
 function Template({title, description1, description2, formType}){
     const { loading } = useSelector((state) => state.auth);
@@ -23,6 +24,23 @@ function Template({title, description1, description2, formType}){
                             </span>
                         </p>
                         {formType === "signup" ? <SignupForm/> : <LoginForm/>}
+                    </div>
+                    <div>
+                        <img
+                            src={frame}
+                            alt="Pattern"
+                            width={558}
+                            height={504}
+                            loading="lazy"
+                        />
+                        <img
+                            src={Image}
+                            alt="Students"
+                            width={558}
+                            height={504}
+                            loading="lazy"
+                            className="absolute -top-4 right-4 z-10"
+                        />
                     </div>
                 </div>
             )}

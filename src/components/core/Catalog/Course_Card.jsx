@@ -14,9 +14,9 @@ function Course_Card({ course, Height }){
 
     return (
         <>
-            <Link to={`/Course/${course._id}`}>
-                <div className="">
-                    <div>
+            <Link to={`/courses/${course._id}`}>
+                <div>
+                    <div className="rounded-lg">
                         <img 
                             src={course?.thumbnail}
                             alt="course thumbnail"

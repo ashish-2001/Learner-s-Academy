@@ -5,7 +5,7 @@ import { CTAButton } from "../../../components/Core//HomePage/Button";
 const LearningGridArray = [
     {
         order: -1,
-        heading: "WorldClass Learning for",
+        heading: "World-Class Learning for",
         highlightText: "Anyone, Anywhere",
         description: "Learners Academy partners with more than 275+ universities",
         BtnText: "Learn More",
@@ -18,27 +18,27 @@ const LearningGridArray = [
     },
     {
         order: 2,
-    heading: "Our Learning Methods",
-    description:
-        "Lerners Academy partners with more than 275+ leading universities and companies to bring",
+        heading: "Our Learning Methods",
+        description:
+            "Lerners Academy partners with more than 275+ leading universities and companies to bring",
     },
     {
         order: 3,
         heading: "Certification",
         description:
-        "Studynotion partners with more than 275+ leading universities and companies to bring",
+        "Learners Academy partners with more than 275+ leading universities and companies to bring",
     },
     {
         order: 4,
         heading: `Rating "Auto-grading"`,
         description:
-        "Studynotion partners with more than 275+ leading universities and companies to bring",
+        "Learners Academy partners with more than 275+ leading universities and companies to bring",
     },
     {
         order: 5,
         heading: "Ready to Work",
         description:
-        "Studynotion partners with more than 275+ leading universities and companies to bring",
+        "Learners Academy partners with more than 275+ leading universities and companies to bring",
     }
 ];
 

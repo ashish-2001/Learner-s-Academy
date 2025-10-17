@@ -58,7 +58,7 @@ function Instructor(){
                             </div>
                         )}
                         <div className="flex min-w-[250px] flex-col rounded-md bg-[#161D29] p-6">
-                            <div className="text-lg font-bold text-[#F1F2FF]">Statistics</div>
+                            <p className="text-lg font-bold text-[#F1F2FF]">Statistics</p>
                             <div className="mt-4 space-y-4">
                                 <div>
                                     <p className="text-lg text-[#999DAA]">
@@ -102,7 +102,7 @@ function Instructor(){
                                         </p>
                                         <div className="mt-1 flex items-center space-x-2">
                                             <p className="text-xs font-medium text-[#838894]">
-                                                {course.totalStudentsEnrolled.length}
+                                                {course.totalStudents.length} students
                                             </p>
                                             <p className="text-xs font-medium text-[#838894]">
                                                 |

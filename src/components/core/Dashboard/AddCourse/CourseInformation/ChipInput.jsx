@@ -18,36 +18,37 @@ function ChipInput({
     
     useEffect(() => {
         if(editCourse){
-            setChips(course?.tag || [])
+            setChips(course?.tag)
         }
-        if(register && typeof register === "function"){
-            register(name, { required: true, validate: (value) => value.length > 0 });
-        }
-    }, [editCourse, course, register, name])
+        
+        register(name, { required: true, validate: (value) => value.length > 0 });
+        
+    }, [])
 
     useEffect(() => {
-        if(setValue && typeof setValue === "function"){
+        
             setValue(name, chips);
-        }
-    }, [chips, setValue, name]);
+        
+    }, [chips]);
 
     const handleKeyDown = (e) => {
         if(e.key === "Enter" || e.key === ","){
-            e.preventDefault()
-            const chipValue = e.target.value.trim()
+            e.preventDefault();
+
+            const chipValue = e.target.value.trim();
+
             if(chipValue && !chips.includes(chipValue)){
                 
-                setChips([...chips, chipValue]);
-                
+                const newChips = [...chips, chipValue];
+                setChips(newChips);
                 e.target.value = "";
-
             }
         }
     }
 
     const handleDeleteChip = (chipIndex) => {
-
-        setChips(chips.filter((_, index) => index !== chipIndex))
+        const newChips = chips.filter((_, index) => index !== chipIndex);
+        setChips(newChips)
         
     }
 
@@ -60,7 +61,11 @@ function ChipInput({
                 {chips.map((chip, index) => (
                     <div className="m-1 items-center rounded-full bg-[#9E8006] px-2 py-1 text-sm text-[#F1F2FF]" key={index}>
                         {chip}
-                        <button className="ml-2 focus:outline-none" onClick={() => handleDeleteChip(index)}>
+                        <button 
+                            type="button"
+                            className="ml-2 focus:outline-none" 
+                            onClick={() => handleDeleteChip(index)}
+                        >
                             <MdClose className="text-sm"/>
                         </button>
                     </div>
@@ -74,7 +79,7 @@ function ChipInput({
                     className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none !pr-10 w-full py-2 px-3 border-2 border-blue-950 hover:border-blue-950 hover:border-2"
                 />
             </div>
-            {errors && errors[name] && (
+            {errors[name] && (
                 <span className="ml-2 text-xs tracking-wide text-red-600">
                     {label} is required
                 </span>

@@ -4,6 +4,7 @@ import { useDropzone } from "react-dropzone";
 import { FiUploadCloud } from "react-icons/fi";
 import "video-react/dist/video-react.css";
 import { Player } from "video-react";
+import { useSelector } from "react-redux";
 
 function Upload({
     name, 
@@ -15,10 +16,12 @@ function Upload({
     viewData = null, 
     editData = null
 }){
+    const { course } = useSelector((state) => state.course);
     const [selectedFile, setSelectedFile] = useState(null);
     const [previewSource, setPreviewSource] = useState(
         viewData ? viewData : editData ? editData : ""
-    )
+    );
+
     const inputRef = useRef(null)
 
     const onDrop = (acceptedFiles) => {
@@ -72,7 +75,10 @@ function Upload({
                             <Player aspectRatio="16:9" playsInline src={previewSource}/>
                         )}
                         {!viewData && (
-                            <button className="mt-3 text-[#6E727F] underline" type="button" onClick={() => {
+                            <button 
+                                type="button"
+                                className="mt-3 text-[#6E727F] underline" 
+                                onClick={() => {
                                 setPreviewSource("")
                                 setSelectedFile(null)
                                 setValue(name, null)
@@ -82,7 +88,9 @@ function Upload({
                         )}
                     </div>
                 ) : (
-                    <div className="flex w-full flex-col items-center p-6" {...getRootProps()}>
+                    <div className="flex w-full flex-col items-center p-6" 
+                        {...getRootProps()}
+                    >
                         <input
                             ref={inputRef}
                             {...getInputProps()}

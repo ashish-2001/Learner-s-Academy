@@ -1,11 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { UpdateProfile } from "../../../../services/operations/settingsAPI";
+import { UpdateProfile } from "../../../../services/operations/SettingsApi";
 import { IconBtn } from "../../../Common/IconBtn";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-const genders = ["Male", "Female", "Non-Binary", "Prefer not to say", "other"];
+const genders = ["Male", "Female"];
 
 function EditProfile(){
     const { user} = useSelector((state)=> state.profile)
@@ -17,34 +17,13 @@ function EditProfile(){
         register,
         handleSubmit,
         formState: { errors }
-    } = useForm({
-        defaultValues: {
-            firstName:user?.firstName || "",
-            lastName: user?.lastName || "",
-            dateOfBirth: user?.additionalDetails?.dateOfBirth || "",
-            gender: user?.additionalDetails?.gender || "",
-            contactNumber: user?.additionalDetails?.contactNumber || "",
-            about: user?.additionalDetails?.about || ""
-        }
-    });
+    } = useForm();
 
     const submitProfileForm = async (data) => {
-
-        const profileData = {
-            firstName: data.firstName,
-            lastName: data.lastName,
-            dateOfBirth: data.dateOfBirth,
-            gender: data.gender,
-            contactNumber: data.contactNumber,
-            about: data.about
-        }
         try{
-            console.log("Profile Data:", profileData)
-            dispatch(UpdateProfile(token, profileData))
-            console.log("This is after dispatch:", profileData)
-
+            console.log("Profile Data:", data)
+            dispatch(UpdateProfile(token, data))
         } catch(error){
-
             console.log("Error message", error.message)
         }
     }
@@ -192,7 +171,7 @@ function EditProfile(){
                         <div className="flex flex-col gap-2 lg:w-[48%]">
                             <label>
                                 <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-[#F1F2FF]">
-                                    Last Name <sup className="text-red-600 text-[20px] top-1">*</sup>
+                                    About <sup className="text-red-600 text-[20px] top-1">*</sup>
                                 </p>
                             <input
                                 type="text"

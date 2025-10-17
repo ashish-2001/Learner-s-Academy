@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import  ProgressBar from "@ramonak/react-progress-bar";
+import { BiDotsVerticalRounded } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getUserEnrolledCourses } from "../../../services/operations/profileAPI";
@@ -16,13 +17,12 @@ function EnrolledCourses(){
             try{
                 const res = await getUserEnrolledCourses(token);
 
-                const filterPublishCourse = res.filter((ele) => ele.status !=="Draft")
-                setEnrolledCourses(filterPublishCourse)
+                setEnrolledCourses(res)
             }catch(e){
                 console.log("Could not fetch enrolled courses.", e.message)
             }
         })()
-    }, [])
+    }, []);
 
 
     return(
@@ -47,8 +47,14 @@ function EnrolledCourses(){
                         <div className={`flex items-center border border-[#2C333F] ${
                             i === arr.length - 1 ? "rounded-b-lg" : "rounded-none"
                         }`} key={i}>
-                            <div onClick={() => { navigate(`/view-course/${course?._id}/section/${course.courseContent?.[0]?._id}/sub-section/${course.courseContent?.[0]?.subSection?.[0]?._id}`)}} className="flex w-[45%] cursor-pointer items-center gap-4 px-5 py-3">
-                                <img src={course.thumbnail} alt="course_img" className="h-14 w-14 rounded-lg object-cover"/>
+                            <div 
+                                onClick={() => { navigate(`/view-course/${course?._id}/section/${course.courseContent?.[0]?._id}/sub-section/${course.courseContent?.[0]?.subSection?.[0]?._id}`)}} 
+                                className="flex w-[45%] cursor-pointer items-center gap-4 px-5 py-3">
+                                <img 
+                                    src={course.thumbnail} 
+                                    alt="course_img" 
+                                    className="h-14 w-14 rounded-lg object-cover"
+                                />
                                 <div className="flex max-w-xs flex-col gap-2">
                                     <p className="font-semibold">{course.courseName}</p>
                                     <p className="text-xs text-[#838894]">

@@ -17,7 +17,7 @@ function ChangeProfilePicture(){
     const fileInputRef = useRef(null);
 
     const handleClick = () => {
-        fileInputRef.current.files[0]
+        fileInputRef.current.click();
     }
 
     const handleFileChange = (e) => {

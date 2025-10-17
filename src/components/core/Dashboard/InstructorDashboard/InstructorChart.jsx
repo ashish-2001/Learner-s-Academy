@@ -52,7 +52,8 @@ function InstructorChart({ courses }){
                         : "text-[#9E8006]"
                     }`}
                 > Students</button>
-                <button onClick={() => setCurrChart("income")}
+                <button 
+                    onClick={() => setCurrChart("income")}
                     className={`rounded-sm p-1 px-3 transition-all duration-200 ${
                         currChart === "income"
                         ? "bg-[#2C333F] text-[#FFD60A]"

@@ -38,6 +38,7 @@ function UpdatePassword(){
                                 <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-[#F1F2FF]">
                                     Current Password <sup className="text-red-600 text-[20px] top-1">*</sup>
                                 </p>
+                            </label>
                             <input
                                 type={showOldPassword ? "text" : "password"}
                                 name="oldPassword"
@@ -46,14 +47,16 @@ function UpdatePassword(){
                                 className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[6E727F] focus:outline-none w-full"
                                 {...register("oldPassword", { required: true})}
                             />
-                            <span onClick={() => setShowOldPassword((prev) => !prev)} className="absolute right-3 top-[38px] z-[10] cursor-pointer">
+                            <span 
+                                onClick={() => setShowOldPassword((prev) => !prev)} 
+                                className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+                            >
                                 {showOldPassword ? (
                                     <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF"/>
                                 ) : (
                                     <AiOutlineEye fontSize={24} fill="#AFB2BF"/>
                                 )}
                             </span>
-                            </label>
                             {errors.oldPassword && (
                                 <span className="-mt-1 text-[12px] text-[#E7C009]">
                                     Please enter your current password
@@ -65,6 +68,7 @@ function UpdatePassword(){
                                 <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-[#F1F2FF]">
                                     New Password <sup className="text-red-600 text-[20px] top-1">*</sup>
                                 </p>
+                            </label>
                             <input
                                 type={showNewPassword ? "text" : "password"}
                                 name="newPassword"
@@ -73,8 +77,10 @@ function UpdatePassword(){
                                 className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[6E727F] focus:outline-none w-full"
                                 {...register("newPassword", { required: true})}
                             />
-                            </label>
-                            <span onClick={()=> setShowNewPassword((prev) => !prev)} className="absolute right-3 top-[38px] z-[10] cursor-pointer">
+                            <span 
+                                onClick={()=> setShowNewPassword((prev) => !prev)} 
+                                className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+                            >
                                 {showNewPassword ? (
                                     <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF"/>
                                 ) : (

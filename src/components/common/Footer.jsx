@@ -7,7 +7,7 @@ import { FaFacebook, FaGoogle, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const BottomFooter = ["Privacy Policy", "Cookie Policy", "Terms"];
 const Resources = [ "Articles", "Blog", "Chart sheet", "Code Challenges", "Docs", "Projects", "Videos", "Workspaces"];
-const Plans = ["Paid Memberships", "for Students", "Business Solutions"];
+const Plans = ["Paid Memberships", "For Students", "Business Solutions"];
 const Community = ["Forums", "Chapters", "Events"];
 
 function Footer(){
@@ -120,7 +120,7 @@ function Footer(){
                     <div className="flex flex-row">
                         {BottomFooter.map((ele, i) => {
                             return (
-                                <div className={`px-3 ${BottomFooter.length - 1 === i ? "" : "border-r border-white cursor-pointer hover:text-white transition-all duration-200" } `} key={i}>
+                                <div className={`${BottomFooter.length - 1 === i ? "" : "border-r border-white cursor-pointer hover:text-white transition-all duration-200" } px-3 `} key={i}>
                                     <Link to={ele.split(" ").join("-").toLowerCase()}>{ele}</Link>
                                 </div>
                             )
@@ -128,7 +128,7 @@ function Footer(){
                     </div>
                     <div className="text-center flex justify-center items-center gap-2">Made with <FaHeart className="text-red-600" /> from Ashish pal</div>
                     <div>
-                        Learner's Academy
+                        Learners Academy
                     </div>
                 </div>
             </div>

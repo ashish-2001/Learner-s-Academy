@@ -45,7 +45,6 @@ function LoginForm(){
                     placeholder="Enter email address"
                     className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full"
                 />
-                <span></span>
             </label>
             <label className="relative">
                 <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-[#F1F2FF]">
@@ -67,7 +66,7 @@ function LoginForm(){
                         <AiOutlineEye fontSize={24} fill="AFB2BF"/>
                     )}
                 </span>
-                <Link to={"/forgot-password"}>
+                <Link to="/forgot-password">
                     <p className="mt-1 ml-auto max-w-max text-xs text-[#47A5C5]">
                         Forgot Password
                     </p>

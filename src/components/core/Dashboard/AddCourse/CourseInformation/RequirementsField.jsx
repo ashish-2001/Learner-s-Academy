@@ -7,7 +7,8 @@ function RequirementsField({
         label, 
         register, 
         setValue, 
-        errors
+        errors,
+        getValues
     }){
     const { editCourse, course } = useSelector((state) => state.course);
     const [requirements, setRequirements] = useState("");
@@ -60,10 +61,14 @@ function RequirementsField({
             </div>
             {requirementsList.length > 0 && (
                 <ul className="mt-2 list-inside list-disc">
-                    {requirements.localeCompare((requirement, index) => (
+                    {requirementsList.map((requirement, index) => (
                         <li key={index} className="flex items-center text-[#F1F2FF]">
                             <span>{requirement}</span>
-                            <button type="button" className="ml-2 text-xs text-[#888888]" onClick={() => handleRemoveRequirement(index)}>
+                            <button 
+                                type="button" 
+                                className="ml-2 text-xs text-[#888888]" 
+                                onClick={() => handleRemoveRequirement(index)}
+                            >
                                 Clear
                             </button>
                         </li>

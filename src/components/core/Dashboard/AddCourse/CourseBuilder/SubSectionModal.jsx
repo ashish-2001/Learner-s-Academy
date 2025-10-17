@@ -129,13 +129,13 @@ function SubSectionModal({
                     />
                     <div className="flex flex-col space-y-2">
                         <label className="text-sm text-[#F1F2FF]" htmlFor="lectureTitle">
-                            Lecture title {!view && <sup className="text-red-200">*</sup>}
+                            Lecture title {!view && <sup className=" text-red-600">*</sup>}
                         </label>
                         <input
                             disabled={view || loading}
                             id="lectureTitle"
                             placeholder="Enter lecture title"
-                            {...register("lectureTitle", {required: true})}
+                            { ...register("lectureTitle", {required: true}) }
                             className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10 py-2 px-3 border-2 border-white hover:border-2 hover:border-white"
                         />
                         {errors.lectureTitle &&(
@@ -153,7 +153,7 @@ function SubSectionModal({
                             disabled={view || loading}
                             id="lectureDesc"
                             placeholder="Enter lecture Description"
-                            {...register("lectureDesc", { required: true})}
+                            { ...register("lectureDesc", { required: true}) }
                             className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none !pr-10 resize-x-none min-h-[130px] w-full py-2 px-3 hover:border-2 hover:border-white border-2 border-white"
                         />
                         {errors.lectureDesc && (
