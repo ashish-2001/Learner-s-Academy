@@ -4,7 +4,15 @@ import { FaArrowRight } from "react-icons/fa";
 import { HtmlAnimation } from "../../../utils/CodeAnimation";
 
 
-function CodeBlocks({ position, heading, subHeading, ctaBtn1, ctaBtn2, codeBlock, backgroundGradient }){
+function CodeBlocks({ 
+    position, 
+    heading, 
+    subHeading, 
+    ctaBtn1, 
+    ctaBtn2, 
+    codeBlock, 
+    backgroundGradient 
+}){
     return(
         <div className={`flex ${position} my-20 justify-between flex flex-col lg:gap-10 gap-10`}>
             <div className="w-[100%] lg:w-[50%] flex flex-col gap-8">

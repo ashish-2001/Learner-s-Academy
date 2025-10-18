@@ -1,9 +1,10 @@
 import { toast } from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { catalogData } from "../apis";
+import { setProgress } from "../../slices/loadingBarSlice";
 
-async function getCatalogPageData(categoryId){
-    const toastId = toast.loading("Loading...")
+async function getCatalogPageData(categoryId, dispatch){
+    dispatch(setProgress(50));
     let result = [];
 
     try{
@@ -15,12 +16,12 @@ async function getCatalogPageData(categoryId){
         }
         result = response?.data
     } catch(error){
-        console.log("CATALOGPAGEDATA_API api error...........", error)
+        console.log("CATALOG PAGEDATA API api error...........", error)
         toast.error(error.message)
         result = error.message?.data
     }
-    toast.dismiss(toastId)
-    return result
+    dispatch(setProgress(100));
+    return result;
 }
 
 

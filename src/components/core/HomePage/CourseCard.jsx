@@ -2,7 +2,11 @@ import React from "react";
 import { HiUsers } from "react-icons/hi";
 import { ImTree } from "react-icons/im";
 
-function CourseCard({ cardData, currentCard, setCurrentCard }) {
+function CourseCard({ 
+    cardData, 
+    currentCard, 
+    setCurrentCard 
+}) {
     return (
         <div
             className={`w-[360px] lg:w-[30%] ${
@@ -11,14 +15,14 @@ function CourseCard({ cardData, currentCard, setCurrentCard }) {
                 : "bg-[#161D29]"
             } text-[#DBDDEA] h-[300px] box-border cursor-pointer`}
             onClick={() => setCurrentCard(cardData?.heading)}
-            >
+        >
             <div className="border-b-[2px] border-[#6E727F] border-dashed h-[80%] p-6 flex flex-col gap-3">
                 <div
-                className={`${
-                    currentCard === cardData?.heading && "text-[#161D29]"
-                } font-semibold text-[20px]`}
+                    className={`${
+                        currentCard === cardData?.heading && "text-[#161D29]"
+                    } font-semibold text-[20px]`}
                 >
-                {cardData?.heading}
+                    {cardData?.heading}
                 </div>
 
                 <div className="text-[#838894]">{cardData?.description}</div>
@@ -31,8 +35,8 @@ function CourseCard({ cardData, currentCard, setCurrentCard }) {
             >
                 {/* Level */}
                 <div className="flex items-center gap-2 text-[16px]">
-                <HiUsers />
-                <p>{cardData?.level}</p>
+                    <HiUsers />
+                    <p>{cardData?.level}</p>
                 </div>
 
                 {/* Lesson */}

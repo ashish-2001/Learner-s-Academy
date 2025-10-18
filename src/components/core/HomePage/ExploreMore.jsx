@@ -40,7 +40,9 @@ function ExploreMore(){
                     return(
                         <div className={`text-[16px] flex flex-row items-center gap-2 ${
                             currentTab === ele ? "bg-[#000814] text-[#F1F2FF] font-medium" : "text-[999DAA]"
-                        } px-7 py-[7px] rounded-full transition-all duration-200 cursor-pointer hover:bg-[#000814] hover:text-[#F1F2FF]`} key={index} onClick={() => setMyCards(ele)}>
+                            } px-7 py-[7px] rounded-full transition-all duration-200 cursor-pointer hover:bg-[#000814] hover:text-[#F1F2FF]`} 
+                            key={index} 
+                            onClick={() => setMyCards(ele)}>
                             {ele}
                         </div>
                     )

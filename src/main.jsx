@@ -6,8 +6,9 @@ import { BrowserRouter } from 'react-router-dom'
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from "react-redux"
 import { rootReducer } from './reducer/index.jsx';
+import { ScrollToTop } from "./components/ScrollToTop";
 import { Toaster } from 'react-hot-toast';
-
+import swDev from './swDev.js';
 
 const store = configureStore({
     reducer: rootReducer
@@ -16,8 +17,10 @@ const store = configureStore({
 createRoot(document.getElementById('root')).render(
         <Provider store={store}>
             <BrowserRouter>
+                <ScrollToTop/>
                 <App />
                 <Toaster/>
             </BrowserRouter>
         </Provider>
-)
+);
+swDev();

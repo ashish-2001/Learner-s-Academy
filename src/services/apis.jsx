@@ -5,14 +5,14 @@ const endpoints = {
     SENDOTP_API: BASE_URL + "/auth/sendotp",
     SIGNUP_API: BASE_URL + "/auth/signup",
     LOGIN_API: BASE_URL + "/auth/login",
-    RESETPASSTOKEN_API: BASE_URL + "/auth/resetpasswordtoken",
-    RESETPASSWORD_API: BASE_URL + "/auth/resetpassword",
+    RESETPASSTOKEN_API: BASE_URL + "/auth/reset-password-token",
+    RESETPASSWORD_API: BASE_URL + "/auth/reset-password",
 }
 
 const profileEndpoints = {
     GET_USER_DETAILS_API: BASE_URL + "/profile/getUserDetails",
     GET_USER_ENROLLED_COURSES_API: BASE_URL + "/profile/getEnrolledCourses",
-    GET_INSTRUCTOR_DATA_API: BASE_URL + "/profile/instructorDashboard",
+    GET_ALL_INSTRUCTOR_DASHBOARD_DETAILS_API: BASE_URL + "/profile/getInstructorDashboardDetails",
 }
 
 const studentEndpoints = {
@@ -35,10 +35,12 @@ const courseEndpoints = {
     DELETE_SECTION_API: BASE_URL + "/course/deleteSection",
     DELETE_SUBSECTION_API: BASE_URL + "/course/deleteSubSection",
     DELETE_COURSE_API: BASE_URL + "/course/deleteCourse",
-    GET_FULL_COURSE_DETAILS_AUTHENTICATED:
-    BASE_URL + "/course/getFullCourseDetails",
+    GET_FULL_COURSE_DETAILS_AUTHENTICATED: BASE_URL + "/course/getFullCourseDetails",
     LECTURE_COMPLETION_API: BASE_URL + "/course/updateCourseProgress",
     CREATE_RATING_API: BASE_URL + "/course/createRating",
+    ADD_COURSE_TO_CATEGORY_API: BASE_URL + "/course/addCourseToCategory",
+    SEARCH_COURSES_API: BASE_URL + "/course/searchCourse",
+    CREATE_CATEGORY_API: BASE_URL + "/course/createCategory"
 }
 
 const ratingsEndpoints = {
@@ -54,7 +56,7 @@ const catalogData = {
 }
 
 const contactUsEndpoint = {
-    CONTACT_US_API: BASE_URL + "/reach/contact",
+    CONTACT_US_API: BASE_URL + "/contact/contactUs",
 }
 
 const settingsEndpoints = {

@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchInstructorCourses } from "../../../services/operations/courseDetailsAPI";
-import { getInstructorData } from "../../../services/operations/profileAPI";
+import { getInstructorDashboard } from "../../../services/operations/profileAPI";
 import { InstructorChart } from "./InstructorDashboard/InstructorChart";
 import { useSelector } from "react-redux";
 
@@ -16,7 +16,7 @@ function Instructor(){
     useEffect(() => {
         ;(async () => {
             setLoading(true)
-            const instructorApiData = await getInstructorData(token)
+            const instructorApiData = await getInstructorDashboard(token)
             const result = await fetchInstructorCourses(token);
             if(instructorApiData.length){
                 setInstructorData(instructorApiData);

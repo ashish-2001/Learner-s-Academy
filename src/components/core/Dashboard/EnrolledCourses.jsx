@@ -1,10 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import  ProgressBar from "@ramonak/react-progress-bar";
-import { BiDotsVerticalRounded } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getUserEnrolledCourses } from "../../../services/operations/profileAPI";
+import { getUserCourses as getUserEnrolledCourses } from "../../../services/operations/profileAPI";
 
 function EnrolledCourses(){
     const { token } = useSelector((state) => state.auth)

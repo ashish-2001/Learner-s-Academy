@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import reducer from "./cartSlice";
 
 const initialState = {
     step: 1,
@@ -27,7 +26,7 @@ const courseSlice = createSlice({
         },
         resetCourseState: (state) =>{
             state.step = 1
-            state.course = 1
+            state.course = null
             state.editCourse = false
         }
     
@@ -41,4 +40,4 @@ export const {
     resetCourseState
 } = courseSlice.actions
 
-export default courseSlice.reducer
+export default courseSlice.reducer;

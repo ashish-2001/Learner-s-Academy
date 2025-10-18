@@ -43,7 +43,7 @@ const cartSlice = createSlice({
 
         if(index >= 0){
             state.totalItems--
-            state.total -=state.cart[index].price
+            state.total -= state.cart[index].price
             state.cart.splice(index, 1)  
 
             localStorage.setItem("cart", JSON.stringify(state.cart))
