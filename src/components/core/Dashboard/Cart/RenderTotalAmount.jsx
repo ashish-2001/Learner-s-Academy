@@ -13,7 +13,13 @@ function RenderTotalAmount(){
 
     const handleBuyCourse = () => {
         const courses = cart.map((course) => course._id);
-        BuyCourse(token, courses, user, navigate, dispatch);
+        console.log("Bought these courses", courses);
+        if(token){
+            const courses = cart.map((course) => course._id);
+            BuyCourse(token, courses, user, navigate, dispatch);
+        }else{
+            navigate('/login');
+        }
     }
 
     return(
@@ -23,7 +29,7 @@ function RenderTotalAmount(){
             <IconBtn
                 text={"Buy Now"}
                 onClick={handleBuyCourse}
-                customClasses={"w-full justify-center"}
+                customClasses={"flex items-center bg-yellow-50 cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-richblack-900 w-full justify-center"}
             />
         </div>
     )

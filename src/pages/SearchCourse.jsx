@@ -10,7 +10,7 @@ function SearchCourse(){
     const dispatch = useDispatch();
     const { searchQuery } = useParams();
 
-    asyn function fetchSearchResults(){
+    async function fetchSearchResults(){
         setLoading(true);
         const res = await searchCourses(searchQuery, dispatch);
         setSearchResults(res);

@@ -48,7 +48,7 @@ function Upload({
     }
 
     useEffect(() => {
-        register(name, { required: true})
+        register(name, { required: true })
     }, [register])
 
     useEffect(() => {
@@ -88,12 +88,14 @@ function Upload({
                         )}
                     </div>
                 ) : (
+                    <label htmlFor="video" className="">
                     <div className="flex w-full flex-col items-center p-6" 
                         {...getRootProps()}
                     >
                         <input
                             ref={inputRef}
                             {...getInputProps()}
+                            id="video"
                         />
                         <div className="grid aspect-square w-14 place-items-center rounded-full bg-gray-800">
                             <FiUploadCloud className="text-2xl text-[#FFD60A]"/>
@@ -107,6 +109,7 @@ function Upload({
                             <li>Recommended size 1024*576</li>
                         </ul>
                     </div>
+                    </label>
                 )}
             </div>
             {errors[name] && (

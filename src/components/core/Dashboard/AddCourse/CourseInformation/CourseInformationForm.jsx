@@ -7,10 +7,10 @@ import {
     editCourseDetails,
     fetchCourseCategories
 } from "../../../../../services/operations/courseDetailsAPI";
-import { setCourse, setStep } from "../../../../../slices/courseSlice";
+import { setCourse, setEditCourse, setStep } from "../../../../../slices/courseSlice";
 import { COURSE_STATUS } from "../../../../../utils/constants";
 import { IconBtn } from "../../../../Common/IconBtn";
-import { Upload } from "../Upload";
+import { Upload } from "../CourseBuilder/Upload";
 import { ChipInput } from "./ChipInput";
 import { RequirementsField } from "./RequirementsField";
 import { useForm } from "react-hook-form";
@@ -46,7 +46,7 @@ function CourseInformationForm(){
             setValue("courseTitle", course.courseName)
             setValue("courseShortDesc", course.courseDescription)
             setValue("coursePrice", course.price);
-            setValue("courseTags", course.tags);
+            setValue("courseTags", course.tag);
             setValue("courseBenefits", course.whatWillYouLearn);
             setValue("courseCategory", course.category);
             setValue("courseRequirements", course.instructions);
@@ -67,9 +67,9 @@ function CourseInformationForm(){
             currentValues.courseRequirements.toString() !== course.instructions.toString() ||
             currentValues.courseImage !== course.thumbnail
         ){
-            return true
+            return true;
         }
-        return false
+        return false;
     }
 
     const onSubmit = async(data) => {
@@ -108,32 +108,40 @@ function CourseInformationForm(){
                 const result = await editCourseDetails(formData, token)
                 setLoading(false)
                 if(result){
+                    dispatch(setEditCourse(false));
                     dispatch(setStep(2))
                     dispatch(setCourse(result))
                 }
             } else{
                 toast.error("No changes made to the form")
             }
-            return
+            console.log("Printing formdata", formData);
+            console.log("Printing result", result);
+            return;
         }
 
         const formData = new FormData();
-        formData.append("courseName", data.courseTitle)
+        formData.append("courseName", data.courseTitle);
         formData.append("courseDescription", data.courseShortDesc);
         formData.append("price", data.coursePrice);
-        formData.append("tag", JSON.stringify(data.courseTags))
-        formData.append("whatWillYouLearn", data.courseBenefits)
-        formData.append("category", data.courseCategory)
-        formData.append("status", COURSE_STATUS.DRAFT)
+        formData.append("tag", JSON.stringify(data.courseTags));
+        formData.append("whatWillYouLearn", data.courseBenefits);
+        formData.append("category", data.courseCategory);
+        formData.append("status", COURSE_STATUS.DRAFT);
         formData.append("instructions", JSON.stringify(data.courseRequirements));
-        formData.append("thumbnailImage", data.courseImage)
-        setLoading(true)
+        formData.append("thumbnailImage", data.courseImage);
+        setLoading(true);
+        console.log("Before course api call");
+        console.log("Printing form data", formData);
         const result = await addCourseDetails(formData, token);
         if(result){
             dispatch(setStep(2))
             dispatch(setCourse(result));
         }
-        setLoading(false)
+        setLoading(false);
+        console.log("After add course api call");
+        console.log("Printing form data", [...formData]);
+        console.log("Printing result", result);
     }
 
     return(
@@ -180,14 +188,11 @@ function CourseInformationForm(){
                         placeholder="Enter Course Price"
                         {...register("coursePrice", {
                             required: true,
-                            valueAsNumber: true,
-                            pattern: {
-                                value: /^(0|[1-9]\d*)(\.\d+)?$/
-                            }
+                            valueAsNumber: true
                         })} 
                         className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none !pr-10 w-full "
                     />
-                    <HiOutlineCurrencyRupee className="absolute left-3 top-1/2 inline-block -translate-y-1/2 text-2xl text-[#6E727F] "/>
+                    <HiOutlineCurrencyRupee size={30} className="absolute left-3 top-1/2 inline-block -translate-y-1/2 text-2xl text-[#6E727F] "/>
                 </div>
                 {errors.coursePrice && (
                     <span className="ml-2 text-xs tracking-wide text-red-600">
@@ -200,6 +205,7 @@ function CourseInformationForm(){
                     Course Category <sup className="text-red-600">*</sup>
                 </label>
                 <select 
+                    disabled={editCourse}
                     {...register("courseCategory", { required: true })} 
                     className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10" 
                     defaultValue="" 
@@ -221,7 +227,7 @@ function CourseInformationForm(){
             <ChipInput
                 label={"Tags"}
                 name={"courseTags"}
-                placeholder={"Enter tags..."}
+                placeholder="Enter tags and press enter"
                 register={register}
                 errors={errors}
                 setValue={setValue}
@@ -229,11 +235,10 @@ function CourseInformationForm(){
             />
             <Upload
                 name="courseImage"
-                label="Course Thumbnail"
+                label="CourseImage"
                 register={register}
                 setValue={setValue}
                 errors={errors}
-                editCourse={editCourse ? course?.thumbnail : null}
             />
             <div className="flex flex-col space-y-2">
                 <label className="text-sm text-[#F1F2FF]" htmlFor="courseBenefits">
@@ -263,13 +268,12 @@ function CourseInformationForm(){
                 {editCourse && (
                     <button 
                         onClick={() => dispatch(setStep(2))}
-                        disabled={loading}
                         className="flex cursor-pointer items-center gap-x-2 rounded-md bg-[#838894] py-[8px] px-[20px] font-semibold text-[#000814]"
                     >
                         Continue Without Saving
                     </button>
                 )}
-                <IconBtn text={!editCourse ? "Next" : "Save Changes"} disabled={loading}>
+                <IconBtn type={"submit"} text={!editCourse ? "Next" : "Save Changes"} disabled={loading}>
                     <MdNavigateNext/>
                 </IconBtn>
             </div>

@@ -14,28 +14,30 @@ function RequirementsField({
     const [requirements, setRequirements] = useState("");
     const [requirementsList, setRequirementsList] = useState([]);
 
-    useEffect(() => {
-        if(editCourse){
-            setRequirementsList(course?.instructions);
-        }
-        register(name, { required: true, validate: (value) => value.length > 0})
-    }, [])
+        useEffect(() => {
+            register(name, {
+                required: true
+            });
+        }, []);
 
     useEffect(() => {
         setValue(name, requirementsList)
-    }, [requirementsList])
+        if(editCourse){
+            setRequirementsList(course?.instructions);
+            setValue(name, course?.instructions);
+        }
+    }, [requirementsList]);
 
     const handleAddRequirement = () => {
         if(requirements){
-            setRequirementsList([...requirementsList, requirements])
-            setRequirements("");
+            setRequirementsList([...requirementsList, requirements]);
         }
     }
 
     const handleRemoveRequirement = (index) => {
-        const updatedRequirements = [...requirementsList]
-        updatedRequirements.splice(index, 1)
-        setRequirementsList(updatedRequirements)
+        const updatedRequirementsList = [...requirementsList]
+        updatedRequirementsList.splice(index, 1)
+        setRequirementsList(updatedRequirementsList)
     }
 
     return(
@@ -61,7 +63,8 @@ function RequirementsField({
             </div>
             {requirementsList.length > 0 && (
                 <ul className="mt-2 list-inside list-disc">
-                    {requirementsList.map((requirement, index) => (
+                    {
+                        requirementsList.map((requirement, index) => (
                         <li key={index} className="flex items-center text-[#F1F2FF]">
                             <span>{requirement}</span>
                             <button 

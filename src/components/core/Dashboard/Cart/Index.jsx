@@ -4,19 +4,11 @@ import { RenderCartCourses } from "./RenderCartCourses";
 import { RenderTotalAmount } from "./RenderTotalAmount";
 
 function Cart(){
+    
     const { total, totalItems } = useSelector((state) => state.cart);
-    const { paymentLoading } = useSelector((state) => state.course);
-
-    if(paymentLoading){
-        return (
-            <div className="flex h-screen items-center justify-center">
-                <div className="spinner"></div>
-            </div>
-        )
-    }
 
     return (
-            <>
+            <div className="mx-auto w-11/12 max-w-[100px] py-10">
                 <h1 className="mb-14 text3xl font-medium text-[#F1F2FF]">Cart</h1>
                 <p className="border-b border-b-[#6E727F] pb-2 font-semibold text-[#6E727F]">
                     {totalItems} Courses in Cart
@@ -29,7 +21,7 @@ function Cart(){
                 ) : (
                     <p className="mt-14 text-center text-3xl text-[#AFB2BF]">Your Cart is empty</p>
                 )}
-            </>
+            </div>
         )
 }
 

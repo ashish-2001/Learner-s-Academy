@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Table, Tbody, Td, Th, Thead, Tr } from "react-super-responsive-table";
 import { useState } from "react";
 import { FaCheck } from "react-icons/fa";
@@ -14,6 +14,7 @@ import { ConfirmationModalData } from "../../../Common/ConfirmationModal";
 
 function CoursesTable({ courses, setCourses }){
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const { token } = useSelector((State) => State.auth)
     const [loading, setLoading] = useState(false);
     const [confirmationModal, setConfirmationModal] = useState(null);
@@ -28,6 +29,12 @@ function CoursesTable({ courses, setCourses }){
         }
         setConfirmationModal(null)
         setLoading(false)
+    }
+
+    if(loading){
+        return(
+            <div className="custom-loader"></div>
+        )
     }
 
     return(
