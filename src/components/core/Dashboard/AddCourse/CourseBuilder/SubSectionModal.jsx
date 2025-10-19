@@ -11,6 +11,7 @@ import {
 import { setCourse } from "../../../../../slices/courseSlice";
 import { IconBtn } from "../../../../Common/IconBtn";
 import { Upload } from "../Upload";
+
 function SubSectionModal({
     modalData,
     setModalData,
@@ -40,21 +41,20 @@ function SubSectionModal({
     }, [])
 
     const isFormUpdated = () => {
-        const currentValues = getValues()
+        const currentValues = getValues();
         if(currentValues.lectureTitle !== modalData.title || 
             currentValues.lectureDesc !== modalData.description || 
             currentValues.lectureVideo !== modalData.videoUrl
         ){
-            return true
+            return true;
         }
-        return false
+        return false;
     }
 
-    const handleEditSubSection = async () => {
-        const currentValues = getValues()
+    const handleEditSubSection = async (data) => {
+        const currentValues = getValues();
         const formData = new FormData();
-        formData.append("sectionId", modalData.sectionId)
-        formData.append("subSectionId", modalData._id)
+        formData.append("SubSectionId", modalData._id);
         if(currentValues.lectureTitle !== modalData.title){
             formData.append("title", currentValues.lectureTitle)
         }
@@ -64,48 +64,43 @@ function SubSectionModal({
         if(currentValues.lectureVideo !== modalData.videoUrl){
             formData.append("video", currentValues.lectureVideo)
         }
-        setLoading(true)
-        const result = await updateSubSection(formData, token)
-
+        formData.append("courseId", course._id);
+        
+        const result = await updateSubSection(formData, token);
         if(result){
-            const updatedCourseContent = course.courseContent.map((section) => section._id === modalData.sectionId ? result : section)
-            const updatedCourse = { ...course, courseContent: updatedCourseContent}
-            dispatch(setCourse(updatedCourse))
+            dispatch(setCourse(result));
         }
-        setModalData(null)
-        setLoading(false)
+        setModalData(null);
     }
 
+
     const onSubmit = async (data) => {
-        if(view) return
+        if(view) return;
         if(edit){
             if(!isFormUpdated()){
-                toast.error("No changes made to the form")
+                toast.error("No changes made")
             }
             else{
-                handleEditSubSection
+                handleEditSubSection(data);
             }
-            return
+            return;
         }
 
         const formData = new FormData();
-        formData.append("sectionId", modalData)
+        formData.append("sectionId", modalData);
         formData.append("title", data.lectureTitle);
         formData.append("description", data.lectureDesc)
         formData.append("video", data.lectureVideo)
-        setLoading(true)
+        formData.append("courseId", course._id);
+        
         const result = await createSubSection(formData, token);
 
         if(result){
-            const updatedCourseContent = course.courseContent.map((section) => section._id === modalData ? result : section)
-            const updatedCourse = { ...course, courseContent: updatedCourseContent}
-            dispatch(setCourse(updatedCourse))
+            dispatch(setCourse(result));
         }
-        setModalData(null)
-        setLoading(false)
+        setModalData(null);
     }
-    
-    return (
+        return (
         <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
             <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-[#6E727F] bg-[#161D29]">
                 <div className="flex items-center justify-between rounded-t-lg bg-[#2C333F] p-5">
@@ -175,6 +170,7 @@ function SubSectionModal({
         </div>
     )
 }
+    
 
 export {
     SubSectionModal

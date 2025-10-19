@@ -4,7 +4,7 @@ import { LoginForm } from "./LoginForm";
 import { SignupForm } from "./SignupForm";
 import { frame } from "../../../assets/images";
 
-function Template({title, description1, description2, formType}){
+function Template({ title, description1, description2, image, formType }){
     const { loading } = useSelector((state) => state.auth);
 
     return (

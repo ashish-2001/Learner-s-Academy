@@ -13,19 +13,37 @@ import { useForm } from "react-hook-form";
 
 function CourseBuilderForm(){
 
-    const { register, handleSubmit, setValue, formState: { errors }} = useForm();
-
     const { course } = useSelector((state) => state.course);
     const { token } = useSelector((state) => state.auth)
     const [loading, setLoading] = useState(false);
     const [editSectionName, setEditSectionName] = useState(null);
     const dispatch = useDispatch();
 
+    const { 
+        register, 
+        handleSubmit, 
+        setValue, 
+        getValues,
+        formState: { errors }
+    } = useForm();
+
+    const goToNext = () => {
+        if(course.courseContent.length > 0){
+            if(course.courseContent.some((Section) => section.subSection.length > 0)){
+                dispatch(setStep(3));
+            }else{
+                toast.error("Please add at least one lesson to each section");
+            }
+        }else{
+            toast.error("Please add at least one section to continue");
+        }
+    };
 
     const onSubmit = async (data) => {
+
         setLoading(true);
 
-        let result;
+        let result = null;
 
         if(editSectionName){
             result = await updateSection(
@@ -40,6 +58,7 @@ function CourseBuilderForm(){
             result = await createSection(
                 {
                     sectionName: data.sectionName,
+                    sectionId: editSectionName,
                     courseId: course._id
                 },
                 token
@@ -47,36 +66,24 @@ function CourseBuilderForm(){
         }
         if(result){
             dispatch(setCourse(result))
-            setEditSectionName(null);
+            setEditSectionName(false);
             setValue("sectionName", "")
         }
         setLoading(false)
     }
 
     const cancelEdit = () => {
-        setEditSectionName(null)
+        setEditSectionName(false)
         setValue("sectionName", "")
     }
 
     const handleChangeEditSectionName = (sectionId, sectionName) => {
         if(editSectionName === sectionId){
             cancelEdit()
-            return
+            return;
         }
         setEditSectionName(sectionId)
         setValue("sectionName", sectionName)
-    }
-
-    const goToNext = () => {
-        if(course.courseContent.length === 0){
-            toast.error("Please add at least one section")
-            return;
-        }
-        if(course.courseContent.some((section) => section.subSection.length === 0)){
-            toast.error("Please add at least one lecture in each section")
-            return
-        }
-        dispatch(setStep(3))
     }
 
     const goBack = () => {
@@ -95,7 +102,7 @@ function CourseBuilderForm(){
                     <input
                         id="sectionName"
                         disabled={loading}
-                        placeholder="add a section to build a course"
+                        placeholder="Add a section to build your course"
                         {...register("sectionName", { required: true })}
                         className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline w-full "
                     />

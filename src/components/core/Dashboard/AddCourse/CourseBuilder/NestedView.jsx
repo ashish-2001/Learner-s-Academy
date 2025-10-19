@@ -10,6 +10,7 @@ import { setCourse } from "../../../../../slices/courseSlice";
 import { ConfirmationModalData } from "../../../../Common/ConfirmationModal";
 import { SubSectionModal } from "./SubSectionModal";
 import { useState } from "react";
+import { VscAdd, VscEdit, VscTrash, VscTriangleDown } from "react-icons/vsc";
 
 function NestedView({ handleChangeEditSectionName }){
     const { course } = useSelector((state) => state.course);
@@ -24,29 +25,27 @@ function NestedView({ handleChangeEditSectionName }){
         const result = await deleteSection({
             sectionId,
             courseId: course._id,
-            token
-        })
+        }, token);
+
         if(result){
-            dispatch(setCourse(result))
+            dispatch(setCourse(result));
+            setConfirmationModal(null);
         }
-        setConfirmationModal(null)
     }
 
     const handleDeleteSubSection = async (subSectionId, sectionId) => {
-        const result = await deleteSubSection({subSectionId, sectionId, token})
+        const result = await deleteSubSection({subSectionId, sectionId, courseId: course._id}, token)
         if(result){
-            const updatedCourseContent = course.courseContent.map((section) => section._id === sectionId ? result : section)
-            const updatedCourse = { ...course, courseContent: updatedCourseContent }
-            dispatch(setCourse(updatedCourse))
+            dispatch(setCourse(result));
+            setConfirmationModal(null);
         }
-        setConfirmationModal(null)
     }
 
     return(
-        <>
-        <div id="nestedViewContainer" className="rounded-lg bg-[#2C333F] p-6 px-8">
+        <div>
+        <div>
             {course?.courseContent?.map((section) => (
-                <details key={section._id} open>
+                <details key={section._id} open className="mt-4">
                     <summary className="flex cursor-pointer items-center justify-between border-b-2 border-b-[#424854] py-2">
                         <div className="flex items-center gap-x-3">
                             <RxDropdownMenu className="text-2xl text-[#C5C7D4]"/>
@@ -55,64 +54,70 @@ function NestedView({ handleChangeEditSectionName }){
                             </p>
                         </div>
                         <div className="flex items-center gap-x-3">
-                            <button onClick={() => handleChangeEditSectionName(section._id, section.sectionName)}>
-                                <MdEdit className="text-xl text-[#838894]"/>
+                            <button >
+                                <VscEdit 
+                                    className="text-xl text-[#838894]"
+                                    onClick={() => handleChangeEditSectionName(section._id, section.sectionName)}
+                                />
                             </button>
-                            <button 
-                                onClick={() => 
-                                setConfirmationModal({
-                                text1: "Delete this section",
-                                text2: "All the lectures in this section will be deleted",
-                                btn1text: "Delete",
-                                btn2Text: "Cancel",
-                                btn1Handler: () => handleDeleteSection(section._id),
-                                btn2Handler: () => setConfirmationModal(null)
-                            })}>
-                                <RiDeleteBin6Line className="text-xl text-[#838894]"/>
+                            <button>
+                                <VscTrash 
+                                    onClick={() => 
+                                        setConfirmationModal({
+                                        text1: "Delete this section",
+                                        text2: "All the lectures in this section will be deleted",
+                                        btn1text: "Delete",
+                                        btn2Text: "Cancel",
+                                        btn1Handler: () => handleDeleteSection(section._id),
+                                        btn2Handler: () => setConfirmationModal(null)
+                                    })}
+                                    className="text-xl text-[#838894]"/>
                             </button>
                             <span className="font-medium text-[#838894]">|</span>
-                            <AiFillCaretDown className="text-xl text-[#838894]"/>
+                            <VscTriangleDown className="text-xl text-[#838894]"/>
                         </div>
                     </summary>
+
                     <div className="px-6 pb-4">
-                        {section.subSection.map((data) => (
+                        {
+                            section.subSection.map((subSection) => (
                             
                                 <div 
-                                    key={data?.id} 
-                                    onClick={() => 
-                                    setViewSubSection(data)} 
+                                    key={subSection?.id} 
+                                    onClick={(e) => {
+                                    if(e.currentTarget != e.target ) return;setViewSubSection(subSection);}}
                                     className="flex cursor-pointer items-center justify-between gap-x-3 border-b-2 border-b-blue-950 py-2"
                                 >
                                     <div className="flex items-center gap-x-3 py-2">
-                                        <RxDropdownMenu className="text-2xl text-[#C5C7D4]"/>
+                                        <RxDropdownMenu className="text-2xl text-[#C5C7D4]" size={25} />
                                         <p className="font-semibold text-[#C5C7D4]">
-                                            {data.title}
+                                            {subSection.title}
                                         </p>
                                     </div>
                                     <div 
                                         onClick={(e) => e.stopPropagation()}
                                         className="flex items-center gap-x-3"
                                     >
-                                        <button 
-                                            onClick={() => 
-                                            setEditSubSection({...data, sectionId: section._id})
-                                            }
-                                        >
-                                            <MdEdit className="text-xl text-[#838894]"/>
+                                        <button>
+                                            <VscEdit 
+                                                onClick={() => 
+                                                    setEditSubSection(subSection)
+                                                }
+                                                className="text-xl text-[#838894]"
+                                            />
                                         </button>
-                                        <button onClick={() => 
+                                        <button> 
+                                            <VscTrash onClick={() => 
                                                 setConfirmationModal({
                                                 text1:"Delete this Sub-Section",
-                                                text2: "This lecture will be deleted",
+                                                text2: "Selected lecture will be deleted",
                                                 btn1Text: "Delete",
                                                 btn2Delete: "Cancel",
-                                                btn1Handler: () => handleDeleteSubSection(data._id, section._id),
+                                                btn1Handler: () => handleDeleteSubSection(subSection._id, section._id),
                                                 btn2Handler: () => setConfirmationModal(null)
                                             })
-                                            }
-                                            >
-                                                <RiDeleteBin6Line className="text-xl text-[#838894]"/>
-                                            </button>
+                                            }/>
+                                        </button>
                                     </div>
                                 </div>
                         ))}
@@ -120,40 +125,37 @@ function NestedView({ handleChangeEditSectionName }){
                             onClick={() => setAddSubSection(section._id)} 
                             className="mt-3 flex items-center gap-x-1 text-[#FFD60A]"
                         >
-                            <FaPlus className="text-lg"/>
+                            <VscAdd className="text-lg"/>
                             <p>Add Lecture</p>
                         </button>
                     </div>
                 </details>
             ))}
         </div>
-        { addSubSection ? (
+        { addSubSection ? 
             <SubSectionModal
                 modalData={addSubSection}
                 setModalData={setAddSubSection}
                 add={true}
             />
-        ) : viewSubSection ? (
+        : viewSubSection ? 
                 <SubSectionModal
                     modalData={viewSubSection}
                     setModalData={setViewSubSection}
                     view={true}
                 />
-            ) : editSubSection ? (
+        : editSubSection ? 
                 <SubSectionModal
                     modalData={editSubSection}
                     setModalData={setEditSubSection}
                     edit={true}
                 />
-            ) : (
-                <></>
-            )}
-            {confirmationModal ? (
-                <ConfirmationModalData modalData={confirmationModal}/>
-            ) : (
-                <></>
-            )}
-        </>
+        :   null
+        }
+        {
+            confirmationModal ? <ConfirmationModalData modalData={confirmationModal}/> : null
+        }
+        </div>
     )
 }
 
