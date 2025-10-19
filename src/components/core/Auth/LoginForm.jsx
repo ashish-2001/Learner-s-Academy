@@ -4,6 +4,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../../services/operations/authAPI";
+import { setProgress } from "../../../slices/loadingBarSlice";
 
 
 function LoginForm(){
@@ -72,7 +73,11 @@ function LoginForm(){
                     </p>
                 </Link>
             </label>
-            <button type="submit" className="mt-6 rounded-[8px] bg-[#FFD60A] py-[8px] px-[12px] font-medium text-[#000814]">
+            <button 
+                type="submit" 
+                className="mt-6 rounded-[8px] bg-[#FFD60A] py-[8px] px-[12px] font-medium text-[#000814]"
+                onClick={dispatch(setProgress(60))}
+            >
                 Sign in
             </button>
         </form>

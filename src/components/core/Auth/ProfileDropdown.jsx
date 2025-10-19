@@ -17,7 +17,7 @@ function ProfileDropdown(){
     useOnClickOutside(ref, () => setOpen(false));
 
     if(!user){
-        return null;
+        return localStorage.setItem("token", null);
     }
 
     return(
@@ -32,7 +32,7 @@ function ProfileDropdown(){
             </div>
             {open && (
                 <div 
-                    onClick={(e) => e.preventDefault()}
+                    onClick={(e) => e.stopPropagation()}
                     className="absolute top-[118%] right-0 z-[1000] divide-y-[1px] divide-[#2C333F] overflow-hidden rounded-md border-[1px] border-[#2C333F] bg-[#161D29]"
                     ref={ref}
                 >
