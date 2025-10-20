@@ -1,10 +1,8 @@
-import React from "react";
+import React from 'react'
 
-function PurchaseHistory(){
+const PurchaseHistory = () => {
     return (
-        <div className="flex justify-center items-center">
-            Purchase History
-        </div>
+        <div>PurchaseHistory</div>
     )
 }
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getInstructorDashboard } from "../../../../services/operations/profileAPI";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { fetchInstructorCourses } from "../../../../services/operations/courseDetailsAPI";
 import { DashboardChart } from "./DashboardChart";
 
@@ -12,7 +11,6 @@ const InstructorDashboard = () => {
     const { token } = useSelector(state => state.auth);
     const { user }  = useSelector(state => state.profile);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     useEffect(() => {
         ;(async () => {
@@ -85,4 +83,8 @@ const InstructorDashboard = () => {
             </div>
         </div>
     )
+}
+
+export { 
+    InstructorDashboard
 }
