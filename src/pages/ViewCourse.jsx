@@ -1,53 +1,50 @@
-import React from "react";
-import { Outlet, useParams } from "react-router-dom";
-import { CourseReviewModal } from "../components/Core/ViewCourse/CourseReviewModal";
-import { VideoDetailsSidebar } from "../components/Core/ViewCourse/VideoDetailsSidebar"
-import { getFullDetailsOfCourse } from "../services/operations/courseDetailsAPI";
-import {
-    setCompletedLectures,
-    setCourseSectionData,
-    setEntireCourseData,
-    setTotalNoOfLectures
-} from "../slices/viewCourseSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import React from 'react'
+import { Outlet } from 'react-router';
+import { setCompletedLectures, setCourseSectionData, setEntireCourseData, setTotalNoOfLectures } from '../slices/viewCourseSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { ReviewModal } from '../Components/Core/ViewCourse/ReviewModal';
+import { VideoDetailsSidebar } from '../Components/core/ViewCourse/VideoDetailsSidebar';
+import { getFullDetailsOfCourse } from '../services/operations/courseDetailsAPI';
 
-function ViewCourse(){
-    const { courseId } = useParams();
-    const { token } = useSelector((state) =>state.auth)
+const ViewCourse = () => {
+    const [reviewModal, setReviewModal] = useState(false)
+    const {courseId} = useParams();
+    const {token} = useSelector(state => state.auth);
     const dispatch = useDispatch();
-    const [reviewModal, setReviewModal] = useState(false);
 
     useEffect(() => {
-        ;(async() => {
+        const setCourseSpecifics = async () => {
             const courseData = await getFullDetailsOfCourse(courseId, token);
-            dispatch(setCourseSectionData(courseData.courseDetails.courseContent))
-            dispatch(setCompletedLectures(courseData.completedVideos))
-            dispatch(setEntireCourseData(courseData.courseDetails))
+            dispatch(setCourseSectionData(courseData.courseDetails.courseContent));
+            dispatch(setEntireCourseData( courseData.courseDetails));
+            dispatch(setCompletedLectures(courseData.completedVideos));
+            var lecture = 0;
+            courseData?.courseDetails?.courseContent?.forEach((section) => {
+                lecture += section?.subSection?.length;
+            });
+            dispatch(setTotalNoOfLectures(lecture));
+        }
+        setCourseSpecifics();
+    }, [courseId, token, dispatch]);
 
-            let lectures = 0;
-            courseData?.courseDetails?.courseContent?.forEach((sec) => {
-                lectures += sec.subSection.length
-            })
-            dispatch(setTotalNoOfLectures(lectures))
-        })()
-    }, [])
-
-    return(
-        <>
-            <div className="relative flex min-h-[calc(100vh-3.5rem)]">
-                <VideoDetailsSidebar setReviewModal={setReviewModal}/>
-                <div className="h-[calc(100vh-3.5rem)] flex-1 overflow-auto">
-                    <div className="mx-6">
-                        <Outlet/>
-                    </div>
-                </div>
-            </div>
-            {reviewModal && <CourseReviewModal setReviewModal={setReviewModal}/>}
-        </>
-    )
+  return (
+    
+    <div className=' flex w-screen'>
+        <div className=''>
+        <VideoDetailsSidebar setReviewModal={setReviewModal} />
+        </div>
+        <div>
+            <Outlet/>
+        </div>
+        {
+            reviewModal && <ReviewModal setReviewModal={setReviewModal} />
+        }
+    </div>
+  )
 }
-
 
 export {
     ViewCourse

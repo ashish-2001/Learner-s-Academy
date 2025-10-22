@@ -4,11 +4,11 @@ import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { apiConnector } from '../../services/apiConnector';
 import { contactusEndpoint } from '../../services/apis';
-import toast from 'react-hot-toast';
-import countryCode from "../../data/countrycode.json"
+import { toast } from 'react-hot-toast';
+import { CountryCode } from '../../data/CountryCode';
 
 const ContactUsForm = () => {
-    const [loading, setloading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const {register,handleSubmit,reset,formState:{errors,isSubmitSuccessful}}=useForm();
     useEffect(() => {
         if(isSubmitSuccessful){
@@ -25,7 +25,7 @@ const ContactUsForm = () => {
     const onSubmit = async (data) => {
         console.log(data);
         try{
-        setloading(true);
+        setLoading(true);
         const phoneNo = data.countryCode+"  "+data.phoneNo;
         const {firstName,lastName,email,message}=data;
 
@@ -38,7 +38,7 @@ const ContactUsForm = () => {
             toast.error("Something went wrong");
         }
         console.log("contact response",res);
-        setloading(false);
+        setLoading(false);
         }catch(error){
             console.log(error);
         }
@@ -72,7 +72,7 @@ const ContactUsForm = () => {
                 <div className='flex w-[81px] flex-col gap-2'>
                 <select type="text" name="countrycode" id="countryCode" className="form-style" {...register("countryCode",{required:true})}>
                     {
-                        countryCode.map((item,index)=>{
+                        CountryCode.map((item,index)=>{
                             return(
                                 <option key={index} value={item.code}>
                                     {item.code} - {item.country}
@@ -104,4 +104,6 @@ const ContactUsForm = () => {
   )
 }
 
-export default ContactUsForm
+export {
+  ContactUsForm
+}

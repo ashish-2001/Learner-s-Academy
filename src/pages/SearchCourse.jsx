@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { searchCourses } from '../services/operations/courseDetailsAPI'
 import { useState } from 'react'
-import CatalogCard from '../Components/core/Catalog/CatalogCard'
+import { CatalogCard } from '../components/Core/Catalog/Course_Card'
 import { useDispatch } from 'react-redux'
 import {HiOutlineEmojiSad} from 'react-icons/hi'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
@@ -12,11 +12,11 @@ import "react-loading-skeleton/dist/skeleton.css";
 const SearchCourse = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [loading, setLoading] = useState(false);
-    const distpatch= useDispatch();
+    const dispatch= useDispatch();
     const {searchQuery}=useParams();
     const fetchSearchResults= async ()=>{
         setLoading(true);
-        const res = await searchCourses(searchQuery,distpatch);
+        const res = await searchCourses(searchQuery,dispatch);
         setSearchResults(res);
         setLoading(false);
         console.log(res);
@@ -88,4 +88,6 @@ const SearchCourse = () => {
   )
 }
 
-export default SearchCourse
+export {
+  SearchCourse
+}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getInstructorDashboard } from "../../../../services/operations/profileAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchInstructorCourses } from "../../../../services/operations/courseDetailsAPI";
-import { DashboardChart } from "./DashboardChart";
+import { DashboardChart } from "./InstructorChart";
 
 const InstructorDashboard = () => {
     const [details, setDetails] = useState([]);
@@ -40,7 +40,7 @@ const InstructorDashboard = () => {
                         <h1 className="text-2xl font-bold">
                             Hi {user?.firstName}
                         </h1>
-                        <p className="font-medium ">Let's start something new</p>
+                        <p className="font-medium ">Lets start something new</p>
                     </div>
                     <div className="my-4 flex flex-col-reverse gap-3 md:flex-row md:flex md:h-[450px] md:space-x-4">
                         <div className="p-6 flex flex-col flex-1 rounded-md">

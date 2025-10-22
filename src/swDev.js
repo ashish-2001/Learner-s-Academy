@@ -5,4 +5,6 @@ function swDev(){
     });
 };
 
-export default swDev;
+export {
+    swDev
+}

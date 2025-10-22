@@ -6,9 +6,9 @@ function IconBtn({
     children, 
     disabled, 
     outline = false, 
-    customClasses, type 
+    customClasses, 
+    type 
 }){
-
     return (
         <button 
             disabled={disabled} 

@@ -4,16 +4,16 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 const Upload = ({name, label, register, errors, setValue}) => {
-    const [image, setimage] = useState(null)
+    const [image, setImage] = useState(null)
     const {editCourse, course} = useSelector((state) => state.course);
 
-    const handelonchange = (e) => {
+    const handelOnChange = (e) => {
         const file = e.target.files[0];
         setValue(name, e.target.files[0]);
         if(file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                setimage(reader.result);
+                setImage(reader.result);
             }
             reader.readAsDataURL(file);
         }
@@ -24,7 +24,7 @@ const Upload = ({name, label, register, errors, setValue}) => {
 
     useEffect(() => {
         if(editCourse) {
-            setimage(course?.thumbnail);
+            setImage(course?.thumbnail);
         }
     }, [])
     
@@ -37,7 +37,7 @@ const Upload = ({name, label, register, errors, setValue}) => {
             image ? (
                 <div className="flex flex-col space-y-2">
                     <img src={image} alt="" className="h-full w-full rounded-md object-cover"/>
-                    <button type="button" onClick={()=>{setimage(null);setValue(name, null)}} className="text-sm text-richblack-5">Remove</button>
+                    <button type="button" onClick={()=>{setImage(null);setValue(name, null)}} className="text-sm text-richblack-5">Remove</button>
                 </div>
             ) : (
                 <div className="flex flex-col space-y-2">
@@ -52,7 +52,7 @@ const Upload = ({name, label, register, errors, setValue}) => {
       role="presentation"
       tabIndex={0}
     >
-      <input id={label} name={name} type="file" accept="image/*,.jpeg,.jpg,.png" tabIndex="-1" multiple=""  {...register(name, {required:true})} onChange={handelonchange} className="hidden" />
+      <input id={label} name={name} type="file" accept="image/*,.jpeg,.jpg,.png" tabIndex="-1" multiple=""  {...register(name, {required:true})} onChange={handelOnChange} className="hidden" />
       <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
         <svg
           stroke="currentColor"
@@ -89,7 +89,7 @@ const Upload = ({name, label, register, errors, setValue}) => {
                 </span>)
             }
 </div>
-)
+) 
 
         }
         
@@ -99,6 +99,4 @@ const Upload = ({name, label, register, errors, setValue}) => {
   )
 }
 
-export {
-    Upload
-}
+export default Upload
