@@ -8,7 +8,7 @@ import { router as profileRoutes } from "./routes/profileRoutes.js";
 import { router as userRoutes } from "./routes/userRoutes.js";
 import { cloudinaryConnect } from "./config/cloudinary.js";
 import fileUpload from "express-fileupload";
-import { database } from "./config/database.js";
+import { connect } from "./config/database.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -17,7 +17,7 @@ const app = express();
 
 const PORT = process.env.PORT || 4000;
 
-database.connect()
+connect();
 
 app.use(express.json());
 

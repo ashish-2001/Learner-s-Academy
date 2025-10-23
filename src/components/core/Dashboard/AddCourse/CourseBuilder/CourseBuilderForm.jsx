@@ -9,8 +9,8 @@ import {
   setEditCourse,
   setStep,
 } from "../../../../../slices/courseSlice";
-import NestedView from "./NestedView";
-import toast from "react-hot-toast";
+import { NestedView } from "./NestedView";
+import { toast } from "react-hot-toast";
 import {
   createSection,
   updateSection,
@@ -23,17 +23,17 @@ const CourseBuilderForm = () => {
   const dispatch = useDispatch();
   const { course } = useSelector((state) => state.course);
 
-  const gonext = () => {
+  const goNext = () => {
     if (course.courseContent.length > 0) {
       if (
         course.courseContent.some((section) => section.subSection.length > 0)
       ) {
         dispatch(setStep(3));
       } else {
-        toast.error("Please add atleast one lesson to esch section");
+        toast.error("Please add at least one lesson to esch section");
       }
     } else {
-      toast.error("Please add atleast one section to continue");
+      toast.error("Please add at least one section to continue");
     }
   };
 
@@ -87,31 +87,31 @@ const CourseBuilderForm = () => {
   };
 
   return (
-    <div className="space-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6">
-      <p className="text-2xl font-semibold text-richblack-5">Course Builder</p>
+    <div className="space-y-8 rounded-md border-[1px] border-[#2C333F] bg-[#161D29] p-6">
+      <p className="text-2xl font-semibold text-[#F1F2FF]">Course Builder</p>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <label className="text-sm text-richblack-5" htmlFor="sectionName">
-          Section Name<sup className="text-pink-200">*</sup>
+        <label className="text-sm text-[#F1F2FF]" htmlFor="sectionName">
+          Section Name<sup className="text-[#EF476F]">*</sup>
         </label>
         <input
           id="sectionName"
           placeholder="Add a section to build your course"
           name="sectionName"
-          className="form-style w-full"
+          className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full"
           {...register("sectionName", { required: true })}
         />
         {errors.sectionName && (
-          <p className="ml-2 text-xs tracking-wide text-pink-200">This field is required</p>
+          <p className="ml-2 text-xs tracking-wide text-[#EF476F]">This field is required</p>
         )}
         <div className="flex items-end gap-x-4">
           <button
             type="submit"
-            className="flex items-center border border-yellow-50 bg-transparent cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-richblack-900 undefined"
+            className="flex items-center border border-[#FFD60A] bg-[#ffffff00] cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-[#000814] undefined"
           >
-            <span className="text-yellow-50">
+            <span className="text-[#FFD60A]">
               {editSectionName ? "Edit Section Name" : "Create Section"}
             </span>
-            <AiOutlinePlusCircle size={20} className="text-yellow-50" />
+            <AiOutlinePlusCircle size={20} className="text-[#FFD60A]" />
           </button>
           {editSectionName && (
             <button
@@ -120,7 +120,7 @@ const CourseBuilderForm = () => {
                 setValue("sectionName", "");
               }}
               type="button"
-              className="text-sm text-richblack-300 underline"
+              className="text-sm text-[#838894] underline"
             >
               Cancel Edit
             </button>
@@ -134,13 +134,13 @@ const CourseBuilderForm = () => {
             dispatch(setEditCourse(true));
             dispatch(setStep(1));
           }}
-          className="flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900"
+          className="flex cursor-pointer items-center gap-x-2 rounded-md bg-[#838894] py-[8px] px-[20px] font-semibold text-[#000814]"
         >
           Back
         </button>
         <button
-          onClick={gonext}
-          className="flex items-center bg-yellow-50 cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-richblack-900 undefined"
+          onClick={goNext}
+          className="flex items-center bg-[#FFD60A] cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-[#000814] undefined"
         >
           <span className="false">Next</span>
           <svg
@@ -161,4 +161,6 @@ const CourseBuilderForm = () => {
   );
 };
 
-export default CourseBuilderForm;
+export {
+  CourseBuilderForm
+}

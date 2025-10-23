@@ -7,7 +7,7 @@ import { useSelector } from "react-redux"
 import "video-react/dist/video-react.css"
 import { Player } from "video-react"
 
-export default function Upload({
+ function Upload({
   name,
   label,
   register,
@@ -60,13 +60,13 @@ export default function Upload({
 
   return (
     <div className="flex flex-col space-y-2">
-      <label className="text-sm text-richblack-5" htmlFor={name}>
-        {label} {!viewData && <sup className="text-pink-200">*</sup>}
+      <label className="text-sm text-[#F1F2FF]" htmlFor={name}>
+        {label} {!viewData && <sup className="text-[#EF476F]">*</sup>}
       </label>
       <div
         className={`${
-          isDragActive ? "bg-richblack-600" : "bg-richblack-700"
-        } flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-richblack-500`}
+          isDragActive ? "bg-[#424854]" : "bg-[#2C333F]"
+        } flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-[#585D69]`}
       >
         {previewSource ? (
           <div className="flex w-full flex-col p-6">
@@ -87,7 +87,7 @@ export default function Upload({
                   setSelectedFile(null)
                   setValue(name, null)
                 }}
-                className="mt-3 text-richblack-400 underline"
+                className="mt-3 text-[#6E727F] underline"
               >
                 Cancel
               </button>
@@ -101,15 +101,15 @@ export default function Upload({
           >
             <input {...getInputProps()} ref={inputRef} id="video" />
               
-            <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
-              <FiUploadCloud className="text-2xl text-yellow-50" />
+            <div className="grid aspect-square w-14 place-items-center rounded-full bg-[#CCCCCC]">
+              <FiUploadCloud className="text-2xl text-[#FFD60A]" />
             </div>
-            <p className="mt-2 max-w-[200px] text-center text-sm text-richblack-200">
+            <p className="mt-2 max-w-[200px] text-center text-sm text-[#999DAA]">
               Drag and drop an {!video ? "image" : "video"}, or click to{" "}
-              <span className="font-semibold text-yellow-50">Browse</span> a
+              <span className="font-semibold text-[#FFD60A]">Browse</span> a
               file
             </p>
-            <ul className="mt-10 flex list-disc justify-between space-x-12 text-center  text-xs text-richblack-200">
+            <ul className="mt-10 flex list-disc justify-between space-x-12 text-center  text-xs text-[#999DAA]">
               <li>Aspect ratio 16:9</li>
               <li>Recommended size 1024x576</li>
             </ul>
@@ -118,10 +118,14 @@ export default function Upload({
         )}
       </div>
       {errors[name] && (
-        <span className="ml-2 text-xs tracking-wide text-pink-200">
+        <span className="ml-2 text-xs tracking-wide text-[#EF476F]">
           {label} is required
         </span>
       )}
     </div>
   )
+}
+
+export {
+  Upload
 }

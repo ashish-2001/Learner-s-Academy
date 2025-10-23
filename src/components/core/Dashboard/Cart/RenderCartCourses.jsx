@@ -50,10 +50,10 @@ function RenderCartCourses(){
                         </div>
                     </div>
                     <div className="flex flex-col items-end space-y-2">
-                        <p className="mb-6 text-2xl md:text-3xl font-medium text-yellow-300">Rs.{course?.price}</p>
+                        <p className="mb-6 text-2xl md:text-3xl font-medium text-[#B69507]">Rs.{course?.price}</p>
                         <button 
                             onClick={() => dispatch(removeFromCart(course._id))} 
-                            className="flex items-center gap-x-1 rounded-md border border-[#424854] bg-[#2C333F] py-3 px-[12px] text-pink-600"
+                            className="flex items-center gap-x-1 rounded-md border border-[#424854] bg-[#2C333F] py-3 px-[12px] text-[#841E3E]"
                         >
                             <RiDeleteBin6Line/>
                             <span></span>

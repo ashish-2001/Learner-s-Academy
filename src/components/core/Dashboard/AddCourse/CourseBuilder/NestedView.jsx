@@ -1,8 +1,4 @@
 import React from "react";
-import { AiFillCaretDown } from "react-icons/ai";
-import { FaPlus } from "react-icons/fa";
-import { MdEdit } from "react-icons/md";
-import { RiDeleteBin6Line } from "react-icons/ri"
 import { RxDropdownMenu } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteSection, deleteSubSection } from "../../../../../services/operations/courseDetailsAPI";
@@ -86,7 +82,7 @@ function NestedView({ handleChangeEditSectionName }){
                                     key={subSection?.id} 
                                     onClick={(e) => {
                                     if(e.currentTarget != e.target ) return;setViewSubSection(subSection);}}
-                                    className="flex cursor-pointer items-center justify-between gap-x-3 border-b-2 border-b-blue-950 py-2"
+                                    className="flex cursor-pointer items-center justify-between gap-x-3 border-b-2 border-b-[#001B1D] py-2"
                                 >
                                     <div className="flex items-center gap-x-3 py-2">
                                         <RxDropdownMenu className="text-2xl text-[#C5C7D4]" size={25} />

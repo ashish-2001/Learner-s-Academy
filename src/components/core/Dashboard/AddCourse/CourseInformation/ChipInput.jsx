@@ -24,12 +24,12 @@ const ChipInput = ({name, label, register, errors, setValue}) => {
 
   return (
     <div>
-        <label className='text-sm text-richblack-5' htmlFor={name}>{label}<sup className='text-pink-200'>*</sup></label>
+        <label className='text-sm text-[#F1F2FF]' htmlFor={name}>{label}<sup className='text-[#EF476F]'>*</sup></label>
         <div className='flex flex-wrap gap-2 m-2'>
             {
                 tags.map((tag, index) => (
-                    <div key={index} className='m-1 flex items-center rounded-full bg-yellow-400 px-2 py-1 text-sm text-richblack-5'>
-                        <span className='text-richblack-5'>{tag}</span>
+                    <div key={index} className='m-1 flex items-center rounded-full bg-[#9E8006] px-2 py-1 text-sm text-[#F1F2FF]'>
+                        <span className='text-[#F1F2FF]'>{tag}</span>
                         <button
                         type='button'
                         onClick={() => {
@@ -38,7 +38,7 @@ const ChipInput = ({name, label, register, errors, setValue}) => {
                             setTags(updatedTags);
                             setValue(name, updatedTags);
                         }}
-                        className='ml-2 text-richblack-5'>
+                        className='ml-2 text-[#F1F2FF]'>
                             <FaTimes/>
                         </button>
                         </div>
@@ -49,7 +49,7 @@ const ChipInput = ({name, label, register, errors, setValue}) => {
         type='text'
         id={name}
         placeholder='Press Enter or , to add a tag'
-        className='form-style w-full'
+        className='rounded-lg bg- p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full'
         onKeyDown={(e) => {
             if(e.key === 'Enter' || e.key === ',') {
                 e.preventDefault();
@@ -62,7 +62,7 @@ const ChipInput = ({name, label, register, errors, setValue}) => {
         }}
     />
     {
-        errors[name] && <span className='text-xs text-pink-200'>Tags are required</span>
+        errors[name] && <span className='text-xs text-[#EF476F]'>Tags are required</span>
         
     }
 

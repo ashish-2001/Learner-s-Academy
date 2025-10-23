@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
-import { NavBar } from "./components/Common/Navbar"
+import { Navbar } from "./components/Common/Navbar"
 import { Footer } from "./components/Common/Footer";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
@@ -11,7 +11,7 @@ import { ResetPassword } from "./pages/ResetPassword";
 import { VerifyOtp } from "./pages/VerifyOtp";
 import { About } from "./pages/About";
 import { ContactUs } from "./pages/ContactUs";
-import { LoadingBar } from "react-top-loading-bar";
+import LoadingBar from "react-top-loading-bar";
 import { setProgress } from "./slices/loadingBarSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -19,7 +19,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { OpenRoute } from "./components/Core/Auth/OpenRoute";
 import { PrivateRoute } from "./components/Core/Auth/PrivateRoute";
 import { MyProfile } from "./components/Core/Dashboard/MyProfile";
-import { Setting } from "./components/Core/Dashboard/MyProfile";
+import { Settings } from "./components/Core/Dashboard/Settings";
 import { EnrolledCourses } from "./components/Core/Dashboard/EnrolledCourses";
 import { Cart } from "./components/Core/Dashboard/Cart/index";
 import { ACCOUNT_TYPE } from "./utils/constants";
@@ -43,20 +43,20 @@ function App() {
   const progress = useSelector((state) => state.loadingBar);
   const dispatch = useDispatch();
   return (
-    <div className=" w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
+    <div className=" w-screen min-h-screen bg-[#000814] flex flex-col font-inter">
       <LoadingBar
         color="#FFD60A"
         height={1.4}
         progress={progress}
         onLoaderFinished={() => dispatch(setProgress(0))}
       />
-      <NavBar setProgress={setProgress}></NavBar>
+      <Navbar setProgress={setProgress}></Navbar>
       {!navigator.onLine && (
-        <div className="bg-red-500 flex text-white text-center p-2 bg-richblack-300 justify-center gap-2 items-center">
+        <div className="flex text-[#fff] text-center p-2 bg-[#838894] justify-center gap-2 items-center">
           <RiWifiOffLine size={22} />
           Please check your internet connection.
           <button
-            className="ml-2 bg-richblack-500 rounded-md p-1 px-2 text-white"
+            className="ml-2 bg-[#585D69] rounded-md p-1 px-2 text-[#fff]"
             onClick={() => window.location.reload()}
           >
             Retry
@@ -109,7 +109,7 @@ function App() {
           }
         >
           <Route path="dashboard/my-profile" element={<MyProfile />} />
-          <Route path="dashboard/settings" element={<Setting />} />
+          <Route path="dashboard/settings" element={<Settings />} />
           {user?.accountType === ACCOUNT_TYPE.STUDENT && (
             <>
               <Route path="dashboard/cart" element={<Cart />} />
@@ -168,4 +168,6 @@ function App() {
   );
 }
 
-export default App;
+export {
+  App
+}

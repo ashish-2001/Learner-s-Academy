@@ -24,7 +24,7 @@ const AdminPanel = () => {
     }
     return (
         // create categories
-        <div className=' text-pure-greys-50 text-xl p-5'>
+        <div className=' text-[#CCCCCC] text-xl p-5'>
             <form onSubmit={handleSubmit}>
                 <div className='flex flex-col gap-2'>
                     <label htmlFor="category">Category Name</label>
@@ -38,7 +38,7 @@ const AdminPanel = () => {
                         (e) => setCategory({ ...category, description: e.target.value })
                     } type="text" name="category" id="category" className="form-style" placeholder='Enter category description' />
                 </div>
-                <button type="submit" className=" mt-10 rounded-md bg-yellow-50 px-6 py-3 text-center text-[13px] font-bold text-black shadow-[2px_2px_0px_0px_rgba(255,255,255,0.18)] transition-all duration-200 hover:scale-95 hover:shadow-none  disabled:bg-richblack-500 sm:text-[16px] ">Create</button>
+                <button type="submit" className=" mt-10 rounded-md bg-[#FFD60A] px-6 py-3 text-center text-[13px] font-bold text-black shadow-[2px_2px_0px_0px_rgba(255,255,255,0.18)] transition-all duration-200 hover:scale-95 hover:shadow-none  disabled:bg-[#585D69] sm:text-[16px] ">Create</button>
             </form>
         </div>
     )

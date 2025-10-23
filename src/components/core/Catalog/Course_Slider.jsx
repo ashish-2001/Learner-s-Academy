@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
-import { AutoPlay, FreeMode,Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
+import { FreeMode,Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
 import Skeleton, { SkeletonTheme} from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { Course_Card } from "./Course_Card";

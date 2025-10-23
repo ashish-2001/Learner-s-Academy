@@ -1,14 +1,14 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
+import { App } from './App.jsx'
 import "./App.css"
 import { BrowserRouter } from 'react-router-dom'
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from "react-redux"
 import { rootReducer } from './reducer/index.jsx';
 import { Toaster } from 'react-hot-toast';
-import swDev from './swDev.js';
-import ScrollToTop from './components/ScrollToTop.jsx';
+import { swDev } from './swDev.js';
+import { ScrollToTop } from './components/ScrollToTop.jsx';
 
 const store = configureStore({
     reducer: rootReducer

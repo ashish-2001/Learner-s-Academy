@@ -44,7 +44,7 @@ function Navbar(){
 
     return(
 
-        <div className={`flex h-14 items-center justify-center border-b-[1px] border-b-[#2C333F] ${
+        <div className={`flex h-14 items-center bg-[#161D29] justify-center border-b-[1px] border-b-[#2C333F] ${
                 location.pathname !== "/" ? "bg-[#161D29]" : ""
             } transition-all duration-200`}>
             <div className="flex w-11/12 max-w-1260px items-center justify-between">
@@ -73,7 +73,7 @@ function Navbar(){
                                                 {subLinks ?.filter(
                                                     (subLink) => subLink?.courses?.length > 0
                                                 ) ?.map((subLink, i) => (
-                                                    <Link to={`/catalog/${subLink.name.split(" ").join("-").toLowerCase()}`} className="rounded-lg bg-transparent py-4 pl-4 hover:bg-[#C5C7D4]" key={i}>
+                                                    <Link to={`/catalog/${subLink.name.split(" ").join("-").toLowerCase()}`} className="rounded-lg bg-[#ffffff00] py-4 pl-4 hover:bg-[#C5C7D4]" key={i}>
                                                         <p>{subLink.name}</p>
                                                     </Link>
                                                 ))}

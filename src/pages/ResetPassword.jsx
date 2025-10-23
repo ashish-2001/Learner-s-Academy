@@ -39,12 +39,12 @@ return (
             {
                 loading?(<div className="custom-loader"></div>):
                 (<div className='max-w-[500px] p-4 lg:p-8 '>
-                    <h1 className='text-[1.875rem] font-semibold leading-[2.375rem] text-richblack-5'>
+                    <h1 className='text-[1.875rem] font-semibold leading-[2.375rem] text-[#F1F2FF]'>
                         {
                             !resetComplete?("Choose  new password"):"Reset complete!"
                         }
                     </h1>
-                    <p className='my-4 text-[1.125rem] leading-[1.625rem] text-richblack-100'>
+                    <p className='my-4 text-[1.125rem] leading-[1.625rem] text-[#AFB2BF]'>
                         {
                             !resetComplete?("Almost done. Enter your new password and youre all set."):(`All done! We have sent an email to ${"nn"} to confirm`)
                         }
@@ -54,7 +54,7 @@ return (
                             !resetComplete && (
                                 <div >
                                 <div className=' relative mt-4'>
-                                    <label className="w-full"><p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">New Password <sup className="text-pink-200">*</sup></p>
+                                    <label className="w-full"><p className="mb-1 text-[0.875rem] leading-[1.375rem] text-[#F1F2FF]">New Password <sup className="text-[#EF476F]">*</sup></p>
                                     <input
                                         required
                                         type={showPassword ? "text" : "password"}
@@ -65,7 +65,7 @@ return (
                                         style={{
                                             boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                                         }}
-                                        className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] pr-12 text-richblack-5"
+                                        className="w-full rounded-[0.5rem] bg-[#161D29] p-[12px] pr-12 text-[#F1F2FF]"
                                         /></label>
                                         <span
                                         onClick={() => setShowPassword((prev) => !prev)}
@@ -79,7 +79,7 @@ return (
                                         </span>
                                 </div>
                                 <div className=' relative mt-4'>
-                                    <label className="w-full"><p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">Confirm New Password <sup className="text-pink-200">*</sup></p>
+                                    <label className="w-full"><p className="mb-1 text-[0.875rem] leading-[1.375rem] text-[#F1F2FF]">Confirm New Password <sup className="text-[#EF476F]">*</sup></p>
                                     <input
                                         required
                                         type={showConfirmPassword ? "text" : "password"}
@@ -90,7 +90,7 @@ return (
                                         style={{
                                             boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                                         }}
-                                        className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] pr-12 text-richblack-5"
+                                        className="w-full rounded-[0.5rem] bg-[#161D29] p-[12px] pr-12 text-[#F1F2FF]"
                                         /></label>
                                         <span
                                         onClick={() => setShowConfirmPassword((prev) => !prev)}
@@ -107,10 +107,10 @@ return (
                             )
                         }
                         {
-                            !resetComplete?(<button type='submit' className='mt-6 w-full rounded-[8px] bg-yellow-50 py-[12px] px-[12px] font-medium text-richblack-900'>
+                            !resetComplete?(<button type='submit' className='mt-6 w-full rounded-[8px] bg-[#FFD60A] py-[12px] px-[12px] font-medium text-[#000814]'>
                             Reset Password
                         </button>):
-                        (<Link to={"/login"}><button className='mt-6 w-full rounded-[8px] bg-yellow-50 py-[12px] px-[12px] font-medium text-richblack-900'>
+                        (<Link to={"/login"}><button className='mt-6 w-full rounded-[8px] bg-[#FFD60A] py-[12px] px-[12px] font-medium text-[#000814]'>
                         Return to login
                         </button></Link>)
                         }
@@ -118,7 +118,7 @@ return (
                     </form> 
                     <div className='mt-6 flex items-center justify-between'>
                     <Link to={"/login"}>
-                    <p className="flex items-center gap-x-2 text-richblack-5"><svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"></path></svg> Back To Login</p>
+                    <p className="flex items-center gap-x-2 text-[#F1F2FF]"><svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"></path></svg> Back To Login</p>
                     </Link>
                     </div>
                     </div>

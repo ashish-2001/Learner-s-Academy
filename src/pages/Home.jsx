@@ -3,7 +3,7 @@ import {FaArrowRight} from 'react-icons/fa';
 import {Link} from 'react-router-dom';
 import { CTAButton } from '../components/Core/HomePage/Button';
 import { HighLightText } from '../components/Core/HomePage/HighLightText';
-import { Banner } from "../assets/Images/banner.mp4"
+import { banner } from "../assets/Images/index"
 import { CodeBlocks } from "../components/Core/HomePage/CodeBlocks";
 import { TimelineSection } from '../components/Core/HomePage/TimelineSection';
 import { LearningLanguageSection } from '../components/Core/HomePage/LearningLanguageSection';
@@ -11,11 +11,11 @@ import { InstructorSection } from '../components/Core/HomePage/InstructorSection
 import { ExploreMore } from '../components/Core/HomePage/ExploreMore';
 import { useDispatch } from 'react-redux';
 import { setProgress } from "../slices/LoadingBarSlice"
-import { getCatalogPageData } from '../services/operations/pageAndComponentData';
+import { getCatalogPageData } from '../services/operations/pageAndcomponentDatas';
 import { Course_Slider } from '../components/Core/Catalog/Course_Slider';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { RatingSlider } from '../components/Core/Ratings/RatingSlider';
+
 
 
 function Home() {
@@ -25,7 +25,7 @@ function Home() {
     useEffect(() => {
         const fetchCatalogPageData = async () => {
             
-                const result = await getCatalogPageData(categoryID,dispatch);
+                const result = await getCatalogPageData(categoryID, dispatch);
                 setCatalogPageData(result);
                 // console.log("page data",CatalogPageData);
             
@@ -39,8 +39,8 @@ function Home() {
     <div>
         <div className=' mx-auto relative flex flex-col w-11/12 items-center justify-between text-white '>
             <Link onClick={()=>{dispatch(setProgress(100))}}  to={"/signup"}>
-            <div className=' group mt-16 p-1 mx-auto rounded-full bg-richblack-800 font-bold transition-all duration-200 hover: scale-95 w-fit max-w-maxContent'>
-                <div className='flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-richblack-900'>
+            <div className=' group mt-16 p-1 mx-auto rounded-full bg-[#161D29] font-bold transition-all duration-200 hover: scale-95 w-fit max-w-[1260px]'>
+                <div className='flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-[#000814]'>
               <p>Become an Instructor</p><FaArrowRight/>
                 </div>
             </div>
@@ -49,7 +49,7 @@ function Home() {
             <div className='text-center text-3xl md:text-4xl font-semibold mt-7'>
                 Empower Your Future With <HighLightText text={"Coding Skills"}/>
             </div>
-            <div className=' mt-4 w-[90%] text-left md:text-center text-sm md:text-lg font-bold text-richblack-300'>
+            <div className=' mt-4 w-[90%] text-left md:text-center text-sm md:text-lg font-bold text-[#838894]'>
             With our online coding courses, you can learn at your own pace, from anywhere in the world, and get access to a wealth of resources, including hands-on projects, quizzes, and personalized feedback from instructors. 
             </div>
 
@@ -60,14 +60,14 @@ function Home() {
                 <CTAButton active={false} linkto={"/login"} >Book a Demo</CTAButton>
             </div>
 
-            <div className='mx-3 my-12 shadow-blue-200 w-[70%] relative'>
+            <div className='mx-3 my-12 shadow-[#118AB2] w-[70%] relative'>
               <div className='grad2 -top-10 w-[800px]'></div>
             <video className='video'
             muted
             loop
             autoPlay
             >
-            <source  src={Banner} type="video/mp4" />
+            <source  src={banner} type="video/mp4" />
             </video>
         </div>
 
@@ -104,13 +104,13 @@ function Home() {
                 backgroudGradient={"grad"}
             />
         </div>
-        <div className=' mx-auto box-content w-full max-w-maxContentTab px- py-12 lg:max-w-maxContent'>
+        <div className=' mx-auto box-content w-full max-w-[650px] px- py-12 lg:max-w-[1260px]'>
         <h2 className='section_heading mb-6 md:text-3xl text-xl'>
            Most Popular Courses
         </h2>
         <Course_Slider Courses={catalogPageData?.selectedCourses}/>
       </div>       
-        <div className=' mx-auto box-content w-full max-w-maxContentTab px- py-12 lg:max-w-maxContent'>
+        <div className=' mx-auto box-content w-full max-w-[650px] px- py-12 lg:max-w-[1260px]'>
         <h2 className='section_heading mb-6 md:text-3xl text-xl'>
            Students are learning
         </h2>
@@ -147,7 +147,7 @@ function Home() {
                 }
 
                 codeblock={`<<!DOCTYPE html>\n<html>\n<head><title>Example</title>\n</head>\n<body>\n<h1><ahref="/">Header</a>\n</h1>\n<nav><ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>\n</nav>`}
-                codeColor={"text-yellow-25"}
+                codeColor={"text-[#FFE83D]"}
                 backgroudGradient={"grad2"}
             />
         </div>
@@ -160,13 +160,13 @@ function Home() {
         <div className='hidden lg:block lg:h-[200px]'></div>
 
 
-        <div className='bg-pure-greys-5 text-richblack-700'>
+        <div className='bg-[#F9F9F9] text-[#2C333F]'>
             <div className='homepage_bg h-[310px]'>
 
-                <div className='w-11/12 max-w-maxContent flex flex-col items-center justify-between gap-5 mx-auto'>
+                <div className='w-11/12 max-w-[1260px] flex flex-col items-center justify-between gap-5 mx-auto'>
                     <div className='h-[150px]'></div>
                     <div className='flex flex-row gap-7 text-white '>
-                        <CTAButton active={true} linkto={"/catalog/Web Developement"}>
+                        <CTAButton active={true} linkto={"/catalog/Web Development"}>
                             <div className='flex items-center gap-3' >
                                 Explore Full Catalog
                                 <FaArrowRight />
@@ -185,7 +185,7 @@ function Home() {
 
             </div>
 
-            <div className='mx-auto w-11/12 max-w-maxContent flex flex-col items-center justify-between gap-7'>
+            <div className='mx-auto w-11/12 max-w-[1260px] flex flex-col items-center justify-between gap-7'>
 
                 <div className='flex flex-row gap-5 mb-10 mt-[95px]'>
                     <div className='text-4xl font-semibold w-[45%]'>
@@ -217,15 +217,15 @@ function Home() {
 
 
 
-       <div className='w-11/12 mx-auto max-w-maxContent flex-col items-center justify-between gap-8 first-letter bg-richblack-900 text-white'>
+       <div className='w-11/12 mx-auto max-w-[1260px] flex-col items-center justify-between gap-8 first-letter bg-[#000814] text-white'>
 
             <InstructorSection />
 
             {/* Review Slider here */}
       </div>
       <div className=' mb-16 mt-3'>
-        <h2 className='text-center text-2xl md:text-4xl font-semibold mt-8 text-richblack-5 mb-5'>Reviews from other learners</h2>
-        <RatingSlider />
+        <h2 className='text-center text-2xl md:text-4xl font-semibold mt-8 text-[#F1F2FF] mb-5'>Reviews from other learners</h2>
+        <Course_Slider />
       </div>
     </div>
   )

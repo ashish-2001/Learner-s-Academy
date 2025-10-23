@@ -8,7 +8,6 @@ import { sendOtp } from "../../../services/operations/authAPI"
 import { setSignupData } from "../../../slices/authSlice"
 import { ACCOUNT_TYPE } from "../../../utils/constants"
 import { Tab } from "../../Common/Tab";
-import { setProgress } from "../../../slices/loadingBarSlice";
 
 function SignupForm(){
     const navigate = useNavigate();
@@ -151,7 +150,7 @@ function SignupForm(){
                                     value={confirmPassword}
                                     placeholder="Confirm Password"
                                     onChange={handleOnchange}
-                                    className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10 "
+                                    className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full !pr-10"
                                 />
                                 <span className="absolute right-3 top-[38px] z-[10] cursor-pointer"
                                     onClick={() => setShowConfirmPassword((prev) => !prev)}

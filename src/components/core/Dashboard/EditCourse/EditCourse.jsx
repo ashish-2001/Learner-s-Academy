@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import RenderSteps from '../AddCourse/RenderSteps';
+import { RenderSteps } from '../AddCourse/RenderSteps';
 
 const EditCourse = () => {
     const {token} = useSelector((state) => state.auth);
@@ -33,7 +33,7 @@ const EditCourse = () => {
 
   return (
     <div className='mx-auto w-11/12 max-w-[1000px] py-10'>
-        <h1 className='mb-14 text-3xl font-medium text-richblack-5'>Edit Course</h1>
+        <h1 className='mb-14 text-3xl font-medium text-[#F1F2FF]'>Edit Course</h1>
         {
             loading ? <p>Loading...</p> :(
         <RenderSteps />
