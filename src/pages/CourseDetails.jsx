@@ -8,7 +8,7 @@ import { BsGlobe } from 'react-icons/bs';
 import { FaShareSquare } from 'react-icons/fa';
 import { IoIosVideocam } from 'react-icons/io';
 import { addToCart } from '../slices/cartSlice';
-import { ACCOUNT_TYPE } from '../utils/constants';
+import { ACCOUNT_TYPE } from '../utils/constants.js';
 import { FaChevronDown } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';

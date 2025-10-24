@@ -9,9 +9,11 @@ function apiConnector(method, url, bodyData, headers, params){
     return axiosInstance({
         method: method,
         url: url,
-        data: bodyData?bodyData:null,
-        headers: headers?headers:null,
-        params: params?params:null
+        data: bodyData ? bodyData : null,
+        headers: headers ? headers : {
+            "Content-Type": "application/json"
+        },
+        params: params ? params : null
     })
 }
 

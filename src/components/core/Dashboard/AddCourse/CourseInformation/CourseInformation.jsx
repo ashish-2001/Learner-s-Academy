@@ -6,7 +6,7 @@ import { HiOutlineCurrencyRupee } from 'react-icons/hi';
 import { RequirementField } from './RequirementField';
 import { setStep, setCourse, setEditCourse} from '../../../../../slices/courseSlice';
 import { IconBtn } from '../../../../Common/IconBtn';
-import { COURSE_STATUS } from '../../../../../utils/constants';
+import { COURSE_STATUS } from '../../../../../utils/constants.js';
 import { toast } from 'react-hot-toast';
 import { Upload } from './Upload'
 import { ChipInput } from './ChipInput';

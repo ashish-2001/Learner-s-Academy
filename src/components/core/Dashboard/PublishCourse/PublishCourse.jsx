@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { setEditCourse, setStep } from '../../../../slices/courseSlice';
-import { COURSE_STATUS } from '../../../../utils/constants';
+import { COURSE_STATUS } from '../../../../utils/constants.js';
 import { addCourseCategory, editCourseDetails } from '../../../../services/operations/courseDetailsAPI';
 import toast from 'react-hot-toast';
 import { useEffect } from 'react';
@@ -65,7 +65,7 @@ const PublishCourse = () => {
         handelPublish(data);
     }
 
-  return (
+return (
     <div>
         <div className='rounded-md border-[1px] border-[#2C333F] bg-[#161D29] p-6'>
             <p className='text-2xl font-semibold text-[#F1F2FF]' >Publish Settings</p>
@@ -83,7 +83,7 @@ const PublishCourse = () => {
             </form>
         </div>
     </div>
-  )
+)
 }
 
 export {

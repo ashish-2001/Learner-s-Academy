@@ -22,7 +22,7 @@ import { MyProfile } from "./components/Core/Dashboard/MyProfile";
 import { Settings } from "./components/Core/Dashboard/Settings";
 import { EnrolledCourses } from "./components/Core/Dashboard/EnrolledCourses";
 import { Cart } from "./components/Core/Dashboard/Cart/index";
-import { ACCOUNT_TYPE } from "./utils/constants";
+import { ACCOUNT_TYPE } from "./utils/constants.js";
 import { AddCourse } from "./components/Core/Dashboard/AddCourse/Index"
 import { MyCourses } from "./components/Core/Dashboard/MyCourses/MyCourses";
 import { EditCourse } from "./components/Core/Dashboard/EditCourse/EditCourse";

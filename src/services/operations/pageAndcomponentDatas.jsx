@@ -15,7 +15,7 @@ const getCatalogPageData = async(categoryId,dispatch) => {
             throw new Error("Could not Fetch Category page data error",
             response);
 
-         result = response?.data;
+        result = response?.data;
 
   }
   catch(error) {

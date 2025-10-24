@@ -18,18 +18,18 @@ return (
         <div className='flex items-center justify-between rounded-md border-[1px] border-[#2C333F] bg-[#161D29] p-3 md:p-8 md:px-12'>
             <div className='flex items-center gap-x-4 '>
                 <img 
-                src={user?.image}
-                alt={`profile-${user?.firstName}`}
-                className='aspect-square w-[78px] rounded-full object-cover' />
+                    src={user?.image}
+                    alt={`profile-${user?.firstName}`}
+                    className='aspect-square w-[78px] rounded-full object-cover' />
                 <div className='space-y-1'>
                     <p className='text-lg font-semibold text-[#F1F2FF]'> {user?.firstName + " " + user?.lastName} </p>
                     <p className=' text-[11px] md:text-sm text-[#838894] md:max-w-full max-w-[220px] break-words'> {user?.email}</p>
                 </div>
             </div>
-            <div className="hidden md:block">
+            <div className="hidden md:block ml-30">
             <IconBtn
                 text="Edit"
-                onclick={() => {
+                onClick={() => {
                     navigate("/dashboard/settings")
                 }} >
             </IconBtn>
@@ -43,7 +43,7 @@ return (
                 <div >
                 <IconBtn 
                 text="Edit"
-                onclick={() => {
+                onClick={() => {
                     navigate("/dashboard/settings")
                 }} />
                 </div>
@@ -58,7 +58,7 @@ return (
                 <div className=''>
                 <IconBtn
                 text="Edit"
-                onclick={() => {
+                onClick={() => {
                     navigate("/dashboard/settings")
                 }} />
                 
@@ -96,8 +96,7 @@ return (
                 </div>
             </div>
         </div>
-
-      </div>
+        </div>
     </div>
     </div>
     

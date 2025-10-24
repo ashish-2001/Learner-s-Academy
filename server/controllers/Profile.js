@@ -1,4 +1,4 @@
-import { success, z } from "zod";
+import { z } from "zod";
 import { User } from "../models/Users.js";
 import { Profile } from "../models/Profile.js";
 import { Course } from "../models/Course.js";
@@ -79,6 +79,43 @@ async function updateProfile(req, res){
             success: false,
             message: "Internal server error",
             error: e.message
+        })
+    }
+}
+
+async function updateDisplayPicture(req, res){
+    try{
+
+        const displayPicture = req.files.displayPicture;
+
+        const userId = req.user.userId;
+
+        const image = await uploadImageToCloudinary(
+            displayPicture,
+            process.env.FOLDER_NAME,
+            1000,
+            1000
+        )
+
+        console.log("Image:", image);
+
+        const updatedProfile = await User.findByIdAndUpdate({
+            _id: userId
+        }, {
+            image: image.secure_url
+        }, {
+            new: true
+        })
+
+        return res.status(200).json({
+            success: true,
+            message: "Image updated successfully",
+            data: updatedProfile
+        })
+    } catch(e){
+        return res.status(500).json({
+            success: false,
+            message: e.message
         })
     }
 }
@@ -169,43 +206,6 @@ async function getAllUserDetails(req, res){
     }
 }
 
-
-async function updateDisplayPicture(req, res){
-    try{
-
-        const displayPicture = req.files.displayPicture;
-
-        const userId = req.user.userId;
-
-        const image = await uploadImageToCloudinary(
-            displayPicture,
-            process.env.FOLDER_NAME,
-            1000,
-            1000
-        )
-
-        console.log("Image:", image);
-
-        const updatedProfile = await User.findByIdAndUpdate({
-            _id: userId
-        }, {
-            image: image.secure_url
-        }, {
-            new: true
-        })
-
-        return res.status(200).json({
-            success: true,
-            message: "Image updated successfully",
-            data: updatedProfile
-        })
-    } catch(e){
-        return res.status(500).json({
-            success: false,
-            message: e.message
-        })
-    }
-}
 
 async function getEnrolledCourses(req, res){
     try{

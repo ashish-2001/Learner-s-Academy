@@ -10,7 +10,7 @@ async function getUserCourses(token, dispatch){
         try{
             console.log("BEFORE CALLING BACKEND API FOR ENROLLED COURSES");
             const response = await apiConnector("GET", profileEndpoints.GET_USER_ENROLLED_COURSES_API, null, {
-                Authorization: `Bearer ${token}`
+               headers: { Authorization: `Bearer ${token}` }
             });
 
             console.log("AFTER CALLING BACKEND API FOR ENROLLED COURSES");
@@ -32,10 +32,10 @@ async function getProfilePicture(token, profilePicture){
     try{
         const formData = new FormData();
         console.log("Profile picture:", profilePicture);
-        formData.append("profilePicture", profilePicture);
+        formData.append("displayPicture", profilePicture);
 
-        const response = await apiConnector("PUT", settingsEndpoints.UPDATE_DISPLAY_PICTURE_API, null, {
-            Authorization: `Bearer ${token}`
+        const response = await apiConnector("PUT", settingsEndpoints.UPDATE_DISPLAY_PICTURE_API, formData, {
+            headers: { Authorization: `Bearer ${token}` }
         });
         console.log("UPDATE DISPLAY PICTURE API RESPONSE.............", response);
         if(!response.data.success){
@@ -53,6 +53,7 @@ async function getProfilePicture(token, profilePicture){
 }
 
 async function updateAdditionalDetails(token, additionalDetails){
+
     console.log("Additional details", additionalDetails);
 
     const {
@@ -63,13 +64,14 @@ async function updateAdditionalDetails(token, additionalDetails){
         contactNumber,
         about
     } = additionalDetails;
+
     console.log("Additional details:", additionalDetails);
 
     const toastId = toast.loading("Loading...");
 
     try{
         const response = await apiConnector("PUT", settingsEndpoints.UPDATE_PROFILE_API, { firstName, lastName, dateOfBirth, gender, contactNumber, about }, {
-            Authorization: `Bearer ${token}`
+            headers: { Authorization: `Bearer ${token}` }
         })
         console.log("UPDATE ADDITIONAL DETAILS API RESPONSE...............", response)
         
@@ -101,8 +103,8 @@ async function updatePassword(token, password){
     const toastId = toast.loading("Updating...");
 
     try{
-        const response = await apiConnector("POST", settingsEndpoints.CHANGE_PASSWORD_API, {oldPassword, newPassword, confirmPassword}, {
-            Authorization: `Bearer ${token}`
+        const response = await apiConnector("PUT", settingsEndpoints.CHANGE_PASSWORD_API, {oldPassword, newPassword, confirmPassword}, {
+            headers: { Authorization: `Bearer ${token}` }
         });
         console.log("UPDATE PASSWORD API RESPONSE...............", response);
         if(!response.data.success){
@@ -113,7 +115,6 @@ async function updatePassword(token, password){
         console.log("UPDATE PASSWORD API ERROR..............", error);
         toast.error(error.response.data.message);
     }
-
     toast.dismiss(toastId);
 }
 
@@ -121,7 +122,7 @@ async function deleteAccount(token, dispatch, navigate){
     const toastId = toast.loading("Deleting...");
     try{
         const response = await apiConnector("DELETE", settingsEndpoints.DELETE_PROFILE_API, null, {
-            Authorization: `Bearer ${token}`
+            headers: { Authorization: `Bearer ${token}` }
         });
         console.log("DELETE ACCOUNT API RESPONSE..............", response);
         if(!response.data.success){
@@ -137,19 +138,21 @@ async function deleteAccount(token, dispatch, navigate){
 }
 
 async function getInstructorDashboard(token, dispatch){
-        dispatch(setProgress);
+        dispatch(setProgress(0));
         let result = [];
         try{
             console.log("BEFORE CALLING BACKEND API FOR INSTRUCTOR DASHBOARD");
             const response = await apiConnector("GET", profileEndpoints.GET_ALL_INSTRUCTOR_DASHBOARD_DETAILS_API, null, {
-                Authorization: `Bearer ${token}`
+                headers: { Authorization: `Bearer ${token}` }
             });
             console.log("AFTER CALLING BACKEND API FOR INSTRUCTOR DASHBOARD");
 
             if(!response.data.success){
                 throw new Error(response.data.message);
             }
+
             result = response.data.data;
+            console.log(result);
         }catch(error){
             console.log("GET INSTRUCTOR DASHBOARD API ERROR................", error);
             toast.error("Could Not Get Instructor Dashboard");

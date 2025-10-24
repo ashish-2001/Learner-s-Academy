@@ -13,7 +13,7 @@ router.get("/getEnrolledCourses", auth, getEnrolledCourses);
 
 router.put("/updateDisplayPicture",auth, updateDisplayPicture);
 
-router.get("/InstructorDashboard", auth, isInstructor, instructorDashboard);
+router.get("/getInstructorDashboardDetails", auth, isInstructor, instructorDashboard);
 
 export {
     router

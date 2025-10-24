@@ -14,7 +14,7 @@ import {
   deleteCourse,
   fetchInstructorCourses,
 } from "../../../../services/operations/courseDetailsAPI"
-import { COURSE_STATUS } from "../../../../utils/constants"
+import { COURSE_STATUS } from "../../../../utils/constants.js"
 
 function CoursesTable({ courses, setCourses }) {
   const navigate = useNavigate()

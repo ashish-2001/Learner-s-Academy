@@ -73,7 +73,7 @@ const categoryPageValidator = z.object({
 
 async function categoryPageDetails(req, res){
     try{
-        const parsedResult = categoryPageValidator.safeParse(req.params);
+        const parsedResult = categoryPageValidator.safeParse(req.body);
 
         if(!parsedResult.success){
             return res.status(400).json({

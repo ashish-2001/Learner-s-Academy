@@ -76,7 +76,7 @@ function LoginForm(){
             <button 
                 type="submit" 
                 className="mt-6 rounded-[8px] bg-[#FFD60A] py-[8px] px-[12px] font-medium text-[#000814]"
-                onClick={dispatch(setProgress(60))}
+                onClick={()=> dispatch(setProgress(60))}
             >
                 Sign in
             </button>

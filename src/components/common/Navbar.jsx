@@ -8,7 +8,7 @@ import { Logo_Full_Light } from "../../assets/logo";
 import { NavbarLinks } from "../../data/NavbarLinks";
 import { apiConnector } from "../../services/apiConnector";
 import { categories } from "../../services/apis";
-import { ACCOUNT_TYPE } from "../../utils/constants";
+import { ACCOUNT_TYPE } from "../../utils/constants.js";
 import { ProfileDropdown } from "../Core/Auth/ProfileDropdown";
 
 

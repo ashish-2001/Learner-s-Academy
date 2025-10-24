@@ -13,7 +13,7 @@ const {
     RESETPASSTOKEN_API
 } = endpoints
 
-function sendOtp(email, navigate){
+function sendOtp(email, accountType, navigate){
 
     return async (dispatch) => {
         const toastId = toast.loading("loading...")
@@ -21,6 +21,7 @@ function sendOtp(email, navigate){
         try{
             const response = await apiConnector("POST", SENDOTP_API, {
                 email,
+                accountType,
                 checkUserPresent: true
             })
 
@@ -40,8 +41,12 @@ function sendOtp(email, navigate){
 
         dispatch(setLoading(false))
         toast.dismiss(toastId)
+        
     }
+    
 }
+
+
 
 function signUp(
     accountType,
@@ -55,7 +60,8 @@ function signUp(
 ) {
     return async(dispatch) => {
         const toastId = toast.loading("Loading")
-        dispatch(setLoading(true))
+        dispatch(setLoading(true));
+        const otpString = otp.toString().trim();
         try{
             const response = await apiConnector("POST", SIGNUP_API, {
                 accountType,
@@ -64,7 +70,7 @@ function signUp(
                 email,
                 password,
                 confirmPassword,
-                otp
+                otp:otpString
             })
 
             console.log("SIGNUP API RESPONSE............", response)

@@ -1,6 +1,5 @@
 import express from "express";
 import { Category } from "../models/Category";
-import { success } from "zod";
 
 const router = express.Router();
 

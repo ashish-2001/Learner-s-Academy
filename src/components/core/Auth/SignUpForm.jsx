@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { sendOtp } from "../../../services/operations/authAPI"
 import { setSignupData } from "../../../slices/authSlice"
-import { ACCOUNT_TYPE } from "../../../utils/constants"
+import { ACCOUNT_TYPE } from "../../../utils/constants.js"
 import { Tab } from "../../Common/Tab";
 
 function SignupForm(){
@@ -22,6 +22,7 @@ function SignupForm(){
     })
         const [showPassword, setShowPassword] = useState(false)
         const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+        
         const { firstName, lastName, email, password, confirmPassword} = formData;
 
         const handleOnchange = (e) => {
@@ -44,7 +45,7 @@ function SignupForm(){
             }
 
             dispatch(setSignupData(signupData));
-            dispatch(sendOtp(formData.email, navigate));
+            dispatch(sendOtp(formData.email, accountType, navigate));
 
             setFormData({
                 firstName: "",

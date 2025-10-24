@@ -9,6 +9,12 @@ const otpSchema = new mongoose.Schema({
         required: true
     },
 
+    accountType: {
+        type: String,
+        enum: ["Student", "Instructor"],
+        required: true
+    },
+    
     otp: {
         type: String,
         required: true

@@ -7,7 +7,7 @@ function IconBtn({
     disabled, 
     outline = false, 
     customClasses, 
-    type 
+    type
 }){
     return (
         <button 

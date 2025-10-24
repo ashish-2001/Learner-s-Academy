@@ -96,7 +96,7 @@ const Settings = () => {
   }
 
   return (
-    <div>
+    <div className=''>
       <div className=' flex-1 overflow-auto'>
         <div className='mx-auto w-11/12 max-w-[1000px] py-10'>
         <h1 className="mb-14 text-3xl font-medium text-[#F1F2FF]">Edit Profile</h1>
@@ -126,21 +126,21 @@ const Settings = () => {
           <div className="flex flex-col gap-5 lg:flex-row">
             <div className="flex flex-col gap-2 lg:w-[48%]">
               <label htmlFor="firstName" className=" text-[#C5C7D4]">First Name</label>
-              <input defaultValue={user.firstName || null} type="text" name="firstName" id="firstName" placeholder="Enter first name" className="form-style" onChange={handleOnChange}/>
+              <input defaultValue={user.firstName || null} type="text" name="firstName" id="firstName" placeholder="Enter first name" className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none" onChange={handleOnChange}/>
               </div>
               <div className="flex flex-col gap-2 lg:w-[48%]">
                 <label htmlFor="lastName" className="text-[#C5C7D4]">Last Name</label>
-                <input defaultValue={user.lastName || null} type="text" name="lastName" id="lastName" placeholder="Enter first name" className="form-style" onChange={handleOnChange}/>
+                <input defaultValue={user.lastName || null} type="text" name="lastName" id="lastName" placeholder="Enter first name" className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none" onChange={handleOnChange}/>
                 </div>
                 </div>
                 <div className="flex flex-col gap-5 lg:flex-row">
                   <div className="flex flex-col gap-2 lg:w-[48%]">
                     <label htmlFor="dateOfBirth" className="text-[#C5C7D4]">Date of Birth</label>
-                    <input defaultValue={user?.additionalDetails.dateOfBirth || null} type="date" name="dateOfBirth" id="dateOfBirth" className="form-style" onChange={handleOnChange}/>
+                    <input defaultValue={user?.additionalDetails.dateOfBirth || null} type="date" name="dateOfBirth" id="dateOfBirth" className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none" onChange={handleOnChange}/>
                     </div>
                     <div className="flex flex-col gap-2 lg:w-[48%]">
                       <label htmlFor="gender" className="text-[#C5C7D4]">Gender</label>
-                      <select defaultValue={user?.additionalDetails.gender || null} type="text" name="gender" id="gender" className="form-style" onChange={handleOnChange}>
+                      <select defaultValue={user?.additionalDetails.gender || null} type="text" name="gender" id="gender" className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none" onChange={handleOnChange}>
                       <option value="Prefer not to say">Prefer not to say</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -152,11 +152,11 @@ const Settings = () => {
                         <div className="flex flex-col gap-5 lg:flex-row">
                           <div className="flex flex-col gap-2 lg:w-[48%]">
                             <label htmlFor="contactNumber" className="text-[#C5C7D4]">Contact Number</label>
-                            <input defaultValue={user?.additionalDetails.contactNumber || null} type="tel" name="contactNumber" id="contactNumber" placeholder="Enter Contact Number" className="form-style" onChange={handleOnChange}/>
+                            <input defaultValue={user?.additionalDetails.contactNumber || null} type="tel" name="contactNumber" id="contactNumber" placeholder="Enter Contact Number" className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none" onChange={handleOnChange}/>
                             </div>
                             <div className="flex flex-col gap-2 lg:w-[48%]">
                               <label htmlFor="about" className="text-[#C5C7D4]">About</label>
-                              <input defaultValue={user?.additionalDetails.about || null} type="text" name="about" id="about" placeholder="Enter Bio Details" className="form-style" onChange={handleOnChange}/>
+                              <input defaultValue={user?.additionalDetails.about || null} type="text" name="about" id="about" placeholder="Enter Bio Details" className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none" onChange={handleOnChange}/>
                 </div>
               </div>
           </div>
