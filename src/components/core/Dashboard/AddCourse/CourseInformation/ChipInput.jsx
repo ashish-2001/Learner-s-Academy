@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-const ChipInput = ({name, label, register, errors, setValue}) => {
+const ChipInput = ({ name, label, register, errors, setValue }) => {
     const [tags, setTags] = useState([])
     const {editCourse, course} = useSelector((state) => state.course);
 

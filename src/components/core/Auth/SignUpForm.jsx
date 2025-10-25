@@ -10,16 +10,16 @@ import { ACCOUNT_TYPE } from "../../../utils/constants.js"
 import { Tab } from "../../Common/Tab";
 
 function SignupForm(){
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT);
-    const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
-    })
+        const navigate = useNavigate();
+        const dispatch = useDispatch();
+        const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT);
+        const [formData, setFormData] = useState({
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            confirmPassword: ""
+        })
         const [showPassword, setShowPassword] = useState(false)
         const [showConfirmPassword, setShowConfirmPassword] = useState(false)
         
@@ -36,7 +36,7 @@ function SignupForm(){
             e.preventDefault()
             if(password !== confirmPassword){
                 toast.error("Passwords do not match")
-                return
+                return;
             }
 
             const signupData = {
@@ -68,6 +68,11 @@ function SignupForm(){
                 id: 2,
                 tabName: "Instructor",
                 type: ACCOUNT_TYPE.INSTRUCTOR
+            },
+            {
+                id: 3,
+                tabName: "Admin",
+                type: ACCOUNT_TYPE.ADMIN
             }
         ]
 

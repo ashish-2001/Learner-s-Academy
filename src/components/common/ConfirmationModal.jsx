@@ -4,8 +4,8 @@ import { IconBtn } from "./IconBtn";
 function ConfirmationModalData({ modalData }){
 
     return(
-        <div className="fixed inset-0 z.[1000] !mt-0 grid place-items-center overflow-auto bg-[#fff] bg-opacity-10 backdrop-blur-sm">
-            <div className="w-11/12 max-w-[350px] rounded-lg border border-[#6E727F] bg-[#161D29] p-6">
+        <div>
+            <div className="w-11/12 max-w-[350px] rounded-lg border border-[#6E727F] bg-[#161D29] p-6 fixed inset-0 z.[1000] !mt-0 grid place-items-center overflow-auto bg-opacity-10 backdrop-blur-sm">
                 <p className="text-2xl font-semibold text-[#F1F2FF]">
                     {modalData?.text1}
                 </p>
@@ -17,11 +17,12 @@ function ConfirmationModalData({ modalData }){
                         onClick={modalData?.btn1Handler }
                         text={modalData?.btn1Text }
                     />
-                    <button className="cursor-pointer rounded-md bg-[#999DAA] py-[8px] px-[20px] font-semibold text-[#000814]" onClick={modalData?.btn2Handler}>
+                    <button  className='flex items-center bg-richblack-200 cursor-pointer gap-x-2 rounded-md py-2 text-sm md:text-lg px-3 md:px-5 font-semibold text-richblack-900 undefined' onClick={modalData?.btn2Handler}>
                         {modalData?.btn2Text}
                     </button>
                 </div>
             </div>
+            <div className="fixed inset-0 z-10 !mt-0 grid place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm over"></div>
         </div>
     )
 }

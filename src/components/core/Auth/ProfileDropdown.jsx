@@ -17,6 +17,7 @@ function ProfileDropdown(){
     useOnClickOutside(ref, () => setOpen(false));
 
     if(!user){
+        console.log("no user");
         return localStorage.setItem("token", null);
     }
 
@@ -42,7 +43,8 @@ function ProfileDropdown(){
                             Dashboard
                         </div>
                     </Link>
-                    <div onClick={() => {
+                    <div 
+                        onClick={() => {
                         dispatch(logout(navigate))
                         setOpen(false)
                     }}

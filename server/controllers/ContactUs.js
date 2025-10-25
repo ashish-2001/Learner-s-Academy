@@ -5,11 +5,11 @@ import { contactUsEmail } from "../mail/templates/contactFormResponse.js";
 
 const contactUsControllerValidator = z.object({
     email: z.string().email("Invalid email address"),
-        firstName: z.string().min(1, "First name is required"),
-        lastName: z.string().min(1, "Last name is required"),
-        message: z.string().min(1, "Message are required"),
-        phoneNumber: z.string().regex(/^[0-9]{10}$/, "Phone number must be of 10 digits"),
-        countryCode: z.string().regex(/^\+\d{1, 3}$/, "Country code is required")
+    firstName: z.string().min(1, "First name is required"),
+    lastName: z.string().min(1, "Last name is required"),
+    message: z.string().min(1, "Message are required"),
+    contactNumber: z.string().regex(/^[0-9]{10}$/, "Contact number must be of 10 digits"),
+    countryCode: z.string().regex(/^\+\d{1, 3}$/, "Country code is required")
 }) 
 async function contactUsController(req, res){
 
@@ -17,19 +17,19 @@ async function contactUsController(req, res){
         const parsedResult = contactUsControllerValidator.safeParse(req.body);
 
         if(!parsedResult.success){
-            return res.status(404).json({
+            return res.status(400).json({
                 success: false,
                 message: "Invalid input",
                 errors: parsedResult.error.errors
             })
         }
 
-        const { email, firstName, lastName, message, phoneNumber, countryCode } = parsedResult.data;
+        const { email, firstName, lastName, message, contactNumber, countryCode } = parsedResult.data;
 
         await mailSender(
             email, 
-            "Your Data send successfully",
-            contactUsEmail(email, firstName, lastName, message, phoneNumber, countryCode)
+            "Your message has been received",
+            contactUsEmail(email, firstName, lastName, message, contactNumber, countryCode)
         )
         
         return res.status(200).json({

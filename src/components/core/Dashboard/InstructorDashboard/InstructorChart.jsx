@@ -41,7 +41,7 @@ const DashboardChart = ({details,currentChart}) => {
     };
 
 
-  return (
+return (
     <div>
             <div className='mt-8 '> 
             {/* change label position extreme right and increase gap and change chart size */}
@@ -68,7 +68,7 @@ const DashboardChart = ({details,currentChart}) => {
             </div>
 
     </div>
-  )
+)
 }
 
 export {

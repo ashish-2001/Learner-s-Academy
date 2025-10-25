@@ -2,7 +2,7 @@ import React from 'react'
 import { RenderSteps } from './RenderSteps'
 
 const AddCourse = () => {
-  return (
+return (
     <div className=' mx-auto w-11/12 max-w-[1000px] py-10'>
     <div className='flex w-full items-start gap-x-6'>
         <div className='flex flex-1 flex-col'>
@@ -23,8 +23,8 @@ const AddCourse = () => {
             </ul>
         </div>
     </div>
-</div>
-  )
+    </div>
+)
 }
 
 export {

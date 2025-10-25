@@ -34,7 +34,7 @@ const InstructorDashboard = () => {
 
     return(
         <div>
-            <div className="mx-auto w-11/12 max-w-[100px] py-10">
+            <div className="mx-auto w-[80%] py-10 text-white pr-10">
                 <div>
                     <div className="space-y-2">
                         <h1 className="text-2xl font-bold">
@@ -45,7 +45,7 @@ const InstructorDashboard = () => {
                     <div className="my-4 flex flex-col-reverse gap-3 md:flex-row md:flex md:h-[450px] md:space-x-4">
                         <div className="p-6 flex flex-col flex-1 rounded-md">
                             <div className="flex items-center justify-between">
-                                <p className="text-lg font-bold">
+                                <p className="text-lg font-bold text-white">
                                     Visualize
                                 </p>
                                 <div className="flex items-center space-x-4">

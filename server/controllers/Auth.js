@@ -15,7 +15,7 @@ const signUpValidator = z.object({
     firstName: z.string().min(1, "First name is required"),
     lastName: z.string().min(1, "Last name is required"),
     email: z.string().email("Invalid email address"),
-    accountType: z.enum([ACCOUNT_TYPE.STUDENT, ACCOUNT_TYPE.INSTRUCTOR]),
+    accountType: z.enum([ACCOUNT_TYPE.STUDENT, ACCOUNT_TYPE.INSTRUCTOR, ACCOUNT_TYPE.ADMIN]),
     password: z.string().min(6, "Password must be at least 6 characters"),
     confirmPassword: z.string().min(6, "Confirm Password must be at least 6 characters"),
     otp: z.string().length(6, "Otp must be digits")
@@ -175,7 +175,7 @@ const signIn = async(req, res) => {
 
 const otpValidator = z.object({
     email: z.string().email("Invalid Email Address"),
-    accountType: z.enum([ACCOUNT_TYPE.STUDENT, ACCOUNT_TYPE.INSTRUCTOR])
+    accountType: z.enum([ACCOUNT_TYPE.STUDENT, ACCOUNT_TYPE.INSTRUCTOR, ACCOUNT_TYPE.ADMIN])
 })
 
 const sendOtp = async (req, res) => {
@@ -216,12 +216,6 @@ const sendOtp = async (req, res) => {
         } while(otpExists);
 
         await Otp.create({ email, otp, accountType });
-
-        // await mailSender(
-        //     email,
-        //     "Your Otp for Signup",
-        //     `Hello! Your Otp for Signup is: ${otp}. It will expire in 10 minutes.`
-        // )
 
         return res.status(200).json({
             success: true,

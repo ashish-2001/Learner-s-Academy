@@ -7,7 +7,8 @@ import { PublishCourse } from '../PublishCourse/PublishCourse';
 
 const RenderSteps = () => {
 
-    const {step} = useSelector((state)=> state.course);
+    const { step } = useSelector((state)=> state.course);
+
     const steps = [
         {
             id:1,
@@ -23,7 +24,7 @@ const RenderSteps = () => {
         },
     ]
 
-  return (
+return (
     <>
     <div className=' flex justify-center items-center'>
     <div className=' flex flex-col w-[calc(100vw-20%)] md:w-fit items-start'>
@@ -31,16 +32,20 @@ const RenderSteps = () => {
             {steps.map( (item) => (
                 <div key={item.id} className=' flex w-full justify-between'>
                     <div className='flex flex-col items-center'>
-                        <div className={  `grid cursor-default aspect-square w-[34px] place-items-center rounded-full border-[1px] ${step === item.id 
+                        <div className={`grid cursor-default aspect-square w-[34px] place-items-center rounded-full border-[1px] ${
+                        step === item.id 
                         ? "bg-[#251400] border-[#FFD60A] text-[#FFD60A]" 
                         : "border-[#2C333F] bg-[#161D29] text-[#838894]"}`}>
                         {
-                            step > item.id ? (<FaCheck/>) :(item.id)
+                            step > item.id ? <FaCheck/> : (item.id)
                         }
                         </div>
                     </div>
-                    {item.id <3 && (
-                    <div className={`h-[calc(34px/2)] w-[100%]  border-dashed border-b-2 ${step > item.id ? "border-[#FFD60A]" : "border-[#2C333F]"}
+                    { item.id < steps.length && (
+                    <div className={`h-[calc(34px/2)] w-[100%]  border-dashed border-b-2 ${
+                    step > item.id 
+                    ? "border-[#FFD60A]" 
+                    : "border-[#2C333F]"
                     }`}></div>
                     )}
                 </div>
@@ -48,11 +53,9 @@ const RenderSteps = () => {
         </div>
         <div className='relative mb-16 flex w-full select-none justify-between'>
             {steps.map((item) => (
-                <>
-                    <div key={item.id} className='flex md:min-w-[180px] flex-col items-start'>
-                        <p className=' ml-3 md:ml-0 text-[10px] md:text-sm text-[#F1F2FF]'>{item.title}</p>
-                    </div>
-                </>
+                <div key={item.id} className='flex md:min-w-[180px] flex-col items-start'>
+                    <p className=' ml-3 md:ml-0 text-[10px] md:text-sm text-[#F1F2FF]'>{item.title}</p>
+                </div>
             ))}
         </div>
         </div>
@@ -62,7 +65,7 @@ const RenderSteps = () => {
         {step === 2 && <CourseBuilderForm/>}
         {step===3 && <PublishCourse/>}
     </>
-  )
+)
 }
 
 export {

@@ -40,7 +40,6 @@ import { Player } from "video-react"
   })
 
   const previewFile = (file) => {
-    // console.log(file)
     const reader = new FileReader()
     reader.readAsDataURL(file)
     reader.onloadend = () => {
@@ -49,13 +48,11 @@ import { Player } from "video-react"
   }
 
   useEffect(() => {
-    register(name, { required: true })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    register(name, { required: true });
   }, [register])
 
   useEffect(() => {
-    setValue(name, selectedFile)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setValue(name, selectedFile);
   }, [selectedFile, setValue])
 
   return (

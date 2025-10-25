@@ -46,7 +46,7 @@ const PublishCourse = () => {
         const result = await editCourseDetails(formData, token);
         const category_id= await course.category;
         console.log("category_id",category_id);
-        const addCourseCategory = await addCourseCategory({categoryId:category_id,courseId:course._id},token);
+        const addCourseCategory = await addCourseCategory({categoryId:category_id, courseId:course._id}, token);
         if(result && addCourseCategory) {
             goToMyCourses();
         } else {

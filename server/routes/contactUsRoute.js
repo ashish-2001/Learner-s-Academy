@@ -4,7 +4,7 @@ const router = express.Router();
 import { contactUsController } from "../controllers/ContactUs.js";
 
 
-router.post("/contact", contactUsController);
+router.post("/contactUs", contactUsController);
 
 export {
     router

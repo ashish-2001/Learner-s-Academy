@@ -41,6 +41,13 @@ const sidebarLinks = [
         path: "/dashboard/cart",
         type: ACCOUNT_TYPE.STUDENT,
         icon: "VscHistory"
+    },
+    {
+        id: 7,
+        name: "Create Category",
+        path: "/course/createCategory",
+        type: ACCOUNT_TYPE.ADMIN,
+        icon: "VscHistory"
     }
 ]
 

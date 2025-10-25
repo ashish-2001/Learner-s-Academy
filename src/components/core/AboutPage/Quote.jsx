@@ -14,8 +14,7 @@ function Quote(){
             , and community to create an 
             <span className="bg-gradient-to-b from-[#E65C00] to-[#F9D432] text-[#ffffff00] bg-clip-text font-bold">
                 {" "}
-                unparalleled educational
-                experience.
+                unparalleled educational experience.
             </span>
         </div>
     )

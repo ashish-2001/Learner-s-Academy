@@ -18,11 +18,11 @@ const CourseInformationForm = () => {
         handleSubmit,
         setValue,
         getValues,
-        formState:{errors},
+        formState: { errors },
     } = useForm();
 
     const dispatch = useDispatch();
-    const {token} = useSelector((state)=>state.auth);
+    const { token } = useSelector((state)=>state.auth);
     const {course, editCourse} = useSelector((state)=>state.course);
     const [loading, setLoading] = useState(false);
     const [courseCategories, setCourseCategories] = useState([]);
@@ -34,6 +34,10 @@ const CourseInformationForm = () => {
             if(categories.length > 0) {
                 setCourseCategories(categories);
             }
+
+            if(editCourse && course.category?._id){
+                setValue("courseCategory", course.category._id)
+            }
             setLoading(false);
         }
 
@@ -42,14 +46,13 @@ const CourseInformationForm = () => {
             setValue("courseShortDesc", course.courseDescription);
             setValue("coursePrice", course.price);
             setValue("courseTags", course.tag);
-            setValue("courseBenefits", course.whatYouWillLearn);
-            setValue("courseCategory", course.category);
+            setValue("courseBenefits", course.whatWillYouLearn);
             setValue("courseRequirements", course.instructions);
             setValue("courseImage", course.thumbnail);
         }
 
         getCategories();
-    },[])
+    }, [])
 
     const isFormUpdated = () => {
         const currentValues = getValues();
@@ -58,8 +61,8 @@ const CourseInformationForm = () => {
             currentValues.coursePrice !== course.price ||
             currentValues.courseTitle !== course.courseName ||
             currentValues.courseTags.toString() !== course.tag.toString() ||
-            currentValues.courseBenefits !== course.whatYouWillLearn ||
-            currentValues.courseCategory._id !== course.category._id ||
+            currentValues.courseBenefits !== course.whatWillYouLearn ||
+            currentValues.courseCategory !== course.category._id ||
             currentValues.courseImage !== course.thumbnail ||
             currentValues.courseRequirements.toString() !== course.instructions.toString() )
             return true;
@@ -88,11 +91,11 @@ const CourseInformationForm = () => {
                 formData.append("price", data.coursePrice);
             }
 
-            if(currentValues.courseBenefits !== course.whatYouWillLearn) {
-                formData.append("whatYouWillLearn", data.courseBenefits);
+            if(currentValues.courseBenefits !== course.whatWillYouLearn) {
+                formData.append("whatWillYouLearn", data.courseBenefits);
             }
 
-            if(currentValues.courseCategory._id !== course.category._id) {
+            if(currentValues.courseCategory !== course.category._id) {
                 formData.append("category", data.courseCategory);
             }
 
@@ -108,14 +111,13 @@ const CourseInformationForm = () => {
                 dispatch(setStep(2));
                 dispatch(setCourse(result));
             }
-            } 
-            else {
-                toast.error("NO Changes made so far");
-            }
             console.log("PRINTING FORMDATA", formData);
             console.log("PRINTING result", result);
-
             return;
+            }
+            else{
+                toast.error("No Changes made so far")
+            }
         }
 
         //create a new course
@@ -123,7 +125,7 @@ const CourseInformationForm = () => {
         formData.append("courseName", data.courseTitle);
         formData.append("courseDescription", data.courseShortDesc);
         formData.append("price", data.coursePrice);
-        formData.append("whatYouWillLearn", data.courseBenefits);
+        formData.append("whatWillYouLearn", data.courseBenefits);
         formData.append("category", data.courseCategory);
         formData.append("instructions", JSON.stringify(data.courseRequirements));
         formData.append("status", COURSE_STATUS.DRAFT);
@@ -131,9 +133,9 @@ const CourseInformationForm = () => {
         formData.append("thumbnailImage", data.courseImage);
 
         setLoading(true);
-        console.log("BEFORE add course API call");
-        console.log("PRINTING FORMDATA", formData);
-        const result = await addCourseDetails(formData,token);
+
+        const result = await addCourseDetails(formData, token);
+
         if(result) {
             dispatch(setStep(2));
             dispatch(setCourse(result));
@@ -145,7 +147,7 @@ const CourseInformationForm = () => {
 
     }
 
-  return (
+return (
     <form
     onSubmit={handleSubmit(onSubmit)}
     className='space-y-8 rounded-md border-[1px] border-[#2C333F] bg-[#161D29] p-6'
@@ -155,7 +157,7 @@ const CourseInformationForm = () => {
             <input
                 id='courseTitle'
                 placeholder='Enter Course Title'
-                {...register("courseTitle", {required:true})}
+                {...register("courseTitle", { required:true  })}
                 className='rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full'
             />
             {
@@ -170,7 +172,7 @@ const CourseInformationForm = () => {
             <textarea
                 id='courseShortDesc'
                 placeholder='Enter Description'
-                {...register("courseShortDesc", {required:true})}
+                {...register("courseShortDesc", { required:true })}
                 className='rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none resize-x-none min-h-[130px] w-full'
                 />
             {
@@ -194,24 +196,25 @@ const CourseInformationForm = () => {
             <HiOutlineCurrencyRupee size={30}  className='absolute top-7 text-[#6E727F]'/>
             {
                 errors.coursePrice && (
-                    <span className='ml-2 text-xs tracking-wide text-[#EF476F]'>Course Price is Required**</span>
+                    <span className='ml-2 text-xs tracking-wide text-[#EF476F]'>Course Price is Required</span>
                 )
             }
         </div>
 
         <div className='flex flex-col space-y-2'>
             <label className='text-sm text-[#F1F2FF]' htmlFor='courseCategory'>Course Category<sup className='text-[#EF476F]'>*</sup></label>
-            <select disabled={editCourse} className='form-style w-full'
-            id='courseCategory'
-            defaultValue=""
-            {...register("courseCategory", {required:true})}
+            <select 
+                disabled={editCourse} 
+                className='form-style w-full'
+                id='courseCategory'
+                {...register("courseCategory", { required:true })}
             >
                 <option value="" disabled>Choose a Category</option>
 
                 {
-                    !loading && courseCategories.map((category, index) => (
-                        <option key={index} value={category?._id}>
-                            {category?.name}
+                    !loading && courseCategories.map((category) => (
+                        <option key={category._id} value={category._id}>
+                            {category.name}
                         </option>
                     ))
                 }
@@ -248,10 +251,10 @@ const CourseInformationForm = () => {
         <div className='flex flex-col space-y-2'>
             <label className='text-sm text-[#F1F2FF]'>Benefits of the course<sup className='text-[#EF476F]'>*</sup></label>
             <textarea
-            id='coursebenefits'
-            placeholder='Enter Benefits of the course'
-            {...register("courseBenefits", {required:true})}
-            className='rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none resize-x-none min-h-[130px] w-full'
+                id='courseBenefits'
+                placeholder='Enter Benefits of the course'
+                {...register("courseBenefits", { required:true })}
+                className='rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none resize-x-none min-h-[130px] w-full'
             />
             {errors.courseBenefits && (
                 <span className='ml-2 text-xs tracking-wide text-[#EF476F]'>
@@ -279,7 +282,6 @@ const CourseInformationForm = () => {
                     </button>
                 )
             }
-
             <IconBtn type={"submit"}
                 text={!editCourse ? "Next" : "Save Changes"}
                 />

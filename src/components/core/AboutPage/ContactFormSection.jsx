@@ -8,7 +8,7 @@ const ContactFormSection = () => {
         Get in Touch
       </h1>
       <p className='text-center text-[#838894] mt-3'>
-        We'd love to here for you, Please fill out this form.
+        We would love to here for you, Please fill out this form.
       </p>
       <div>
         <ContactUsForm />

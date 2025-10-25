@@ -10,31 +10,49 @@ import { LearningLanguageSection } from '../components/Core/HomePage/LearningLan
 import { InstructorSection } from '../components/Core/HomePage/InstructorSection';
 import { ExploreMore } from '../components/Core/HomePage/ExploreMore';
 import { useDispatch } from 'react-redux';
-import { setProgress } from "../slices/LoadingBarSlice"
-import { getCatalogPageData } from '../services/operations/pageAndcomponentDatas';
+import { setProgress } from '../slices/loadingBarSlice';
 import { Course_Slider } from '../components/Core/Catalog/Course_Slider';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { apiConnector } from '../services/apiConnector';
+import { catalogData } from '../services/apis';
+import { getCatalogPageData } from '../services/operations/pageAndcomponentDatas';
 
 
 
 function Home() {
-    const [catalogPageData, setCatalogPageData] = useState(null);
-    const categoryID = "6475dbeb49dcc886b5698441";
+
+    const dispatch = useDispatch();
+    const [categories, setCategories] = useState(null);
+    const [categoryId, setCategoryId] = useState("");
+    const [catalogPageData, setCatalogPageData] = useState("");
 
     useEffect(() => {
-        const fetchCatalogPageData = async () => {
+        const fetchCategories = async () => {
             
-                const result = await getCatalogPageData(categoryID, dispatch);
-                setCatalogPageData(result);
-                // console.log("page data",CatalogPageData);
-            
+            const response = await apiConnector("GET", catalogData.SHOW_ALL_CATEGORIES_API);
+
+            if(response?.data?.success){
+                setCategories(response.data.data);
+                if(response.data.data.length > 0 ){
+                    setCategoryId(response.data.data[0]._id)
+                }
+            }
         }
-        if (categoryID) {
-            fetchCatalogPageData();
+        fetchCategories();
+    }, []);
+
+    useEffect(() => {
+        if(!categoryId){
+            return;
         }
-    }, [categoryID])
-    const dispatch = useDispatch();
+        const fetchCatalog = async() => {
+            const result = await getCatalogPageData(categoryId, dispatch);
+            setCatalogPageData(result?.data);
+        }
+        fetchCatalog();
+    }, [categoryId, dispatch]);
+    
   return (
     <div>
         <div className=' mx-auto relative flex flex-col w-11/12 items-center justify-between text-white '>
@@ -108,13 +126,13 @@ function Home() {
         <h2 className='section_heading mb-6 md:text-3xl text-xl'>
            Most Popular Courses
         </h2>
-        <Course_Slider Courses={catalogPageData?.selectedCourses}/>
+        <Course_Slider Courses={catalogData?.selectedCourses}/>
       </div>       
         <div className=' mx-auto box-content w-full max-w-[650px] px- py-12 lg:max-w-[1260px]'>
         <h2 className='section_heading mb-6 md:text-3xl text-xl'>
            Students are learning
         </h2>
-        <Course_Slider Courses={catalogPageData?.differentCourses}/>
+        <Course_Slider Courses={catalogData?.differentCourses}/>
       </div>       
 
 

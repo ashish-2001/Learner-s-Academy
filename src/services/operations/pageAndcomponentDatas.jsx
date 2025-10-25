@@ -3,13 +3,12 @@ import { setProgress } from "../../slices/loadingBarSlice";
 import { apiConnector } from '../apiConnector';
 import { catalogData } from '../apis';
 
-const getCatalogPageData = async(categoryId,dispatch) => {
+const getCatalogPageData = async(categoryId, dispatch) => {
   // const toastId = toast.loading("Loading...");
   dispatch(setProgress(50));
   let result = [];
   try{
-        const response = await apiConnector("POST", catalogData.CATALOGPAGEDATA_API, 
-        {categoryId: categoryId,});
+        const response = await apiConnector("POST", catalogData.CATALOGPAGEDATA_API, { categoryId });
         console.log("CATALOG PAGE DATA API RESPONSE....", response);
         if(!response.data.success)
             throw new Error("Could not Fetch Category page data error",

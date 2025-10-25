@@ -8,8 +8,18 @@ import { toast } from 'react-hot-toast';
 import { CountryCode } from '../../data/CountryCode';
 
 const ContactUsForm = () => {
+
     const [loading, setLoading] = useState(false);
-    const {register,handleSubmit,reset,formState:{errors,isSubmitSuccessful}}=useForm();
+
+    const { 
+        register,
+        handleSubmit,
+        reset,
+        formState:{
+            errors,
+            isSubmitSuccessful
+        }} = useForm();
+
     useEffect(() => {
         if(isSubmitSuccessful){
             reset({
@@ -17,36 +27,46 @@ const ContactUsForm = () => {
                 lastName:"",
                 email:"",
                 message:"",
-                phoneNo:""
+                contactNumber:""
             })
         }
-    }, [reset,isSubmitSuccessful])
+    }, [reset, isSubmitSuccessful])
 
     const onSubmit = async (data) => {
         console.log(data);
         try{
         setLoading(true);
-        const phoneNo = data.countryCode+"  "+data.phoneNo;
-        const {firstName,lastName,email,message}=data;
+        const contactNumber = data.contactNumber+" "+data.contactNumber;
+        const countryCode = data.countryCode
+        const payload = { 
+            firstName: data.firstName, 
+            lastName: data.lastName, 
+            email: data.email, 
+            message: data.message, 
+            contactNumber, 
+            countryCode
+        }
 
-        const res = await apiConnector("POST",contactUsEndpoint.CONTACT_US_API,{firstName,lastName,email,message,phoneNo});
-        if(res.data.success===true){
-            
+        const res = await apiConnector("POST", contactUsEndpoint.CONTACT_US_API, payload);
+
+        if(res.data.success){
             toast.success("Message sent successfully");
         }
         else{
-            toast.error("Something went wrong");
+            toast.error("Failed to send message");
         }
-        console.log("contact response",res);
-        setLoading(false);
         }catch(error){
             console.log(error);
+            toast.error("Failed to send message");
+            setLoading(false)
+        } finally{
+            setLoading(false);
+            reset();
         }
-
     }
     
 return (
-    loading?(<div className=".custom-loader w-[100%] pt-[30%] pb-[30%]"><div className="custom-loader"></div></div>):(
+    loading ? (<div className=".custom-loader w-[100%] pt-[30%] pb-[30%]"><div className="custom-loader"></div></div>):(
     <div>
         <form onSubmit={handleSubmit(onSubmit)} className={"flex flex-col gap-7"}>
 
@@ -67,12 +87,12 @@ return (
         }</div>
         
         <div className='flex flex-col gap-2'>
-            <label htmlFor="phoneNo" className="text-[14px] text-[#F1F2FF]">Phone Number</label>
+            <label htmlFor="contactNumber" className="text-[14px] text-[#F1F2FF]">Contact Number</label>
             <div className='flex gap-5'>
                 <div className='flex w-[81px] flex-col gap-2'>
                 <select type="text" name="countryCode" id="countryCode" className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text- shadow-[0_1px_0_0] shadow-[#fff]/50 placeholder:text-[#6E727F] focus:outline-none" {...register("countryCode", { required:true })}>
                     {
-                        CountryCode.map((item,index)=>{
+                        CountryCode.map((item, index)=>{
                             return(
                                 <option key={index} value={item.code}>
                                     {item.code} - {item.country}
@@ -83,9 +103,18 @@ return (
                 </select>
                 </div>
                 <div className='flex w-[calc(100%-90px)] flex-col gap-2'>
-                <input type="tel"  name="phoneNumber" id="phoneNumber" placeholder="12345 67890" className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-[#fff]/50 placeholder:text-[#6E727F] focus:outline-none" {...register("phoneNumber",{ required:{ value:true,message:"Please enter phone Number *"}, maxLength:{ value:10, message:"Enter a valid Phone Number *"}, minLength:{ value:8, message:"Enter a valid Phone Number *"}})} />
+                <input 
+                    type="tel" 
+                    name="contactNumber" 
+                    id="contactNumber" 
+                    placeholder="12345 67890" 
+                    className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-[#fff]/50 placeholder:text-[#6E727F] focus:outline-none" 
+                    {...register("contactNumber", { 
+                        required: "Please enter contact Number", 
+                        maxLength: { value: 12, message:"Enter a valid contact Number" }, 
+                        minLength:{ value: 8, message: "Enter a valid Phone Number"}})} />
                 {
-                    errors.phoneNumber && <span className=" text-[#FFE83D]">{errors.phoneNo.message}</span>
+                    errors.contactNumber && <span className=" text-[#FFE83D]">{errors.contactNumber.message}</span>
                 }
                 </div>
             </div>

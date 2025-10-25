@@ -30,10 +30,6 @@ const Settings = () => {
     setProfilePicture(URL.createObjectURL(file));
   }
 
-
-
-
-
   //update additional info
   const [formData, setFormData] = useState({
     firstName: "",
@@ -55,11 +51,6 @@ const Settings = () => {
     e.preventDefault()
     updateAdditionalDetails(token,formData);
   }
-
-
-
-
-
 
   //update password
   const [showPassword, setShowPassword] = useState(false);
@@ -90,9 +81,8 @@ const Settings = () => {
   //delete account
   const onDeleteAccount = () => {
     if(window.confirm("Are you sure you want to delete your account?")){
-        deleteAccount(token,dispatch,navigate);
+        deleteAccount( token, dispatch, navigate );
       }
-
   }
 
   return (

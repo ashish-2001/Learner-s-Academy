@@ -13,7 +13,7 @@ function RatingStars({  Review_Count, Star_Size }){
     })
 
     useEffect(() => {
-        const wholeStars = Math.floor(Review_Count) || 0
+        const wholeStars = Math.floor(Review_Count) || 0;
         setStarCount({
             full: wholeStars,
             half: Number.isInteger(Review_Count) ? 0 : 1,

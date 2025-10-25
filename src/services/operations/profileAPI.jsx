@@ -9,9 +9,11 @@ async function getUserCourses(token, dispatch){
         let result = [];
         try{
             console.log("BEFORE CALLING BACKEND API FOR ENROLLED COURSES");
-            const response = await apiConnector("GET", profileEndpoints.GET_USER_ENROLLED_COURSES_API, null, {
-               headers: { Authorization: `Bearer ${token}` }
-            });
+            const response = await apiConnector("GET", profileEndpoints.GET_USER_ENROLLED_COURSES_API, null, 
+                {
+                    Authorization: `Bearer ${token}` 
+                }
+        );
 
             console.log("AFTER CALLING BACKEND API FOR ENROLLED COURSES");
 
@@ -34,9 +36,11 @@ async function getProfilePicture(token, profilePicture){
         console.log("Profile picture:", profilePicture);
         formData.append("displayPicture", profilePicture);
 
-        const response = await apiConnector("PUT", settingsEndpoints.UPDATE_DISPLAY_PICTURE_API, formData, {
-            headers: { Authorization: `Bearer ${token}` }
-        });
+        const response = await apiConnector("PUT", settingsEndpoints.UPDATE_DISPLAY_PICTURE_API, formData, 
+            {
+                Authorization: `Bearer ${token}` 
+            }
+    );
         console.log("UPDATE DISPLAY PICTURE API RESPONSE.............", response);
         if(!response.data.success){
             throw new Error(response.data.message);
@@ -47,7 +51,7 @@ async function getProfilePicture(token, profilePicture){
         console.log(JSON.parse(localStorage.getItem("user")).image);
     } catch(error){
         console.log("UPDATE DISPLAY PICTURE API ERROR.................", error);
-        toast.error(error.response.data.message);
+        toast.error(error?.response?.data?.message);
     }
     toast.dismiss(toastId);
 }
@@ -67,12 +71,15 @@ async function updateAdditionalDetails(token, additionalDetails){
 
     console.log("Additional details:", additionalDetails);
 
-    const toastId = toast.loading("Loading...");
+    const toastId = toast.loading("Updating Profile...");
 
     try{
-        const response = await apiConnector("PUT", settingsEndpoints.UPDATE_PROFILE_API, { firstName, lastName, dateOfBirth, gender, contactNumber, about }, {
-            headers: { Authorization: `Bearer ${token}` }
-        })
+
+        const response = await apiConnector("PUT", settingsEndpoints.UPDATE_PROFILE_API, { firstName, lastName, dateOfBirth, gender, contactNumber, about }, 
+            {
+                Authorization: `Bearer ${token}` 
+            }
+    )
         console.log("UPDATE ADDITIONAL DETAILS API RESPONSE...............", response)
         
         if(!response.data.success){
@@ -81,14 +88,24 @@ async function updateAdditionalDetails(token, additionalDetails){
 
         toast.success("Additional Details updated successfully");
 
-        const user = JSON.parse(localStorage.getItem("user"));
-        user.firstName = firstName || user.firstName;
-        user.lastName = lastName || user.lastName;
-        user.additionalDetails.dateOfBirth = dateOfBirth || user.additionalDetails.dateOfBirth;
-        user.additionalDetails.contactNumber = contactNumber || user.additionalDetails.contactNumber;
-        user.additionalDetails.about = about || user.additionalDetails.about;
-        user.additionalDetails.gender = gender;
-        localStorage.setItem("user", JSON.stringify(user));
+        const user = JSON.parse(localStorage.getItem("user")) || {};
+
+        const updatedUser = {
+            ...user,
+            firstName: firstName || user.firstName,
+            lastName: lastName || user.lastName,
+            additionalDetails: {
+                ...user.additionalDetails,
+                dateOfBirth: dateOfBirth || user.additionalDetails?.dateOfBirth,
+                contactNumber: contactNumber || user.additionalDetails?.contactNumber,
+                about: about || user.additionalDetails?.about,
+                gender: gender || user.additionalDetails?.gender
+            }
+        }
+    
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+
+        return updatedUser;
 
     } catch(error){
         console.log("UPDATE ADDITIONAL DETAILS API ERROR...............", error);
@@ -103,9 +120,11 @@ async function updatePassword(token, password){
     const toastId = toast.loading("Updating...");
 
     try{
-        const response = await apiConnector("PUT", settingsEndpoints.CHANGE_PASSWORD_API, {oldPassword, newPassword, confirmPassword}, {
-            headers: { Authorization: `Bearer ${token}` }
-        });
+        const response = await apiConnector("PUT", settingsEndpoints.CHANGE_PASSWORD_API, { oldPassword, newPassword, confirmPassword }, 
+            {
+                Authorization: `Bearer ${token}` 
+            }
+    );
         console.log("UPDATE PASSWORD API RESPONSE...............", response);
         if(!response.data.success){
             throw new Error(response.data.message);
@@ -113,7 +132,7 @@ async function updatePassword(token, password){
         toast.success("Password updated successfully");
     }catch(error){
         console.log("UPDATE PASSWORD API ERROR..............", error);
-        toast.error(error.response.data.message);
+        toast.error(error?.response?.data?.message);
     }
     toast.dismiss(toastId);
 }
@@ -121,9 +140,11 @@ async function updatePassword(token, password){
 async function deleteAccount(token, dispatch, navigate){
     const toastId = toast.loading("Deleting...");
     try{
-        const response = await apiConnector("DELETE", settingsEndpoints.DELETE_PROFILE_API, null, {
-            headers: { Authorization: `Bearer ${token}` }
-        });
+        const response = await apiConnector("DELETE", settingsEndpoints.DELETE_PROFILE_API, null, 
+            {
+                Authorization: `Bearer ${token}` 
+            }
+    );
         console.log("DELETE ACCOUNT API RESPONSE..............", response);
         if(!response.data.success){
             throw new Error(response.data.message);
@@ -132,19 +153,24 @@ async function deleteAccount(token, dispatch, navigate){
         dispatch(logout(navigate));
     } catch(error){
         console.log("DELETE ACCOUNT API ERROR.................", error);
-        toast.error(error.response.data.message);
+        toast.error(error?.response?.data?.message);
+    } finally {
+        toast.dismiss(toastId);
     }
-    toast.dismiss(toastId);
 }
 
 async function getInstructorDashboard(token, dispatch){
-        dispatch(setProgress(0));
+
+        dispatch(setProgress(20));
         let result = [];
+
         try{
             console.log("BEFORE CALLING BACKEND API FOR INSTRUCTOR DASHBOARD");
-            const response = await apiConnector("GET", profileEndpoints.GET_ALL_INSTRUCTOR_DASHBOARD_DETAILS_API, null, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+            const response = await apiConnector("GET", profileEndpoints.GET_ALL_INSTRUCTOR_DASHBOARD_DETAILS_API, null, 
+                {
+                    Authorization: `Bearer ${token}` 
+                }
+        );
             console.log("AFTER CALLING BACKEND API FOR INSTRUCTOR DASHBOARD");
 
             if(!response.data.success){
@@ -155,9 +181,11 @@ async function getInstructorDashboard(token, dispatch){
             console.log(result);
         }catch(error){
             console.log("GET INSTRUCTOR DASHBOARD API ERROR................", error);
-            toast.error("Could Not Get Instructor Dashboard");
+            toast.error(error?.response?.data?.message);
+        } finally {
+            dispatch(setProgress(100));
         }
-        dispatch(setProgress(100));
+        
         return result;
     }
 

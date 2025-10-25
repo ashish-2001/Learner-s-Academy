@@ -42,7 +42,7 @@ router.get("/showAllCategories", showAllCategories);
 
 router.put("/updateCourseProgress", auth, isStudent, updateCourseProgress)
 
-router.post("/createCategory", auth, isAdmin, createCategory);
+router.post("/admin-panel", auth, isAdmin, createCategory);
 router.get("/showAllCategories", showAllCategories);
 router.post("/getCategoryPageDetails", categoryPageDetails);
 

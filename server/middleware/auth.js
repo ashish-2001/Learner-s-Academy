@@ -103,7 +103,7 @@ async function isAdmin(req, res, next){
             email: parsedResult.data.email
         })
 
-        if(!userDetails || userDetails.accountType !== "Admin"){
+        if(!userDetails || userDetails.accountType !== ""){
             return res.status(401).json({
                 success: false,
                 message: "This is a protected route for Admin"

@@ -18,7 +18,7 @@ import {
 
 const CourseBuilderForm = () => {
   const { token } = useSelector((state) => state.auth);
-  const [editSectionName, setEditSectionName] = React.useState(false);
+  const [editSectionName, setEditSectionName] = useState(false);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const { course } = useSelector((state) => state.course);
@@ -30,7 +30,7 @@ const CourseBuilderForm = () => {
       ) {
         dispatch(setStep(3));
       } else {
-        toast.error("Please add at least one lesson to esch section");
+        toast.error("Please add at least one lesson to each section");
       }
     } else {
       toast.error("Please add at least one section to continue");
@@ -76,8 +76,8 @@ const CourseBuilderForm = () => {
   };
 
 
-  const handelChangeEditSectionName = (sectionId,sectionName) => {
-    if (editSectionName===sectionId) {
+  const handelChangeEditSectionName = (sectionId, sectionName) => {
+    if (editSectionName === sectionId) {
       setEditSectionName(false);
       setValue("sectionName", "");
       return;
