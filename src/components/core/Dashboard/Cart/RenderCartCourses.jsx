@@ -12,11 +12,11 @@ function RenderCartCourses(){
     return(
         <div className="flex flex-1 flex-col">
             {cart.map((course, index) => (
-                <div className={`flex w-full flex-wrap items-start justify-between gap-6 border-b border-b-[#6E727F] pb-6 false pt-6`} key={course._id}>
+                <div className={`flex w-full flex-wrap items-start justify-between gap-6 border-b border-b-[#6E727F] pb-6 false pt-6`} key={index}>
                     <div className="flex flex-1 flex-col gap-4 xl:flex-row">
-                        <Link>
+                        <Link to={`/courses/${course._id}`}>
                             <img
-                                src={course?.thumbnail}
+                                src={""}
                                 alt={course?.courseName}
                                 className="md:h-[148px] md:w-[220px] rounded-lg h-[100px] w-[180px] object-cover"
                             />
@@ -36,7 +36,6 @@ function RenderCartCourses(){
                                 <span className="text-[#FFF970]"></span>
                                 <ReactStars
                                     count={5}
-                                    value={course?.ratingAndReviews?.length}
                                     size={20}
                                     edit={false}
                                     activeColor={"#ffd700"}

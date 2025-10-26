@@ -1,72 +1,58 @@
 import React from 'react'
 import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, plugins } from 'chart.js';
+import { data } from 'react-router-dom';
 
-const DashboardChart = ({details,currentChart}) => {
-    ChartJS.register(ArcElement, Tooltip, Legend);
 
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+const DashboardChart = ({ details, currentChart }) => {
 
     const randomColor = (num) => {
-        const colors = []
-        for(let i=0; i<num; i++) {
-            colors.push(`rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`)
-        }
-        return colors;
+        return Array.from({ length: num }, () => 
+            `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
+        )
     }
 
-    const StudentsData = {
-        labels: details?.map(course => course?.courseName),
+    const chartLabels = details?.map(course => course?.courseName) || [];
+    const studentData = details?.map(course => course?.totalStudents) || [];
+    const revenueData = details?.map(course => course?.totalRevenue) || [];
+    const colors = randomColor(chartLabels.length);
+
+    const chartData = {
+        labels: chartLabels,
         datasets: [
             {
-                label: '# of Students',
-                data: details?.map(course => course?.totalStudents),
-                backgroundColor: randomColor(details?.length),
-                borderColor: randomColor(),
-                borderWidth: 1,
-            },
-        ],
+                label: currentChart === 'revenue' ? 'Revenue (₹)' : 'Number of students',
+                data : currentChart === 'revenue' ? revenueData : studentData,
+                backgroundColor: colors,
+                borderColor: colors.map(c => c.replace('0.7', '1')),
+                borderWidth: 1
+            }
+        ]
     };
 
-    const RevenueData = {
-        labels: details?.map(course => course?.courseName),
-        datasets: [
-            {
-                label: '# of ₹',
-                data: details?.map(course => course?.totalRevenue),
-                backgroundColor: randomColor(details?.length),
-                borderColor: randomColor(),
-                borderWidth: 1,
+    const chartOptions = {
+        plugins: {
+            legend: {
+                position: 'right',
+                labels: {
+                    boxWidth: 15,
+                    boxHeight: 15,
+                    padding: 20,
+                    font: {
+                        size: 12
+                    },
+                },
             },
-        ],
+        },
+        aspectRatio: 2
     };
 
 
 return (
-    <div>
-            <div className='mt-8 '> 
-            {/* change label position extreme right and increase gap and change chart size */}
-                {currentChart === 'revenue' ? <Pie data={RevenueData}
-                options={{
-                    plugins: {
-                        legend: {
-                            position: 'right',
-                            labels: {
-                                boxWidth: 10,
-                                boxHeight: 10,
-                                padding: 20,
-                                font: {
-                                    size: 12,
-                                },
-                            },
-                        },
-                    },
-                    aspectRatio: 2,
-                }
-            }
-            /> 
-            : <Pie data={StudentsData} />}
-            </div>
-
+    <div className='mt-8'>
+        <Pie data={chartData} options={chartOptions}/>
     </div>
 )
 }

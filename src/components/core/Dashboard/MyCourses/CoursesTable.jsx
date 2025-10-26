@@ -8,13 +8,10 @@ import { FiEdit2 } from "react-icons/fi"
 import { HiClock } from "react-icons/hi"
 import { RiDeleteBin6Line } from "react-icons/ri"
 import { useNavigate } from "react-router-dom"
-
-import { formatDate } from "../../../../services/formatDate"
-import {
-  deleteCourse,
-  fetchInstructorCourses,
-} from "../../../../services/operations/courseDetailsAPI"
+import { formatDate } from "../../../../services/formatDate";
+import { deleteCourse, fetchInstructorCourses } from "../../../../services/operations/courseDetailsAPI"
 import { COURSE_STATUS } from "../../../../utils/constants.js"
+import { ConfirmationModalData } from "../../../Common/ConfirmationModal"
 
 function CoursesTable({ courses, setCourses }) {
   const navigate = useNavigate()
@@ -76,10 +73,10 @@ function CoursesTable({ courses, setCourses }) {
                 key={course?._id}
                 className="flex gap-x-10 border-b border-[#161D29] px-6 py-8 gap-4"
               >
-                <Td colSpan={1}  className="flex flex-1 gap-x-4 p-3">
+                <Td className="flex flex-1 gap-x-4 p-3">
                   <img
                     src={course?.thumbnail}
-                    alt={course?.courseName}
+                    alt={""}
                     className="md:h-[148px] md:w-[220px] aspect-video rounded-lg object-cover"
                   />
                   <div className="flex flex-col gap-1 justify-between">
@@ -87,8 +84,7 @@ function CoursesTable({ courses, setCourses }) {
                       {course.courseName}
                     </p>
                     <p className="text-xs text-[#838894]">
-                      {course?.courseDescription.split(" ")?.length >
-                      TRUNCATE_LENGTH
+                      {course?.courseDescription.split(" ")?.length > TRUNCATE_LENGTH
                         ? course.courseDescription
                             .split(" ")
                             .slice(0, TRUNCATE_LENGTH)
@@ -126,7 +122,7 @@ function CoursesTable({ courses, setCourses }) {
                       navigate(`/dashboard/edit-course/${course._id}`);
                     }}
                     title="Edit"
-                    className="px-2 transition-all duration-200 hover:scale-110 hover:text-[#05A77B] mr- mb-"
+                    className="px-2 transition-all duration-200 hover:scale-110 hover:text-[#05A77B]"
                   >
                     <FiEdit2 size={20} />
                   </button>
@@ -135,9 +131,8 @@ function CoursesTable({ courses, setCourses }) {
                     onClick={() => {
                       setConfirmationModal({
                         text1: "Do you want to delete this course?",
-                        text2:
-                          "All the data related to this course will be deleted",
-                        btn1Text: !loading ? "Delete" : "Loading...  ",
+                        text2: "All the data related to this course will be deleted",
+                        btn1Text: !loading ? "Delete" : "Loading...",
                         btn2Text: "Cancel",
                         btn1Handler: !loading
                           ? () => handleCourseDelete(course._id)
@@ -158,7 +153,7 @@ function CoursesTable({ courses, setCourses }) {
           )}
         </Tbody>
       </Table>
-      {confirmationModal && <confirmationModal modalData={confirmationModal} />}
+      {confirmationModal && <ConfirmationModalData modalData={confirmationModal} />}
     </>
   )
 }

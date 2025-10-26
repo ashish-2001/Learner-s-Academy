@@ -1,15 +1,24 @@
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { useFormContext } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 
-const Upload = ({name, label, register, errors, setValue}) => {
+const Upload = ({ name, label }) => {
+
     const [image, setImage] = useState(null)
     const {editCourse, course} = useSelector((state) => state.course);
 
+    const {
+      register,
+      setValue,
+      formState: { errors }
+    } = useFormContext();
+
     const handelOnChange = (e) => {
         const file = e.target.files[0];
-        setValue(name, e.target.files[0]);
+        setValue(name, file);
+
         if(file) {
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -17,33 +26,37 @@ const Upload = ({name, label, register, errors, setValue}) => {
             }
             reader.readAsDataURL(file);
         }
-        else {
-            console.log("no file");
-        }
     }
 
     useEffect(() => {
-        if(editCourse) {
+        if(editCourse && course?.thumbnail) {
             setImage(course?.thumbnail);
         }
-    }, [])
-    
-    
+    }, [editCourse, course]);
 
+    const removeImage = () => {
+      setImage(null);
+      setValue(name, null);
+    }
 
   return (
     <div>
-        {
-            image ? (
+        { image ? (
                 <div className="flex flex-col space-y-2">
-                    <img src={image} alt="" className="h-full w-full rounded-md object-cover"/>
-                    <button type="button" onClick={()=>{setImage(null);setValue(name, null)}} className="text-sm text-[#F1F2FF]">Remove</button>
+                    <img src={image} alt="Course thumbnail" className="h-full w-full rounded-md object-cover"/>
+                    <button 
+                      type="button" 
+                      onClick={removeImage} 
+                      className="text-sm text-[#F1F2FF]"
+                    >
+                        Remove
+                    </button>
                 </div>
             ) : (
-                <div className="flex flex-col space-y-2">
+  <div className="flex flex-col space-y-2">
   <label className="text-sm text-[#F1F2FF]" htmlFor={label}>
     <div>
-    Course Thumbnail <sup className="text-[#EF476F]">*</sup>
+      {label} <sup className="text-[#EF476F]">*</sup>
     </div>
   
   <div className="bg-[#2C333F] flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-[#585D69]">
@@ -52,7 +65,17 @@ const Upload = ({name, label, register, errors, setValue}) => {
       role="presentation"
       tabIndex={0}
     >
-      <input id={label} name={name} type="file" accept="image/*,.jpeg,.jpg,.png" tabIndex="-1" multiple=""  {...register(name, {required:true})} onChange={handelOnChange} className="hidden" />
+      <input 
+        id={label} 
+        name={name} 
+        type="file" 
+        accept="image/*,.jpeg,.jpg,.png" 
+        // tabIndex="-1" multiple=""  
+        {...register(name, {required:true})} 
+        onChange={handelOnChange} className="hidden" 
+      />
+
+
       <div className="grid aspect-square w-14 place-items-center rounded-full bg-[#171717]">
         <svg
           stroke="currentColor"
@@ -84,19 +107,15 @@ const Upload = ({name, label, register, errors, setValue}) => {
   </div>
 </label>
 {
-                errors.courseImage && (<span className='ml-2 text-xs tracking-wide text-[#EF476F]'>
-                    Course Image is required**
-                </span>)
-            }
+  errors.courseImage && (<span className='ml-2 text-xs tracking-wide text-[#EF476F]'>
+      Course Image is required**
+  </span>)
+}
 </div>
 ) 
-
-        }
-        
-
-
-    </div>
-  )
+}
+</div>
+)
 }
 
 export {

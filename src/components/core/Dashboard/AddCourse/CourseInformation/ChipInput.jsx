@@ -14,7 +14,6 @@ const ChipInput = ({ name, label, register, errors, setValue }) => {
         register(name, {
             required:true,
             // validate: (value) => value.length > 0
-   
         });
         if(editCourse ) {
             setTags(JSON.parse(course?.tag));
@@ -22,7 +21,7 @@ const ChipInput = ({ name, label, register, errors, setValue }) => {
         }
     },[])
 
-  return (
+return (
     <div>
         <label className='text-sm text-[#F1F2FF]' htmlFor={name}>{label}<sup className='text-[#EF476F]'>*</sup></label>
         <div className='flex flex-wrap gap-2 m-2'>
@@ -31,14 +30,15 @@ const ChipInput = ({ name, label, register, errors, setValue }) => {
                     <div key={index} className='m-1 flex items-center rounded-full bg-[#9E8006] px-2 py-1 text-sm text-[#F1F2FF]'>
                         <span className='text-[#F1F2FF]'>{tag}</span>
                         <button
-                        type='button'
-                        onClick={() => {
-                            const updatedTags = [...tags];
-                            updatedTags.splice(index, 1);
-                            setTags(updatedTags);
-                            setValue(name, updatedTags);
-                        }}
-                        className='ml-2 text-[#F1F2FF]'>
+                            type='button'
+                            onClick={() => {
+                                const updatedTags = [...tags];
+                                updatedTags.splice(index, 1);
+                                setTags(updatedTags);
+                                setValue(name, updatedTags);
+                            }}
+                            className='ml-2 text-[#F1F2FF]'
+                        >
                             <FaTimes/>
                         </button>
                         </div>
@@ -65,9 +65,8 @@ const ChipInput = ({ name, label, register, errors, setValue }) => {
         errors[name] && <span className='text-xs text-[#EF476F]'>Tags are required</span>
         
     }
-
     </div>
-  )
+)
 }
 
 export {
