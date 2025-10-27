@@ -10,11 +10,11 @@ import { useNavigate } from 'react-router-dom'
 const Settings = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user=useSelector(state=>state.profile.user);
+  const user = useSelector(state => state.profile.user);
 
 
   //update profile picture
-  const pfp=useSelector(state=>state.profile.user.image);
+  const pfp = useSelector(state => state.profile.user.image);
   const [profilePicture, setProfilePicture] = useState(pfp)
   const token= useSelector(state=>state.auth.token);
 

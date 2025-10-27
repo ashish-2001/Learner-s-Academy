@@ -1,6 +1,6 @@
 import { success, z } from "zod";
 import { Course } from "../models/Course.js";
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 import { CourseProgress } from "../models/CourseProgress.js";
 import { User } from "../models/Users.js";
 import { mailSender } from "../utils/mailSender.js";
@@ -15,79 +15,78 @@ const capturePaymentValidator = z.object({
 
 
 async function capturePayment(req, res) {
+    
+    const { courses } = req.body;
+    const userId = req.user.userId;
+
     try{
-        const parsedResult = capturePaymentValidator.safeParse(req.body);
-
-        if(!parsedResult.success){
-            return res.status(404).json({
-                success: false,
-                message: "Invalid input",
-                errors: parsedResult.error.errors
-            })
-        }
-
-        const { courses } = parsedResult.data;
-        const userId = req.user.userId;
-
         if(courses.length === 0){
             return res.status(404).json({
-                message: "Please provide course id"
-            })
-        }
+                success: false,
+                message: "Please provide the valid course id"
+            });
+        };
 
-        let total_amount = 0;
+        let totalAmount = 0;
 
         for(const course_id of courses){
-            try{
-                const course = await Course.findById(course_id)
+            let course;
 
+            try{
+                course = await Course.findById(course_id);
                 if(!course){
                     return res.status(404).json({
                         success: false,
-                        message: " Could not find the course"
+                        message: "Could not find the course"
                     })
                 }
 
                 const uid = new mongoose.Types.ObjectId(userId);
-
-                if(course.studentsEnroled.includes(uid)){
-                    return res.status(400).json({
+                if(course.studentsEnrolled.includes(uid)){
+                    return res.status(200).json({
                         success: false,
-                        message: "Student is Already Enrolled"
-                    })
-                }
-
-                total_amount += course.price;
+                        message: "Student is already enrolled"
+                    });
+                };
+                totalAmount += course.price;
             }
-            catch(e){
+            catch(error){
                 return res.status(500).json({
                     success: false,
-                    message: e.message
-                })
+                    message: error.message
+                });
             }
         }
 
         const options = {
-            amount : total_amount * 100,
+            amount: totalAmount * 100,
             currency: "INR",
-            receipt: Math.random(Date.now()).toString(),
+            receipt: Math.random(Date.now()).toString()
+        };
+
+        try{
+            const paymentResponse = await instance.orders.create(options);
+
+            return res.status(200).json({
+                success: true,
+                orderId: paymentResponse.id,
+                currency: paymentResponse.currency,
+                amount: paymentResponse.amount
+            })
+        } catch(error){
+            return res.status(500).json({
+                success: true,
+                message: error.message
+            })
         }
-
-        const paymentResponse = await instance.orders.create(options);
-
-        return res.status(200).json({
-            success: true,
-            data: paymentResponse
-        })
-    }
-    catch(e){
+    } catch(error){
         return res.status(500).json({
             success: false,
-            message: "Could not initiate order",
-            error: e.message
-        })
+            message: error.message
+        });
     }
 }
+
 
 async function verifyPayment(req, res){
 
@@ -178,91 +177,8 @@ async function sendPaymentSuccessfulEmail(req, res){
     }
 }
 
-const enrollStudentsValidator = z.object({
-    courses: z.array(z.string().min(1, "course id cannot be empty"))
-    .nonempty("At least one course must be provided"),
-    userid: z.string().min(1, "user id is required")
-})
-
-async function enrollStudents(req, res){
-
-    try{
-        const { courses, userId } = enrollStudentsValidator.safeParse(req.body);
-
-        for(const courseId of courses){
-            try{
-                const enrolledCourse = await Course.findOneAndUpdate({
-                    _id: courseId
-                }, {
-                    $push: {
-                        studentsEnroled: userId
-                    }
-                }, {
-                    new: true
-                }) 
-
-                if(!enrolledCourse){
-                    return res.status(404).json({
-                        success: false,
-                        message: "Course not found"
-                    })
-                }
-
-                const courseProgress = await CourseProgress.create({
-                    courseId: courseId,
-                    userId: userId,
-                    completedVideos: []
-                })
-
-                const enrolledStudent = await User.findByIdAndUpdate(
-                    userId,
-                    {
-                        $push: {
-                            courses: courseId,
-                            courseProgress: courseProgress._id
-                        },
-                    },
-                    {
-                        new: true
-                    }
-                )
-
-                console.log("Enrolled student: ", enrollStudents)
-
-                await mailSender(
-                    enrolledStudent.email,
-                    `Successfully Enrolled into ${enrolledCourse.courseName}`,
-                    courseEnrollmentEmail(
-                        enrolledCourse.courseName,
-                        `${enrolledStudent.firstName} ${enrolledStudent.lastName}`
-                    )
-                )
-            }
-            catch(e){
-                return res.status(500).json({
-                    success: false,
-                    message: "Internal server error",
-                    error: e.message
-                })
-            }
-
-            return res.status(200).json({
-                success: true,
-                message: "User enrolled successfully in all selected courses"
-            })
-        }
-    }
-    catch(validationError){
-        return res.status(400).json({
-            success: false,
-            errors: validationError.errors.map((err) => err.message)
-        })
-    }
-}
-
 export {
     capturePayment,
     verifyPayment,
-    sendPaymentSuccessfulEmail,
-    enrollStudents
+    sendPaymentSuccessfulEmail
 }

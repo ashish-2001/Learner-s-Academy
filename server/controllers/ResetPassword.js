@@ -1,19 +1,16 @@
-import { success, z } from "zod";
+import { z } from "zod";
 import { User } from "../models/Users.js";
 import bcrypt from "bcrypt"
 import { mailSender } from "../utils/mailSender.js";
 
 async function resetPasswordToken(req, res){
     try{
-
-        const { email } = req.body.email;
-
+        const email = req.body.email;
         const user = await User.findOne({
             email: email
         }) 
 
         if(!user){
-
             return res.status(404).json({
                 success: false,
                 message: `This email: ${email} is not registered with us.`
@@ -26,7 +23,7 @@ async function resetPasswordToken(req, res){
         const updatedDetails = await User.findOneAndUpdate({
             email: email
         }, {
-            token,
+            token: token,
             resetPasswordExpires: Date.now() + 3600000
         }, {
             new: true
@@ -59,13 +56,13 @@ async function resetPasswordToken(req, res){
 }
 
 const resetPasswordValidator1 = z.object({
-    password: z.string().min(6, "Password must be at least 6 characters long"),
-    confirmPassword: z.string().min(6, "Confirm password is required"),
-    token: z.string().min(1, "Token is required")
-}).refine((data) => data.password === data.confirmPassword, {
+        password: z.string().min(6, "Password must be at least 6 characters long"),
+        confirmPassword: z.string().min(6, "Confirm password is required"),
+        token: z.string().min(1, "Token is required")
+    }).refine((data) => data.password === data.confirmPassword, {
     message: "password and confirm password do not match",
     path: ["confirmPassword"]
-})
+});
 
 async function resetPassword(req, res){
     try{
@@ -114,6 +111,7 @@ async function resetPassword(req, res){
     catch(e){
         return res.status(400).json({
             success: true,
+            message: "Some error in updating the password",
             errors: e.errors.map((err) => err.message)
         })
     }

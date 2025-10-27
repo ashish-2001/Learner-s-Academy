@@ -23,7 +23,7 @@ const cartSlice = createSlice({
 
         if(index >= 0){
             toast.error("Course already in cart")
-            return
+            return;
         }
 
         state.cart.push(course)
@@ -49,6 +49,7 @@ const cartSlice = createSlice({
             localStorage.setItem("cart", JSON.stringify(state.cart))
             localStorage.setItem("total", JSON.stringify(state.total))
             localStorage.setItem("totalItems", JSON.stringify(state.totalItems))
+            
             toast.success("Course removed from cart")
         }
     },

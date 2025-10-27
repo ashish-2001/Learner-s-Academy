@@ -11,7 +11,7 @@ const {
     LOGIN_API,
     RESETPASSWORD_API,
     RESETPASSTOKEN_API
-} = endpoints
+} = endpoints;
 
 function sendOtp(email, accountType, navigate){
 
@@ -133,7 +133,8 @@ function login(email, password, navigate){
 
 function getPasswordResetToken(email, setEmailSent){
     return async (dispatch) => {
-        const toastId = toast.loading("Loading...")
+        const toastId = toast.loading("Loading...");
+        dispatch(setLoading(true));
         try{
             const response = await apiConnector("POST", RESETPASSTOKEN_API, {
                 email
@@ -145,7 +146,8 @@ function getPasswordResetToken(email, setEmailSent){
                 throw new Error(response.data.message)
             }
             toast.success("Reset Email Sent")
-            setEmailSent(true)
+            setEmailSent(true);
+
         } catch(error){
             console.log("RESETPASSTOKEN ERROR............", error)
             toast.error("Failed to send reset email")
@@ -155,23 +157,26 @@ function getPasswordResetToken(email, setEmailSent){
     }
 }
 
-function resetPassword(password, confirmPassword, token, navigate){
+function resetPassword(password, confirmPassword, token, setResetComplete){
     return async (dispatch) => {
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try{
-            const response = await apiConnector("POST",     RESETPASSWORD_API, {
+            const response = await apiConnector("POST", RESETPASSWORD_API, {
                 password,
                 confirmPassword,
                 token
-            })
-            console.log("RESETPASSWORD RESPONSE........", response)
+            });
+
+            console.log("RESETPASSWORD RESPONSE........", response);
+
             if(!response.data.success){
                 throw new Error(response.data.message)
             }
 
             toast.success("Password Reset Successfully")
-            navigate("/login")
+            setResetComplete(true);
+
         }catch(error){
             console.log("RESETPASSWORD ERROR..........", error)
             toast.error("Failed to reset password")
@@ -194,6 +199,29 @@ function logout(navigate){
     }
 }
 
+function forgotPassword(email, setEmailSent){
+    return async (dispatch) => {
+        dispatch(setLoading(true));
+        try{
+            const response = await apiConnector("POST", RESETPASSTOKEN_API, {
+                email
+            });
+
+            console.log("Forgot password response", response);
+
+            if(!response.data.success){
+                toast.error(response.data.message);
+                throw new Error(response.data.message);
+            }
+            toast.success("Reset Email Sent");
+            setEmailSent(true);
+        } catch(error){
+            console.log("Forgot Password Error", error);
+        }
+        dispatch(setLoading(false));
+    }
+}
+
 
 export {
     signUp,
@@ -201,5 +229,6 @@ export {
     sendOtp,
     getPasswordResetToken,
     resetPassword,
+    forgotPassword,
     logout
 }

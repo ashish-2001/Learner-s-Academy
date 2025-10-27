@@ -5,8 +5,9 @@ import { IconBtn } from "../../Common/IconBtn"
 
 const MyProfile = () => {
 
-    const {user} = useSelector((state) => state.profile)
+    const { user } = useSelector((state) => state.profile)
     const navigate = useNavigate();
+
 return (
     <div className='mx-auto w-11/12 max-w-[1000px] py-10'>
         <div className='py-10'>
@@ -42,13 +43,14 @@ return (
                 <p className='text-lg font-semibold text-[#F1F2FF]'>About</p>
                 <div >
                 <IconBtn 
-                text="Edit"
-                onClick={() => {
-                    navigate("/dashboard/settings")
-                }} />
+                    text="Edit"
+                    onClick={() => {
+                        navigate("/dashboard/settings")
+                    }} 
+                />
                 </div>
             </div>
-            <p className='text-[#6E727F] text-sm font-medium'> {user?.additionalDetails?.about  ??  "Write Something about Yourself"}</p>
+            <p className='text-[#6E727F] text-sm font-medium'>{ user?.additionalDetails?.about  ??  "Write Something about Yourself" }</p>
         </div>
 
         {/* section 3 */}
@@ -56,12 +58,12 @@ return (
             <div className='flex w-full items-center justify-between'>
                 <p className='text-lg font-semibold text-[#F1F2FF]'>Personal Details</p>
                 <div className=''>
-                <IconBtn
-                text="Edit"
-                onClick={() => {
-                    navigate("/dashboard/settings")
-                }} />
-                
+                    <IconBtn
+                        text="Edit"
+                        onClick={() => {
+                            navigate("/dashboard/settings")
+                        }} 
+                    />
                 </div>
             </div>
             <div className='flex gap-y-5 md:flex-row flex-col max-w-[500px] justify-between'>
@@ -99,8 +101,7 @@ return (
         </div>
     </div>
     </div>
-    
-  )
+)
 }
 
 export {

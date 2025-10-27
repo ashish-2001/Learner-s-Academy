@@ -18,7 +18,7 @@ async function createRating(req, res){
         const { rating , review, courseId } = createRatingValidator.safeParse(req.body);
         const userId = req.user.userId;
 
-        const courseDetails = await Course.findOne({
+        const courseDetails = await Course.find({
             _id: courseId,
             studentsEnrolled: {
                 $elemMatch: {
@@ -51,34 +51,24 @@ async function createRating(req, res){
             review,
             course: courseId,
             user: userId
-        })
+        });
 
-        const updatedCourseDetails = await Course.findByIdAndUpdate({ _id: courseId}, {
+        await Course.findByIdAndUpdate({ _id: courseId}, {
             $push: {
-                ratingAndReview: ratingReview
+                ratingAndReview: ratingReview._id
             }
-        })
-
-        console.log(updatedCourseDetails)
+        });
 
         return res.status(201).json({
             success: true,
-            message: "Rating and review created successfully",
+            message: "Rating added successfully",
             ratingReview
         })
     }
     catch(e){
-        if(e instanceof z.ZodError){
-            return res.status(400).json({
-                success: false,
-                errors: e.errors.map((e) => e.message) 
-            })
-        }
-
         return res.status(500).json({
             success: false,
-            message: "Internal server error",
-            error: e.message
+            errors: e.errors.map((e) => e.message) 
         })
     }
 }
@@ -103,7 +93,7 @@ async function getAverageRating(req, res){
                     }
                 }
             }
-        ])
+        ]);
 
         if(result.length > 0){
             return res.status(200).json({
@@ -111,24 +101,17 @@ async function getAverageRating(req, res){
                 averageRating: result[0].averageRating
             })
         }
-
-        return res.status(200).json({
-            success: true,
-            averageRating: 0
-        })
+        else{
+            return res.status(200).json({
+                success: true,
+                averageRating: 0
+            });
+        }
     }
     catch(e){
-        if(e instanceof z.ZodError){
-            return res.status(400).json({
-                success: false,
-                errors: e.errors.map((err) => err.message)
-            })
-        }
-
         return res.status(500).json({
             success: false,
-            message: "Failed to retrieve the rating for the course",
-            error: e.message
+            errors: e.message
         })
     }
 }
@@ -136,7 +119,7 @@ async function getAverageRating(req, res){
 async function getAllRating(req, res){
     try{
 
-        const allReviews = await RatingAndReview.find({}).sort({rating: "desc"}).populate({
+        const allReviews = await RatingAndReview.find().sort({rating: "-1"}).populate({
             path: "user",
             select: "firstName lastName email image"
         }).populate({

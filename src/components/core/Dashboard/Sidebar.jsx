@@ -9,6 +9,7 @@ import { SidebarLink } from "./SidebarLink";
 import { VscSignOut } from "react-icons/vsc";
 
 function Sidebar(){
+
     const { user, loading: profileLoading } = useSelector((state) => state.profile)
     const { loading: authLoading } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
@@ -17,18 +18,18 @@ function Sidebar(){
 
     if(profileLoading || authLoading){
         return(
-            <div className="grid h-[calc(100vh-3.5rem)] min-w-[220px] items-center border-r-[1px] border-r-[#2C333F] bg-[#161D29]">
-                <div className="spinner"></div>
+            <div className="mt-10">
+                Loading...
             </div>
         )
     }
 
     return(
-        <>
+        <div className="text-white bg-richblack-800">
             <div className="flex-h-[calc(100vh-3.5rem)] min-w-[220px]  items-center border-r-[1px] border-r-[#2C333F] bg-[#161D29]">
                 <div className="flex flex-col">
                     {sidebarLinks.map((link) => {
-                        if(link.type && user?.accountType !== link.type) return null
+                        if(link.type && user?.accountType !== link.type) return null;
                         return (
                             <SidebarLink key={link.id} link={link} iconName={link.icon}/>
                         )
@@ -57,9 +58,9 @@ function Sidebar(){
                             </button>
                     </div>
                 </div>
-                {confirmationModal && <ConfirmationModalData modalData={confirmationModal}/>}
+                {confirmationModal && <ConfirmationModalData modalData={confirmationModal} />}
             </div>
-        </>
+        </div>
     )
 }
 

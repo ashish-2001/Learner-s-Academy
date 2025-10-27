@@ -2,11 +2,7 @@ import { z } from "zod";
 import { User } from "../models/Users.js";
 import { Profile } from "../models/Profile.js";
 import { Course } from "../models/Course.js";
-import { CourseProgress } from "../models/CourseProgress.js";
 import { uploadImageToCloudinary } from "../utils/ImageUploader.js";
-import { convertSecondsToDuration } from "../utils/secToDuration.js";
-import mongoose from "mongoose";
-
 
 const updateProfileValidator = z.object({
     firstName: z.string().min(1, "First name is required").optional(),
@@ -100,12 +96,26 @@ async function updateDisplayPicture(req, res){
         console.log("Image:", image);
 
         const updatedProfile = await User.findByIdAndUpdate({
-            _id: userId
+            userId
         }, {
             image: image.secure_url
         }, {
             new: true
-        })
+        });
+
+        if(!updatedProfile){
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+
+        if(!displayPicture){
+            return res.status(404).json({
+                success: false,
+                message: "Image not found"
+            })
+        }
 
         return res.status(200).json({
             success: true,
@@ -145,37 +155,19 @@ async function deleteAccount(req, res){
                 success: false,
                 message: "User not found"
             })
-        }
+        };
 
         await Profile.findByIdAndDelete({
-            _id: new mongoose.SchemaTypeOptions.ObjectId(user.additionalDetails)
+            _id: user.additionalDetails
         });
 
-            for(const courseId of user.courses){
-            await Course.findByIdAndUpdate(
-                courseId,
-                {
-                    $pull: {
-                        studentsEnroled: userId
-                    }
-                }, 
-                {
-                    new: true
-                }
-            )
-        }
+        await User.findByIdAndDelete({ _id: userId})
 
-        await User.findByIdAndDelete({ _id: userId });
         res.status(200).json({
             success: true,
             message: "User deleted successfully"
         });
-
-        await CourseProgress.deleteMany({
-            userId: userId
-        })
-    }
-    catch(e){
+    } catch(e){
         return res.status(500).json({
             success: false,
             message: "User cannot be deleted",
@@ -211,60 +203,31 @@ async function getEnrolledCourses(req, res){
     try{
 
         const userId = req.user.userId;
+        const user = await User.findById(userId);
 
-        let userDetails = await User.findOne({ _id: userId }).populate({
-            path: "courses",
-            populate: {
-                path: "courseContent",
-                populate:{
-                    path: "subSection"
-                }
-            }
-        }).exec();
-
-        userDetails = userDetails.toObject();
-        let SubSectionLength = 0;
-        for(let i = 0; i < userDetails.courses.length; i++){
-            let totalDurationInSeconds = 0 ;
-            SubSectionLength = 0;
-
-            for(let j = 0; j < userDetails.courses[i].courseContent.length; j++){
-                totalDurationInSeconds += userDetails.courses[i].courseContent[j].subSection.reduce((acc, curr) => acc + parseInt(curr.timeDuration), 0)
-                userDetails.courses[i].totalDuration = convertSecondsToDuration(totalDurationInSeconds)
-                SubSectionLength += userDetails.courses[i].courseContent[j].subSection.length;
-                userDetails.courses[i].totalDuration = convertSecondsToDuration(totalDurationInSeconds);
-            }
-
-            let courseProgressCount = await CourseProgress.findOne({
-                courseId: userDetails.courses[i]._id,
-                userId: userId
-            });
-
-            courseProgressCount = courseProgressCount?.completedVideos.length;
-
-            if(SubSectionLength === 0){
-                userDetails.courses[i].progressPercentage = 100;
-            } else{
-                const multiplier = Math.pow(10, 2)
-                userDetails.courses[i].progressPercentage = Math.round((courseProgressCount / SubSectionLength) * 100 * multiplier) / multiplier
-            }
-        }
-
-        if(!userDetails){
-            return res.status(400).json({
+        if(!user){
+            return res.status(404).json({
                 success: false,
-                message: `Could not find user with id: ${userDetails}`
+                message: "User not found"
             })
         }
 
-        return res.status(200).json({
+        const enrolledCourses = await User.findById(userId).populate({
+            path: "courses",
+            populate: {
+                path: "courseContent"
+            }
+        }).populate("courseProgress").exec();
+
+        res.status(200).json({
             success: true,
-            data: userDetails.courses
+            message: "User data fetched successfully",
+            data: enrolledCourses
         })
-    }catch(e){
+    } catch(error){
         return res.status(500).json({
             success: false,
-            message: e.message 
+            message: error.message
         })
     }
 }
@@ -272,29 +235,31 @@ async function getEnrolledCourses(req, res){
 async function instructorDashboard(req, res) {
     try{
 
-        const instructorId = req.user.userId;
-        const courseDetails = await Course.find({
-            instructor: instructorId
+        const userId = req.user.userId;
+        const courseData = await Course.find({
+            instructor: userId
         })
 
-        const courseData = courseDetails.map((course) => {
+        const courseDetails = courseData.map((course) => {
 
-                const totalStudentsEnrolled = course.studentsEnroled.length;
-                const totalAmountGenerated = totalStudentsEnrolled * course.price
+                const totalStudents = course.studentsEnrolled.length;
+                const totalRevenue = course?.price * totalStudents;
 
-                const courseDetailsWithStats = {
+                const courseStats = {
                     _id: course._id,
                     courseName: course.courseName,
                     courseDescription: course.courseDescription,
-                    totalStudentsEnrolled,
-                    totalAmountGenerated
+                    totalStudents,
+                    totalRevenue
                 }
 
-                return courseDetailsWithStats
+                return courseStats
         })
 
         return res.status(200).json({
-            courses: courseData
+            success: true,
+            message: "User data fetched successfully",
+            data: courseDetails
         })
     } catch(e){
         res.status(500).json({

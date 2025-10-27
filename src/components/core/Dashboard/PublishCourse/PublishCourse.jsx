@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { setCourse, setEditCourse, setStep } from '../../../../slices/courseSlice';
 import { COURSE_STATUS } from '../../../../utils/constants.js';
-import { addCourseCategory, editCourseDetails } from '../../../../services/operations/courseDetailsAPI';
+import { addCourseToCategory, editCourseDetails } from '../../../../services/operations/courseDetailsAPI';
 import toast from 'react-hot-toast';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -54,7 +54,7 @@ const PublishCourse = () => {
 
         const result = await editCourseDetails(formData, token);
         const category_id= await course.category;
-        const categoryResult = await addCourseCategory({ categoryId: category_id, courseId: course._id }, token);
+        const categoryResult = await addCourseToCategory({ categoryId: category_id, courseId: course._id }, token);
 
         if(result && categoryResult) {
             goToMyCourses();

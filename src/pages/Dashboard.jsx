@@ -4,13 +4,14 @@ import { Outlet } from "react-router-dom";
 import { Sidebar } from "../components/Core/Dashboard/Sidebar";
 
 function Dashboard(){
-    const { loading: profileLoading} = useSelector((State)=> State.profile)
+
+    const { loading: profileLoading} = useSelector((state)=> state.profile)
     const { loading: authLoading } = useSelector((state) => state.auth);
 
     if(profileLoading || authLoading){
         return(
-            <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
-                <div className="spinner"></div>
+            <div className="mt-10">
+                <div>Loading...</div>
             </div>
         )
     }

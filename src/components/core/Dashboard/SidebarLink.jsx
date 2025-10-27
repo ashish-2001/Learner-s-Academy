@@ -2,7 +2,7 @@ import React from "react";
 import * as Icons from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { NavLink, matchPath, useLocation } from "react-router-dom";
-import { resetCourseState } from "../../../slices/courseSlice";
+import { setEditCourse} from "../../../slices/courseSlice";
 
 function SidebarLink({ link, iconName }){
     const Icon = Icons[iconName]
@@ -16,7 +16,7 @@ function SidebarLink({ link, iconName }){
     return (
         <NavLink
             to={link.path}
-            onClick={() => dispatch(resetCourseState())}
+            onClick={() => dispatch(setEditCourse())}
             className={`relative px-8 py-2 text-sm font-medium ${
                 matchRoute(link.path) ? "bg-[#3D2A01] text-[#FFD60A]" : "bg-opacity-0 text-[#838894]"
             } transition-all duration-200`}

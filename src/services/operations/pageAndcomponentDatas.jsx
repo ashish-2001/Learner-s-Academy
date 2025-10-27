@@ -4,26 +4,29 @@ import { apiConnector } from '../apiConnector';
 import { catalogData } from '../apis';
 
 const getCatalogPageData = async(categoryId, dispatch) => {
-  // const toastId = toast.loading("Loading...");
+  
+  const toastId = toast.loading("Loading...");
   dispatch(setProgress(50));
   let result = [];
+
   try{
-        const response = await apiConnector("POST", catalogData.CATALOGPAGEDATA_API, { categoryId });
+        const response = await apiConnector("POST", catalogData.CATALOGPAGEDATA_API, { categoryId: categoryId });
         console.log("CATALOG PAGE DATA API RESPONSE....", response);
         if(!response.data.success)
-            throw new Error("Could not Fetch Category page data error",
-            response);
-
+            throw new Error("Could not Fetch Category page data error");
         result = response?.data;
-
   }
   catch(error) {
-    console.log("CATALOG PAGE DATA API ERROR....", error);
     toast.error("No Course added to this category yet");
-    result = error.response?.data;
+    result = error?.response?.data || { success: false };
+  } finally{
+    dispatch(setProgress(100));
+
+    setTimeout(() => {
+      toast.dismiss(toastId);
+      dispatch(setProgress(0));
+    }, 1000);
   }
-  // toast.dismiss(toastId);
-  dispatch(setProgress(100));
   return result;
 }
 

@@ -10,18 +10,19 @@ import { VideoDetailsSidebar } from '../Components/core/ViewCourse/VideoDetailsS
 import { getFullDetailsOfCourse } from '../services/operations/courseDetailsAPI';
 
 const ViewCourse = () => {
+
     const [reviewModal, setReviewModal] = useState(false)
-    const {courseId} = useParams();
-    const {token} = useSelector(state => state.auth);
+    const { courseId } = useParams();
+    const { token } = useSelector(state => state.auth);
     const dispatch = useDispatch();
 
     useEffect(() => {
         const setCourseSpecifics = async () => {
             const courseData = await getFullDetailsOfCourse(courseId, token);
             dispatch(setCourseSectionData(courseData.courseDetails.courseContent));
-            dispatch(setEntireCourseData( courseData.courseDetails));
+            dispatch(setEntireCourseData(courseData.courseDetails));
             dispatch(setCompletedLectures(courseData.completedVideos));
-            var lecture = 0;
+            let lecture = 0;
             courseData?.courseDetails?.courseContent?.forEach((section) => {
                 lecture += section?.subSection?.length;
             });
@@ -29,21 +30,19 @@ const ViewCourse = () => {
         }
         setCourseSpecifics();
     }, [courseId, token, dispatch]);
-
-  return (
-    
-    <div className=' flex w-screen'>
-        <div className=''>
-        <VideoDetailsSidebar setReviewModal={setReviewModal} />
+    return (
+        <div className=' flex w-screen'>
+            <div className=''>
+                <VideoDetailsSidebar setReviewModal={setReviewModal} />
+            </div>
+            <div>
+                <Outlet/>
+            </div>
+            {
+                reviewModal && <ReviewModal setReviewModal={setReviewModal} />
+            }
         </div>
-        <div>
-            <Outlet/>
-        </div>
-        {
-            reviewModal && <ReviewModal setReviewModal={setReviewModal} />
-        }
-    </div>
-  )
+    )
 }
 
 export {

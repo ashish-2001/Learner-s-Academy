@@ -1,6 +1,6 @@
 import React from 'react'
 import {FaArrowRight} from 'react-icons/fa';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { CTAButton } from '../components/Core/HomePage/Button';
 import { HighLightText } from '../components/Core/HomePage/HighLightText';
 import { banner } from "../assets/Images/index"
@@ -14,8 +14,8 @@ import { setProgress } from '../slices/loadingBarSlice';
 import { Course_Slider } from '../components/Core/Catalog/Course_Slider';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { apiConnector } from '../services/apiConnector';
 import { catalogData } from '../services/apis';
+import { fetchCourseCategories } from '../services/operations/courseDetailsAPI';
 import { getCatalogPageData } from '../services/operations/pageAndcomponentDatas';
 
 
@@ -23,35 +23,35 @@ import { getCatalogPageData } from '../services/operations/pageAndcomponentDatas
 function Home() {
 
     const dispatch = useDispatch();
-    const [categories, setCategories] = useState(null);
-    const [categoryId, setCategoryId] = useState("");
-    const [catalogPageData, setCatalogPageData] = useState("");
+    const [categories, setCategories] = useState([]);
+    const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+    const [catalogPageData, setCatalogPageData] = useState(null);
 
     useEffect(() => {
         const fetchCategories = async () => {
-            
-            const response = await apiConnector("GET", catalogData.SHOW_ALL_CATEGORIES_API);
-
-            if(response?.data?.success){
-                setCategories(response.data.data);
-                if(response.data.data.length > 0 ){
-                    setCategoryId(response.data.data[0]._id)
-                }
+            dispatch(setProgress(30));
+            const result = await fetchCourseCategories();
+            if(result && result.length > 0){
+                setCategories(result);
+                setSelectedCategoryId(result[0]._id);
             }
+            dispatch(setProgress(70));
         }
         fetchCategories();
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
-        if(!categoryId){
-            return;
+        const fetchCatalogData = async() => {
+            if(!selectedCategoryId){
+                return;
+            }
+            dispatch(setProgress(50));
+            const result = await getCatalogPageData(selectedCategoryId, dispatch);
+            setCatalogPageData(result);
+            dispatch(setProgress(100));
         }
-        const fetchCatalog = async() => {
-            const result = await getCatalogPageData(categoryId, dispatch);
-            setCatalogPageData(result?.data);
-        }
-        fetchCatalog();
-    }, [categoryId, dispatch]);
+        fetchCatalogData()
+    }, [selectedCategoryId, dispatch]);
     
   return (
     <div>
@@ -68,7 +68,7 @@ function Home() {
                 Empower Your Future With <HighLightText text={"Coding Skills"}/>
             </div>
             <div className=' mt-4 w-[90%] text-left md:text-center text-sm md:text-lg font-bold text-[#838894]'>
-            With our online coding courses, you can learn at your own pace, from anywhere in the world, and get access to a wealth of resources, including hands-on projects, quizzes, and personalized feedback from instructors. 
+                With our online coding courses, you can learn at your own pace, from anywhere in the world, and get access to a wealth of resources, including hands-on projects, quizzes, and personalized feedback from instructors. 
             </div>
 
             <div className='flex flex-row gap-7 mt-8'>
@@ -79,15 +79,15 @@ function Home() {
             </div>
 
             <div className='mx-3 my-12 shadow-[#118AB2] w-[70%] relative'>
-              <div className='grad2 -top-10 w-[800px]'></div>
-            <video className='video'
-            muted
-            loop
-            autoPlay
-            >
-            <source  src={banner} type="video/mp4" />
-            </video>
-        </div>
+                <div className='grad2 -top-10 w-[800px]'></div>
+                <video className='video'
+                    muted
+                    loop
+                    autoPlay
+                >
+                    <source  src={banner} type="video/mp4" />
+                </video>
+            </div>
 
         <div >
             <CodeBlocks 
@@ -200,7 +200,6 @@ function Home() {
 
                 </div>
 
-
             </div>
 
             <div className='mx-auto w-11/12 max-w-[1260px] flex flex-col items-center justify-between gap-7'>
@@ -231,22 +230,19 @@ function Home() {
                 <LearningLanguageSection />
 
             </div>
-      </div>
-
-
-
-       <div className='w-11/12 mx-auto max-w-[1260px] flex-col items-center justify-between gap-8 first-letter bg-[#000814] text-white'>
+        </div>
+    <div className='w-11/12 mx-auto max-w-[1260px] flex-col items-center justify-between gap-8 first-letter bg-[#000814] text-white'>
 
             <InstructorSection />
 
             {/* Review Slider here */}
-      </div>
-      <div className=' mb-16 mt-3'>
+    </div>
+    <div className=' mb-16 mt-3'>
         <h2 className='text-center text-2xl md:text-4xl font-semibold mt-8 text-[#F1F2FF] mb-5'>Reviews from other learners</h2>
         <Course_Slider />
-      </div>
     </div>
-  )
+    </div>
+)
 }
 
 export {

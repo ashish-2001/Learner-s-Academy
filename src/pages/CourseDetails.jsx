@@ -6,7 +6,7 @@ import { GetAvgRating } from '../utils/avgRating';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { BsGlobe } from 'react-icons/bs';
 import { FaShareSquare } from 'react-icons/fa';
-import { IoIosVideocam } from 'react-icons/io';
+import { IoVideocamOutline } from "react-icons/io5"
 import { addToCart } from '../slices/cartSlice';
 import { ACCOUNT_TYPE } from '../utils/constants.js';
 import { FaChevronDown } from 'react-icons/fa';
@@ -16,20 +16,20 @@ import { BuyCourse } from '../services/operations/studentFeaturesAPI';
 import { fetchCourseDetails } from '../services/operations/courseDetailsAPI';
 
 const CourseDetails = () => {
-    const {token} = useSelector((state) => state.auth);
-    const {user} = useSelector((state) => state.profile);
+    const { token } = useSelector((state) => state.auth);
+    const { user } = useSelector((state) => state.profile);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {courseId} = useParams();
+    const { courseId } = useParams();
     const [courseDetail, setCourseDetail] = useState(null);
     const [avgReviewCount, setAvgReviewCount] = useState(0);
     const [alreadyEnrolled, setAlreadyEnrolled] = useState(false);
-    const {cart}=useSelector((state)=>state.cart);
+    const { cart } = useSelector((state) => state.cart);
 
 
     const handelPayment = () => {
         if(token){
-            BuyCourse(token,[courseId],user,navigate,dispatch);
+            BuyCourse(token, [courseId], user, navigate, dispatch);
         }
         else{
             navigate('/login');
@@ -38,7 +38,7 @@ const CourseDetails = () => {
 
     useEffect(() => {
         const getCourseDetails = async() => {
-            const response = await fetchCourseDetails(courseId,dispatch);
+            const response = await fetchCourseDetails(courseId, dispatch);
             // console.log("getCourseDetails -> response", response);
             setCourseDetail(response);
         }
@@ -84,7 +84,7 @@ const CourseDetails = () => {
         <div className='custom-loader'></div>
     </div>
 
-  return (
+return (
     <div>
         <div className='mx-auto box-content px-4 lg:w-[1260px] lg:relative '>
             <div className='mx-auto grid min-h-[450px] max-w-[650px] justify-items-center py-8 lg:mx-0 lg:justify-items-start lg:py-0 xl:max-w-[810px]'>
@@ -108,11 +108,11 @@ const CourseDetails = () => {
                     <div className='flex flex-wrap gap-5 text-lg'>
                         <AiOutlineInfoCircle className='text-2xl text-[#F1F2FF]' />
                         <p className='text-[#C5C7D4]'>Created at &nbsp;    
-                        {new Date(courseDetail?.createdAt || courseDetail?.updatedAt).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
-                        })}
+                            {new Date(courseDetail?.createdAt || courseDetail?.updatedAt).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                            })}
                         </p>
                         <p className='flex items-center gap-2 text-[#C5C7D4]'><BsGlobe className='text-lg text-[#C5C7D4]'/>English</p>
                     </div>
@@ -236,7 +236,7 @@ const CourseDetails = () => {
                                                 item?.subSection?.map((subItem, subIndex) => (
                                                     <div key={subIndex} className='relative overflow-hidden bg-[#000814]  p-5 border border-solid border-[#424854]'>
                                                         <div className='flex items-center gap-2'>
-                                                        <IoVideoCamOutline className='txt-lg text-[#F1F2FF]'/>
+                                                        <IoVideocamOutline className='txt-lg text-[#F1F2FF]'/>
                                                         <span className='text-lg'>{subItem?.title}</span>
                                                         </div>
                                                     </div>
@@ -298,13 +298,11 @@ const CourseDetails = () => {
                                         </div>
                                     ))
                                 }
-                                </div>
-                                </div>
-                                </div>
-                                
-
+                            </div>
+                    </div>
+            </div>
         </div>
-  )
+    )
 }
 
 export {

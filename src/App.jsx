@@ -34,6 +34,7 @@ import { ViewCourse } from "./pages/ViewCourse";
 import { VideoDetails } from "./components/Core/ViewCourse/VideoDetails";
 import { PurchaseHistory } from "./components/Core/Dashboard/PurchaseHistory"
 import { InstructorDashboard } from "./components/Core/Dashboard/InstructorDashboard/InstructorDashboard";
+import { Error } from "./pages/Error"
 import { RiWifiOffLine } from "react-icons/ri";
 import { AdminPanel } from "./components/Core/Dashboard/AdminPanel";
 
@@ -161,7 +162,7 @@ function App() {
           )}
         </Route>
 
-        <Route path="*" element={<Home />} />
+        <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
     </div>

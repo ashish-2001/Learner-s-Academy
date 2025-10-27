@@ -2,7 +2,7 @@ import React from 'react'
 import { ContactUsForm } from '../components/contactUs/ContactUsForm'
 
 const ContactUs = () => {
-  return (
+return (
     <div>
         <div className='mx-auto mt-20 flex w-11/12 max-w-[1260px] flex-col justify-between gap-10 text-white lg:flex-row'>
         <div className='lg:w-[40%]'>
@@ -13,7 +13,7 @@ const ContactUs = () => {
                     <h1 className="text-lg font-semibold text-[#F1F2FF]">Chat on us</h1>
                     </div>
                     <p className='font-medium'>Our friendly team is here to help.</p>
-                    <p className='font-semibold'>info@studynotion.com</p>
+                    <p className='font-semibold'>info@learnersacademy.com</p>
                 </div>
                 <div className="flex flex-col gap-[2px] p-3 text-sm text-[#999DAA]">
                     <div className='flex flex-row items-center gap-3'>
@@ -21,7 +21,7 @@ const ContactUs = () => {
                     <h1 className="text-lg font-semibold text-[#F1F2FF]">Visit us</h1>
                     </div>
                     <p className='font-medium'>Come and say hello at our office HQ.</p>
-                    <p className='font-semibold'>Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016</p>
+                    <p className='font-semibold'>Ashish Pal 1st Block 1st Cross, Atul Pal, Lucknow</p>
                 </div>
                 <div className="flex flex-col gap-[2px] p-3 text-sm text-[#999DAA]">
                     <div className='flex flex-row items-center gap-3'>
@@ -36,9 +36,9 @@ const ContactUs = () => {
         <div className='lg:w-[60%]'>
             <div className='border border-[#424854] text-[#838894] rounded-xl p-7 lg:p-14 flex gap-3 flex-col'>
                 <h1 className='text-4xl leading-10 font-semibold text-[#F1F2FF]'>
-                Got a Idea? We've got the skills. Let's team up
+                Got a Idea? We have got the skills. Let us team up
                 </h1>
-                <p className='text-lg font-medium'>Tell us more about yourself and what you're got in mind.</p>
+                <p className='text-lg font-medium'>Tell us more about yourself and what you are got in mind.</p>
                 <div className='mt-7'>
                     <ContactUsForm/>
                 </div>
@@ -47,11 +47,11 @@ const ContactUs = () => {
         </div>
         <div className='relative mx-auto my-20 flex w-11/12 max-w-[1260px] flex-col items-center justify-between gap-8 bg-[#000814] text-white'>
                     <h1 className='text-center text-4xl font-semibold mt-8'>
-                        Reviews from other leraners
+                        Reviews from other learners
                     </h1>
                 </div>
     </div>
-  )
+)
 }
 
 export {

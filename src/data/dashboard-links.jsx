@@ -45,7 +45,7 @@ const sidebarLinks = [
     {
         id: 7,
         name: "Create Category",
-        path: "/course/createCategory",
+        path: "/course/admin-panel",
         type: ACCOUNT_TYPE.ADMIN,
         icon: "VscHistory"
     }

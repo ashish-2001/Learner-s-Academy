@@ -1,7 +1,6 @@
 import { toast } from "react-hot-toast";
 import { rzp_logo } from "../../assets/logo";
 import { resetCart } from "../../slices/cartSlice";
-import { setPaymentLoading } from "../../slices/courseSlice";
 import { apiConnector } from "../apiConnector";
 import { studentEndpoints } from "../apis";
 
@@ -28,10 +27,12 @@ function loadScript(src){
 }
 
 async function BuyCourse(token, courses, userDetails, navigate, dispatch){
+
     const toastId = toast.loading("Please wait while we redirect you to payment gateway", {
         position: "bottom-center",
         autoClose: false
     });
+
     try{
         const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js")
         if(!res){
@@ -78,13 +79,13 @@ async function BuyCourse(token, courses, userDetails, navigate, dispatch){
         const paymentObject = new window.Razorpay(options);
 
         paymentObject.open();
-        paymentObject.on("payment.failed", function (response){
+        paymentObject.on("payment.failed", function(response){
             toast.error("Oops! Payment Failed.");
         });
         toast.dismiss(toastId);
     } catch(error){
         toast.dismiss(toastId);
-        toast.console.error("Something went wrong");
+        toast.error("Something went wrong");
         console.log("buyCourse -> error", error);
     }
 }
@@ -109,7 +110,7 @@ async function verifyPayment(response, courses, token, navigate, dispatch){
             return;
         }
 
-        toast.success("Payment Successful. You are added to the course ")
+        toast.success("Payment Successful.")
         navigate("/dashboard/enrolled-courses")
         dispatch(resetCart())
     }catch(error){
@@ -117,7 +118,6 @@ async function verifyPayment(response, courses, token, navigate, dispatch){
         toast.error("Could ot verify payment.")
     }
     toast.dismiss(toastId)
-    dispatch(setPaymentLoading(false))
 }
 
 async function sendPaymentSuccessEmail(response, amount, token){

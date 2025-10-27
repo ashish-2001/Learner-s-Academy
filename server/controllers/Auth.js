@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { success, z } from "zod";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { User } from "../models/Users.js";
@@ -145,7 +145,7 @@ const signIn = async(req, res) => {
         if(isPasswordMatch){
             const token = jwt.sign({
             userId: user._id,
-            role: user.role,
+            accountType: user.accountType,
             email: user.email
         }, JWT_SECRET, {
             expiresIn: "24h"
@@ -245,18 +245,32 @@ const changePassword = async (req, res) =>{
             })
         }
 
-        const { oldPassword, newPassword } = req.body;
+        const { oldPassword, newPassword, confirmPassword } = req.body;
 
         const isPasswordMatch = await bcrypt.compare(
             oldPassword, 
             userDetails.password
-        )
+        );
+
+        if(oldPassword === newPassword){
+            return res.status(400).json({
+                success: false,
+                message: "New Password cannot be same as old password"
+            })
+        }
 
         if(!isPasswordMatch){
-            return res.status(403).json({
-                message: "Old password does not match",
+            return res.status(401).json({
+                message: "Password is Incorrect",
                 success: false
             })
+        };
+
+        if(newPassword !== confirmPassword){
+            return res.status(400).json({
+                success: false,
+                message: "The password and confirm password does not match"
+            });
         }
 
         const encryptedPassword = await bcrypt.hash(newPassword, 10);
