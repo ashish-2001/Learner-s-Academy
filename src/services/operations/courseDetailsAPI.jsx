@@ -458,7 +458,6 @@ async function searchCourses(searchQuery, dispatch){
 async function createCategory(data, token){
 
     const toastId = toast.loading("Creating Category...");
-    let success = false;
 
     try{
         const response = await apiConnector("POST", CREATE_CATEGORY_API, data, 
@@ -471,18 +470,14 @@ async function createCategory(data, token){
         if(!response?.data?.success){
             throw new Error(response?.data?.message);
         }
-
-        toast.success("Category created");
-        success = true;
-
+        return response.data;
     } catch(error){
         console.log("CREATE CATEGORY API ERROR...............", error)
         toast.error(error?.response?.data?.message || error.message || "Failed to create")
-        success = false
     } finally {
         toast.dismiss(toastId);
     }
-    return success;
+
 }
 
 

@@ -32,7 +32,8 @@ const AdminPanel = () => {
                 setCategory({
                     name: "",
                     description: ""
-                })
+                });
+                return;
             } else {
                 toast.error(response?.message || "Failed to create category");
             }

@@ -32,7 +32,8 @@ const courseSchema = new mongoose.Schema({
 
     status: {
         type: String,
-        enum: ["Draft, Published"]
+        enum: ["Draft", "Published"],
+        default: "Draft"
     },
 
     instructor: {
@@ -46,25 +47,26 @@ const courseSchema = new mongoose.Schema({
         required: true
     },
 
-    studentsEnrolled: {
+    studentsEnrolled: [{
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "User"
-    },
+    }],
 
-    ratingAndReviews: {
+    ratingAndReviews: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "RatingAndReviews"
-    },
+    }],
 
-    courseContent: {
+    courseContent: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Section"
-    },
+    }],
 
     category: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Category"
+        ref: "Category",
+        required: true
     }
 }, {
     timestamps: true

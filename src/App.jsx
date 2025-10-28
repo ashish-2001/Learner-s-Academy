@@ -140,7 +140,7 @@ function App() {
           )}
           {user?.accountType === ACCOUNT_TYPE.ADMIN && (
             <>
-              <Route path="dashboard/admin-panel" element={<AdminPanel />} />
+              <Route path="course/createCategory" element={<AdminPanel />} />
             </>
           )}
         </Route>

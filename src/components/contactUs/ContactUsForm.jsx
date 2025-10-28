@@ -36,7 +36,7 @@ const ContactUsForm = () => {
         console.log(data);
         try{
         setLoading(true);
-        const contactNumber = data.contactNumber+" "+data.contactNumber;
+        const contactNumber = data.countryCode+" "+data.contactNumber;
         const countryCode = data.countryCode
         const payload = { 
             firstName: data.firstName, 

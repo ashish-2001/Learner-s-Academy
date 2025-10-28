@@ -7,7 +7,8 @@ const contactUsValidator = z.object({
     firstName: z.string().min(1, "First name is required"),
     lastName: z.string().min(1, "Last name is required"),
     message: z.string().min(1, "Message are required"),
-    contactNumber: z.string().regex(/^[0-9]{10}$/, "Contact number must be of 10 digits"),
+    contactNumber: z.string().regex(/^[0-9+\s]{8,15}$/, "Contact number must be of 10 digits"),
+    countryCode: z.string().min(1, "Country code is required")
 });
 
 async function contactUs(req, res){
@@ -23,14 +24,15 @@ async function contactUs(req, res){
             })
         }
 
-        const { email, firstName, lastName, message, contactNumber } = parsedResult.data;
+        const { email, firstName, lastName, message, contactNumber, countryCode } = parsedResult.data;
 
         const data = {
             firstName,
             lastName,
             email,
             message,
-            contactNumber
+            contactNumber,
+            countryCode
         }
 
         const info = await mailSender(

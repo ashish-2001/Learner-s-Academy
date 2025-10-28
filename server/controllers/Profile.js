@@ -95,9 +95,9 @@ async function updateDisplayPicture(req, res){
 
         console.log("Image:", image);
 
-        const updatedProfile = await User.findByIdAndUpdate({
+        const updatedProfile = await User.findByIdAndUpdate(
             userId
-        }, {
+        , {
             image: image.secure_url
         }, {
             new: true

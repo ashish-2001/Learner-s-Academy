@@ -5,11 +5,8 @@ import { Category } from "../models/Category.js";
 const categoryValidator = z.object({
     name: z.string().min(1, "Name is required"),
     description: z.string().optional()
-})
+});
 
-// function getRandomInt(max){
-//     return Math.floor(Math.random() * max);
-// }
 
 async function createCategory(req, res){
 
