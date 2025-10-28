@@ -49,7 +49,7 @@ const ContactUsForm = () => {
 
         const res = await apiConnector("POST", contactUsEndpoint.CONTACT_US_API, payload);
 
-        if(res.data.success){
+        if(res.data.success === true){
             toast.success("Message sent successfully");
         }
         else{

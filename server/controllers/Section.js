@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { Course } from "../models/Course.js";
 import { Section } from "../models/Section.js";
-import { SubSection } from "../models/SubSection.js";
 
 const sectionValidator = z.object({
     sectionName: z.string().min(1, "Section name is required"),
@@ -22,6 +21,15 @@ async function createSection(req, res){
         }
 
         const { sectionName, courseId } = parsedResult.data;
+
+        const ifCourse = await Course.findById(courseId);
+
+        if(!ifCourse){
+            return res.status(404).json({
+                success: false,
+                message: "Course not found"
+            });
+        }
 
         const newSection = await Section.create({
             sectionName
@@ -97,14 +105,14 @@ async function updateSection(req, res){
             })
         }
 
-        const course = await Course.findById(courseId).populate({
+        const updatedCourse = await Course.findById(courseId).populate({
             path: "courseContent",
             populate: {
                 path: "subSection"
             }
         }).exec()
 
-        if(!course){
+        if(!updatedCourse){
             return res.status(404).json({
                 success: false,
                 message: "Course not found"
@@ -115,7 +123,7 @@ async function updateSection(req, res){
             success: true,
             message: "Section updated successfully",
             updateSection: section,
-            course
+            updatedCourse
         })
     }
     catch(e){
@@ -145,41 +153,19 @@ async function deleteSection(req, res){
         }
 
         const { courseId, sectionId } = parsedResult.data;
+
+        await Section.findByIdAndDelete(sectionId);
         
-        await Course.findByIdAndUpdate(courseId, {
-            $pull: {
-                courseContent: sectionId
-            }
-        })
-
-        const section = await Section.findById(sectionId);
-
-        if(!Section){
-            return res.status(404).json({
-                success: false,
-                message: "Section not found"
-            })
-        }
-
-        await SubSection.deleteMany({
-            _id: {
-                $in: section.subSection
-            }
-        })
-
-        await Section.findByIdAndUpdate(sectionId)
-
-        const course = await Course.findById(courseId).populate({
+        const updatedCourse = await Course.findById(courseId).populate({
             path: "courseContent",
             populate: {
                 path: "subSection"
-            }
-        }).exec()
+            }}).exec();
 
         return res.status(200).json({
             success: true,
             message: "Section deleted",
-            data: course
+            data: updatedCourse
         })
     }
     catch(e){

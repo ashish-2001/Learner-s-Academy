@@ -6,19 +6,20 @@ const otpSchema = new mongoose.Schema({
 
     email: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
 
-    accountType: {
-        type: String,
-        enum: ["Student", "Instructor", "Admin"],
-        required: true
-    },
-    
     otp: {
         type: String,
         required: true
     },
+
+    // accountType: {
+    //     type: String,
+    //     enum: ["Student", "Instructor", "Admin"],
+    //     required: true
+    // },
 
     createdAt: {
         type: Date,
@@ -35,10 +36,10 @@ async function sendVerificationEmail(email, otp){
             "Verification Email",
             otpTemplate(otp)
         )
-        console.log("Email sent successfully:-", mailResponse.response)
+        console.log("Email sent successfully:-", mailResponse)
     }catch(e){
         console.log("Error occurred while sending email:-", e.message)
-        throw new Error("Something went wrong")
+        throw new Error("Failed to send verification email")
     }
 }
 

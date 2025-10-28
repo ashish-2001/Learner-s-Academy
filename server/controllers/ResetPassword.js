@@ -13,7 +13,7 @@ async function resetPasswordToken(req, res){
         if(!user){
             return res.status(404).json({
                 success: false,
-                message: `This email: ${email} is not registered with us.`
+                message: `This email: ${email} is not registered with us. Enter a valid email.`
             })
 
         }
@@ -45,11 +45,10 @@ async function resetPasswordToken(req, res){
         })
     }
     catch(e){
-
         return res.status(500).json({
             error: e.message,
             success: false,
-            message: "Some error occurred while sending the reset email"
+            message: "Some error occurred while sending the reset message"
         });
 
     }
@@ -66,14 +65,23 @@ const resetPasswordValidator1 = z.object({
 
 async function resetPassword(req, res){
     try{
-        const { password, confirmPassword, token } = resetPasswordValidator1.safeParse(req.body);
+        const parsedResult = resetPasswordValidator1.safeParse(req.body);
 
-        if(confirmPassword !== password){
+        if(!parsedResult.success){
             return res.status(400).json({
                 success: false,
                 message: "Password and Confirm password does not match"
             })
         }
+
+        const { password, confirmPassword, token } = parsedResult.data;
+
+            if(confirmPassword !== password){
+                return res.status(400).json({
+                    success: false,
+                    message: "Password and Confirm password does not match"
+                })
+            }
 
         const userDetails = await User.findOne({
             token: token
@@ -112,7 +120,7 @@ async function resetPassword(req, res){
         return res.status(400).json({
             success: true,
             message: "Some error in updating the password",
-            errors: e.errors.map((err) => err.message)
+            errors: e.message
         })
     }
 }

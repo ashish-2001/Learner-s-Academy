@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { mailSender } from "../utils/mailSender.js";
-import { contactUsEmail } from "../mail/templates/contactFormResponse.js";
 
 
 const contactUsValidator = z.object({
@@ -9,7 +8,8 @@ const contactUsValidator = z.object({
     lastName: z.string().min(1, "Last name is required"),
     message: z.string().min(1, "Message are required"),
     contactNumber: z.string().regex(/^[0-9]{10}$/, "Contact number must be of 10 digits"),
-}) 
+});
+
 async function contactUs(req, res){
 
     try{
@@ -25,10 +25,20 @@ async function contactUs(req, res){
 
         const { email, firstName, lastName, message, contactNumber } = parsedResult.data;
 
+        const data = {
+            firstName,
+            lastName,
+            email,
+            message,
+            contactNumber
+        }
+
         const info = await mailSender(
             email, 
             "Your message has been received",
-            contactUsEmail(email, firstName, lastName, message, contactNumber)
+            `<html><body>${Object.keys(data).map((key) => {
+                return `<p>${key} : ${data[key]}</p>`;
+            })}</body></html>`
         )
         
         if(info){

@@ -6,8 +6,7 @@ function convertSecondsToDuration(totalSeconds){
 
     if(hours > 0){
         return `${hours}h ${minutes}m`
-    }
-    else if(minutes > 0){
+    } else if(minutes > 0){
         return `${minutes}m ${seconds}s`
     } else{
         return `${seconds}s`

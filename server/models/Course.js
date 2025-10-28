@@ -65,12 +65,9 @@ const courseSchema = new mongoose.Schema({
     category: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Category"
-    },
-
-    createdAt: {
-        type: Date,
-        default: Date.now
     }
+}, {
+    timestamps: true
 });
 
 const Course = mongoose.model("Course", courseSchema);

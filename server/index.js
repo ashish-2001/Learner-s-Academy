@@ -45,9 +45,9 @@ app.use("/api/v1/course", courseRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 
 app.get("/", (req, res) => {
-	return res.json({
+	return res.status(200).json({
 		success: true,
-		message: "Your server is up and running..."
+		message: "Welcome to the API"
 	})
 });
 
