@@ -8,17 +8,6 @@ import { convertSecondsToDuration } from "../utils/secToDuration.js";
 import { uploadImageToCloudinary } from "../utils/ImageUploader.js";
 import { CourseProgress } from "../models/CourseProgress.js";
 
-const courseValidator = z.object({
-    courseName: z.string().min(1, "Course name is required"),
-    courseDescription: z.string().min(1, "Course description is required"),
-    whatWillYouLearn: z.string().min(1, "Learning point is required"),
-    price: z.number().positive("Price must be greater than 0"),
-    tag: z.array(z.string()).nonempty( "At least one tag is required"),
-    category: z.string().min(1, "Category is required"),
-    status: z.string().optional(),
-    instructions: z.array(z.string()).nonempty("Instruction is required")
-});
-
 const editCourseValidator = z.object({
     courseId: z.string().min(1, "CourseId is required"),
     courseName: z.string().optional(),
@@ -37,15 +26,8 @@ const createCourse = async (req, res) =>{
     const userId = req.user.userId;
 
     try{
-        const parsedResult = courseValidator.safeParse(req.body);
+        
 
-        if(!parsedResult.success){
-            return res.status(400).json({
-                success: false,
-                message: "All fields are required",
-                errors: parsedResult.error.errors
-            })
-        }
 
         let {
             courseName, 
@@ -56,9 +38,24 @@ const createCourse = async (req, res) =>{
             category,
             status,
             instructions
-        } = parsedResult.data;
+        } = req.body;
 
         const thumbnail = req.files.thumbnailImage;
+
+        if(
+            !courseName || 
+            !courseDescription || 
+            !whatWillYouLearn || 
+            !price || 
+            !tag ||
+            !thumbnail || 
+            !category
+        ){
+            return res.status(400).json({
+                success: false,
+                message: "All fields are required"
+            });
+        }
         
         console.log("Tag:", tag);
         console.log("Instructions:", instructions);
@@ -162,7 +159,7 @@ async function getAllCourses(req, res){
                 thumbnail: true,
                 instructor: true,
                 ratingAndReviews: true,
-                studentsEnroled: true
+                studentsEnrolled: true
         }).populate("instructor").exec();
 
         return res.status(200).json({
