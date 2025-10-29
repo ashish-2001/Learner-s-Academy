@@ -38,7 +38,7 @@ function EnrolledCourses(){
     if(loading){
         return(
             <div className="flex h-[calc(100vh)] w-full justify-center items-center">
-                <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-richblack-500"></div>
+                <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-[#585D69]"></div>
             </div>
         )
     }
@@ -67,7 +67,7 @@ function EnrolledCourses(){
                             onClick={() => {
                                 navigate(`view-course/${course._id}/section/${course.courseContent[0]._id}/sub-section/${course.course.courseContent[0].subSection[0]}`)
                             }}
-                            className="flex items-center border border-richblack-700 rounded-none"
+                            className="flex items-center border border-[#2C333F] rounded-none"
                         >
                             <div className="flex w-[45%] cursor-pointer items-center gap-4 px-5 py-3">
                                 <img 

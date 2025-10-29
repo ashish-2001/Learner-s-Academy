@@ -1,4 +1,4 @@
-import { success, z } from "zod";
+import { z } from "zod";
 import { uploadImageToCloudinary } from "../utils/ImageUploader.js";
 import { SubSection } from "../models/SubSection.js";
 import { Section } from "../models/Section.js";
@@ -38,7 +38,7 @@ async function createSubSection(req, res){
 
         const uploadDetails = await uploadImageToCloudinary(
             video,
-            process.env.FOLDER_NAME
+            process.env.FOLDER_NAME || "default"
         )
         console.log(uploadDetails)
 
@@ -99,7 +99,7 @@ async function updateSubSection(req, res) {
         if(!parsedResult.success){
             return res.status(400).json({
                 success: false,
-                message: "invalid input",
+                message: "All fields are required",
                 errors: parsedResult.error.errors
             })
         }
@@ -158,7 +158,7 @@ async function deleteSubSection(req, res){
         if(!parsedResult.success){
             return res.status(404).json({
                 success: false,
-                message: "Invalid input",
+                message: "All fields are required",
                 errors: parsedResult.error.errors
             })
         }

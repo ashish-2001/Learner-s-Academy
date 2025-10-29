@@ -88,18 +88,20 @@ async function fetchCourseCategories(){
 }
 
 async function addCourseDetails(data, token){
-    let result = null
-    const toastId = toast.loading("Loading...")
+
+    const toastId = toast.loading("Loading...");
+    let result = null;
+
     try{
         const response = await apiConnector("POST", CREATE_COURSE_API, data, 
             {
                 "Content-Type": "multipart/form-data",
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
             }
     )
         console.log("CREATE COURSE API RESPONSE.........", response)
         if(!response?.data?.success){
-            throw new Error("Could Not Add Course Details")
+            throw new Error(response?.data?.message || "Could Not Add Course Details")
         }
 
         toast.success("Course Details Added Successfully")
@@ -107,7 +109,7 @@ async function addCourseDetails(data, token){
 
         } catch(error){
             console.log("CREATE COURSE API ERROR...........", error)
-            toast.error(error.response.data.message);
+            toast.error(error.response?.data?.message);
         } finally{
             toast.dismiss(toastId);
         }
@@ -331,12 +333,13 @@ async function deleteCourse(data, token){
 }
 
 async function getFullDetailsOfCourse(courseId, token){
+
     const toastId = toast.loading("Loading...")
     let result = null;
+
     try{
-        const response = await apiConnector("POST", GET_FULL_COURSE_DETAILS_AUTHENTICATED, courseId, {
-            courseId
-        },  {
+        const response = await apiConnector("GET", `${GET_FULL_COURSE_DETAILS_AUTHENTICATED}?courseId=${courseId}`, null, 
+            {
                 Authorization: `Bearer ${token}`
             }
         )

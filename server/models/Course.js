@@ -2,38 +2,11 @@ import mongoose from "mongoose";
 
 const courseSchema = new mongoose.Schema({
     courseName: {
-        type: String,
-        required: true
-    },
-
-    courseDescription: {
-        type: String,
-        required: true
-    },
-
-
-    price: {
-        type: Number,
-        required: true
-    },
-
-    thumbnailImage: {
         type: String
     },
 
-    tag: {
-        type: [String],
-        required: true
-    },
-
-    instructions: {
-        type: [String]
-    },
-
-    status: {
-        type: String,
-        enum: ["Draft", "Published"],
-        default: "Draft"
+    courseDescription: {
+        type: String
     },
 
     instructor: {
@@ -47,26 +20,49 @@ const courseSchema = new mongoose.Schema({
         required: true
     },
 
+    courseContent: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Section"
+    }],
+
+    ratingAndReviews: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "RatingAndReview"
+    }],
+
+    price: {
+        type: Number
+    },
+
+    thumbnailImage: {
+        type: String
+    },
+
+    tag: {
+        type: [String]
+    },
+
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Category",
+        required: true
+    },
+
     studentsEnrolled: [{
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "User"
     }],
 
-    ratingAndReviews: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "RatingAndReviews"
-    }],
+    instructions: {
+        type: [String],
+        default: []
+    },
 
-    courseContent: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Section"
-    }],
-
-    category: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Category",
-        required: true
+    status: {
+        type: String,
+        enum: ["Draft", "Published"],
+        default: "Draft"
     }
 }, {
     timestamps: true

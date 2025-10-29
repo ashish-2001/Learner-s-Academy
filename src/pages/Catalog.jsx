@@ -60,8 +60,8 @@ return(
             <div className="mx-auto box-content w-full max-w-[620px] px-4 py-12 lg:max-w-[1260px]">
                 <h2 className="section_heading">Courses to get you started</h2>
                 <div className="my-4 flex border-b border-b-[#424854] text-sm">
-                    <button onClick={() => { setActiveOption(1)}} className={activeOption === 1 ? `px-4 py-2 border-b border-b-yellow-25 text-yellow-25 cursor-pointer` : `px-4 py-2 text-richblack-50 cursor-pointer`}>Most Popular</button>
-                    <button onClick={() => { setActiveOption(2)}} className={activeOption === 2 ? `px-4 py-2 border-b border-b-yellow-25 text-yellow-25 cursor-pointer` : `px-4 py-2 text-richblack-50 cursor-pointer`}>New</button>
+                    <button onClick={() => { setActiveOption(1)}} className={activeOption === 1 ? `px-4 py-2 border-b border-b-yellow-25 text-yellow-25 cursor-pointer` : `px-4 py-2 text-[#C5C7D4] cursor-pointer`}>Most Popular</button>
+                    <button onClick={() => { setActiveOption(2)}} className={activeOption === 2 ? `px-4 py-2 border-b border-b-yellow-25 text-yellow-25 cursor-pointer` : `px-4 py-2 text-[#C5C7D4] cursor-pointer`}>New</button>
                 </div>
                 <div>
                     <Course_Slider Courses={CatalogPageData?.selectedCourses}/>

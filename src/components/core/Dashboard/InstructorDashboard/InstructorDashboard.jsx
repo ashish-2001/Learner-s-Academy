@@ -93,7 +93,7 @@ const InstructorDashboard = () => {
                         </div>
                     </div>
                 </div>
-                <div className="rounded-md bg-richblack-800 p-6">
+                <div className="rounded-md bg-[#161D29] p-6">
                     <div className="flex items-center justify-between">
                         <p className="text-lg font-bold text-richblack-5">Your Courses</p>
                         <button onClick={() => {
@@ -106,7 +106,7 @@ const InstructorDashboard = () => {
                     </div>
                     <div className="my-4 flex space-x-6">
                         {
-                            courses?.length === 0 ?  <p className="text-sm font-medium text-richblack-300">You have not created any course</p> 
+                            courses?.length === 0 ?  <p className="text-sm font-medium text-[#838894]">You have not created any course</p> 
                             : courses?.slice(0, 3)?.map((course, index) => {
                                 return (
                                     <div key={index} className="w-1/3">
@@ -116,11 +116,11 @@ const InstructorDashboard = () => {
                                             className="aspect-video md:h-[201px] w-full rounded object-cover"
                                         />
                                         <div className="mt-3 w-full">
-                                            <p className="text-sm font-medium text-richblack-50">{course?.courseName}</p>
+                                            <p className="text-sm font-medium text-[#C5C7D4]">{course?.courseName}</p>
                                             <div className="mt-1 md:space-x-2 md:flex">
-                                                <p className="text-xs font-medium text-richblack-300">{course?.studentsEnrolled?.length} Students</p>
-                                                <p className="hidden md:block text-xs font-medium text-richblack-300">|</p>
-                                                <p className="text-xs font-medium text-richblack-300">₹ {course?.price}</p>
+                                                <p className="text-xs font-medium text-[#838894]">{course?.studentsEnrolled?.length} Students</p>
+                                                <p className="hidden md:block text-xs font-medium text-[#838894]">|</p>
+                                                <p className="text-xs font-medium text-[#838894]">₹ {course?.price}</p>
                                             </div>
                                         </div>
                                     </div>

@@ -85,7 +85,7 @@ async function updateSection(req, res){
         if(!parsedResult.success){
             return res.status(404).json({
                 success: false,
-                message: "Invalid input",
+                message: "All fields are required",
                 errors: parsedResult.error.errors
             })
         }
@@ -147,7 +147,7 @@ async function deleteSection(req, res){
         if(!parsedResult.success){
             return res.status(404).json({
                 success: false,
-                message: "Invalid input",
+                message: "All fields are required",
                 errors: parsedResult.error.errors
             })
         }

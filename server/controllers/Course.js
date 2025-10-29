@@ -25,10 +25,9 @@ const createCourse = async (req, res) =>{
 
     const userId = req.user.userId;
 
+    console.log("Course")
     try{
         
-
-
         let {
             courseName, 
             courseDescription,
@@ -39,6 +38,17 @@ const createCourse = async (req, res) =>{
             status,
             instructions
         } = req.body;
+
+    
+        console.log("Before thumbnail")        
+        if (!req.files || !req.files.thumbnailImage) {
+            return res.status(400).json({
+                success: false,
+                message: "Thumbnail image is missing. Please upload a file."
+            });
+        }
+
+console.log("After thumbnail")
 
         const thumbnail = req.files.thumbnailImage;
 
@@ -60,13 +70,7 @@ const createCourse = async (req, res) =>{
         console.log("Tag:", tag);
         console.log("Instructions:", instructions);
 
-        if(!status || status === undefined){
-            status = "Draft"
-        }
-
-        const instructorDetails = await User.findById(userId, {
-            accountType: "Instructor"
-        })
+        const instructorDetails = await User.findById(userId)
 
         if(!instructorDetails){
             return res.status(404).json({
@@ -86,7 +90,7 @@ const createCourse = async (req, res) =>{
 
         const thumbnailImage = await uploadImageToCloudinary(
             thumbnail,
-            process.env.FOLDER_NAME
+            process.env.FOLDER_NAME || "default"
         )
 
         console.log(thumbnailImage);
@@ -95,19 +99,16 @@ const createCourse = async (req, res) =>{
             courseName,
             courseDescription,
             instructor: instructorDetails._id,
-            whatWillYouLearn: whatWillYouLearn,
+            whatWillYouLearn,
             price,
-            tag,
+            tag: JSON.parse(tag),
             category: categoryDetails._id,
-            thumbnail: thumbnailImage.secure_url,
-            status: status,
-            instructions: instructions
+            thumbnailImage: thumbnailImage.secure_url,
+            status: status || "Draft",
+            instructions: JSON.parse(instructions)
         });
 
-        await User.findByIdAndUpdate(
-            {
-                _id: instructorDetails._id
-            },
+        await User.findByIdAndUpdate( instructorDetails._id,
             {
                 $push: {
                     courses: newCourse._id
@@ -118,10 +119,7 @@ const createCourse = async (req, res) =>{
             }
         );
 
-        await Category.findByIdAndUpdate(
-            {
-                _id: category
-            },
+        await Category.findByIdAndUpdate( category,
             {
                 $push: {
                     course: newCourse._id
@@ -254,7 +252,7 @@ async function editCourse(req, res){
         if(!parseResult.success){
             return res.status(400).json({
                 success: false,
-                message: "Invalid input",
+                message: "All fields are required",
                 errors: parseResult.error.errors
             })
         }
@@ -328,7 +326,7 @@ async function editCourse(req, res){
 async function getFullCourseDetails(req, res) {
 
     try{
-        const { courseId } = req.body;
+        const { courseId } = req.query;
         const userId = req.user.userId;
         const courseDetails = await Course.findOne({ _id: courseId })
         .populate({
@@ -338,7 +336,7 @@ async function getFullCourseDetails(req, res) {
             }
         })
         .populate("category")
-        .populate("ratingAndReview").
+        .populate("ratingAndReviews").
         populate({
             path: "courseContent",
             populate: {
@@ -360,12 +358,14 @@ async function getFullCourseDetails(req, res) {
             })
         }
 
-        if(courseDetails.status === "Draft"){
-            return res.status(403).json({
-                success: false,
-                message: "Accessing a draft course is forbidden"
-            });
-        };
+        if(courseDetails.status === "Draft" && courseDetails.instructor._id.toString() !== req.user.userId){
+            if(courseDetails.status === "Draft"){
+                return res.status(403).json({
+                    success: false,
+                    message: "Accessing a draft course is forbidden"
+                });
+            };
+        }
 
         let totalDurationInSeconds = 0;
 

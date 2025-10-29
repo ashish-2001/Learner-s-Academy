@@ -10,33 +10,32 @@ const Upload = ({ name, label }) => {
     const {editCourse, course} = useSelector((state) => state.course);
 
     const {
-      register,
       setValue,
       formState: { errors }
     } = useFormContext();
 
     const handelOnChange = (e) => {
         const file = e.target.files[0];
-        setValue(name, file);
+        if(!file) return;
+        setValue(name, file, { shouldValidate: true })
 
-        if(file) {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImage(reader.result);
             }
             reader.readAsDataURL(file);
-        }
     }
 
     useEffect(() => {
-        if(editCourse && course?.thumbnail) {
-            setImage(course?.thumbnail);
+        if(editCourse && course?.thumbnailImage) {
+            setImage(course?.thumbnailImage);
+            setValue(name, course.thumbnailImage);
         }
-    }, [editCourse, course]);
+    }, [editCourse, course, name, setValue]);
 
     const removeImage = () => {
       setImage(null);
-      setValue(name, null);
+      setValue(name, null, { shouldValidate: true });
     }
 
   return (
@@ -71,8 +70,8 @@ const Upload = ({ name, label }) => {
         type="file" 
         accept="image/*,.jpeg,.jpg,.png" 
         // tabIndex="-1" multiple=""  
-        {...register(name, {required:true})} 
-        onChange={handelOnChange} className="hidden" 
+        onChange={handelOnChange} 
+        className="hidden" 
       />
 
 
@@ -107,8 +106,8 @@ const Upload = ({ name, label }) => {
   </div>
 </label>
 {
-  errors.courseImage && (<span className='ml-2 text-xs tracking-wide text-[#EF476F]'>
-      Course Image is required**
+  errors[name] && (<span className='ml-2 text-xs tracking-wide text-[#EF476F]'>
+      {label} is required**
   </span>)
 }
 </div>

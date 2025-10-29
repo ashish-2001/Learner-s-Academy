@@ -25,7 +25,7 @@ function Sidebar(){
     }
 
     return(
-        <div className="text-white bg-richblack-800">
+        <div className="text-white bg-[#161D29]">
             <div className="flex-h-[calc(100vh-3.5rem)] min-w-[220px]  items-center border-r-[1px] border-r-[#2C333F] bg-[#161D29]">
                 <div className="flex flex-col">
                     {sidebarLinks.map((link) => {

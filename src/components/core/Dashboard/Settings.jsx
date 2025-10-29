@@ -49,7 +49,7 @@ const Settings = () => {
 
   const handelAdditionalDetails = (e) => {
     e.preventDefault()
-    updateAdditionalDetails(token,formData);
+    updateAdditionalDetails(token, formData);
   }
 
   //update password

@@ -21,7 +21,7 @@ async function updateProfile(req, res){
         if(!parsedResult.success){
             return res.status(400).json({
                 success: false,
-                message: "Invalid input",
+                message: "All fields are required",
                 errors: parsedResult.error.errors
             })
         }
