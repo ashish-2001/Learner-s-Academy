@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { success, z } from "zod";
 import { User } from "../models/Users.js";
 import { Category } from "../models/Category.js";
 import { Course } from "../models/Course.js";
@@ -7,19 +7,6 @@ import { SubSection } from "../models/SubSection.js";
 import { convertSecondsToDuration } from "../utils/secToDuration.js";
 import { uploadImageToCloudinary } from "../utils/ImageUploader.js";
 import { CourseProgress } from "../models/CourseProgress.js";
-
-const editCourseValidator = z.object({
-    courseId: z.string().min(1, "CourseId is required"),
-    courseName: z.string().optional(),
-    courseDescription: z.string().optional(),
-    whatWillYouLearn: z.string().optional(),
-    price: z.string().optional(),
-    tag: z.union([z.string(), z.array(z.string())]).optional(),
-    category: z.string().optional(),
-    status: z.string().optional(),
-    instructions: z.union([z.string(), z.array(z.string())]).optional()
-});
-
 
 const createCourse = async (req, res) =>{
 
@@ -246,19 +233,27 @@ async function getInstructorCourses(req, res) {
 async function editCourse(req, res){
 
     try{
+        const {
+            courseId,
+            courseName,
+            courseDescription,
+            whatWillYouLearn,
+            price,
+            tag,
+            category,
+            status,
+            instructions,
+        } = req.body;
 
-        const parseResult = editCourseValidator.safeParse(req.body);
+        console.log("req body", req.body);
+        console.log("req files", req.files);
 
-        if(!parseResult.success){
+        if(!courseId){
             return res.status(400).json({
                 success: false,
-                message: "All fields are required",
-                errors: parseResult.error.errors
+                message: "Course id is required"
             })
         }
-
-        const { courseId }  = parseResult.data;
-        const updates = parseResult.data;
 
         const course = await Course.findById(courseId);
 
@@ -268,30 +263,74 @@ async function editCourse(req, res){
                 error: "Course not found"
             });
         }
+        
+        let parsedTags = course.tag;
 
-        if(req.files){
+        if(tag){
+            try{
+                parsedTags = typeof tag === "string" ? JSON.parse(tag) : tag;
+            } catch {
+                parsedTags = [tag];
+            }
+        }
+
+        let parsedInstructions = course.instructions;
+
+        if(instructions){
+            try{
+                parsedInstructions = typeof instructions === "string" ? JSON.parse(instructions) : instructions
+            } catch {
+                parsedInstructions = [instructions]
+            }
+        }
+
+        if(category){
+            const categoryId = typeof category === "object" ? category._id: category;
+            const categoryExists = await Category.findById(categoryId);
+            if(!categoryExists){
+                return res.status(404).json({
+                    success: false,
+                    message: "Category not found"
+                });
+            }
+            course.category = categoryId;
+        }
+
+        if(req.files && req.files.thumbnailImage){
             console.log("Thumbnail update");
             const thumbnail = req.files.thumbnailImage;
             const thumbnailImage = await uploadImageToCloudinary(
                 thumbnail,
-                process.env.FOLDER_NAME
+                process.env.FOLDER_NAME || "default"
             )
-            course.thumbnail = thumbnailImage.secure._url;
+            course.thumbnailImage = thumbnailImage.secure_url;
         }
 
-    for (const key in updates) {
-        if (Object.prototype.hasOwnProperty.call(key)) {
-            if(key === "tag" || key === "instructions"){
-                course[key] = JSON.parse(updates[key]);
-            } else{
-                course[key] = updates[key]
-            }
+        if(courseName) {
+            course.courseName = courseName;
         }
-    }
+        if(courseDescription){
+            course.courseDescription = courseDescription;
+        }
+        if(whatWillYouLearn){
+            course.whatWillYouLearn = whatWillYouLearn;
+        }
+        if(price){
+            course.price = price;
+        }
+        if(status){
+            course.status = status;
+        }
+        if(parsedTags){
+            course.tag = parsedTags;
+        }
+        if(parsedInstructions){
+            course.instructions = parsedInstructions;
+        }
 
         await course.save();
 
-        const updatedCourse = await Course.findOne({ _id: courseId })
+    const updatedCourse = await Course.findOne({ _id: courseId })
         .populate({
             path:"instructor",
             populate: {
@@ -307,13 +346,14 @@ async function editCourse(req, res){
             }
         }).exec();
 
-        return res.json({
+        return res.status(200).json({
             success: true,
             message: "Course updated successfully",
             data: updatedCourse
         })
     }
     catch(e){
+        console.error("Edit course error:", e)
         return res.status(500).json({
             success: false,
             message: "Interval server error",

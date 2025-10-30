@@ -26,7 +26,7 @@ async function createSubSection(req, res){
 
         const { sectionId, title, description, courseId } = parsedResult.data;
 
-        const video = req.files.video;
+        const video = req.files.videoFile;
 
         const ifSection = await Section.findById(sectionId);
         if(!ifSection){

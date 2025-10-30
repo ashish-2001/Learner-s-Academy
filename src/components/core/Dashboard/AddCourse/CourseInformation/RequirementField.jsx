@@ -17,22 +17,23 @@ const RequirementField = ({ name, label }) => {
     useEffect(()=> {
         register(name, {
             required: true,
-            // validate: (value) => value.length > 0
         })
     },[register, name]);
 
     useEffect(()=> {
-        if(editCourse && course?.instructions) {
+        if(editCourse && course?.instructions?.length > 0) {
             setRequirementList(course?.instructions);
             setValue(name, course?.instructions);
-        }else{
-            setValue(name, requirementList);
         }
-    },[requirementList, setValue, name, editCourse, course?.instructions]);
+    },[ editCourse, course?.instructions, name, setValue]);
+
+    useEffect(() => {
+        setValue(name, requirementList);
+    }, [requirementList, name, setValue]);
 
     const handleAddRequirement = () => {
         if(requirement.trim()) {
-            setRequirementList([...requirementList, requirement.trim()]);
+            setRequirementList((prev) => [...prev, requirement.trim()]);
             setRequirement("");
         }
     }

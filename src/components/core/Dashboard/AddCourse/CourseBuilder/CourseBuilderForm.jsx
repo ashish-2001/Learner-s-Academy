@@ -76,7 +76,7 @@ const CourseBuilderForm = () => {
   };
 
 
-  const handelChangeEditSectionName = (sectionId, sectionName) => {
+  const handleChangeEditSectionName = (sectionId, sectionName) => {
     if (editSectionName === sectionId) {
       setEditSectionName(false);
       setValue("sectionName", "");
@@ -127,7 +127,7 @@ const CourseBuilderForm = () => {
           )}
         </div>
       </form>
-      {course.courseContent.length > 0 && <NestedView handelChangeEditSectionName={handelChangeEditSectionName} />}
+      {course.courseContent.length > 0 && <NestedView handleChangeEditSectionName={handleChangeEditSectionName} />}
       <div className="flex justify-end gap-x-3">
         <button
           onClick={() => {

@@ -119,7 +119,8 @@ async function addCourseDetails(data, token){
 
 async function editCourseDetails(data, token){
     let result = null;
-    const toastId = toast.loading("Loading...")
+    const toastId = toast.loading("Loading...");
+
     try{
         const response = await apiConnector("POST", EDIT_COURSE_API, data, 
             {
@@ -129,7 +130,7 @@ async function editCourseDetails(data, token){
 
         console.log("EDIT COURSE API RESPONSE...........", response)
         if(!response?.data?.success){
-            throw new Error("Could not update course details")
+            throw new Error(response?.data?.message || "Could not update course details")
         }
         toast.success("Course details updated successfully")
         result = response?.data?.data
@@ -148,6 +149,7 @@ async function createSection(data, token){
     try{
         const response = await apiConnector("POST", CREATE_SECTION_API, data, 
             {
+                "Content-type": "multipart/form-data",
                 Authorization: `Bearer ${token}`
             }
     );
@@ -174,6 +176,7 @@ async function createSubSection(data, token){
     try{
         const response = await apiConnector("POST", CREATE_SUBSECTION_API, data, 
             {
+                "Content-type": "multipart/form-data",
                 Authorization: `Bearer ${token}`
             }
         )
@@ -196,7 +199,9 @@ async function updateSection(data, token){
     let result = null;
     const toastId = toast.loading("Loading...")
     try{
-        const response = await apiConnector("POST", UPDATE_SECTION_API, data, {
+        const response = await apiConnector("PUT", UPDATE_SECTION_API, data, 
+        {
+            "Content-type": "multipart/form-data",
             Authorization: `Bearer ${token}`
         })
         console.log("UPDATE SECTION API RESPONSE..........", response)
@@ -219,7 +224,8 @@ async function updateSubSection(data, token){
     let result = null;
     const toastId = toast.loading("Loading...")
     try{
-        const response = await apiConnector("POST", UPDATE_SUBSECTION_API, data, {
+        const response = await apiConnector("POST", UPDATE_SUBSECTION_API, data, 
+        {   "Content-type": "multipart/form-data",
             Authorization: `Bearer ${token}`
         })
         console.log("UPDATE SUB-SECTION API RESPONSE............", response)
@@ -243,6 +249,7 @@ async function deleteSection(data, token){
     try{
         const response = await apiConnector("POST", DELETE_SECTION_API, data, 
             {
+                "Content-type": "multipart/form-data",
                 Authorization: `Bearer ${token}`
             }
         )
@@ -268,6 +275,7 @@ async function deleteSubSection(data, token){
     try{
         const response = await apiConnector("POST", DELETE_SUBSECTION_API, data, 
             {
+                "Content-type": "multipart/form-data",
                 Authorization: `Bearer ${token}`
             }
         ); 

@@ -56,7 +56,7 @@ const CourseInformationForm = () => {
             setValue("coursePrice", course.price);
             setValue("courseTags", course.tag);
             setValue("courseBenefits", course.whatWillYouLearn);
-            setValue("courseCategory", course.category);
+            setValue("courseCategory", course.category?._id || course.category);
             setValue("courseRequirements", course.instructions);
             setValue("thumbnailImage", course.thumbnailImage);
         }
@@ -64,10 +64,14 @@ const CourseInformationForm = () => {
 
     const onSubmit = async (data) => {
 
+        const formData = new FormData();
         setLoading(true);
 
+        if(editCourse){
+            formData.append("courseId", course._id);
+        }
+
         try{
-            const formData = new FormData();
             formData.append("courseName", data.courseTitle);
             formData.append("courseDescription", data.courseShortDesc);
             formData.append("price", data.coursePrice);
@@ -77,7 +81,7 @@ const CourseInformationForm = () => {
             formData.append("status", COURSE_STATUS.DRAFT);
             formData.append("tag", JSON.stringify(data.courseTags));
 
-            if(data.thumbnailImage ){
+            if(data.thumbnailImage && data.thumbnailImage instanceof File ){
                 formData.append("thumbnailImage", data.thumbnailImage);
             }
                 
@@ -161,7 +165,6 @@ const CourseInformationForm = () => {
             <div className='flex flex-col space-y-2'>
                 <label className='text-sm text-[#F1F2FF]' htmlFor='courseCategory'>Course Category<sup className='text-[#EF476F]'>*</sup></label>
                 <select 
-                    disabled={editCourse} 
                     className='rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-white/50 placeholder:text-[#6E727F] focus:outline-none w-full'
                     id='courseCategory'
                     {...register("courseCategory", { required:true })}

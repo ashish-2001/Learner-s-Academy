@@ -16,8 +16,19 @@ const ChipInput = ({ name, label, register, errors, setValue }) => {
             // validate: (value) => value.length > 0
         });
         if(editCourse ) {
-            setTags(JSON.parse(course?.tag));
-            setValue(name, JSON.parse(course?.tag));
+            try{
+                const parsedTags = Array.isArray(course?.tag)
+                ? course.tag
+                : JSON.parse(course?.tag || "[]");
+
+                setTags(parsedTags);
+                setValue(name, parsedTags);
+            } catch(error){
+                console.error("Invalid tag format", error.message);
+                setTags([]);
+                setValue(name, []);
+            }
+            
         }
     },[])
 

@@ -86,23 +86,10 @@ async function showAllCategories(req, res){
     }
 }
 
-const categoryPageValidator = z.object({
-    categoryId: z.string().min(1, "CategoryId is required")
-})
-
 async function categoryPageDetails(req, res){
     try{
-        const parsedResult = categoryPageValidator.safeParse(req.body);
 
-        if(!parsedResult.success){
-            return res.status(400).json({
-                success: false,
-                message: "All fields are required",
-                errors: parsedResult.error.errors
-            })
-        }
-
-        const { categoryId } = parsedResult.data;
+        const { categoryId } = req.body;
 
         const selectedCategory = await Category.findById(categoryId).populate({
             path: "courses",
