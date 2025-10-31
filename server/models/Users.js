@@ -33,8 +33,7 @@ const userSchema = new mongoose.Schema({
     },
 
     active:{
-        type: Boolean,
-        required: true
+        type: Boolean
     },
 
     approved: {
@@ -56,8 +55,7 @@ const userSchema = new mongoose.Schema({
     },
 
     image: {
-        type: String,
-        required: true
+        type: String
     },
 
     resetPasswordExpires: {

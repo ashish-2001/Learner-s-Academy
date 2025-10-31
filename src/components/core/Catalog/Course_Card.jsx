@@ -20,7 +20,7 @@ return (
         <div>
             <div>
                 <img 
-                    src={course?.thumbnail}
+                    src={course?.thumbnail || course?.thumbnailImage}
                     alt='Course thumbnail'
                     className={`${Height}  rounded-xl object-cover`}
                 />

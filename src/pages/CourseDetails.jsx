@@ -16,6 +16,7 @@ import { BuyCourse } from '../services/operations/studentFeaturesAPI';
 import { fetchCourseDetails } from '../services/operations/courseDetailsAPI';
 
 const CourseDetails = () => {
+
     const { token } = useSelector((state) => state.auth);
     const { user } = useSelector((state) => state.profile);
     const navigate = useNavigate();
@@ -26,6 +27,36 @@ const CourseDetails = () => {
     const [alreadyEnrolled, setAlreadyEnrolled] = useState(false);
     const { cart } = useSelector((state) => state.cart);
 
+    useEffect(() => {
+        const getCourseDetails = async () => {
+            const data = await fetchCourseDetails(courseId, dispatch);
+
+            if(data){
+                setCourseDetail(data);
+            } else {
+                toast.error("Failed to fetch course details");
+            }
+        }
+
+        if(courseId){
+            getCourseDetails();
+        }
+    }, [courseId, dispatch]);
+
+    useEffect(() => {
+
+        if(courseDetail?.ratingAndReviews?.length > 0){
+            const count = GetAvgRating(courseDetail.ratingAndReviews);
+            setAvgReviewCount(count);
+            }
+    }, [courseDetail?.ratingAndReviews]);
+
+    useEffect (() => {
+    if(courseDetail && user?._id){
+        const enrolled = courseDetail?.studentsEnrolled?.includes(user._id);
+        setAlreadyEnrolled(Boolean(enrolled));
+    }
+    }, [courseDetail, user?._id])
 
     const handelPayment = () => {
         if(token){
@@ -36,53 +67,30 @@ const CourseDetails = () => {
         }
     }
 
-    useEffect(() => {
-        const getCourseDetails = async() => {
-            const response = await fetchCourseDetails(courseId, dispatch);
-            // console.log("getCourseDetails -> response", response);
-            setCourseDetail(response);
-        }
-        getCourseDetails();
-    }, [courseId]);
-
-    useEffect(() => {
-        if(courseDetail?.ratingAndReviews?.length > 0){
-            const count = GetAvgRating(courseDetail?.ratingAndReviews);
-            setAvgReviewCount(count);
-            console.log("getCourseDetails -> count", parseInt(count));
-            }
-    }, [courseDetail?.ratingAndReviews]);
-
-
     //add to cart
     const handelAddToCart = () => {
         if(token){
         dispatch(addToCart(courseDetail));
-        // console.log("handelAddToCart -> courseId", courseDetail._id)
+        toast.success('Added to cart');
         }
         else{
             navigate('/login');
         }
     }
 
-
-    useEffect (() => {
-    if(courseDetail){
-        const Enrolled = courseDetail?.studentsEnrolled?.find((student) => student === user?._id);
-        // console.log("CourseDetails -> Enrolled", Enrolled)
-        if(Enrolled){
-            setAlreadyEnrolled(true);
-        }
-    }
-    }, [courseDetail, user?._id])
-
-
-
-
-
     if(!courseDetail) return <div className='flex justify-center items-center h-screen'>
         <div className='custom-loader'></div>
     </div>
+
+    const createdDate = courseDetail?.createdAt || courseDetail?.updatedAt
+    ? new Date(
+        courseDetail.createdAt || courseDetail.updatedAt
+    ).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    })
+    : 'Date not available'
 
 return (
     <div>
@@ -103,46 +111,68 @@ return (
                         <span className='text-[#999DAA]'>{courseDetail?.studentsEnrolled?.length} students enrolled</span>
                     </div>
                     <div>
-                        <p>Created By {courseDetail?.instructor?.firstName}  {courseDetail?.instructor?.lastName}</p>
+                        <p>Created By {courseDetail?.instructor?.firstName || ''} {' '}{courseDetail?.instructor?.lastName || ''}</p>
                     </div>
                     <div className='flex flex-wrap gap-5 text-lg'>
                         <AiOutlineInfoCircle className='text-2xl text-[#F1F2FF]' />
-                        <p className='text-[#C5C7D4]'>Created at &nbsp;    
-                            {new Date(courseDetail?.createdAt || courseDetail?.updatedAt).toLocaleDateString('en-US', {
-                                year: 'numeric',
-                                month: 'long',
-                                day: 'numeric',
-                            })}
+                        <p className='text-[#C5C7D4]'>Created at &nbsp; {createdDate}
                         </p>
                         <p className='flex items-center gap-2 text-[#C5C7D4]'><BsGlobe className='text-lg text-[#C5C7D4]'/>English</p>
                     </div>
                     </div>
                     <div className='flex w-full flex-col gap-4 border-y border-y-[#585D69] py-4 lg:hidden'>
                         <p className='space-x-3 pb-4 text-3xl font-semibold text-[#F1F2FF]'>
-                            <span>₹{courseDetail?.price}</span></p>
-                            {ACCOUNT_TYPE.INSTRUCTOR !==user?.accountType &&
+                            <span>₹ {courseDetail?.price}</span></p>
+                            {ACCOUNT_TYPE.INSTRUCTOR !==user?.accountType && (
                             <>
-                            {
-                                alreadyEnrolled ? <button onClick={()=>{navigate("/dashboard/enrolled-courses")}}  className='yellowButton'>Go to Course</button> : <button onClick={handelPayment} className='yellowButton'>Buy Now</button>
-                            }
-                            {
-                                alreadyEnrolled ? (<div></div>) : 
-                                (
-                                    cart?.find((item) => item?._id === courseDetail?._id) ?
-                                    (<button onClick={()=>{navigate("/dashboard/cart")}} className='blackButton text-[#F1F2FF]'>Go to Cart</button>) :
-                                    (<button onClick={handelAddToCart} className='blackButton text-[#F1F2FF]'>Add to Cart</button>)
-                                )
-                            }
-                            </>
+                                {
+                                    alreadyEnrolled ? 
+                                    <button 
+                                        onClick={()=>{navigate("/dashboard/enrolled-courses")}} 
+                                        className='bg-[#FFD60A] text-[#000814] rounded-md cursor-pointer font-semibold py-2 px-5'
+                                    >
+                                        Go to Course
+                                    </button> : 
+                                    <button 
+                                        onClick={handelPayment} 
+                                        className='bg-[#FFD60A] text-[#000814] rounded-md cursor-pointer font-semibold py-2 px-5'
+                                    >
+                                        Buy Now
+                                    </button>
+                                }
+                                {
+                                    !alreadyEnrolled &&
+                                    (
+                                        cart?.some((item) => item?._id === courseDetail?._id) ? (
+                                        <button 
+                                            onClick={()=>{navigate("/dashboard/cart")}} 
+                                            className='bg-[#161D29] rounded-md cursor-pointer font-semibold py-2 px-5 text-[#F1F2FF]'
+                                        >
+                                            Go to Cart
+                                        </button> ) : (
+                                        <button 
+                                            onClick={handelAddToCart} 
+                                            className='bg-[#161D29] rounded-md cursor-pointer font-semibold py-2 px-5 text-[#F1F2FF]'
+                                        >
+                                            Add to Cart
+                                        </button> )
+                                    )
+                                }
+                            </>)
                             }
                     </div>
                 </div>
+
                 <div className='right-[1rem] top-[60px] mx-auto hidden min-h-[600px] w-1/3 max-w-[410px] translate-y-24 md:translate-y-0 lg:absolute  lg:block'>
                     <div className='flex flex-col gap-4 rounded-md bg-[#2C333F] p-4 text-[#F1F2FF]'>
-                        <img src={courseDetail?.thumbnail} alt="course img" className='max-h-[300px] min-h-[180px] w-[400px] overflow-hidden rounded-2xl object-cover md:max-w-full' />
+                        <img 
+                            src={courseDetail?.thumbnail} 
+                            alt="course img" 
+                            className='max-h-[300px] min-h-[180px] w-[400px] overflow-hidden rounded-2xl object-cover md:max-w-full' 
+                        />
                         <div className='px-4'>
                             <div className='space-x-3 pb-4 text-3xl font-semibold'>
-                                <span>₹{courseDetail?.price}</span>
+                                <span>₹ {courseDetail?.price}</span>
                             </div>
                             <div className='flex flex-col gap-4'>
                                 {ACCOUNT_TYPE.INSTRUCTOR !== user?.accountType &&
@@ -151,11 +181,22 @@ return (
                                     alreadyEnrolled ? <button onClick={()=>{navigate("/dashboard/enrolled-courses")}} className='yellowButton'>Go to Course</button> : <button onClick={handelPayment} className='yellowButton'>Buy Now</button>
                                 }
                                 {
-                                alreadyEnrolled ? (<div></div>) : 
+                                !alreadyEnrolled && 
                                 (
-                                    cart?.find((item) => item._id === courseDetail._id) ?
-                                    (<button onClick={()=>{navigate("/dashboard/cart")}} className='blackButton text-[#F1F2FF]'>Go to Cart</button>) :
-                                    (<button onClick={handelAddToCart} className='blackButton text-[#F1F2FF]'>Add to Cart</button>)
+                                    cart?.some((item) => item._id === courseDetail._id) ?
+                                    (<button 
+                                        onClick={()=>{navigate("/dashboard/cart")}} 
+                                        className='bg-[#161D29] rounded-md cursor-pointer font-semibold py-2 px-5 text-[#F1F2FF]'
+                                    >
+                                        Go to Cart
+                                    </button>) : (
+                                    <button 
+                                        onClick={handelAddToCart} 
+                                        className='bg-[#161D29] rounded-md cursor-pointer font-semibold py-2 px-5 text-[#F1F2FF]'
+                                    >
+                                        Add to Cart
+                                    </button>
+                                    )
                                 )
                             }
                                 </>
@@ -167,24 +208,27 @@ return (
                             <div className=''>
                                 <p className='my-2 text-xl font-semibold '>This course includes</p>
                                 <div className='flex flex-col gap-1 text-sm text-[#06D6A0]'>
-                                    {
-                                        JSON.parse(courseDetail?.instructions).map((item,index) => (
-                                            <div key={index} className='flex gap-2 items-center'>
-                                                <span className='text-lg'>✓</span>
-                                                <span>{item}</span>
-                                            </div>
-                                        ))
+                                    {  Array.isArray(courseDetail?.instructions) && courseDetail.instructions.length > 0 
+                                        ? (
+                                            courseDetail.instructions.map((item, index) => (
+                                                <div key={index} className='flex gap-2 items-center'>
+                                                    <span className='text-lg'>✓</span>
+                                                    <span>{item}</span>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p className='text-sm text-gray-200'>No instructions available</p>
+                                        ) 
                                     }
                                 </div>
                             </div>
                             <div className='text-center'>
                                 {/* copy url */}
-                                <button className='mx-auto flex items-center gap-2 py-6 text-[#E7C009]' onClick={
-                                    () => {
-                                        navigator.clipboard.writeText(window.location.href);
+                                <button className='mx-auto flex items-center gap-2 py-6 text-[#E7C009]' 
+                                    onClick={() => { navigator.clipboard.writeText(window.location.href);
                                         toast.success('URL copied to clipboard');
-                                    }
-                                }>
+                                    }}
+                                >
                                     <FaShareSquare className='text-xl text-[#CFAB08]'/>
                                     <span>Share</span>
                                 </button>
@@ -208,58 +252,44 @@ return (
                     <div className='max-w-[830px] '>
                         <div className='flex flex-col gap-3'>
                             <p className='text-[28px] font-semibold'>Course Content</p>
-                            <div className='flex flex-wrap justify-between gap-2'>
-                                <div className='flex gap-2'>
-                                <span>{courseDetail?.courseContent?.length} Section(s)</span>
-                                <span>{courseDetail?.courseContent?.reduce((acc, item) => acc + item?.subSection?.length, 0)} Lecture(s)</span>
-                                </div>
-                                <button className='text-[#FFE83D]'>
-                                    <span>Collapse al sections</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div className='py-4'>
                             {
-                                courseDetail?.courseContent?.map((item, index) => (
-                                    <details key={index} className=' border border-solid border-[#424854] bg-[#2C333F] text-[#F1F2FF] detailanimatation'>
-                                        <summary className='flex cursor-pointer items-start justify-between bg-opacity-20 px-7  py-5 transition-[0.3s]'>
-                                            <div className='flex items-center gap-2'>
-                                            <FaChevronDown className='arrow '/>
-                                            <span className='text-xl'>{item?.sectionName}</span>
-                                            </div>
-                                            <div className='space-x-4'>
-                                                <span className='text-[#FFE83D]'>{item?.subSection?.length} Lecture(s)</span>
-                                            </div>
-                                        </summary>
-                                        <div className='mt-5'>
-                                            {
-                                                item?.subSection?.map((subItem, subIndex) => (
-                                                    <div key={subIndex} className='relative overflow-hidden bg-[#000814]  p-5 border border-solid border-[#424854]'>
-                                                        <div className='flex items-center gap-2'>
-                                                        <IoVideocamOutline className='txt-lg text-[#F1F2FF]'/>
-                                                        <span className='text-lg'>{subItem?.title}</span>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                ))
-                                            }
-                                            </div>
-                                    </details>
-                                ))
-                            }
+                                courseDetail?.courseContent?.length > 0 ? (
+                                    courseDetail.courseContent.map((section) => (
+                                        <div key={section._id} className='mb-4 border border-[#424854] bg-[#2C333F] p-4 rounded-md'>
+                                            <h3 className='text-xl font-semibold mb-2'>{section.sectionName}</h3>
+                                            {section?.subSection?.map((subSec) => (
+                                                <div key={subSec._id} className='flex flex-col gap-2 mb-3'>
+                                                    <p className='text-lg'>{subSec.title}</p>
+                                                    {subSec.videoUrl && (
+                                                        <video
+                                                            src={subSec.videoUrl}
+                                                            controls
+                                                            className='rounded-md border border-gray-300'
+                                                            width={"100%"}
+                                                        />
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p>No course content available</p>
+                                )}
                         </div>
                     </div>
                 </div>
-                <div className='mb-12 py-4'>
-            </div>
                 <p className='text-[28px] font-semibold'>
                     Author
                 </p>
                 <div className='flex items-center gap-4 py-4'>
-                    <img src={courseDetail?.instructor.image} alt="author img" className='w-[50px] h-[50px] rounded-full object-cover'/>
+                    <img 
+                        src={courseDetail?.instructor?.thumbnailImage} 
+                        alt="author img" 
+                        className='w-[50px] h-[50px] rounded-full object-cover'
+                    />
                     <p className='text-xl font-semibold'>{courseDetail?.instructor?.firstName} {courseDetail?.instructor?.lastName}</p>
                 </div>
-                <p className='text-[#C5C7D4] text-sm mb-10'>{courseDetail?.instructor?.additionalDetails?.about}</p>
+                <p className='text-[#C5C7D4] text-sm mb-10'>{courseDetail?.instructor?.additionalDetails?.about || "No author details available"}</p>
             </div>
 
             {/* Reviews */}
@@ -274,29 +304,37 @@ return (
                                 <div className='flex items-center gap-2'>
                                     <span className='text-4xl font-semibold'>{avgReviewCount}</span>
                                     <span className='text-2xl'>/5</span>
-                                    <span className='text-[#C5C7D4]'>({courseDetail?.ratingAndReviews?.length} ratings)</span>
+                                    <span className='text-[#C5C7D4]'>({courseDetail?.ratingAndReviews?.length || 0} ratings)</span>
                                     <span className='text-[#C5C7D4]'>|</span>
-                                    <span className='text-[#C5C7D4]'> {courseDetail?.studentsEnrolled?.length} students</span>
+                                    <span className='text-[#C5C7D4]'> {courseDetail?.studentsEnrolled?.length || 0} students</span>
                                     </div>
                                 </div>
                                 </div>
                                 {
-                                    courseDetail?.ratingAndReviews?.map((item, index) => (
-                                        <div key={index} className='flex flex-col md:items-baseline gap-3 my-4 mt-12 ga'>
-                                            <div className='flex items-center gap-2'>
-                                                <img src={item?.user?.image} alt="user img" className='w-[30px] h-[30px] rounded-full object-cover'/>
-                                                <div className='flex flex-col'>
-                                                    <p className='md:text-xl min-w-max font-semibold'>{item?.user?.firstName} {item?.user?.lastName}</p>
-                                                </div>
-                                            </div>
-                                            <div className='flex flex-col gap-2'>
+                                    courseDetail?.ratingAndReviews?.length > 0 ? (
+                                        courseDetail?.ratingAndReviews?.map((item, index) => (
+                                            <div key={index} className='flex flex-col md:items-baseline gap-3 my-4 mt-12'>
                                                 <div className='flex items-center gap-2'>
-                                                    <RatingStars Review_Count={item?.rating}/>
+                                                    <img 
+                                                        src={ item?.user?.thumbnailImage } 
+                                                        alt="user img" 
+                                                        className='w-[30px] h-[30px] rounded-full object-cover'
+                                                    />
+                                                    
+                                                    <p className='md:text-xl min-w-max font-semibold'>{item?.user?.firstName} {item?.user?.lastName}</p>
+                                                    
                                                 </div>
-                                                <p className='text-[#C5C7D4] text-[12px] md:text-sm max-w-4xl'>{item?.review}</p>
+                                                <div className='flex flex-col gap-2'>
+                                                    <div className='flex items-center gap-2'>
+                                                        <RatingStars Review_Count={item?.rating}/>
+                                                    </div>
+                                                    <p className='text-[#C5C7D4] text-[12px] md:text-sm max-w-4xl'>{item?.review}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))
+                                        ))
+                                    ) : (
+                                        <p className='text-gray-300'>No reviews yet</p>
+                                    )
                                 }
                             </div>
                     </div>

@@ -35,11 +35,16 @@ function Navbar(){
     const [subLinks, setSubLinks] = useState([]);
 
     useEffect(()=> {
-        ;(async () => {
+
+        const cached = localStorage.getItem("subLinks");
+        if(cached){
+            setSubLinks(JSON.parse(cached));
+        }
+        (async () => {
             try {
                 const result = await apiConnector("GET", categories.CATEGORIES_API);
-                if(result?.data?.data > 0){
-                    setSubLinks(result?.data?.data);
+                if(Array.isArray(result?.data?.data) && result.data.data.length > 0){
+                    setSubLinks(result.data.data);
                 }
                 localStorage.setItem("subLinks", JSON.stringify(result.data.data));
             }

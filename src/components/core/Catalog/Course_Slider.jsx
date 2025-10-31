@@ -3,16 +3,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
-import { Autoplay, FreeMode, Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
+import { FreeMode, Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { Course_Card } from "./Course_Card";
 
-function Course_Slider({ Courses }){
+function Course_Slider({ courses }){
 
     return(
         <>
-            {Courses?.length ? (
+            {courses?.length ? (
                 <Swiper
                     mousewheel={
                         {
@@ -30,15 +30,15 @@ function Course_Slider({ Courses }){
                     slidesPerView={1}
                     spaceBetween={20}
                     pagination={true}
-                    loo={true}
+                    loop={true}
                     modules={[Pagination, Navigation, FreeMode, Mousewheel, Keyboard]}
                     breakpoints={{
                         300: { slidesPerView:2.1, spaceBetween:10},
                         640: { slidesPerView: 2.2 },
                         1024: { slidesPerView: 3.1 }
                 }}
-                className="max-h[30rem]">
-                    {Courses?.map((course, index) => (
+                className="max-h-[30rem]">
+                    {courses?.map((course, index) => (
                         <SwiperSlide key={index}>
                             <Course_Card course={course} Height={"lg:h-[250px] h-[100px]"}/>
                         </SwiperSlide>

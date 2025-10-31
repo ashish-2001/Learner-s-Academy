@@ -7,7 +7,7 @@ import ReactStars from 'react-rating-stars-component';
 import { createRating } from '../../../services/operations/courseDetailsAPI';
 import { useParams } from 'react-router';
 
-const ReviewModal = ({setReviewModal}) => {
+const ReviewModal = ({ setReviewModal }) => {
   const {user}= useSelector(state => state.profile);
   const {token} = useSelector(state => state.auth);
   const {courseId} = useParams();
@@ -33,7 +33,7 @@ const ReviewModal = ({setReviewModal}) => {
 
   const onSubmit = async (data) => {
     const res = await createRating({
-      courseId:courseId,
+      courseId: courseId,
       review:data.userExperience,
       rating:data.userRating
     },token);

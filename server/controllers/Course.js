@@ -162,10 +162,17 @@ async function getAllCourses(req, res){
 
 async function getCourseDetails(req, res){
     try{
-        const { courseId } = req.body;
-        const courseDetails = await Course.find({
-            _id: courseId
-        })
+        
+        const { courseId } = req.query;
+
+        if(!courseId){
+            return res.status(400).json({
+                success: false,
+                message: "Course ID is required"
+            })
+        }
+
+        const courseDetails = await Course.findById(courseId)
         .populate({
             path:"instructor",
             populate: {
@@ -198,8 +205,7 @@ async function getCourseDetails(req, res){
             message: "Course fetched successfully",
             data: courseDetails
         });
-    } 
-    catch(e){
+    } catch(e){
         return res.status(500).json({
             success: false,
             message: "Can not fetch course data",
@@ -207,6 +213,8 @@ async function getCourseDetails(req, res){
         })
     }
 }
+
+
 async function getInstructorCourses(req, res) {
 
     try{

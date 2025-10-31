@@ -51,16 +51,15 @@ async function fetchCourseDetails(courseId, dispatch){
     let result = null;
 
     try{
-        const response = await apiConnector("POST", COURSE_DETAILS_API, {
-            courseId
-        })
+        const response = await apiConnector("GET", `${COURSE_DETAILS_API}?courseId=${courseId}`);
+
         console.log("COURSE_DETAILS_API API RESPONSE............", response.data);
 
-        if(!response.data.success){
-            throw new Error(response.data.message)
+        if(!response?.data?.success){
+            throw new Error(response.data.message || "Failed to fetch course details")
         }
 
-        result = response.data.data[0];
+        result = response.data.data;
 
         } catch(error){
             console.log("COURSE_DETAIL_API API ERROR..........", error)

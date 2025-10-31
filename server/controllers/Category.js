@@ -127,7 +127,7 @@ async function categoryPageDetails(req, res){
                 $ne: categoryId
             }
         }).populate({
-            path: "Courses",
+            path: "courses",
             match: {
                 status: "Published",
             },
@@ -145,7 +145,7 @@ async function categoryPageDetails(req, res){
             differentCourses.push(...category.courses);
         }
         
-        const allCategories = await Category.findOne().populate({
+        const allCategories = await Category.find().populate({
             path: "courses",
             match: { 
                 status: "Published" 
@@ -158,19 +158,19 @@ async function categoryPageDetails(req, res){
         }])});
 
         const allCourses = allCategories.flatMap((category) => category.courses)
-        const mostSellingCourses = allCourses.sort((a, b) => b.sold - a.sold).slice(0, 10);
+        const mostSellingCourses = allCourses
+        .sort((a, b) => b.sold - a.sold)
+        .slice(0, 10);
 
         return res.status(200).json({
             success: true,
             data: {
-                selectedCourses: selectedCourses,
-                differentCourses: differentCourses,
-                mostSellingCourses: mostSellingCourses,
-                success: true
+                selectedCourses,
+                differentCourses,
+                mostSellingCourses
             }
         })
-    }
-    catch(e){
+    } catch(e){
         return res.status(500).json({
             success: false,
             message: "Internal sever error",
@@ -181,7 +181,7 @@ async function categoryPageDetails(req, res){
 
 async function addCourseToCategory(req, res){
     const { courseId, categoryId } = req.body;
-
+        console.log("Course added to this category");
     try{
         const category = await Category.findById(categoryId);
         if(!category){

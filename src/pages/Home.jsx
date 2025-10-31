@@ -3,7 +3,7 @@ import {FaArrowRight} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { CTAButton } from '../components/Core/HomePage/Button';
 import { HighLightText } from '../components/Core/HomePage/HighLightText';
-import { banner } from "../assets/Images/index"
+import { banner } from "../assets/images/index.js"
 import { CodeBlocks } from "../components/Core/HomePage/CodeBlocks";
 import { TimelineSection } from '../components/Core/HomePage/TimelineSection';
 import { LearningLanguageSection } from '../components/Core/HomePage/LearningLanguageSection';
@@ -14,7 +14,6 @@ import { setProgress } from '../slices/loadingBarSlice';
 import { Course_Slider } from '../components/Core/Catalog/Course_Slider';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { catalogData } from '../services/apis';
 import { fetchCourseCategories } from '../services/operations/courseDetailsAPI';
 import { getCatalogPageData } from '../services/operations/pageAndcomponentDatas';
 
@@ -53,7 +52,7 @@ function Home() {
         fetchCatalogData()
     }, [selectedCategoryId, dispatch]);
     
-  return (
+return (
     <div>
         <div className=' mx-auto relative flex flex-col w-11/12 items-center justify-between text-white '>
             <Link onClick={()=>{dispatch(setProgress(100))}}  to={"/signup"}>
@@ -124,16 +123,16 @@ function Home() {
         </div>
         <div className=' mx-auto box-content w-full max-w-[650px] px- py-12 lg:max-w-[1260px]'>
         <h2 className='section_heading mb-6 md:text-3xl text-xl'>
-           Most Popular Courses
+            Most Popular Courses
         </h2>
-        <Course_Slider Courses={catalogData?.selectedCourses}/>
-      </div>       
+        <Course_Slider courses={catalogPageData?.selectedCourses}/>
+    </div>       
         <div className=' mx-auto box-content w-full max-w-[650px] px- py-12 lg:max-w-[1260px]'>
         <h2 className='section_heading mb-6 md:text-3xl text-xl'>
-           Students are learning
+            Students are learning
         </h2>
-        <Course_Slider Courses={catalogData?.differentCourses}/>
-      </div>       
+        <Course_Slider courses={catalogPageData?.differentCourses}/>
+    </div>       
 
 
                 {/* Code Section 2 */}

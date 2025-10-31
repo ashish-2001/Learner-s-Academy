@@ -1,6 +1,7 @@
 import express from "express";
 import { updateProfile, deleteAccount, getAllUserDetails, getEnrolledCourses, instructorDashboard, updateDisplayPicture } from "../controllers/Profile.js";
 import { auth, isInstructor } from "../middleware/auth.js";
+
 const router = express.Router();
 
 router.delete("/deleteProfile", auth, deleteAccount);

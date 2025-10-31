@@ -13,7 +13,7 @@ async function mailSender(email, title, body){
         })
 
         const info = await transporter.sendMail({
-            from: `"Learner's || Academy <${process.env.MAIL_USER}>"`,
+            from: `"Learner's Academy <${process.env.MAIL_USER}>"`,
             to: `${email}`,
             subject: `${title}`, 
             html: `${body}`

@@ -19,12 +19,17 @@ function Catalog(){
     const fetchSubLinks = async () => {
         try{
             const result = await apiConnector("GET", categories.CATEGORIES_API);
-            const category_id = result.data.data.filter((item) => item.name === Catalog.catalog[0]._id);
-            setCategoryId(category_id);
-            setDesc(result.data.data.filter((item) => item.name === Catalog.catalog)[0]);
+            const category = result.data.data.find((item) => item.name === Catalog.catalog);
+
+            if(category){
+                setCategoryId(category._id);
+                setDesc(category);
+            } else{
+                console.log("Category not found for:", Catalog.catalog);
+            }
+            
         } catch(error){
-            console.log("Could not fetch sublinks");
-            console.log(error);
+            console.log("Could not fetch subLinks", error);
         }
     }
 
@@ -35,8 +40,10 @@ function Catalog(){
     useEffect(() => {
         const fetchCatalogPageData = async () => {
             const result = await getCatalogPageData(categoryId, dispatch);
+            console.log("Result", result);
             setCatalogPageData(result);
         }
+
         if(categoryId){
             fetchCatalogPageData();
         }
@@ -58,27 +65,28 @@ return(
                 </div>
             </div>
             <div className="mx-auto box-content w-full max-w-[620px] px-4 py-12 lg:max-w-[1260px]">
-                <h2 className="section_heading">Courses to get you started</h2>
+                <h2 className="text-[#F1F2FF] text-2xl font-bold leading-8">Courses to get you started</h2>
                 <div className="my-4 flex border-b border-b-[#424854] text-sm">
-                    <button onClick={() => { setActiveOption(1)}} className={activeOption === 1 ? `px-4 py-2 border-b border-b-yellow-25 text-yellow-25 cursor-pointer` : `px-4 py-2 text-[#C5C7D4] cursor-pointer`}>Most Popular</button>
-                    <button onClick={() => { setActiveOption(2)}} className={activeOption === 2 ? `px-4 py-2 border-b border-b-yellow-25 text-yellow-25 cursor-pointer` : `px-4 py-2 text-[#C5C7D4] cursor-pointer`}>New</button>
+                    <button onClick={() => { setActiveOption(1)}} className={activeOption === 1 ? `px-4 py-2 border-b border-b-[#FFE83D] text-[#FFE83D] cursor-pointer` : `px-4 py-2 text-[#C5C7D4] cursor-pointer`}>Most Popular</button>
+                    <button onClick={() => { setActiveOption(2)}} className={activeOption === 2 ? `px-4 py-2 border-b border-b-[#FFE83D] text-[#FFE83D] cursor-pointer` : `px-4 py-2 text-[#C5C7D4] cursor-pointer`}>New</button>
                 </div>
                 <div>
-                    <Course_Slider Courses={CatalogPageData?.selectedCourses}/>
+                    <Course_Slider courses={CatalogPageData?.selectedCourses}/>
                 </div>
             </div>
-            <div className="mx-auto box-content w-full max-w[620px] px-4 py-12 lg:max-w-[1260px]">
-                <h2 className="section_heading mb-6 md:text-3xl text-xl">
+            <div className="mx-auto box-content w-full max-w-[620px] px-4 py-12 lg:max-w-[1260px]">
+                <h2 className="text-[#F1F2FF] text-2xl font-bold leading-8 mb-6 md:text-3xl ">
                     Similar to {Catalog.catalog}
                 </h2>
                 <div className="py-8">
-                    <Course_Slider courses={CatalogPageData?.differentCourses} />
+                    <Course_Slider courses={CatalogPageData?.differentCourses || []} />
                 </div>
             
             <div className="mx-auto box-content w-full max-w-[620px] px-4 py-12 lg:max-w-1260px">
-                <h2 className="section_heading mb-6 md:text-3xl text-xl">Frequently Bought Together</h2>
+                <h2 className="text-[#F1F2FF] text-2xl font-bold leading-8 mb-6 md:text-3xl">Frequently Bought Together</h2>
                 <div className="grid grid-cols-2 gap-3 lg:gap-6 lg:grid-cols-2 pr-4">
-                        {CatalogPageData?.mostSellingCourses.map((item, i) => (
+                        { Array.isArray(CatalogPageData?.mostSellingCourses) &&
+                            CatalogPageData?.mostSellingCourses.map((item, i) => (
                             <Course_Card  key={i} course={item} Height={"h-[400px] lg:h-[400px]"}/>
                         ))}
                     </div>

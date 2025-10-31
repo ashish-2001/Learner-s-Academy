@@ -6,8 +6,7 @@ const otpSchema = new mongoose.Schema({
 
     email: {
         type: String,
-        required: true,
-        trim: true
+        required: true
     },
 
     otp: {
@@ -15,11 +14,11 @@ const otpSchema = new mongoose.Schema({
         required: true
     },
 
-    // accountType: {
-    //     type: String,
-    //     enum: ["Student", "Instructor", "Admin"],
-    //     required: true
-    // },
+    accountType: {
+        type: String,
+        enum: ["Student", "Instructor", "Admin"],
+        required: true
+    },
 
     createdAt: {
         type: Date,

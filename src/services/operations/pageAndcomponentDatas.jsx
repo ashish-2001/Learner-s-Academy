@@ -14,12 +14,12 @@ const getCatalogPageData = async(categoryId, dispatch) => {
         if(!response.data.success){
           throw new Error("Could not Fetch Category page data error", response);
         }
-        result = response?.data;
+        result = response?.data.data;
       }
-  catch(error) {
-    toast.error("No Course added to this category yet");
-    result = error?.response?.data || { success: false };
-  }
+      catch(error) {
+        toast.error("No Course added to this category yet");
+        result = error?.response?.data || { success: false };
+      }
       dispatch(setProgress(100));
     return result;
 }
