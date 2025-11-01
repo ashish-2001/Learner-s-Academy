@@ -8,14 +8,14 @@ function Cart(){
     const { total, totalItems } = useSelector((state) => state.cart);
 
     return (
-            <div className="mx-auto w-11/12 max-w-[100px] py-10">
-                <h1 className="mb-14 text3xl font-medium text-[#F1F2FF]">Cart</h1>
-                <p className="border-b border-b-[#6E727F] pb-2 font-semibold text-[#6E727F]">
-                    {totalItems} Courses in Cart
+            <div className="mx-auto max-w-[1265px] flex flex-col items-center justify-center">
+                <h1 className=" text-3xl font-medium text-[#F1F2FF]">Cart</h1>
+                <p className="border-b w-full border-b-[#6E727F] font-semibold text-[#6E727F] flex items-center justify-center">
+                    {totalItems >= 2 ? `${totalItems} Courses in Cart` : `${totalItems} Course in cart`} 
                 </p>
                 {total > 0 ? (
-                    <div className="mt-8 flex flex-col-reverse items-start gap-x-10 gap-y-6 lg:flex-row">
-                        <RenderCartCourses/>
+                    <div className="flex flex-row justify-center items-center gap-x-10 gap-y-6 lg:flex ">
+                        <RenderCartCourses className="gap-x-10"/>
                         <RenderTotalAmount/>
                     </div>
                 ) : (

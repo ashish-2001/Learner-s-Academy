@@ -4,7 +4,7 @@ import {FaArrowRight} from "react-icons/fa"
 import { TypeAnimation } from 'react-type-animation'
 
 const CodeBlocks = ({
-    position, heading, subheading, ctabtn1, ctabtn2, codeblock, backgroudGradient, codeColor
+    position, heading, subheading, ctabtn1, ctabtn2, codeblock, backgroundGradient, codeColor
 }) => {
   return (
     <div className={`flex ${position} my-20 justify-between gap-10 flex-wrap `}>
@@ -32,11 +32,10 @@ const CodeBlocks = ({
 
     </div>
 
-     {/*Section 2*/}
-     <div className=' h-fit  flex flex-row text-10[px] w-[100%] py-3 lg:w-[500px] glass  '> 
-        {/*HW -> BG gradient*/}
+    
+    <div className='h-fit border-[1px] rounded-2xl border-solid [border-image-slice:1] [border-image-source:linear-gradient(to_right_bottom,#ffffff38,#ffffff00)] bg-[linear-gradient(111.93deg,rgba(14,26,45,0.24)_-1.4%,rgba(17,30,50,0.38)_104.96%)] backdrop-blur-[26px] flex flex-row py-3 text-[10px] sm:text-sm leading-[18px] sm:leading-6 relative w-[100%] lg:w-[470px]'> 
 
-        <div className='text-center flex flex-col w-[10%] text-[#6E727F] font-inter font-bold'>
+        <div className='text-center rounded-md flex flex-col w-[10%] text-[#6E727F] font-inter font-bold'>
             <p>1</p>
             <p>2</p>
             <p>3</p>
@@ -51,31 +50,27 @@ const CodeBlocks = ({
         </div>
 
         <div className={`w-[90%] flex flex-col gap-2 font-bold font-mono ${codeColor} pr-2 relative`}>
-            <div className={`${backgroudGradient}`}></div>
-           <TypeAnimation
+            {backgroundGradient}
+            <TypeAnimation
             sequence={[codeblock, 2000, ""]}
             repeat={Infinity}
             cursor={true}
-           
-            style = {
-                {
-                    whiteSpace: "pre-line",
-                    display:"block",
-                    overflowX:"hidden",
-                    fontSize:"16px",
+                style = {
+                    {
+                        whiteSpace: "pre-line",
+                        display:"block",
+                        overflowX:"hidden",
+                        fontSize:"16px",
+                    }
                 }
-            }
-            omitDeletionAnimation={true}
-           />
+                omitDeletionAnimation={true}
+            />
         </div>
 
-     </div>
-
-
-
+    </div>
     </div>
     
-  )
+    )
 }
 
 export {

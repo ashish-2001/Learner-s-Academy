@@ -449,16 +449,17 @@ async function searchCourses(searchQuery, dispatch){
 
     try{
         const response = await apiConnector("POST", SEARCH_COURSES_API, {
-            searchQuery: searchQuery
+            searchQuery
         });
         console.log("SEARCH COURSES API RESPONSE................", response);
         if(!response?.data?.success){
             throw new Error("Could not search courses");
         }
-        result = response?.data?.data;
+
+        result = response.data.data;
     } catch(error){
-        console.log("SEARCH COURSES API ERROR..................", error);
         toast.error(error?.response?.data?.message || error.message || "Failed to search courses");
+        return []
     } finally{
         dispatch(setProgress(100));
     }

@@ -4,10 +4,7 @@ import { Course } from "../models/Course.js";
 import { RatingAndReview } from "../models/RatingAndReviews.js";
 
 const createRatingValidator = z.object({
-    rating: z.number({
-        required_error: "Rating is required",
-        invalid_type_error: "Rating must be a number"
-    }).min(1, "Rating must be at least 1").max(5, "Rating can not be more than 5"),
+    rating: z.number().min(1, "Rating must be at least 1").max(5, "Rating can not be more than 5"),
     review: z.string().min(1, "Review can not be empty"),
     courseId: z.string().min(1, "Course id is required")
 })
@@ -15,17 +12,26 @@ const createRatingValidator = z.object({
 async function createRating(req, res){
 
     try{
-        const { rating , review, courseId } = createRatingValidator.safeParse(req.body);
+        const parsed = createRatingValidator.safeParse(req.body);
         const userId = req.user.userId;
 
-        const courseDetails = await Course.find({
+        if(!parsed.success){
+            return res.status(400).json({
+                success: false,
+                message: "Validation failed",
+            })
+        }
+
+        const { rating, review, courseId } = parsed.data;
+
+        const courseDetails = await Course.findOne({
             _id: courseId,
             studentsEnrolled: {
                 $elemMatch: {
                     $eq: userId
                 }
             }
-        })
+        });
 
         if(!courseDetails){
             return res.status(404).json({
@@ -53,11 +59,16 @@ async function createRating(req, res){
             user: userId
         });
 
-        await Course.findByIdAndUpdate({ _id: courseId}, {
-            $push: {
-                ratingAndReview: ratingReview._id
+        await Course.findByIdAndUpdate(courseId, 
+            {
+                $push: {
+                    ratingAndReviews: ratingReview._id
+                }
+            },
+            {
+                new: true
             }
-        });
+        );
 
         return res.status(201).json({
             success: true,
@@ -68,7 +79,7 @@ async function createRating(req, res){
     catch(e){
         return res.status(500).json({
             success: false,
-            errors: e.errors.map((e) => e.message) 
+            message: e.message || "Interval server error"
         })
     }
 }
@@ -77,7 +88,7 @@ async function getAverageRating(req, res){
 
     try{
 
-        const { courseId } = req.body.courseId;
+        const { courseId } = req.body;
 
         const result = await RatingAndReview.aggregate([
             {

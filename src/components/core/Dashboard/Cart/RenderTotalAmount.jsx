@@ -23,13 +23,15 @@ function RenderTotalAmount(){
     }
 
     return(
-        <div className="min-w-[280px] rounded-md border-[1px] border-[#2C333F] bg-[#161D29] p-6">
-            <p className="mb-1 text-sm font-medium text-[#838894]">Total:</p>
-            <p className="mb-6 text-3xl font-medium text-[#E7C009]">₹ {total}</p>
+        <div className=" flex flex-col items-center justify-center min-w-[280px] rounded-md border-[1px] border-[#2C333F] bg-[#161D29] p-3 mb-8">
+            <div className="flex items-center justify-center gap-3">
+                <p className="mb-3 text-2xl font-medium text-[#838894]">Total:</p>
+                <p className="mb-3 text-2xl font-medium text-[#E7C009]">₹ {total}</p>
+            </div>
             <IconBtn
                 text={"Buy Now"}
                 onClick={handleBuyCourse}
-                customClasses={"flex items-center bg-[#FFD60A] cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-[#000814] w-full justify-center"}
+                ClassName={"flex items-center w-full bg-[#FFD60A] cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-[#000814] justify-center"}
             />
         </div>
     )

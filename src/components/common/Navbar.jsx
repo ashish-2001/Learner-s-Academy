@@ -57,7 +57,7 @@ function Navbar(){
     const show = useRef();
     const overlay = useRef();
 
-    const shownav = () => {
+    const showNav = () => {
         show.current.classList.toggle("navshow");
         overlay.current.classList.toggle("hidden");
     }
@@ -98,14 +98,14 @@ function Navbar(){
                 {/* mobile Navbar */}
                 {
                     user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
-                        <div className=' md:hidden'>
+                        <div className='md:hidden'>
                             <Link to='/dashboard/cart' className=' relative left-10' onClick={() => { dispatch(setProgress(100)) }} >
                                 <div className=''>
                                     <TiShoppingCart className=' fill-[#DBDDEA] w-8 h-8' />
                                 </div>
                                 {
                                     totalItems > 0 && (
-                                        <span className=' font-medium text-[12px] shadow-[3px ] shadow-black bg-yellow-100 text-[#000814] rounded-full px-[4px] absolute -top-[2px] right-[1px]'>
+                                        <span className='font-medium text-[12px] shadow-[3px ] shadow-black bg-yellow-100 text-[#000814] rounded-full px-[4px] absolute -top-[2px] right-[1px]'>
                                             {totalItems}
                                         </span>
                                     )
@@ -117,14 +117,14 @@ function Navbar(){
                 }
 
                 <div className={`flex md:hidden  relative gap- flex-row ${token !== null && user?.accountType !== "Instructor" ? " -left-12" : ""}`}>
-                    <GiHamburgerMenu className={`w-16 h-8 fill-[#DBDDEA] absolute left-10 -bottom-4 `} onClick={shownav} />
-                    <div ref={overlay} className=' fixed top-0 bottom-0 left-0 right-0 z-30 bg w-[100vw] hidden h-[100vh] overflow-y-hidden bg-[rgba(0,0,0,0.5)] ' onClick={shownav}></div>
+                    <GiHamburgerMenu className={`w-16 h-8 fill-[#DBDDEA] absolute left-10 -bottom-4 `} onClick={showNav} />
+                    <div ref={overlay} className=' fixed top-0 bottom-0 left-0 right-0 z-30 bg w-[100vw] hidden h-[100vh] overflow-y-hidden bg-[rgba(0,0,0,0.5)] ' onClick={showNav}></div>
                     <div ref={show} className='mobNav z-50'>
                         <nav className=' items-center flex flex-col absolute w-[200px] -left-[80px] -top-7  glass2' ref={show}>
                             {
                                 token == null && (
                                     <Link to='/login' className='' onClick={() => { dispatch(setProgress(100)) }} >
-                                        <button onClick={shownav} className=' mt-4 text-center text-[15px] px-6 py-2 rounded-md font-semibold bg-yellow-50 text-black hover:scale-95 transition-all duration-200'>
+                                        <button onClick={showNav} className=' mt-4 text-center text-[15px] px-6 py-2 rounded-md font-semibold bg-yellow-50 text-black hover:scale-95 transition-all duration-200'>
                                             Login
                                         </button>
                                     </Link>
@@ -133,7 +133,7 @@ function Navbar(){
                             {
                                 token == null && (
                                     <Link to='/signup' className='text-yellow-50' onClick={() => { dispatch(setProgress(100)) }} >
-                                        <button onClick={shownav} className='mt-4 text-center text-[15px] px-5 py-2 rounded-md font-semibold bg-yellow-50 text-black hover:scale-95 transition-all duration-200' >
+                                        <button onClick={showNav} className='mt-4 text-center text-[15px] px-5 py-2 rounded-md font-semibold bg-yellow-50 text-black hover:scale-95 transition-all duration-200' >
                                             Signup
                                         </button>
                                     </Link>
@@ -145,7 +145,7 @@ function Navbar(){
                                 token != null && (
                                     <div className=' mt-2' >
                                         <p className=' text-[#C5C7D4] text-center mb-2'>Account</p>
-                                        {/* <Link to='/dashboard' onClick={()=>{dispatch(setProgress(100));shownav()}} className="p-2"> */}
+                                        {/* <Link to='/dashboard' onClick={()=>{dispatch(setProgress(100));showNav()}} className="p-2"> */}
                                         <ProfileDropdown />
                                         {/* </Link> */}
                                     </div>
@@ -157,7 +157,7 @@ function Navbar(){
                                 {
                                     NavbarLinks?.length < 0 ? (<div></div>) : (
                                         NavbarLinks?.map((element, index) => (
-                                            <Link to={`/catalog/${element?.name}`} key={index} onClick={() => { dispatch(setProgress(30)); shownav() }} className="p-2 text-sm">
+                                            <Link to={`/catalog/${element?.name}`} key={index} onClick={() => { dispatch(setProgress(30)); showNav() }} className="p-2 text-sm">
                                                 <p className=' text-[#F1F2FF] '>
                                                     {element?.name}
                                                 </p>
@@ -166,12 +166,12 @@ function Navbar(){
                                 }
                             </div>
                             <div className=' mt-4 mb-4 bg-[#DBDDEA] w-[200px] h-[2px]'></div>
-                            <Link to='/about' onClick={() => { dispatch(setProgress(100)); shownav() }} className="p-2">
+                            <Link to='/about' onClick={() => { dispatch(setProgress(100)); showNav() }} className="p-2">
                                 <p className=' text-[#F1F2FF] '>
                                     About
                                 </p>
                             </Link>
-                            <Link to='/contact' onClick={() => { dispatch(setProgress(100)); shownav() }} className="p-2">
+                            <Link to='/contact' onClick={() => { dispatch(setProgress(100)); showNav() }} className="p-2">
                                 <p className=' text-[#F1F2FF] '>
                                     Contact
                                 </p>
@@ -197,7 +197,7 @@ function Navbar(){
                                                 {
                                                     subLinks?.length < 0 ? (<div></div>) : (
                                                         subLinks?.map((element, index) => (
-                                                            <Link to={`/catalog/${element?.name}`} key={index} className="rounded-lg bg-transparent py-4 pl-4 hover:bg-[#F1F2FF]0" onClick={() => { dispatch(setProgress(30)) }}>
+                                                            <Link to={`/catalog/${element?.name}`} key={index} className="font-semibold text-[17px] rounded-lg bg-transparent py-4 pl-4 hover:bg-[#808188]" onClick={() => { dispatch(setProgress(30)) }}>
                                                                 <p className=''>
                                                                     {element?.name}
                                                                 </p>
@@ -221,8 +221,8 @@ function Navbar(){
                             ))
                         }
                         <form onSubmit={handleSearch} className='flex items-center relative'>
-                            <input value={searchValue} onChange={(e) => { setSearchValue(e.target.value) }} id='searchinput' type="text" placeholder="Search" className=' absolute top-0 left-0 border-0 focus:ring-1 ring-[#6E727F] rounded-full px-2 py-1 text-[15px] w-28 text-[#F1F2FF]0 focus:outline-none focus:border-transparent bg-[#2C333F]' />
-                            <HiSearch type='submit' id='searchIcon' size={20} className=" text-[#AFB2BF] top-1 absolute cursor-pointer left-20" />
+                            <input value={searchValue} onChange={(e) => { setSearchValue(e.target.value) }} id='searchInput' type="text" placeholder="Search..." className='absolute pl-4 top-0 left-0 border-0 focus:ring-1 ring-[#6E727F] rounded-full px-2 py-1 text-[15px] w-[280px] text-[#F1F2FF] focus:outline-none focus:border-transparent bg-[#2C333F]' />
+                            <HiSearch type='submit' id='searchIcon' size={20} className=" text-[#AFB2BF] top-1 absolute cursor-pointer left-[250px]" />
                         </form>
                     </ul>
                 </nav>

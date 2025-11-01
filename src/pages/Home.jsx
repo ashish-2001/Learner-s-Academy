@@ -77,9 +77,9 @@ return (
                 <CTAButton active={false} linkto={"/login"} >Book a Demo</CTAButton>
             </div>
 
-            <div className='mx-3 my-12 shadow-[#118AB2] w-[70%] relative'>
-                <div className='grad2 -top-10 w-[800px]'></div>
-                <video className='video'
+            <div className='mx-3 my-15 shadow-[#118AB2] shadow-[100_-5px_50px_-5px] w-[70%]'>
+                <div className='relative w-[772.95px] h-[457.05px] left-[calc(50%-372.95px/2-76.53px)] top-[calc(18%-257.05px/2-47.47px)] bg-[linear-gradient(118.19deg,#1FA2FF_-3.62%,#12D8FA_50.44%,#A6FFCB_104.51%)] opacity-20 blur-[34px] [transform:matrix(1,0,-0.03,1,0,0)] z-0'></div>
+                <video className='absolute h-[500px] top-[400px]'
                     muted
                     loop
                     autoPlay
@@ -88,7 +88,7 @@ return (
                 </video>
             </div>
 
-        <div >
+        <div>
             <CodeBlocks 
                 position={"lg:flex-row"}
                 heading={
@@ -116,9 +116,9 @@ return (
                     }
                 }
 
-                codeblock={`<<!DOCTYPE html>\n<html>\n<head><title>Example</title>\n</head>\n<body>\n<h1><ahref="/">Header</a>\n</h1>\n<nav><ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>\n</nav>`}
+                codeblock={`<<!DOCTYPE html>\n<html>\n<head><title>Example</title>\n</head>\n<body>\n<h1><a href="/">Header</a>\n</h1>\n<nav><a href="one/">One</a>\n<a href="two/">Two</a>\n<a href="three/">Three</a>\n</nav>`}
                 codeColor={"white"}
-                backgroudGradient={"grad"}
+                backgroundGradient={<div className='absolute w-[372.95px] h-[257.05px] rounded-full left-[calc(50%-372.95px/2-76.53px)] top-[calc(50%-257.05px/2-47.47px)] bg-[linear-gradient(123.77deg,#8a2be2_-6.46%,#ffa500_59.04%,#f8f8ff_124.53%)] opacity-20 blur-[34px] [transform:matrix(1,0,-0.03,1,0,0)]'></div>}
             />
         </div>
         <div className=' mx-auto box-content w-full max-w-[650px] px- py-12 lg:max-w-[1260px]'>
@@ -163,15 +163,13 @@ return (
                     }
                 }
 
-                codeblock={`<<!DOCTYPE html>\n<html>\n<head><title>Example</title>\n</head>\n<body>\n<h1><ahref="/">Header</a>\n</h1>\n<nav><ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>\n</nav>`}
+                codeblock={`<<!DOCTYPE html>\n<html>\n<head><title>Example</title>\n</head>\n<body>\n<h1><a href="/">Header</a>\n</h1>\n<nav><a href="one/">One</a>\n<a href="two/">Two</a>\n<a href="three/">Three</a>\n</nav>`}
                 codeColor={"text-[#FFE83D]"}
-                backgroudGradient={"grad2"}
+                backgroundGradient={<div className='w-[372.95px] h-[257.05px] left-[calc(50%-372.95px/2-76.53px)] top-[calc(50%-257.05px/2-47.47px)] rounded-full bg-[linear-gradient(118.19deg,#1fa2ff_-3.62%,#12d8fa_50.44%,#a6ffcb_104.51%)] opacity-20 blur-[34px] [transform:matrix(1,0,-0.03,1,0,0)] absolute'></div>}
             />
         </div>
 
-
         <ExploreMore/>
-
 
         </div>
         <div className='hidden lg:block lg:h-[200px]'></div>

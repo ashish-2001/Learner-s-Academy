@@ -71,7 +71,6 @@ const CourseDetails = () => {
     const handelAddToCart = () => {
         if(token){
         dispatch(addToCart(courseDetail));
-        toast.success('Added to cart');
         }
         else{
             navigate('/login');
@@ -98,7 +97,7 @@ return (
             <div className='mx-auto grid min-h-[450px] max-w-[650px] justify-items-center py-8 lg:mx-0 lg:justify-items-start lg:py-0 xl:max-w-[810px]'>
                 <div className='relative block max-h-[30rem] lg:hidden'>
                     <div className='absolute bottom-0 left-0 h-full w-full shadow-[#161D29_0px_-64px_36px_-28px_inset]'></div>
-                        <img src={courseDetail?.thumbnail} alt="course img" />
+                        <img src={courseDetail?.thumbnailImage} alt="course img" />
                 </div>
                     <div className='z-30 my-5 flex flex-col justify-center gap-4 py-5 text-lg text-[#F1F2FF]'>  
                             <p className='text-4xl font-bold text-[#F1F2FF] sm:text-[42px]'>{courseDetail?.courseName}</p>
@@ -166,7 +165,7 @@ return (
                 <div className='right-[1rem] top-[60px] mx-auto hidden min-h-[600px] w-1/3 max-w-[410px] translate-y-24 md:translate-y-0 lg:absolute  lg:block'>
                     <div className='flex flex-col gap-4 rounded-md bg-[#2C333F] p-4 text-[#F1F2FF]'>
                         <img 
-                            src={courseDetail?.thumbnail} 
+                            src={courseDetail?.thumbnailImage} 
                             alt="course img" 
                             className='max-h-[300px] min-h-[180px] w-[400px] overflow-hidden rounded-2xl object-cover md:max-w-full' 
                         />
@@ -178,7 +177,7 @@ return (
                                 {ACCOUNT_TYPE.INSTRUCTOR !== user?.accountType &&
                                 <>
                                 {
-                                    alreadyEnrolled ? <button onClick={()=>{navigate("/dashboard/enrolled-courses")}} className='yellowButton'>Go to Course</button> : <button onClick={handelPayment} className='yellowButton'>Buy Now</button>
+                                    alreadyEnrolled ? <button onClick={()=>{navigate("/dashboard/enrolled-courses")}} className='cursor-pointer rounded-md bg-[#FFD60A] px-[20px] py-[8px] font-semibold text-[#000814]'>Go to Course</button> : <button onClick={handelPayment} className='cursor-pointer rounded-md bg-#FFD60A px-[20px] py-[8px] font-semibold text-[#000814]'>Buy Now</button>
                                 }
                                 {
                                 !alreadyEnrolled && 
@@ -283,7 +282,7 @@ return (
                 </p>
                 <div className='flex items-center gap-4 py-4'>
                     <img 
-                        src={courseDetail?.instructor?.thumbnailImage} 
+                        src={courseDetail?.instructor?.image} 
                         alt="author img" 
                         className='w-[50px] h-[50px] rounded-full object-cover'
                     />

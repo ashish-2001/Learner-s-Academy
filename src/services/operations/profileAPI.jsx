@@ -110,14 +110,15 @@ async function updateAdditionalDetails(token, additionalDetails){
     } catch(error){
         console.log("UPDATE ADDITIONAL DETAILS API ERROR...............", error);
         toast.error(error.response.data.message);
+    } finally{
+        toast.dismiss(toastId);
     }
-    toast.dismiss(toastId);
 }
 
 async function updatePassword(token, password){
     const { oldPassword, newPassword, confirmPassword: confirmPassword } = password;
     console.log("password", password);
-    const toastId = toast.loading("Updating...");
+    const toastId = toast.loading("Updating Password...");
 
     try{
         const response = await apiConnector("PUT", settingsEndpoints.CHANGE_PASSWORD_API, { oldPassword, newPassword, confirmPassword }, 
@@ -138,7 +139,7 @@ async function updatePassword(token, password){
 }
 
 async function deleteAccount(token, dispatch, navigate){
-    const toastId = toast.loading("Deleting...");
+    const toastId = toast.loading("Deleting Account...");
     try{
         const response = await apiConnector("DELETE", settingsEndpoints.DELETE_PROFILE_API, null, 
             {
@@ -161,7 +162,7 @@ async function deleteAccount(token, dispatch, navigate){
 
 async function getInstructorDashboard(token, dispatch){
 
-        dispatch(setProgress(20));
+        dispatch(setProgress(30));
         let result = [];
 
         try{

@@ -10,14 +10,16 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import "react-loading-skeleton/dist/skeleton.css";
 
 const SearchCourse = () => {
+
     const [searchResults, setSearchResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const dispatch= useDispatch();
-    const {searchQuery}=useParams();
+    const { searchQuery } = useParams();
+
     const fetchSearchResults= async ()=>{
         setLoading(true);
-        const res = await searchCourses(searchQuery,dispatch);
-        setSearchResults(res);
+        const res = await searchCourses(searchQuery, dispatch);
+        setSearchResults(res || []);
         setLoading(false);
         console.log(res);
     }
@@ -73,7 +75,7 @@ const SearchCourse = () => {
             (
                 <div className='mx-auto flex flex-wrap p-5 gap-4 justify-evenly m-5'>
                 {searchResults?.map((item)=>(
-                    <div className='flex flex-col gap-4' key={item.id}>
+                    <div className='flex flex-col gap-4' key={item._id}>
                     <Course_Card course={item} Height={"lg:h-[250px] h-[100px]"} />
                     </div>
                 ))}

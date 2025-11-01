@@ -510,8 +510,17 @@ async function deleteCourse(req, res){
 }
 
 async function searchCourse(req, res){
+
     try{
+
         const { searchQuery } = req.body;
+
+        if(!searchQuery || searchQuery.trim() === ""){
+            return res.status(400).json({
+                success: false,
+                message: "Search query is required"
+            });
+        }
 
         const courses = await Course.find({
             $or: [
@@ -533,17 +542,15 @@ async function searchCourse(req, res){
                     }
                 }
             ]
-        }).populate({
-            path: "instructor"
-        })
+        }).populate("instructor")
         .populate("category")
         .populate("ratingAndReviews")
-        .exec()
+        .exec();
 
-        return res.status(500).json({
+        return res.status(200).json({
             success: true,
             data: courses
-        })
+        });
     } catch(error){
         return res.status(500).json({
             success: false,
