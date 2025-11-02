@@ -10,10 +10,11 @@ import { useEffect, useState } from "react";
 import { ratingsEndpoints } from "../../../services/apis";
 import { apiConnector } from "../../../services/apiConnector";
 import { RatingStars } from "../../Common/RatingStars";
+import Skeleton from "react-loading-skeleton";
 
 const RatingSlider = () => {
   const [Reviews, setReviews] = useState([]);
-  const [Loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getReviews = async () => {
@@ -23,7 +24,7 @@ const RatingSlider = () => {
           "GET",
           ratingsEndpoints.REVIEWS_DETAILS_API
         );
-        setReviews(res.data.data);
+        setReviews(res?.data.data);
         console.log("LOGGING REVIEWS", res);
       } catch (error) {
         console.log("LOGGING Review ERROR", error);
@@ -35,7 +36,11 @@ const RatingSlider = () => {
   }, []);
   return (
     <div>
-      <Swiper
+      {
+      loading ? (
+        <Skeleton height={150} count={3}/>
+      ) : (
+        <Swiper
         mousewheel={{
           enabled: true,
           forceToAxis: true,
@@ -48,9 +53,7 @@ const RatingSlider = () => {
         slidesPerView={1}
         loop={true}
         spaceBetween={20}
-        pagination={false}
         modules={[Mousewheel, Keyboard, Autoplay]}
-        className="mySwiper md:pt-5"
         autoplay={{
           delay: 2000,
           disableOnInteraction: false,
@@ -58,16 +61,7 @@ const RatingSlider = () => {
         style={{
           "--swiper-navigation-size": "20px",
         }}
-        freeMode={false}
-        rewind={false}
         centeredSlides={true}
-        navigation={false}
-        // navigation={
-        //     {
-        //         nextEl: ".swiper-button-next",
-        //         prevEl: ".swiper-button-prev",
-        //     }
-        // }
         breakpoints={{
           300: { slidesPerView: 1.1, spaceBetween: 10 },
           640: { slidesPerView: 2.2 },
@@ -93,15 +87,17 @@ const RatingSlider = () => {
                 </div>
               </div>
               <div className="font-medium text-[#DBDDEA]">
-                {review?.review.slice(0, 70)}...
+                {review?.review.length > 70
+                ? `${review.review.slice(0, 70)}...`
+                : review.review}
               </div>
               <RatingStars Review_Count={review?.rating} />
             </div>
           </SwiperSlide>
         ))}
-        {/* <div className='swiper-button-next'></div> */}
-        {/* <div className='swiper-button-prev'></div> */}
       </Swiper>
+      )
+    }
     </div>
   );
 };

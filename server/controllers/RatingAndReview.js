@@ -88,7 +88,7 @@ async function getAverageRating(req, res){
 
     try{
 
-        const { courseId } = req.body;
+        const { courseId } = req.body || req.query;
 
         const result = await RatingAndReview.aggregate([
             {

@@ -40,6 +40,7 @@ function RenderCartCourses(){
                                         count={5}
                                         size={20}
                                         edit={false}
+                                        value={course?.averageRating}
                                         activeColor={"#ffd700"}
                                         emptyIcon={<FaStar/>}
                                         fullIcon={<FaStar/>}

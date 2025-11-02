@@ -17,14 +17,20 @@ const ratingAndReviewSchema = new mongoose.Schema({
 
     rating: {
         type: Number,
-        required: true
+        required: true,
+        min: 1,
+        max: 5
     },
 
     review: {
         type: String,
         required: true
     }
-})
+}, {
+    timestamps: true
+});
+
+ratingAndReviewSchema.index({ user: 1, course: 1}, { unique: true});
 
 const RatingAndReview = mongoose.model("RatingAndReview", ratingAndReviewSchema);
 

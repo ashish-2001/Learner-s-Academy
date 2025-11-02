@@ -46,7 +46,9 @@ async function BuyCourse(token, courses, userDetails, navigate, dispatch){
             Authorization: `Bearer ${token}`
         });
 
-        if(!orderResponse.data.success){
+        console.log("order response", orderResponse);
+
+        if(!orderResponse.data.success && orderResponse.data.status !== "success"){
             toast.error(orderResponse.data.message);
             console.log("buyCourse -> orderResponse", orderResponse);
             toast.dismiss(toastId);
@@ -55,7 +57,7 @@ async function BuyCourse(token, courses, userDetails, navigate, dispatch){
         console.log("buyCourse -> orderResponse", orderResponse);
 
         const options = {
-            key: process.env.RAZORPAY_KEY,
+            key: import.meta.env.VITE_RAZORPAY_KEY,
             currency: orderResponse.data.currency,
             amount: orderResponse.data.amount.toString(),
             order_id: orderResponse.data.orderId,

@@ -15,7 +15,7 @@ function Cart(){
                 </p>
                 {total > 0 ? (
                     <div className="flex flex-row justify-center items-center gap-x-10 gap-y-6 lg:flex ">
-                        <RenderCartCourses className="gap-x-10"/>
+                        <RenderCartCourses/>
                         <RenderTotalAmount/>
                     </div>
                 ) : (

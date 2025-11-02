@@ -2,6 +2,7 @@ import { z } from "zod";
 import { User } from "../models/Users.js";
 import bcrypt from "bcrypt"
 import { mailSender } from "../utils/mailSender.js";
+import crypto from "crypto";
 
 async function resetPasswordToken(req, res){
     try{

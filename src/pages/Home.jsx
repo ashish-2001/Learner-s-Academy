@@ -16,6 +16,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { fetchCourseCategories } from '../services/operations/courseDetailsAPI';
 import { getCatalogPageData } from '../services/operations/pageAndcomponentDatas';
+import { RatingSlider } from '../components/Core/Ratings/RatingsSlider.jsx';
 
 
 
@@ -236,7 +237,7 @@ return (
     </div>
     <div className=' mb-16 mt-3'>
         <h2 className='text-center text-2xl md:text-4xl font-semibold mt-8 text-[#F1F2FF] mb-5'>Reviews from other learners</h2>
-        <Course_Slider />
+            <RatingSlider/>
     </div>
     </div>
 )
