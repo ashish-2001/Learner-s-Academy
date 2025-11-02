@@ -17,3 +17,4 @@ function cloudinaryConnect(){
 export {
     cloudinaryConnect
 }
+
