@@ -1,5 +1,5 @@
 import { toast } from "react-hot-toast";
-import { rzp_logo } from "../../assets/logo";
+import { Learners_Academy } from "../../assets/logo";
 import { resetCart } from "../../slices/cartSlice";
 import { apiConnector } from "../apiConnector";
 import { studentEndpoints } from "../apis";
@@ -63,7 +63,7 @@ async function BuyCourse(token, courses, userDetails, navigate, dispatch){
             order_id: orderResponse.data.orderId,
             name: "Learners Academy",
             description: "Thanks for purchasing the course",
-            image: rzp_logo,
+            image: Learners_Academy,
             prefill: {
                 name:` ${userDetails?.firsName}` + " " + `${userDetails?.lastName}`,
                 email: userDetails?.email

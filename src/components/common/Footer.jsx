@@ -1,7 +1,7 @@
 import React from "react";
 import { FooterLink2 } from "../../data/FooterLink2";
 import { Link } from "react-router-dom";
-import { Logo_Full_Light } from "../../assets/logo";
+import { Learners_Academy } from "../../assets/logo";
 import { FaHeart } from "react-icons/fa";
 import { FaFacebook, FaGoogle, FaTwitter, FaYoutube } from "react-icons/fa";
 
@@ -17,7 +17,7 @@ function Footer(){
                 <div className="border-b w-[100%] flex flex-col lg:flex-row pb-5 border-[#2C333F]">
                     <div className="lg:[50%] flex flex-wrap flex-row justify-between lg:border-[#2C333F] lg:pr-5 gap-3" >
                         <div className="w-[30%] flex flex-col gap-3 lg:w-[30%] mb-7 lg:pl-0">
-                            <img src={Logo_Full_Light} alt="" className="object-obtain"/>
+                            <img src={Learners_Academy} alt="" className="object-obtain h-[45px] w-[50px] rounded-full"/>
                             <h1 className="text-[#838894] font-semibold text-[16px]">
                                 Company
                             </h1>

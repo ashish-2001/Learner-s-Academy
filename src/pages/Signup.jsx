@@ -5,7 +5,7 @@ import { signup } from "../assets/images/index";
 function Signup(){
     return(
         <Template
-            title={"Join the millions learning to code with StudyNotion for free"}
+            title={"Join the millions learning to code with Learners Academy for free"}
             description1={"Build skills for today, tomorrow, and beyond."}
             description2={"Education to future-proof your career"}
             formType={"signup"}

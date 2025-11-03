@@ -50,7 +50,7 @@ function Sidebar(){
                                 btn1Handler: () => dispatch(logout(navigate)),
                                 btn2Handler: () => setConfirmationModal(null)
                             })}
-                            className="px-8 py-2 text-sm font-medium text-[#838894]">
+                            className="px-8 py-2 text-sm font-medium text-[#838894] cursor-pointer">
                                 <div className="flex items-center gap-x-2">
                                     <VscSignOut className="text-lg"/>
                                     <span>Logout</span>

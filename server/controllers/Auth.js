@@ -1,4 +1,4 @@
-import { success, z } from "zod";
+import { z } from "zod";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { User } from "../models/Users.js";
@@ -119,7 +119,6 @@ const signInValidator = z.object({
 
 const signIn = async(req, res) => {
 
-    
         const result = signInValidator.safeParse(req.body);
         
         if(!result.success){
@@ -316,7 +315,7 @@ const changePassword = async (req, res) =>{
             message: "Error occurred while updating password",
             success: false,
             error: e.message
-        })
+        });
     }
 };
 

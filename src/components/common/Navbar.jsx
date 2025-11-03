@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, matchPath, useLocation, useNavigate } from "react-router-dom";
-import { Logo_Full_Light } from "../../assets/logo";
+import { Learners_Academy } from "../../assets/logo";
 import { NavbarLinks } from "../../data/NavbarLinks";
 import { apiConnector } from "../../services/apiConnector";
 import { categories } from "../../services/apis";
@@ -93,7 +93,7 @@ function Navbar(){
 <div className={"flex sm:relative bg-[#000814] w-screen relative z-50 h-14 items-center justify-center border-b-[1px] border-b-[#2C333F] translate-y-  transition-all duration-500"}>
             <div className='flex w-11/12 max-w-maxContent items-center justify-between'>
                 <Link to='/' onClick={() => { dispatch(setProgress(100)) }}>
-                    <img src={Logo_Full_Light} width={160} alt="Study Notion" height={42}></img>
+                    <img src={Learners_Academy} width={160} alt="Learners-Academy" height={42} className="h-[45px] w-[50px] rounded-full"></img>
                 </Link>
                 {/* mobile Navbar */}
                 {
