@@ -54,8 +54,6 @@ const signUp = async (req, res) =>{
         const otpRecord = await Otp.findOne({ email, accountType, otp: otp.toString() })
         .sort({createdAt: -1});
 
-        console.log(otpRecord);
-
         if(!otpRecord || otpRecord.otp !== otp.toString()){
             return res.status(400).json({
                 success: false,
@@ -300,7 +298,7 @@ const changePassword = async (req, res) =>{
             console.error(e)
             return res.status(500).json({
                 success: false,
-                message: "Error occurred while sending email"
+                message: "Error occurred while sending email!"
             })
             }
 
