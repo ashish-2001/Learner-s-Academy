@@ -51,14 +51,14 @@ async function contactUs(req, res){
         } else{
             return res.status(403).json({
                 success: true,
-                message: "Something went wrong"
+                message: "Email could not be send!"
             });
         }
     }
     catch(e){
         return res.status(500).json({
             success: false,
-            message: "Something went wrong...",
+            message: "Internal server error!",
             error: e.message
         })
     }

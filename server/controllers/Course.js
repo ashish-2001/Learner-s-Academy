@@ -1,4 +1,3 @@
-import { success, z } from "zod";
 import { User } from "../models/Users.js";
 import { Category } from "../models/Category.js";
 import { Course } from "../models/Course.js";
@@ -191,14 +190,14 @@ async function getCourseDetails(req, res){
             path: "courseContent", 
             populate: { 
                 path: "subSection", 
-            }}).exec();
+        }}).exec();
 
         if(!courseDetails){
             return res.status(404).json({
                 success: false,
                 message: `Could not found`
-            })
-        }
+            });
+        };
 
         return res.status(200).json({
             success: true,

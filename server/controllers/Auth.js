@@ -39,6 +39,13 @@ const signUp = async (req, res) =>{
         
         const { firstName, lastName, email, accountType, password, confirmPassword, otp } = parsedResult.data;
 
+        if(password !== confirmPassword ){
+            return res.status(403).json({
+                success: false,
+                message: 'Password and confirm password does not match'
+            });
+        }
+
         const existingUser = await User.findOne({
             email,
             accountType
