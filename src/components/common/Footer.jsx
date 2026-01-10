@@ -6,16 +6,13 @@ import { FaHeart } from "react-icons/fa";
 import { FaFacebook, FaGoogle, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const BottomFooter = ["Privacy Policy", "Cookie Policy", "Terms"];
-const Resources = [ "Articles", "Blog", "Chart sheet", "Code Challenges", "Docs", "Projects", "Videos", "Workspaces"];
-const Plans = ["Paid Memberships", "For Students", "Business Solutions"];
-const Community = ["Forums", "Chapters", "Events"];
 
 function Footer(){
     return(
-        <div className="bg-[#161D29]">
-            <div className="flex lg:flex-row gap-8 items-center justify-between w-11/12 max-w-1260px text-[#6E727F] leading-6 mx-auto relative py-14">
-                <div className="border-b w-[100%] flex flex-col lg:flex-row pb-5 border-[#2C333F]">
-                    <div className="lg:[50%] flex flex-wrap flex-row justify-between lg:border-[#2C333F] lg:pr-5 gap-3" >
+        <div className="bg-[#161D29] flex flex-col items-center justify-center">
+            <div className="flex lg:flex-row gap-8 items-center justify-center w-11/12 max-w-1260px text-[#6E727F] leading-6 mx-auto relative py-14">
+                <div className="border-b w-[100%] flex flex-col items-center justify-center gap-3 lg:flex-row pb-5 border-[#2C333F]">
+                    <div className="lg:[50%] flex items-center justify-center lg:border-[#2C333F] lg:pr-5 gap-3" >
                         <div className="w-[30%] flex flex-col gap-3 lg:w-[30%] mb-7 lg:pl-0">
                             <img src={Learners_Academy} alt="" className="object-obtain h-[45px] w-[50px] rounded-full"/>
                             <h1 className="text-[#838894] font-semibold text-[16px]">
@@ -37,57 +34,6 @@ function Footer(){
                                 <FaYoutube/>
                             </div>
                             <div></div>
-                        </div>
-                        <div className="w-[48%] lg:w-[30%] mb-7 lg:pl-0">
-                            <h1 className="text-[#C5C7D4] font-semibold text-[16px]">
-                                Resources
-                            </h1>
-                            <div className="flex flex-col gap-2 mt-2">
-                                {Resources.map((ele, i)=>{
-                                    return (
-                                        <div className="text-[14px] cursor-pointer hover:text-[#C5C7D4] transition-all duration-200" key={i}>
-                                            <Link to={ele.split(" ").join("-").toLowerCase()}>{ele}</Link>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-
-                            <h1 className="text-[#C5C7D4] font-semibold text-[16px] mt-7">
-                                Support
-                            </h1>
-                            <div className="text-[14px] cursor-pointer hover:text-[#C5C7D4] transition-all duration-200 mt-2">
-                                <Link to={"/help-center"}>Help Center</Link>
-                            </div>
-                        </div>
-
-                        <div className="w-[48%] lg:w-[30%] mb-7 lg:pl-0">
-                            <h1 className="text-[#C5C7D4] font-semibold text-[16px]">
-                                Plans
-                            </h1>
-
-                            <div className="flex flex-col gap-2 mt-2">
-                                {Plans.map((ele, i)=> {
-                                    return(
-                                        <div className="text-[14px] cursor-pointer hover:text-[#C5C7D4] transition-all duration-200" key={i}>
-                                            <Link to={ele.split(" ").join("-").toLowerCase()}>{ele}</Link>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-
-                            <h1 className="text-[#C5C7D4] font-semibold text-[16px] mt-7">
-                                Community
-                            </h1>
-
-                            <div className="flex flex-col gap-2 mt-2">
-                                {Community.map((ele, i) =>{
-                                    return(
-                                        <div className="text-[14px] cursor-pointer hover:text-[#C5C7D4] transition-all duration-200" key={i}>
-                                            <Link to={ele.split(" ").join("-").toLowerCase()}>{ele}</Link>
-                                        </div>
-                                    )
-                                })}
-                            </div>
                         </div>
                     </div>
                     <div className="lg:w-[50%] flex flex-wrap flex-row justify-between pl-3 lg:pl-5 gap-3">
