@@ -24,7 +24,7 @@ async function createRating(req, res){
 
         const { rating, review, courseId } = parsed.data;
 
-        const courseDetails = await Course.findOne({
+        const courseDetails = await Course.find({
             _id: courseId,
             studentsEnrolled: {
                 $elemMatch: {
@@ -43,52 +43,48 @@ async function createRating(req, res){
         const alreadyReviewed = await RatingAndReview.findOne({
             user: userId,
             course: courseId
-        })
+        });
 
         if(alreadyReviewed){
-            return res.status(403).json({
+            return res.status(404).json({
                 success: false,
                 message: "Course already reviewed by user"
             })
-        }
+        };
 
-        const ratingReview = await RatingAndReview.create({
+        const ratingAndReview = await RatingAndReview.create({
             rating,
             review,
             course: courseId,
             user: userId
         });
 
-        await Course.findByIdAndUpdate(courseId, 
-            {
+        await Course.findByIdAndUpdate({
+            _id: courseId,
                 $push: {
-                    ratingAndReviews: ratingReview._id
+                    ratingAndReviews: ratingAndReview._id
                 }
-            },
-            {
-                new: true
-            }
-        );
+        });
 
-        return res.status(201).json({
+        return res.status(200).json({
             success: true,
             message: "Rating added successfully",
-            ratingReview
+            data: ratingAndReview
         })
     }
     catch(e){
         return res.status(500).json({
             success: false,
-            message: e.message || "Interval server error"
-        })
-    }
-}
+            message: e.message
+        });
+    };
+};
 
 async function getAverageRating(req, res){
 
     try{
 
-        const { courseId } = req.body || req.query;
+        const { courseId } = req.body.courseId;
 
         const result = await RatingAndReview.aggregate([
             {
@@ -130,7 +126,7 @@ async function getAverageRating(req, res){
 async function getAllRating(req, res){
     try{
 
-        const allReviews = await RatingAndReview.find().sort({rating: "-1"}).populate({
+        const allReviews = await RatingAndReview.find().sort({ rating: "-1" }).populate({
             path: "user",
             select: "firstName lastName email image"
         }).populate({
