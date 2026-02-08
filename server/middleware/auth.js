@@ -5,7 +5,7 @@ dotenv.config();
 async function auth(req, res, next){
     try{
 
-        let token = req.cookies.token || req.header("Authorization")?.replace("Bearer ", "") || req.body.token ;
+        let token = req.cookies.token || req.header("Authorization")?.replace("Bearer ", "") || req.body.token;
 
         if(!token){
             return res.status(401).json({
@@ -98,7 +98,7 @@ async function isAdmin(req, res, next){
             error: e.message
         })
     }
-}
+};
 
 
 export { 
