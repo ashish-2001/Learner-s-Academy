@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { Course } from "../models/Course.js"
 import { Category } from "../models/Category.js";
+import mongoose from "mongoose";
 
 const categoryValidator = z.object({
     name: z.string().min(1, "Name is required"),
@@ -91,16 +92,25 @@ async function categoryPageDetails(req, res){
 
         const { categoryId } = req.body;
 
+        if(!categoryId || !mongoose.Types.ObjectId.isValid(categoryId)){
+            return res.status(400).json({
+                success: false,
+                message: "Invalid or missing categoryId"
+            })
+        }
+
         const selectedCategory = await Category.findById(categoryId).populate({
             path: "courses",
             match: {
                 status: "Published"
             },
             populate: ([{
-                path: "instructor"
+                path: "instructor",
+                select: "firstName lastName image"
             },
             {
-                path:"ratingAndReviews"
+                path:"ratingAndReviews",
+                select: "rating review user"
             }])
         }).exec()
 
@@ -112,7 +122,7 @@ async function categoryPageDetails(req, res){
             })
         }
 
-        if(selectedCategory.courses.length === 0){
+        if(!selectedCategory.courses || selectedCategory.courses.length === 0){
             console.log("No courses found for the selected category.")
             return res.status(404).json({
                 success: false,
@@ -132,17 +142,21 @@ async function categoryPageDetails(req, res){
                 status: "Published",
             },
             populate: ([{
-                path: "instructor"
+                path: "instructor",
+                select: "firstName lastName image"
             }, 
             {
-                path: "ratingAndReviews"
+                path: "ratingAndReviews",
+                select: "rating review user"
             }])
-        })
+        });
 
         let differentCourses = [];
 
         for(const category of categoriesExceptSelected){
-            differentCourses.push(...category.courses);
+            if(Category.courses?.length){
+                differentCourses.push(...category.courses);
+            }
         }
         
         const allCategories = await Category.find().populate({
@@ -151,21 +165,24 @@ async function categoryPageDetails(req, res){
                 status: "Published" 
             }, 
             populate: ([{
-                path: "instructor"
+                path: "instructor",
+                select: "firstName lastName image"
             },
         {
-            path: "ratingAndReviews"
-        }])});
+            path: "ratingAndReviews",
+            select: "rating review user"
+        }])
+    });
 
         const allCourses = allCategories.flatMap((category) => category.courses)
         const mostSellingCourses = allCourses
-        .sort((a, b) => b.sold - a.sold)
+        .sort((a, b) => (b.sold || 0) - (a.sold || 0))
         .slice(0, 10);
 
         return res.status(200).json({
             success: true,
             data: {
-                selectedCourses,
+                selectedCourses: selectedCategory.courses,
                 differentCourses,
                 mostSellingCourses
             }
