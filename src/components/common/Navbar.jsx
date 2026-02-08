@@ -1,5 +1,4 @@
-import React, { useRef } from "react";
-import { useEffect, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, matchPath, useLocation, useNavigate } from "react-router-dom";
 import { Learners_Academy } from "../../assets/logo";
@@ -19,20 +18,21 @@ function Navbar(){
     const { token } = useSelector((state) => state.auth);
     const { user } = useSelector((state) => state.profile);
     const { totalItems } = useSelector((state) => state.cart);
+    
+    const [subLinks, setSubLinks] = useState([]);
+    const [searchValue, setSearchValue] = useState("");
     const [prevScrollPos, setPrevScrollPos] = useState(0);
     const [visible, setVisible] = useState(true);
-    const [searchValue, setSearchValue] = useState("");
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
-
     const location = useLocation();
-        function matchRoute(route){
+
+
+    function matchRoute(route){
         return matchPath({ path: route }, location.pathname)
     }
     
-    const [subLinks, setSubLinks] = useState([]);
 
     useEffect(()=> {
 
@@ -91,18 +91,18 @@ function Navbar(){
 
     return(
 <div className={"flex sm:relative bg-[#000814] w-screen relative z-50 h-14 items-center justify-center border-b-[1px] border-b-[#2C333F] translate-y-  transition-all duration-500"}>
-            <div className='flex w-11/12 max-w-maxContent items-center justify-between'>
-                <Link to='/' onClick={() => { dispatch(setProgress(100)) }}>
-                    <img src={Learners_Academy} width={160} alt="Learners-Academy" height={42} className="h-[45px] w-[50px] rounded-full"></img>
-                </Link>
-                {/* mobile Navbar */}
-                {
-                    user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
-                        <div className='md:hidden'>
-                            <Link to='/dashboard/cart' className=' relative left-10' onClick={() => { dispatch(setProgress(100)) }} >
-                                <div className=''>
-                                    <TiShoppingCart className=' fill-[#DBDDEA] w-8 h-8' />
-                                </div>
+    <div className='flex w-11/12 max-w-["1260px"] items-center justify-between'>
+        <Link to='/' onClick={() => { dispatch(setProgress(100)) }}>
+            <img src={Learners_Academy} width={160} alt="Learners-Academy" height={42} className="h-[45px] w-[50px] rounded-full"/>
+        </Link>
+                
+            {
+                user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
+                    <div className='md:hidden'>
+                        <Link to='/dashboard/cart' className='relative left-10' onClick={() => { dispatch(setProgress(100)) }} >
+                            <div className=''>
+                                <TiShoppingCart className=' fill-[#DBDDEA] w-8 h-8' />
+                            </div>
                                 {
                                     totalItems > 0 && (
                                         <span className='font-medium text-[12px] shadow-[3px ] shadow-black bg-yellow-100 text-[#000814] rounded-full px-[4px] absolute -top-[2px] right-[1px]'>
@@ -110,13 +110,11 @@ function Navbar(){
                                         </span>
                                     )
                                 }
-
-                            </Link>
+                        </Link>
                         </div>
                     )
                 }
-
-                <div className={`flex md:hidden  relative gap- flex-row ${token !== null && user?.accountType !== "Instructor" ? " -left-12" : ""}`}>
+                <div className={`flex md:hidden  relative gap-4 flex-row ${token !== null && user?.accountType !== "Instructor" ? " -left-12" : ""}`}>
                     <GiHamburgerMenu className={`w-16 h-8 fill-[#DBDDEA] absolute left-10 -bottom-4 `} onClick={showNav} />
                     <div ref={overlay} className=' fixed top-0 bottom-0 left-0 right-0 z-30 bg w-[100vw] hidden h-[100vh] overflow-y-hidden bg-[rgba(0,0,0,0.5)] ' onClick={showNav}></div>
                     <div ref={show} className='mobNav z-50'>
@@ -124,7 +122,7 @@ function Navbar(){
                             {
                                 token == null && (
                                     <Link to='/login' className='' onClick={() => { dispatch(setProgress(100)) }} >
-                                        <button onClick={showNav} className=' mt-4 text-center text-[15px] px-6 py-2 rounded-md font-semibold bg-yellow-50 text-black hover:scale-95 transition-all duration-200'>
+                                        <button onClick={showNav} className='mt-4 text-center text-[15px] px-6 py-2 rounded-md font-semibold bg-yellow-50 text-black hover:scale-95 transition-all duration-200'>
                                             Login
                                         </button>
                                     </Link>
@@ -137,32 +135,29 @@ function Navbar(){
                                             Signup
                                         </button>
                                     </Link>
-
                                 )
                             }
 
                             {
                                 token != null && (
-                                    <div className=' mt-2' >
+                                    <div className='mt-2' >
                                         <p className=' text-[#C5C7D4] text-center mb-2'>Account</p>
-                                        {/* <Link to='/dashboard' onClick={()=>{dispatch(setProgress(100));showNav()}} className="p-2"> */}
                                         <ProfileDropdown />
-                                        {/* </Link> */}
                                     </div>
                                 )
                             }
-                            <div className=' mt-4 mb-4 bg-[#DBDDEA] w-[200px] h-[2px]'></div>
-                            <p className=' text-xl text-yellow-50 font-semibold'>Courses</p>
+                            <div className='mt-4 mb-4 bg-[#DBDDEA] w-[200px] h-[2px]'></div>
+                            <p className='text-xl text-yellow-50 font-semibold'>Courses</p>
                             <div className=' flex flex-col items-end pr-4'>
                                 {
-                                    NavbarLinks?.length < 0 ? (<div></div>) : (
-                                        NavbarLinks?.map((element, index) => (
-                                            <Link to={`/catalog/${element?.name}`} key={index} onClick={() => { dispatch(setProgress(30)); showNav() }} className="p-2 text-sm">
-                                                <p className=' text-[#F1F2FF] '>
-                                                    {element?.name}
-                                                </p>
-                                            </Link>
-                                        )))
+                                    subLinks?.length < 0 ? (<div></div>) : (
+                                    subLinks?.map((element, index) => (
+                                        <Link to={`/catalog/${element?.name}`} key={index} onClick={() => { dispatch(setProgress(30)); showNav() }} className="p-2 text-sm">
+                                            <p className=' text-[#F1F2FF] '>
+                                                {element?.name}
+                                            </p>
+                                        </Link>
+                                    )))
                                 }
                             </div>
                             <div className=' mt-4 mb-4 bg-[#DBDDEA] w-[200px] h-[2px]'></div>
@@ -188,7 +183,7 @@ function Navbar(){
                             NavbarLinks?.map((element, index) => (
                                 <li key={index} >
                                     {
-                                        element.title === "Catalog" ? (<div className=' flex items-center group relative cursor-pointer'>
+                                        element.title === "Catalog" ? (<div className='flex items-center group relative cursor-pointer'>
                                             <p>{element.title}</p>
                                             <svg width="25px" height="20px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0)" stroke="#000000" strokeWidth="0.00024000000000000003"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" stroke="#CCCCCC" strokeWidth="0.384"></g><g id="SVGRepo_iconCarrier"> <path fillRule="evenodd" clipRule="evenodd" d="M4.29289 8.29289C4.68342 7.90237 5.31658 7.90237 5.70711 8.29289L12 14.5858L18.2929 8.29289C18.6834 7.90237 19.3166 7.90237 19.7071 8.29289C20.0976 8.68342 20.0976 9.31658 19.7071 9.70711L12.7071 16.7071C12.3166 17.0976 11.6834 17.0976 11.2929 16.7071L4.29289 9.70711C3.90237 9.31658 3.90237 8.68342 4.29289 8.29289Z" fill="#ffffff"></path> </g></svg>
 
@@ -265,7 +260,7 @@ function Navbar(){
                     }
                     {
                         token !== null && (
-                            <div className=' pt-2' >
+                            <div className='pt-2' >
                                 <ProfileDropdown />
                             </div>
                         )

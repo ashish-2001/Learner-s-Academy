@@ -8,6 +8,7 @@ import { useOnClickOutside } from "../../../hooks/useOnClickOutside";
 import { logout } from "../../../services/operations/authAPI";
 
 function ProfileDropdown(){
+
     const { user } = useSelector((state) => state.profile);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -22,7 +23,7 @@ function ProfileDropdown(){
     }
 
     return(
-        <button className="relative hover:cursor-pointer" onClick={() => setOpen(true)}>
+        <button className="relative" onClick={() => setOpen(true)}>
             <div className="flex items-center gap-x-1">
                 <img 
                     className="aspect-square w-[30px] rounded-full object-cover"

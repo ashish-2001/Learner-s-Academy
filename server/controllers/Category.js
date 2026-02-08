@@ -132,6 +132,13 @@ async function categoryPageDetails(req, res){
 
         const selectedCourses = selectedCategory.courses;
 
+        if(!selectedCourses){
+            return res.status(404).json({
+                success: false,
+                message: "Category not found!"
+            });
+        };
+
         const categoriesExceptSelected = await Category.find({
             _id: {
                 $ne: categoryId
@@ -154,7 +161,7 @@ async function categoryPageDetails(req, res){
         let differentCourses = [];
 
         for(const category of categoriesExceptSelected){
-            if(Category.courses?.length){
+            if(category.courses?.length){
                 differentCourses.push(...category.courses);
             }
         }
