@@ -126,7 +126,7 @@ async function getAverageRating(req, res){
 async function getAllRating(req, res){
     try{
 
-        const allReviews = await RatingAndReview.find().sort({ rating: "-1" }).populate({
+        const allReviews = await RatingAndReview.find().sort({ rating: -1 }).populate({
             path: "user",
             select: "firstName lastName email image"
         }).populate({
