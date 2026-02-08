@@ -33,7 +33,7 @@ async function createRating(req, res){
             }
         });
 
-        if(!courseDetails){
+        if(!courseDetails || courseDetails.length === 0){
             return res.status(404).json({
                 success: false,
                 message: "Student is not enrolled in this course"
@@ -59,20 +59,18 @@ async function createRating(req, res){
             user: userId
         });
 
-        await Course.findByIdAndUpdate({
-            _id: courseId,
+        await Course.findByIdAndUpdate(courseId, {
                 $push: {
                     ratingAndReviews: ratingAndReview._id
                 }
-        });
+        }, { new: true });
 
         return res.status(200).json({
             success: true,
             message: "Rating added successfully",
             data: ratingAndReview
         })
-    }
-    catch(e){
+    } catch(e){
         return res.status(500).json({
             success: false,
             message: e.message
@@ -84,7 +82,7 @@ async function getAverageRating(req, res){
 
     try{
 
-        const { courseId } = req.body.courseId;
+        const { courseId } = req.body || req.query ;
 
         const result = await RatingAndReview.aggregate([
             {
