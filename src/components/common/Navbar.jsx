@@ -90,7 +90,7 @@ function Navbar(){
 
 
     return(
-<div className={"flex sm:relative bg-[#000814] w-screen relative z-50 h-14 items-center justify-center border-b-[1px] border-b-[#2C333F] translate-y-  transition-all duration-500"}>
+<div className={"flex sm:relative bg-[#000814] w-screen relative z-50 h-14 items-center justify-center border-b-[1px] border-b-[#2C333F] translate-y transition-all duration-500"}>
     <div className='flex w-11/12 max-w-["1260px"] items-center justify-between'>
         <Link to='/' onClick={() => { dispatch(setProgress(100)) }}>
             <img src={Learners_Academy} width={160} alt="Learners-Academy" height={42} className="h-[45px] w-[50px] rounded-full"/>
