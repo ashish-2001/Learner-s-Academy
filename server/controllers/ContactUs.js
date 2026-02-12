@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { mailSender } from "../utils/mailSender.js";
+import mailSender from "../utils/mailSender.js";
 
 
 const contactUsValidator = z.object({
