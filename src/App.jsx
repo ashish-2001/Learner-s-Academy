@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
-import { Navbar } from "./components/Common/Navbar";
+import { Navbar } from "../src/components/Common/Navbar";
 import { Footer } from "./components/Common/Footer";
 import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
