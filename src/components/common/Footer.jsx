@@ -14,7 +14,9 @@ function Footer(){
                 <div className="border-b w-[100%] flex flex-col items-center justify-center gap-3 lg:flex-row pb-5 border-[#2C333F]">
                     <div className="lg:[50%] flex items-center justify-center lg:border-[#2C333F] lg:pr-5 gap-3" >
                         <div className="w-[30%] flex flex-col gap-3 lg:w-[30%] mb-7 lg:pl-0">
-                            <img src={Learners_Academy} alt="" className="object-obtain h-[45px] w-[50px] rounded-full"/>
+                            <Link to={"/"}>
+                                <img src={Learners_Academy} alt="" className="object-obtain h-[50px] w-[50px] rounded-full" />
+                            </Link>
                             <h1 className="text-[#838894] font-semibold text-[16px]">
                                 Company
                             </h1>

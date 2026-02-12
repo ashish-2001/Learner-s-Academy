@@ -178,6 +178,7 @@ function SignupForm(){
         )
 }
 
+
 export {
     SignupForm
-}
+};
