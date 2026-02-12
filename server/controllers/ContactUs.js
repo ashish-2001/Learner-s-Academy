@@ -65,5 +65,6 @@ async function contactUs(req, res){
 }
 
 export { 
-    contactUs
+    contactUs,
+    mailSender
 }
