@@ -7,7 +7,7 @@ import { apiConnector } from "../../services/apiConnector";
 import { categories } from "../../services/apis";
 import { ACCOUNT_TYPE } from "../../utils/constants.js";
 import { ProfileDropdown } from "../Core/Auth/ProfileDropdown";
-import { setProgress } from "../../slices/loadingBarSlice.jsx";
+import { setProgress } from "../../slices/loadingBarSlice";
 import { HiSearch } from "react-icons/hi";
 import { TiShoppingCart } from "react-icons/ti";
 import { GiHamburgerMenu } from "react-icons/gi";
