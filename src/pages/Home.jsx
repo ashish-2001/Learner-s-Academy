@@ -1,17 +1,17 @@
 import React from 'react'
 import {FaArrowRight} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { CTAButton } from '../components/Core/HomePage/Button';
-import { HighLightText } from '../components/Core/HomePage/HighLightText';
+import { CTAButton } from '../components/core/HomePage/Button';
+import { HighLightText } from '../components/core/HomePage/HighLightText';
 import { banner } from "../assets/images/index.js"
-import { CodeBlocks } from "../components/Core/HomePage/CodeBlocks";
-import { TimelineSection } from '../components/Core/HomePage/TimelineSection';
-import { LearningLanguageSection } from '../components/Core/HomePage/LearningLanguageSection';
-import { InstructorSection } from '../components/Core/HomePage/InstructorSection';
-import { ExploreMore } from '../components/Core/HomePage/ExploreMore';
+import { CodeBlocks } from "../components/core/HomePage/CodeBlocks";
+import { TimelineSection } from '../components/core/HomePage/TimelineSection';
+import { LearningLanguageSection } from '../components/core/HomePage/LearningLanguageSection';
+import { InstructorSection } from '../components/core/HomePage/InstructorSection';
+import { ExploreMore } from '../components/core/HomePage/ExploreMore';
 import { useDispatch } from 'react-redux';
 import { setProgress } from '../slices/loadingBarSlice';
-import { Course_Slider } from '../components/Core/Catalog/Course_Slider';
+import { Course_Slider } from '../components/core/Catalog/Course_Slider';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { fetchCourseCategories } from '../services/operations/courseDetailsAPI';
