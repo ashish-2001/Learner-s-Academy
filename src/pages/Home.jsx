@@ -16,7 +16,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { fetchCourseCategories } from '../services/operations/courseDetailsAPI';
 import { getCatalogPageData } from '../services/operations/pageAndcomponentDatas';
-import { RatingSlider } from '../components/Core/Ratings/RatingsSlider.jsx';
+import { RatingSlider } from '../components/core/Ratings/RatingsSlider.jsx';
 
 
 
