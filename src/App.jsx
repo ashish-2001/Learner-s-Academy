@@ -16,7 +16,7 @@ import { setProgress } from "./slices/loadingBarSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Dashboard } from "./pages/Dashboard";
-import { OpenRoute } from "./components/core/auth1/OpenRoute.jsx";
+import { OpenRoute } from "./components/core/auth/OpenRoute.jsx";
 import { PrivateRoute } from "./components/core/auth/PrivateRoute.js";
 import { MyProfile } from "./components/core/Dashboard/MyProfile";
 import { Settings } from "./components/core/Dashboard/Settings";
