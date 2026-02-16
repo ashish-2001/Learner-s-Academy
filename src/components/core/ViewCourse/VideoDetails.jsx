@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import { markLectureAsCompleted } from "../../../services/operations/courseDetailsAPI";
 import { updateCompletedLectures } from "../../../slices/viewCourseSlice";
-import { IconBtn } from "../../Common/IconBtn";
+import { IconBtn } from "../../common/IconBtn";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
