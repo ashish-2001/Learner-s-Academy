@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom"
 import { formatDate } from "../../../../services/formatDate";
 import { deleteCourse, fetchInstructorCourses } from "../../../../services/operations/courseDetailsAPI"
 import { COURSE_STATUS } from "../../../../utils/constants.js"
-import { ConfirmationModalData } from "../../../Common/ConfirmationModal"
+import { ConfirmationModalData } from "../../../common/ConfirmationModal"
 
 function CoursesTable({ courses, setCourses }) {
   const navigate = useNavigate()
