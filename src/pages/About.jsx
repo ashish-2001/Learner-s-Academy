@@ -2,7 +2,7 @@ import React from 'react'
 import { HighLightText } from '../components/core/HomePage/HighLightText'
 import { Quote } from "../components/core/AboutPage/Quote"
 import { FoundingStory } from "../assets/images/index.js"
-import { StatsComponent } from '../Components/core/AboutPage/Stats'
+import { StatsComponent } from '../components/core/AboutPage/Stats'
 import { LearningGrid } from '../components/core/AboutPage/LearningGrid'
 import { ContactFormSection } from '../components/core/AboutPage/ContactFormSection'
 import { RatingSlider } from '../components/core/Ratings/RatingsSlider'
