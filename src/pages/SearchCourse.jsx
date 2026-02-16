@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { searchCourses } from '../services/operations/courseDetailsAPI'
 import { useState } from 'react'
-import { Course_Card } from '../components/core/Catalog/Course_Card'
-import { useDispatch } from 'react-redux'
-import { HiOutlineEmojiSad } from 'react-icons/hi'
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import { Course_Card } from '../components/core/Catalog/Course_Card';
+import { useDispatch } from 'react-redux';
+import { HiOutlineEmojiSad } from 'react-icons/hi';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import "react-loading-skeleton/dist/skeleton.css";
 
 const SearchCourse = () => {
