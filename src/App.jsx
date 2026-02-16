@@ -20,7 +20,7 @@ import { OpenRoute } from "./components/core/Auth/OpenRoute";
 import { PrivateRoute } from "./components/core/Auth/PrivateRoute";
 import { MyProfile } from "./components/core/Dashboard/MyProfile";
 import { Settings } from "./components/core/Dashboard/Settings";
-import { EnrolledCourses } from "./components/Core/Dashboard/EnrolledCourses";
+import { EnrolledCourses } from "./components/core/Dashboard/EnrolledCourses";
 import { Cart } from "./components/core/Dashboard/Cart/index";
 import { ACCOUNT_TYPE } from "./utils/constants.js";
 import { AddCourse } from "./components/core/Dashboard/AddCourse/Index"
