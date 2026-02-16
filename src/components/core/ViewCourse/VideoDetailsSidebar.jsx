@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
 import { IoIosArrowBack } from "react-icons/io";
-import { IconBtn } from "../../Common/IconBtn";
+import { IconBtn } from "../../common/IconBtn";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
