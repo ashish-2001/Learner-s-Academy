@@ -20,9 +20,7 @@ const PORT = process.env.PORT || 5500;
 connect();
 
 app.use(cors({
-	origin: [
-		"https://learner-s-academy.vercel.app/"
-	],
+	origin: "https://learner-s-academy.vercel.app/",
 	credentials: true
 }));
 
