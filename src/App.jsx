@@ -167,7 +167,7 @@ function App() {
       <Footer />
     </div>
   );
-}
+};
 
 export {
   App
