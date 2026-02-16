@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { Logo1 }  from "../../../assets/timeLineLogo/index";
-import { Logo2 } from "../../../assets/timeLineLogo/index";
-import { Logo3 } from "../../../assets/timeLineLogo/index";
-import { Logo4 } from "../../../assets/timeLineLogo/index";
+import { Logo1 }  from "../../../assets/timeLineLogo/index.js";
+import { Logo2 } from "../../../assets/timeLineLogo/index.js";
+import { Logo3 } from "../../../assets/timeLineLogo/index.js";
+import { Logo4 } from "../../../assets/timeLineLogo/index.js";
 import { timelineImage } from "../../../assets/Images/TimelineImage.png";
 
 const timeline = [
