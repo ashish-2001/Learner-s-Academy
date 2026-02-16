@@ -21,7 +21,7 @@ connect();
 
 app.use(cors({
 	origin: [
-		"https://learner-s-academy.onrender.com"
+		"https://learner-s-academy.vercel.app/"
 	],
 	credentials: true
 }));
