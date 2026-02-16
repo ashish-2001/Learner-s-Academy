@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { LoginForm } from "./LoginForm";
-import { SignupForm } from "./SignupForm";
+import { SignupForm } from "./signupForm";
 import { frame } from "../../../assets/images/index";
 
 function Template({ title, description1, description2, image, formType }){
