@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { sidebarLinks } from "../../../data/dashboard-links";
 import { logout } from "../../../services/operations/authAPI";
-import { ConfirmationModalData } from "../../Common/ConfirmationModal";
+import { ConfirmationModalData } from "../../common/ConfirmationModal";
 import { SidebarLink } from "./SidebarLink";
 import { VscSignOut } from "react-icons/vsc";
 
