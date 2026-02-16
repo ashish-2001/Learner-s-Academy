@@ -6,7 +6,7 @@ import { NavbarLinks } from "../../data/NavbarLinks";
 import { apiConnector } from "../../services/apiConnector";
 import { categories } from "../../services/apis";
 import { ACCOUNT_TYPE } from "../../utils/constants.js";
-import { ProfileDropdown } from "../core/auth/ProfileDropdown.js";
+import { ProfileDropdown } from "../core/auth/ProfileDropdown";
 import { setProgress } from "../../slices/loadingBarSlice";
 import { HiSearch } from "react-icons/hi";
 import { TiShoppingCart } from "react-icons/ti";
