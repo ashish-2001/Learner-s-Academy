@@ -4,7 +4,6 @@ import { Logo1 } from '../../../assets/timelineLogo/index.js';
 import { Logo2 } from "../../../assets/timelineLogo/index.js";
 import { Logo3 } from "../../../assets/timelineLogo/index.js";
 import { Logo4 } from "../../../assets/timelineLogo/index.js";
-import { timelineImage } from "../../../assets/images/index.js";
 
 const timeline = [
     {
@@ -56,7 +55,7 @@ return (
         </div>
         <div className='relative shadow-[#118AB2]'>
 
-            <img  src={timelineImage}
+            <img  src=""
             alt="timelineImage"
             className='shadow-white object-cover h-fit'
             />
@@ -77,9 +76,9 @@ return (
 
         </div>
 
-      </div>
+        </div>
     </div>
-  )
+    )
 }
 
 export {
