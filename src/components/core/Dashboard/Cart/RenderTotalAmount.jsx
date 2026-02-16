@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { BuyCourse } from "../../../../services/operations/studentFeaturesAPI";
-import { IconBtn } from "../../../Common/IconBtn";
+import { IconBtn } from "../../../common/IconBtn";
 
 function RenderTotalAmount(){
     const { total, cart } = useSelector((state) => state.cart);
