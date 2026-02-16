@@ -1,5 +1,5 @@
 import React from "react";
-import { Template } from "../components/core/Auth/Template";
+import { Template } from "../components/core/auth/Template";
 import { signup } from "../assets/images/index";
 
 function Signup(){
