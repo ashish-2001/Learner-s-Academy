@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Course_Card } from "../components/Core/Catalog/Course_Card";
+import { Course_Card } from "../components/core/Catalog/Course_Card";
 import { apiConnector } from "../services/apiConnector";
 import { categories } from "../services/apis";
 import { getCatalogPageData } from "../services/operations/pageAndcomponentDatas"
-import { Course_Slider } from "../components/Core/Catalog/Course_Slider";
+import { Course_Slider } from "../components/core/Catalog/Course_Slider";
 import { useDispatch } from "react-redux";
 
 function Catalog(){
