@@ -43,8 +43,8 @@ const ViewCourse = () => {
             }
         </div>
     )
-}
+};
 
 export {
     ViewCourse
-}
+};
