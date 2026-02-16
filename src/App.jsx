@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Dashboard } from "./pages/Dashboard";
 import { OpenRoute } from "./components/core/auth/OpenRoute";
-import { PrivateRoute } from "./components/core/auth/PrivateRoute.js";
+import { PrivateRoute } from "./components/core/auth/PrivateRoute";
 import { MyProfile } from "./components/core/Dashboard/MyProfile";
 import { Settings } from "./components/core/Dashboard/Settings";
 import { EnrolledCourses } from "./components/core/Dashboard/EnrolledCourses";
