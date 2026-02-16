@@ -1,5 +1,5 @@
 import React from "react";
-import { HighLightText } from "../../../components/Core/HomePage/HighLightText";
+import { HighLightText } from "../../../components/core/HomePage/HighLightText";
 
 
 function Quote(){
