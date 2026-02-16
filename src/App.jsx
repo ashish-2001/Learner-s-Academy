@@ -171,4 +171,4 @@ function App() {
 
 export {
   App
-}
+};
