@@ -21,7 +21,7 @@ import { PrivateRoute } from "./components/core/Auth/PrivateRoute";
 import { MyProfile } from "./components/core/Dashboard/MyProfile";
 import { Settings } from "./components/core/Dashboard/Settings";
 import { EnrolledCourses } from "./components/core/Dashboard/EnrolledCourses";
-import { Cart } from "./components/core/Dashboard/cart/index";
+import { Cart } from "./components/core/Dashboard/Cart/Index";
 import { ACCOUNT_TYPE } from "./utils/constants.js";
 import { AddCourse } from "./components/core/Dashboard/AddCourse/Index"
 import { MyCourses } from "./components/core/Dashboard/MyCourses/MyCourses";
