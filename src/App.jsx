@@ -17,26 +17,26 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Dashboard } from "./pages/Dashboard";
 import { OpenRoute } from "./components/core/Auth/OpenRoute";
-import { PrivateRoute } from "./components/Core/auth/PrivateRoute";
-import { MyProfile } from "./components/Core/Dashboard/MyProfile";
-import { Settings } from "./components/Core/Dashboard/Settings";
+import { PrivateRoute } from "./components/core/Auth/PrivateRoute";
+import { MyProfile } from "./components/core/Dashboard/MyProfile";
+import { Settings } from "./components/core/Dashboard/Settings";
 import { EnrolledCourses } from "./components/Core/Dashboard/EnrolledCourses";
-import { Cart } from "./components/Core/Dashboard/Cart/index";
+import { Cart } from "./components/core/Dashboard/Cart/index";
 import { ACCOUNT_TYPE } from "./utils/constants.js";
-import { AddCourse } from "./components/Core/Dashboard/AddCourse/Index"
-import { MyCourses } from "./components/Core/Dashboard/MyCourses/MyCourses";
-import { EditCourse } from "./components/Core/Dashboard/EditCourse/EditCourse";
+import { AddCourse } from "./components/core/Dashboard/AddCourse/Index"
+import { MyCourses } from "./components/core/Dashboard/MyCourses/MyCourses";
+import { EditCourse } from "./components/core/Dashboard/EditCourse/EditCourse";
 import { Catalog } from "./pages/Catalog";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { CourseDetails } from "./pages/CourseDetails";
 import { SearchCourse } from "./pages/SearchCourse";
 import { ViewCourse } from "./pages/ViewCourse";
-import { VideoDetails } from "./components/Core/ViewCourse/VideoDetails";
-import { PurchaseHistory } from "./components/Core/Dashboard/PurchaseHistory"
-import { InstructorDashboard } from "./components/Core/Dashboard/InstructorDashboard/InstructorDashboard";
+import { VideoDetails } from "./components/core/ViewCourse/VideoDetails";
+import { PurchaseHistory } from "./components/core/Dashboard/PurchaseHistory"
+import { InstructorDashboard } from "./components/core/Dashboard/InstructorDashboard/InstructorDashboard";
 import { Error } from "./pages/Error"
 import { RiWifiOffLine } from "react-icons/ri";
-import { AdminPanel } from "./components/Core/Dashboard/AdminPanel";
+import { AdminPanel } from "./components/core/Dashboard/AdminPanel";
 
 function App() {
   console.log = function () {};
