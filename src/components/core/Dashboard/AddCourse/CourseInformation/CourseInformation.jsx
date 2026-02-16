@@ -5,7 +5,7 @@ import { addCourseDetails, editCourseDetails, fetchCourseCategories } from '../.
 import { HiOutlineCurrencyRupee } from 'react-icons/hi';
 import { RequirementField } from './RequirementField';
 import { setStep, setCourse } from '../../../../../slices/courseSlice';
-import { IconBtn } from '../../../../Common/IconBtn';
+import { IconBtn } from '../../../../common/IconBtn';
 import { COURSE_STATUS } from '../../../../../utils/constants.js';
 import { toast } from 'react-hot-toast';
 import { Upload } from './Upload'
