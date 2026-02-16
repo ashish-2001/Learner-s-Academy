@@ -5,7 +5,7 @@ import { FoundingStory } from "../assets/images/index.js"
 import { StatsComponent } from '../Components/core/AboutPage/Stats'
 import { LearningGrid } from '../components/core/AboutPage/LearningGrid'
 import { ContactFormSection } from '../components/core/AboutPage/ContactFormSection'
-import { RatingSlider } from '../components/core/Ratings/RatingsSlider';
+import { RatingSlider } from '../components/core/Ratings/RatingsSlider'
 import { aboutus1, aboutus2, aboutus3 } from '../assets/images/index.js'
 
 const About = () => {
