@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Logo1 } from '../../../assets/TimeLineLogo/index.js';
+import { Logo1 } from '../../../assets/timeLineLogo/index.js';
 import { Logo2 } from "../../../assets/TimeLineLogo/index.js";
 import { Logo3 } from "../../../assets/TimeLineLogo/index.js";
 import { Logo4 } from "../../../assets/TimeLineLogo/index.js";
