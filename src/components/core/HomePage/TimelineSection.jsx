@@ -4,7 +4,7 @@ import { Logo1 } from '../../../assets/timelineLogo/index.js';
 import { Logo2 } from "../../../assets/timelineLogo/index.js";
 import { Logo3 } from "../../../assets/timelineLogo/index.js";
 import { Logo4 } from "../../../assets/timelineLogo/index.js";
-import { timelineImage } from "../../../assets/Images/TimelineImage.png";
+import { timelineImage } from "../../../assets/images/index.js";
 
 const timeline = [
     {
