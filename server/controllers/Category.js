@@ -115,7 +115,6 @@ async function categoryPageDetails(req, res){
         }).exec()
 
         if(!selectedCategory){
-            console.log("Category not found");
             return res.status(404).json({
                 success: false,
                 message: "Category not found"
@@ -123,7 +122,6 @@ async function categoryPageDetails(req, res){
         }
 
         if(!selectedCategory.courses || selectedCategory.courses.length === 0){
-            console.log("No courses found for the selected category.")
             return res.status(404).json({
                 success: false,
                 message: "No courses found for the selected category"
@@ -135,7 +133,7 @@ async function categoryPageDetails(req, res){
         if(!selectedCourses){
             return res.status(404).json({
                 success: false,
-                message: "Category not found!"
+                message: "Courses not found!"
             });
         };
 
@@ -204,10 +202,13 @@ async function categoryPageDetails(req, res){
 }
 
 async function addCourseToCategory(req, res){
+
     const { courseId, categoryId } = req.body;
-        console.log("Course added to this category");
+        
     try{
+
         const category = await Category.findById(categoryId);
+
         if(!category){
             return res.status(404).json({
                 success: false,
@@ -216,6 +217,7 @@ async function addCourseToCategory(req, res){
         }
 
         const course = await Course.findById(courseId);
+
         if(!course){
             return res.status(404).json({
                 success: false,
@@ -231,7 +233,9 @@ async function addCourseToCategory(req, res){
         }
 
         category.courses.push(courseId);
+
         await category.save();
+
         return res.status(200).json({
             success: true,
             message: "Course added to the category successfully"
@@ -243,11 +247,11 @@ async function addCourseToCategory(req, res){
             error: error.message
         })
     }
-}
+};
 
 export {
     createCategory,
     showAllCategories,
     categoryPageDetails,
     addCourseToCategory
-}
+};

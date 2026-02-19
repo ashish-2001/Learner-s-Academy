@@ -112,7 +112,6 @@ const signUp = async (req, res) =>{
             success: false
         })
     }
-
 }
 
 const signInValidator = z.object({
@@ -175,7 +174,7 @@ const signIn = async(req, res) => {
             message: "Password is incorrect"
         })
     }
-}
+};
 
 const otpValidator = z.object({
     email: z.string().email("Invalid Email Address"),
