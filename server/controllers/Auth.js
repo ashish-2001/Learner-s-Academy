@@ -92,8 +92,6 @@ const signUp = async (req, res) =>{
 
         await Otp.deleteOne({ _id: otpRecord._id });
 
-        
-
         const token = jwt.sign({
             userId: user._id,
             accountType: user.accountType,
