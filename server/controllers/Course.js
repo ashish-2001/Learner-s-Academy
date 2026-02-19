@@ -7,11 +7,10 @@ import { convertSecondsToDuration } from "../utils/secToDuration.js";
 import { uploadImageToCloudinary } from "../utils/ImageUploader.js";
 import { CourseProgress } from "../models/CourseProgress.js";
 
-const createCourse = async (req, res) =>{
+async function createCourse(req, res){
 
     const userId = req.user.userId;
 
-    console.log("Course")
     try{
         
         let {
@@ -25,16 +24,12 @@ const createCourse = async (req, res) =>{
             instructions
         } = req.body;
 
-    
-        console.log("Before thumbnail")        
         if (!req.files || !req.files.thumbnailImage) {
             return res.status(400).json({
                 success: false,
                 message: "Thumbnail image is missing. Please upload a file."
             });
         }
-
-console.log("After thumbnail")
 
         const thumbnail = req.files.thumbnailImage;
 
@@ -51,10 +46,7 @@ console.log("After thumbnail")
                 success: false,
                 message: "All fields are required"
             });
-        }
-        
-        console.log("Tag:", tag);
-        console.log("Instructions:", instructions);
+        };
 
         const instructorDetails = await User.findById(userId)
 
@@ -77,9 +69,7 @@ console.log("After thumbnail")
         const thumbnailImage = await uploadImageToCloudinary(
             thumbnail,
             process.env.FOLDER_NAME || "default"
-        )
-
-        console.log(thumbnailImage);
+        );
 
         const newCourse = await Course.create({
             courseName,
@@ -252,15 +242,12 @@ async function editCourse(req, res){
             instructions,
         } = req.body;
 
-        console.log("req body", req.body);
-        console.log("req files", req.files);
-
         if(!courseId){
             return res.status(400).json({
                 success: false,
-                message: "Course id is required"
-            })
-        }
+                message: "Course not found!"
+            });
+        };
 
         const course = await Course.findById(courseId);
 
@@ -394,9 +381,7 @@ async function getFullCourseDetails(req, res) {
         let courseProgressCount = await CourseProgress.findOne({
             courseId: courseId,
             userId: userId
-        })
-
-        console.log("courseProgressCount: ", courseProgressCount);
+        });
 
         if(!courseDetails){
             return res.status(400).json({
@@ -470,7 +455,7 @@ async function deleteCourse(req, res){
         const courseSections = course.courseContent;
 
         for(const sectionId of courseSections){
-            const section = await Section.findById(sectionId)
+            const section = await Section.findById(sectionId);
             if(section){
                 const subSections = section.subSection;
                 for(const subSectionId of subSections){
@@ -492,12 +477,12 @@ async function deleteCourse(req, res){
             $pull: {
                 courses: courseId
             }
-        })
+        });
 
         return res.status(200).json({
             success: true,
             message: "Course deleted successfully"
-        })
+        });
     }
     catch(e){
         return res.status(500).json({
@@ -525,7 +510,8 @@ async function searchCourse(req, res){
             $or: [
                 {
                     courseName: {
-                        $regex: searchQuery, $options: "i"
+                        $regex: searchQuery,
+                        $options: "i"
                     }
                 },
                 {
@@ -556,16 +542,19 @@ async function searchCourse(req, res){
             message: error.message
         })
     }
-}
+};
 
 async function markLectureAsComplete(req, res){
+
     const { courseId, subSectionId, userId } = req.body;
+
     if(!courseId || !subSectionId || !userId){
         return res.status(400).json({
             success: false,
             message: "All the fields are required"
         })
-    }
+    };
+    
     try{
         const progressAlreadyExists = await CourseProgress.findOne({
             userId: userId,
@@ -613,7 +602,7 @@ async function markLectureAsComplete(req, res){
             message: error.message
         })
     }
-}
+};
 
 
 export {
@@ -626,4 +615,4 @@ export {
     deleteCourse,
     searchCourse,
     markLectureAsComplete
-}
+};

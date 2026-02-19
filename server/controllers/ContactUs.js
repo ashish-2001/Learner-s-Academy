@@ -33,7 +33,7 @@ async function contactUs(req, res){
             message,
             contactNumber,
             countryCode
-        }
+        };
 
         const info = await mailSender(
             email, 
@@ -41,20 +41,21 @@ async function contactUs(req, res){
             `<html><body>${Object.keys(data).map((key) => {
                 return `<p>${key} : ${data[key]}</p>`;
             })}</body></html>`
-        )
+        );
         
         if(info){
             return res.status(200).json({
                 success: true,
                 message: "Email send successfully"
-            })
+            });
         } else{
             return res.status(403).json({
                 success: true,
                 message: "Email could not be send!"
             });
-        }
+        };
     }
+
     catch(e){
         return res.status(500).json({
             success: false,
@@ -62,8 +63,8 @@ async function contactUs(req, res){
             error: e.message
         })
     }
-}
+};
 
 export { 
     contactUs
-}
+};

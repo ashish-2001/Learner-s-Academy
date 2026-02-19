@@ -1,18 +1,9 @@
-import { success, z } from "zod";
 import { Course } from "../models/Course.js";
-import mongoose, { mongo } from "mongoose";
-import { CourseProgress } from "../models/CourseProgress.js";
+import mongoose from "mongoose";
 import { User } from "../models/Users.js";
 import { mailSender } from "../utils/mailSender.js";
-import { courseEnrollmentEmail } from "../mail/templates/CourseEnrollmentEmail.js";
 import { paymentSuccessEmail } from "../mail/templates/paymentSuccessEmail.js";
 import { instance } from "../config/razorpay.js";
-
-
-const capturePaymentValidator = z.object({
-    courses: z.array(z.string().regex(/^[0-9a-fA-F]{24}$/, "Invalid course Id format")).min(1, "at least one course id is required")
-})
-
 
 async function capturePayment(req, res) {
     
@@ -77,15 +68,15 @@ async function capturePayment(req, res) {
             return res.status(500).json({
                 success: true,
                 message: error.message
-            })
-        }
+            });
+        };
     } catch(error){
         return res.status(500).json({
             success: false,
             message: error.message
         });
-    }
-}
+    };
+};
 
 
 async function verifyPayment(req, res){
@@ -174,11 +165,11 @@ async function sendPaymentSuccessfulEmail(req, res){
             message: "Internal server error",
             error: e.message
         })
-    }
-}
+    };
+};
 
 export {
     capturePayment,
     verifyPayment,
     sendPaymentSuccessfulEmail
-}
+};
