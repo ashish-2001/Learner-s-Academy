@@ -108,8 +108,6 @@ async function updateSubSection(req, res) {
 
         const video = req?.files?.videoFile;
 
-        console.log(video);
-
         let uploadDetails = null;
 
         if(video){
@@ -126,8 +124,6 @@ async function updateSubSection(req, res) {
         }, { new: true });
 
         const updatedCourse = await Course.findById(courseId).populate({ path: "courseContent", populate: { path: "subSection" }}).exec();
-
-
 
         return res.status(200).json({
             success: true,

@@ -82,8 +82,8 @@ function courseEnrollmentEmail(courseName, name){
         </body>
         </html>
     `
-}
+};
 
 export {
     courseEnrollmentEmail
-}
+};
