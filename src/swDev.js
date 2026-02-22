@@ -7,4 +7,4 @@ function swDev(){
 
 export {
     swDev
-}
+};
