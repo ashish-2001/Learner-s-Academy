@@ -15,7 +15,7 @@ function ForgotPassword(){
     const handleOnSubmit = (e) => {
         e.preventDefault();
         dispatch(forgotPassword(email, setEmailSent));
-    }
+    };
 
     return(
         <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
@@ -63,9 +63,9 @@ function ForgotPassword(){
                 </div>
             )}
         </div>
-    )
-}
+    );
+};
 
 export {
     ForgotPassword
-}
+};
