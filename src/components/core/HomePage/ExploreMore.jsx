@@ -23,7 +23,7 @@ function ExploreMore(){
         const result = HomePageExplore.filter((course) => course.tag === value)
         setCourses(result[0].courses);
         setCurrentCard(result[0].courses[0].heading)
-    }
+    };
 
     return(
         <div>
@@ -63,10 +63,10 @@ function ExploreMore(){
                 })}
             </div>
         </div>
-    )
-}
+    );
+};
 
 
 export {
     ExploreMore
-}
+};
