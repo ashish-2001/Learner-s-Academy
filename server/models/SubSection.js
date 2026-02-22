@@ -23,4 +23,4 @@ const SubSection = mongoose.model("SubSection", subSectionSchema);
 
 export {
     SubSection
-}
+};
