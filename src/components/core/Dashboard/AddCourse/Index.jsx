@@ -25,7 +25,7 @@ return (
                 </div>
             </div>
         </div>
-    )
+    );
 };
 
 export {
