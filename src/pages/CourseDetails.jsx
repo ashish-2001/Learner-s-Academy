@@ -33,47 +33,44 @@ const CourseDetails = () => {
                 setCourseDetail(data);
             } else {
                 toast.error("Failed to fetch course details");
-            }
-        }
+            };
+        };
 
         if(courseId){
             getCourseDetails();
-        }
+        };
     }, [courseId, dispatch]);
 
     useEffect(() => {
 
-        if(courseDetail?.ratingAndReviews?.length > 0){
-            const count = GetAvgRating(courseDetail.ratingAndReviews);
+    if(courseDetail?.ratingAndReviews?.length > 0){
+        const count = GetAvgRating(courseDetail.ratingAndReviews);
             setAvgReviewCount(count);
-            }
+        };
     }, [courseDetail?.ratingAndReviews]);
 
     useEffect (() => {
-    if(courseDetail && user?._id){
-        const enrolled = courseDetail?.studentsEnrolled?.includes(user._id);
-        setAlreadyEnrolled(Boolean(enrolled));
-    }
-    }, [courseDetail, user?._id])
+        if(courseDetail && user?._id){
+            const enrolled = courseDetail?.studentsEnrolled?.includes(user._id);
+            setAlreadyEnrolled(Boolean(enrolled));
+        }
+    }, [courseDetail, user?._id]);
 
     const handelPayment = () => {
         if(token){
             BuyCourse(token, [courseId], user, navigate, dispatch);
-        }
-        else{
+        } else{
             navigate('/login');
-        }
-    }
+        };
+    };
 
-    //add to cart
     const handelAddToCart = () => {
         if(token){
-        dispatch(addToCart(courseDetail));
-        }
-        else{
+            dispatch(addToCart(courseDetail));
+        } else{
             navigate('/login');
-        }
-    }
+        };
+    };
 
     if(!courseDetail) return <div className='flex justify-center items-center h-screen'>
         <div className='custom-loader'></div>
@@ -87,7 +84,7 @@ const CourseDetails = () => {
         month: 'long',
         day: 'numeric'
     })
-    : 'Date not available'
+    : 'Date not available';
 
 return (
     <div>
@@ -337,9 +334,9 @@ return (
                     </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export {
     CourseDetails
-}
+};
