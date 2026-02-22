@@ -11,8 +11,8 @@ const DashboardChart = ({ details, currentChart }) => {
     const randomColor = (num) => {
         return Array.from({ length: num }, () => 
             `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
-        )
-    }
+        );
+    };
 
     const chartLabels = details?.map(course => course?.courseName) || [];
     const studentData = details?.map(course => course?.totalStudents) || [];
@@ -50,13 +50,13 @@ const DashboardChart = ({ details, currentChart }) => {
     };
 
 
-return (
-    <div className='mt-8'>
-        <Pie data={chartData} options={chartOptions}/>
-    </div>
-)
-}
+    return (
+        <div className='mt-8'>
+            <Pie data={chartData} options={chartOptions}/>
+        </div>
+    );
+};
 
 export {
     DashboardChart
-}
+};
