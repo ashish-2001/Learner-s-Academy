@@ -19,9 +19,7 @@ import { getCatalogPageData } from '../services/operations/pageAndcomponentDatas
 import { RatingSlider } from '../components/core/Ratings/RatingsSlider.jsx';
 
 
-
 function Home() {
-
     const dispatch = useDispatch();
     const [categories, setCategories] = useState([]);
     const [selectedCategoryId, setSelectedCategoryId] = useState(null);
@@ -34,9 +32,9 @@ function Home() {
             if(result && result.length > 0){
                 setCategories(result);
                 setSelectedCategoryId(result[0]._id);
-            }
+            };
             dispatch(setProgress(70));
-        }
+        };
         fetchCategories();
     }, [dispatch]);
 
@@ -44,22 +42,23 @@ function Home() {
         const fetchCatalogData = async() => {
             if(!selectedCategoryId){
                 return;
-            }
+            };
             dispatch(setProgress(50));
             const result = await getCatalogPageData(selectedCategoryId, dispatch);
             setCatalogPageData(result);
             dispatch(setProgress(100));
-        }
-        fetchCatalogData()
+        };
+        fetchCatalogData();
     }, [selectedCategoryId, dispatch]);
     
 return (
     <div>
         <div className=' mx-auto relative flex flex-col w-11/12 items-center justify-between text-white '>
-            <Link onClick={()=>{dispatch(setProgress(100))}}  to={"/signup"}>
+                <Link onClick={()=>{dispatch(setProgress(100))}}  to={"/signup"}>
             <div className=' group mt-16 p-1 mx-auto rounded-full bg-[#161D29] font-bold transition-all duration-200 hover: scale-95 w-fit max-w-[1260px]'>
                 <div className='flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-[#000814]'>
-            <p>Become an Instructor</p><FaArrowRight/>
+                    <p>Become an Instructor</p>
+                    <FaArrowRight/>
                 </div>
             </div>
             </Link>
@@ -88,7 +87,6 @@ return (
                     <source  src={banner} type="video/mp4" />
                 </video>
             </div>
-
         <div>
             <CodeBlocks 
                 position={"lg:flex-row"}
@@ -123,20 +121,17 @@ return (
             />
         </div>
         <div className=' mx-auto box-content w-full max-w-[650px] px- py-12 lg:max-w-[1260px]'>
-        <h2 className='section_heading mb-6 md:text-3xl text-xl'>
-            Most Popular Courses
-        </h2>
-        <Course_Slider courses={catalogPageData?.selectedCourses}/>
-    </div>       
+            <h2 className='section_heading mb-6 md:text-3xl text-xl'>
+                Most Popular Courses
+            </h2>
+            <Course_Slider courses={catalogPageData?.selectedCourses}/>
+        </div>       
         <div className=' mx-auto box-content w-full max-w-[650px] px- py-12 lg:max-w-[1260px]'>
-        <h2 className='section_heading mb-6 md:text-3xl text-xl'>
-            Students are learning
-        </h2>
-        <Course_Slider courses={catalogPageData?.differentCourses}/>
-    </div>       
-
-
-                {/* Code Section 2 */}
+            <h2 className='section_heading mb-6 md:text-3xl text-xl'>
+                Students are learning
+            </h2>
+            <Course_Slider courses={catalogPageData?.differentCourses}/>
+        </div>       
         <div>
             <CodeBlocks 
                 position={"lg:flex-row-reverse"}
@@ -169,76 +164,56 @@ return (
                 backgroundGradient={<div className='w-[372.95px] h-[257.05px] left-[calc(50%-372.95px/2-76.53px)] top-[calc(50%-257.05px/2-47.47px)] rounded-full bg-[linear-gradient(118.19deg,#1fa2ff_-3.62%,#12d8fa_50.44%,#a6ffcb_104.51%)] opacity-20 blur-[34px] [transform:matrix(1,0,-0.03,1,0,0)] absolute'></div>}
             />
         </div>
-
-        <ExploreMore/>
-
+            <ExploreMore/>
         </div>
         <div className='hidden lg:block lg:h-[200px]'></div>
-
-
-        <div className='bg-[#F9F9F9] text-[#2C333F]'>
-            <div className='homepage_bg h-[310px]'>
-
-                <div className='w-11/12 max-w-[1260px] flex flex-col items-center justify-between gap-5 mx-auto'>
-                    <div className='h-[150px]'></div>
-                    <div className='flex flex-row gap-7 text-white '>
-                        <CTAButton active={true} linkto={"/catalog/Web Development"}>
-                            <div className='flex items-center gap-3' >
-                                Explore Full Catalog
-                                <FaArrowRight />
-                            </div>
-                            
-                        </CTAButton>
-                        <CTAButton active={false} linkto={"/signup"}>
-                            <div>
-                                Learn more
-                            </div>
-                        </CTAButton>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div className='mx-auto w-11/12 max-w-[1260px] flex flex-col items-center justify-between gap-7'>
-
-                <div className='flex flex-row gap-5 mb-10 mt-[95px]'>
-                    <div className='text-4xl font-semibold w-[45%]'>
-                        Get the Skills you need for a
-                        <HighLightText text={"Job that is in demand"} />
-                    </div>
-
-                    <div className='flex flex-col gap-10 w-[40%] items-start'>
-                    <div className='text-[16px]'>
-                    The modern Learners Academy is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.
-                    </div>
-                    <CTAButton active={true} linkto={"/signup"}>
-                        <div>
-                            Learn more
+            <div className='bg-[#F9F9F9] text-[#2C333F]'>
+                <div className='homepage_bg h-[310px]'>
+                    <div className='w-11/12 max-w-[1260px] flex flex-col items-center justify-between gap-5 mx-auto'>
+                        <div className='h-[150px]'></div>
+                        <div className='flex flex-row gap-7 text-white '>
+                            <CTAButton active={true} linkto={"/catalog/Web Development"}>
+                                <div className='flex items-center gap-3' >
+                                    Explore Full Catalog
+                                    <FaArrowRight />
+                                </div>  
+                            </CTAButton>
+                            <CTAButton active={false} linkto={"/signup"}>
+                                <div>
+                                    Learn more
+                                </div>
+                            </CTAButton>
                         </div>
-                    </CTAButton>
                     </div>
-
                 </div>
-                
-                
-
-                <TimelineSection />
-
-                <LearningLanguageSection />
-
+                <div className='mx-auto w-11/12 max-w-[1260px] flex flex-col items-center justify-between gap-7'>
+                    <div className='flex flex-row gap-5 mb-10 mt-[95px]'>
+                        <div className='text-4xl font-semibold w-[45%]'>
+                            Get the Skills you need for a
+                            <HighLightText text={"Job that is in demand"} />
+                        </div>
+                        <div className='flex flex-col gap-10 w-[40%] items-start'>
+                            <div className='text-[16px]'>
+                                The modern Learners Academy is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.
+                            </div>
+                            <CTAButton active={true} linkto={"/signup"}>
+                                <div>
+                                    Learn more
+                                </div>
+                            </CTAButton>
+                        </div>
+                    </div>
+                    <TimelineSection />
+                    <LearningLanguageSection />
+                </div>
             </div>
-        </div>
-    <div className='w-11/12 mx-auto max-w-[1260px] flex-col items-center justify-between gap-8 first-letter bg-[#000814] text-white'>
-
+        <div className='w-11/12 mx-auto max-w-[1260px] flex-col items-center justify-between gap-8 first-letter bg-[#000814] text-white'>
             <InstructorSection />
-
-            {/* Review Slider here */}
-    </div>
-    <div className=' mb-16 mt-3'>
-        <h2 className='text-center text-2xl md:text-4xl font-semibold mt-8 text-[#F1F2FF] mb-5'>Reviews from other learners</h2>
+        </div>
+        <div className=' mb-16 mt-3'>
+            <h2 className='text-center text-2xl md:text-4xl font-semibold mt-8 text-[#F1F2FF] mb-5'>Reviews from other learners</h2>
             <RatingSlider/>
-    </div>
+        </div>
     </div>
 )
 }
