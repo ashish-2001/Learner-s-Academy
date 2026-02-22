@@ -23,7 +23,7 @@ import { Settings } from "./components/core/Dashboard/Settings";
 import { EnrolledCourses } from "./components/core/Dashboard/EnrolledCourses";
 import { Cart } from "./components/core/Dashboard/Cart/Index";
 import { ACCOUNT_TYPE } from "./utils/constants.js";
-import { AddCourse } from "./components/core/Dashboard/AddCourse/index"
+import { AddCourse } from "./components/core/Dashboard/AddCourse/index";
 import { MyCourses } from "./components/core/Dashboard/MyCourses/MyCourses";
 import { EditCourse } from "./components/core/Dashboard/EditCourse/EditCourse";
 import { Catalog } from "./pages/Catalog";
@@ -32,9 +32,9 @@ import { CourseDetails } from "./pages/CourseDetails";
 import { SearchCourse } from "./pages/SearchCourse";
 import { ViewCourse } from "./pages/ViewCourse";
 import { VideoDetails } from "./components/core/ViewCourse/VideoDetails";
-import { PurchaseHistory } from "./components/core/Dashboard/PurchaseHistory"
+import { PurchaseHistory } from "./components/core/Dashboard/PurchaseHistory";
 import { InstructorDashboard } from "./components/core/Dashboard/InstructorDashboard/InstructorDashboard";
-import { Error } from "./pages/Error"
+import { Error } from "./pages/Error";
 import { RiWifiOffLine } from "react-icons/ri";
 import { AdminPanel } from "./components/core/Dashboard/AdminPanel";
 
