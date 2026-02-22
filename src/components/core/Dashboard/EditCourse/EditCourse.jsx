@@ -25,9 +25,9 @@ const EditCourse = () => {
                 console.log("Fetched Courses", result.courseDetails);
                 dispatch(setEditCourse(true));
                 dispatch(setStep(1));
-            }
+            };
             setLoading(false);
-        }
+        };
         populateCourse();
     }, [courseId, token, dispatch]);
 
@@ -39,9 +39,9 @@ const EditCourse = () => {
                 
             }
         </div>
-    )
-}
+    );
+};
 
 export {
     EditCourse
-}
+};
