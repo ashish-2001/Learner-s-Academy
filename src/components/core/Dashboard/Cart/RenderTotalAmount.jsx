@@ -17,10 +17,10 @@ function RenderTotalAmount(){
         if(token){
             const courses = cart.map((course) => course._id);
             BuyCourse(token, courses, user, navigate, dispatch);
-        }else{
+        } else{
             navigate('/login');
-        }
-    }
+        };
+    };
 
     return(
         <div className=" flex flex-col items-center justify-center min-w-[280px] rounded-md border-[1px] border-[#2C333F] bg-[#161D29] p-3 mb-8">
@@ -34,9 +34,9 @@ function RenderTotalAmount(){
                 ClassName={"flex items-center w-full bg-[#FFD60A] cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-[#000814] justify-center"}
             />
         </div>
-    )
-}
+    );
+};
 
 export {
     RenderTotalAmount
-}
+};
