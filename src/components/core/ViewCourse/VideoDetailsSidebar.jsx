@@ -15,20 +15,20 @@ function VideoDetailsSidebar({ setReviewModal }){
 
         useEffect(() => {
             ;(() => {
-                if(!courseSectionData.length) return
+                if(!courseSectionData.length) return;
                 const currentSectionIndex = courseSectionData.findIndex(
                     (data) => data._id === sectionId
-                )
+                );
 
                 const currentSubSectionIndex = courseSectionData?.[currentSectionIndex]?.subSection.findIndex(
                     (data) => data._id === subSectionId
-                )
+                );
 
-                const activeSubSectionId = courseSectionData[currentSectionIndex]?.subSection?.[currentSubSectionIndex]?._id
-                setActiveStatus(courseSectionData?.[currentSectionIndex]?._id)
-                setVideoBarActive(activeSubSectionId)
-            })()
-        }, [courseSectionData, courseEntireData, location.pathname])
+                const activeSubSectionId = courseSectionData[currentSectionIndex]?.subSection?.[currentSubSectionIndex]?._id;
+                setActiveStatus(courseSectionData?.[currentSectionIndex]?._id);
+                setVideoBarActive(activeSubSectionId);
+            })();
+        }, [courseSectionData, courseEntireData, location.pathname]);
     
 
     return (
@@ -94,10 +94,10 @@ function VideoDetailsSidebar({ setReviewModal }){
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
 
 export {
     VideoDetailsSidebar
-}
+};
