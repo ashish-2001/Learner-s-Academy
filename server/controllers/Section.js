@@ -5,7 +5,7 @@ import { Section } from "../models/Section.js";
 const sectionValidator = z.object({
     sectionName: z.string().min(1, "Section name is required"),
     courseId: z.string().min(1, "Course id is required")
-})
+});
 
 async function createSection(req, res){
 
@@ -17,8 +17,8 @@ async function createSection(req, res){
                 success: false,
                 message: "All fields are required",
                 errors: parsedResult.error.errors
-            })
-        }
+            });
+        };
 
         const { sectionName, courseId } = parsedResult.data;
 
@@ -29,15 +29,13 @@ async function createSection(req, res){
                 success: false,
                 message: "Course not found"
             });
-        }
+        };
 
         const newSection = await Section.create({
             sectionName
-        })
+        });
 
-        const updatedCourse = await Course.findByIdAndUpdate(
-            courseId,
-            {
+        const updatedCourse = await Course.findByIdAndUpdate( courseId, {
                 $push: { courseContent: newSection._id }
             }, 
             {
@@ -48,35 +46,34 @@ async function createSection(req, res){
             populate: {
                 path: "subSection"
             }
-        }).exec()
+        }).exec();
 
         if(!updatedCourse){
             return res.status(404).json({
                 success: false,
                 message: "Course not found"
-            })
-        }
+            });
+        };
 
         return res.status(200).json({
             success: true,
             message: "Section created successfully",
             updatedCourse
-        })
-    }
-    catch(e){
+        });
+    } catch(e){
         return res.status(500).json({
             success: false,
             message: "Interval server error",
             error: e.message
-        })
-    }
-}
+        });
+    };
+};
 
 const updateSectionValidator = z.object({
     sectionName: z.string().min(1, "Section name is required"),
     sectionId: z.string().min(1, "Section id is required"),
     courseId: z.string().min(1, "Course id is required")
-})
+});
 
 async function updateSection(req, res){
     try{
@@ -87,8 +84,8 @@ async function updateSection(req, res){
                 success: false,
                 message: "All fields are required",
                 errors: parsedResult.error.errors
-            })
-        }
+            });
+        };
 
         const { sectionName, sectionId, courseId } = parsedResult.data;
 
@@ -96,49 +93,48 @@ async function updateSection(req, res){
             sectionId,
             { sectionName },
             { new: true }
-        )
+        );
 
         if(!section){
             return res.status(404).json({
                 success: false,
                 message: "Section not found"
-            })
-        }
+            });
+        };
 
         const updatedCourse = await Course.findById(courseId).populate({
             path: "courseContent",
             populate: {
                 path: "subSection"
             }
-        }).exec()
+        }).exec();
 
         if(!updatedCourse){
             return res.status(404).json({
                 success: false,
                 message: "Course not found"
-            })
-        }
+            });
+        };
 
         return res.status(200).json({
             success: true,
             message: "Section updated successfully",
             updateSection: section,
             updatedCourse
-        })
-    }
-    catch(e){
+        });
+    } catch(e){
         return res.status(500).json({
             success: false,
             message: "Internal server error",
             error: e.message
-        })
-    }
-}
+        });
+    };
+};
 
 const deleteSectionValidator = z.object({
     sectionId: z.string().min(1, "Section id is required"),
     courseId: z.string().min(1, "Course id is required")
-})
+});
 
 async function deleteSection(req, res){
     try{
@@ -149,8 +145,8 @@ async function deleteSection(req, res){
                 success: false,
                 message: "All fields are required",
                 errors: parsedResult.error.errors
-            })
-        }
+            });
+        };
 
         const { courseId, sectionId } = parsedResult.data;
 
@@ -166,19 +162,18 @@ async function deleteSection(req, res){
             success: true,
             message: "Section deleted",
             data: updatedCourse
-        })
-    }
-    catch(e){
+        });
+    } catch(e){
         return res.status(500).json({
             success: false,
             message: "Internal server error",
             error: e.message
-        })
-    }
-}
+        });
+    };
+};
 
 export{
     createSection,
     updateSection,
     deleteSection
-}
+};
