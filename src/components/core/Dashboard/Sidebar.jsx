@@ -61,9 +61,9 @@ function Sidebar(){
                 {confirmationModal && <ConfirmationModalData modalData={confirmationModal} />}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export {
     Sidebar
-}
+};
