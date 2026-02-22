@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { mailSender } from "../utils/mailSender.js";
 
-
 const contactUsValidator = z.object({
     email: z.string().email("Invalid email address"),
     firstName: z.string().min(1, "First name is required"),
@@ -21,8 +20,8 @@ async function contactUs(req, res){
                 success: false,
                 message: "All fields are required",
                 errors: parsedResult.error.errors
-            })
-        }
+            });
+        };
 
         const { email, firstName, lastName, message, contactNumber, countryCode } = parsedResult.data;
 
@@ -54,15 +53,13 @@ async function contactUs(req, res){
                 message: "Email could not be send!"
             });
         };
-    }
-
-    catch(e){
+    } catch(e){
         return res.status(500).json({
             success: false,
             message: "Internal server error!",
             error: e.message
-        })
-    }
+        });
+    };
 };
 
 export { 
