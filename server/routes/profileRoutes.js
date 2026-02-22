@@ -16,6 +16,7 @@ router.put("/updateDisplayPicture",auth, updateDisplayPicture);
 
 router.get("/getInstructorDashboardDetails", auth, isInstructor, instructorDashboard);
 
+
 export {
     router
-}
+};
