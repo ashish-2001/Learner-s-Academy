@@ -6,10 +6,8 @@ import { GetAvgRating } from '../utils/avgRating';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { BsGlobe } from 'react-icons/bs';
 import { FaShareSquare } from 'react-icons/fa';
-import { IoVideocamOutline } from "react-icons/io5"
 import { addToCart } from '../slices/cartSlice';
 import { ACCOUNT_TYPE } from '../utils/constants.js';
-import { FaChevronDown } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { BuyCourse } from '../services/operations/studentFeaturesAPI';
