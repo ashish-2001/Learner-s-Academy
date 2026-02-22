@@ -29,8 +29,8 @@ function StatsComponent(){
             </div>
         </section>
     )
-}
+};
 
 export {
     StatsComponent
-}
+};
