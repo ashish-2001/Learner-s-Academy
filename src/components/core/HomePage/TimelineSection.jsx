@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 import { Logo1 } from '../../../assets/timelineLogo/index.js';
 import { Logo2 } from "../../../assets/timelineLogo/index.js";
@@ -29,17 +29,16 @@ const timeline = [
 ];
 
 const TimelineSection = () => {
+
 return (
     <div>
-    <div className='flex flex-col lg:flex-row gap-15 items-center'>
-
-        <div className='lg:w-[45%] flex flex-col gap-5 p-3 lg:p-0'>
-            {
-                timeline.map( (element, index) => {
-                    return (
-                        <div className='flex flex-row gap-6' key={index}>
-
-                            <div className='w-[50px] h-[50px] bg-white flex items-center'>
+        <div className='flex flex-col lg:flex-row gap-15 items-center'>
+            <div className='lg:w-[45%] flex flex-col gap-5 p-3 lg:p-0'>
+                {
+                    timeline.map( (element, index) => {
+                        return (
+                            <div className='flex flex-row gap-6' key={index}>
+                                <div className='w-[50px] h-[50px] bg-white flex items-center'>
                                 <img src={element.Logo} />
                             </div>
 
@@ -56,30 +55,24 @@ return (
         <div className='relative shadow-[#118AB2]'>
 
             <img  src=""
-            alt="timelineImage"
-            className='shadow-white object-cover h-fit'
+                alt="timelineImage"
+                className='shadow-white object-cover h-fit'
             />
-
-            <div className='absolute bg-[#014A32] flex flex-row text-white uppercase py-7
-                            left-[50%] translate-x-[-50%] translate-y-[-50%]'>
-                <div className='flex flex-row gap-5 items-center border-r border-[#05A77B] px-7'>
-                    <p className='text-3xl font-bold'>10</p>
-                    <p className='text-[#05A77B] text-sm'>Years of Experience</p>
+                <div className='absolute bg-[#014A32] flex flex-row text-white uppercase py-7 left-[50%] translate-x-[-50%] translate-y-[-50%]'>
+                    <div className='flex flex-row gap-5 items-center border-r border-[#05A77B] px-7'>
+                        <p className='text-3xl font-bold'>10</p>
+                        <p className='text-[#05A77B] text-sm'>Years of Experience</p>
+                    </div>
+                        <div className='flex gap-5 items-center px-7'>
+                            <p className='text-3xl font-bold'>250</p>
+                            <p className='text-[#05A77B] text-sm'>TYpe of Courses</p>
+                        </div>
+                    </div>
                 </div>
-
-                <div className='flex gap-5 items-center px-7'>
-                <p className='text-3xl font-bold'>250</p>
-                    <p className='text-[#05A77B] text-sm'>TYpe of Courses</p>
-                </div>
-
             </div>
-
         </div>
-
-        </div>
-    </div>
-    )
-}
+    );
+};
 
 export {
     TimelineSection
