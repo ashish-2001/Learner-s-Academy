@@ -41,7 +41,7 @@ cloudinaryConnect();
 
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/profile", profileRoutes);
-console.log("It is running")
+console.log("It is running");
 app.use("/api/v1/contact", contactUsRoutes);
 app.use("/api/v1/course", courseRoutes);
 app.use("/api/v1/payment", paymentRoutes);
@@ -50,7 +50,7 @@ app.get("/", (req, res) => {
 	return res.status(200).json({
 		success: true,
 		message: "Welcome to the API"
-	})
+	});
 });
 
 app.listen(PORT, () => {
