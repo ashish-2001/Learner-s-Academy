@@ -131,9 +131,9 @@ const InstructorDashboard = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export { 
     InstructorDashboard
-}
+};
