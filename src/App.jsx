@@ -54,7 +54,7 @@ function App() {
       <Navbar setProgress={setProgress}></Navbar>
       {!navigator.onLine && (
         <div className="flex text-[#fff] text-center p-2 bg-[#838894] justify-center gap-2 items-center">
-          <RiWifiOffLine size={22} />
+          <RiWifiOffLine size={22}/>
           Please check your internet connection.
           <button
             className="ml-2 bg-[#585D69] rounded-md p-1 px-2 text-[#fff]"
@@ -63,18 +63,18 @@ function App() {
             Retry
           </button>
         </div>
-      )}
-      <ScrollToTop />
+      )};
+      <ScrollToTop/>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home/>} />
 
-        <Route path="/catalog/:catalog" element={<Catalog />} />
+        <Route path="/catalog/:catalog" element={<Catalog/>} />
 
         <Route
           path="/login"
           element={
             <OpenRoute>
-              <Login />
+              <Login/>
             </OpenRoute>
           }
         />
@@ -83,64 +83,64 @@ function App() {
           path="/signup"
           element={
             <OpenRoute>
-              <Signup />
+              <Signup/>
             </OpenRoute>
           }
         />
 
-        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/forgot-password" element={<ForgotPassword/>} />
 
-        <Route path="/update-password/:id" element={<ResetPassword />} />
+        <Route path="/update-password/:id" element={<ResetPassword/>} />
 
-        <Route path="/verify-email" element={<VerifyOtp />} />
+        <Route path="/verify-email" element={<VerifyOtp/>} />
 
-        <Route path="/about" element={<About />} />
+        <Route path="/about" element={<About/>} />
 
-        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/contact" element={<ContactUs/>} />
 
-        <Route path="/courses/:courseId" element={<CourseDetails />} />
+        <Route path="/courses/:courseId" element={<CourseDetails/>} />
 
-        <Route path="/search/:searchQuery" element={<SearchCourse />} />
+        <Route path="/search/:searchQuery" element={<SearchCourse/>} />
 
         <Route
           element={
             <PrivateRoute>
-              <Dashboard />
+              <Dashboard/>
             </PrivateRoute>
           }
         >
-          <Route path="dashboard/my-profile" element={<MyProfile />} />
-          <Route path="dashboard/settings" element={<Settings />} />
+          <Route path="dashboard/my-profile" element={<MyProfile/>} />
+          <Route path="dashboard/settings" element={<Settings/>} />
           {user?.accountType === ACCOUNT_TYPE.STUDENT && (
             <>
-              <Route path="dashboard/cart" element={<Cart />} />
+              <Route path="dashboard/cart" element={<Cart/>} />
               <Route
                 path="dashboard/enrolled-courses"
-                element={<EnrolledCourses />}
+                element={<EnrolledCourses/>}
               />
               <Route
                 path="dashboard/purchase-history"
-                element={<PurchaseHistory />}
+                element={<PurchaseHistory/>}
               />
             </>
           )}
           {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
             <>
-              <Route path="dashboard/add-course" element={<AddCourse />} />
-              <Route path="dashboard/my-courses" element={<MyCourses />} />
+              <Route path="dashboard/add-course" element={<AddCourse/>} />
+              <Route path="dashboard/my-courses" element={<MyCourses/>} />
               <Route
                 path="dashboard/edit-course/:courseId"
                 element={<EditCourse />}
               />
               <Route
                 path="dashboard/instructor"
-                element={<InstructorDashboard />}
+                element={<InstructorDashboard/>}
               />
             </>
           )}
           {user?.accountType === ACCOUNT_TYPE.ADMIN && (
             <>
-              <Route path="course/createCategory" element={<AdminPanel />} />
+              <Route path="course/createCategory" element={<AdminPanel/>} />
             </>
           )}
         </Route>
