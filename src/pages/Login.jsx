@@ -3,6 +3,7 @@ import { Template } from "../components/core/auth/Template";
 import { login } from "../assets/images/index";
 
 function Login(){
+    
     return(
         <Template
             title={"Welcome back"}
@@ -11,10 +12,9 @@ function Login(){
             formType={"login"}
             image={login}
         />
-    )
-    
-}
+    );
+};
 
 export {
     Login
-}
+};
