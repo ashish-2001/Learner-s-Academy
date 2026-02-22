@@ -81,9 +81,9 @@ function paymentSuccessEmail(name, amount, orderId, paymentId){
         </div>
     </body>
     
-    </html>`
-}
+    </html>`;
+};
 
 export {
     paymentSuccessEmail
-}
+};
