@@ -11,9 +11,9 @@ function Signup(){
             formType={"signup"}
             image={signup}
         />
-    )
-}
+    );
+};
 
 export {
     Signup
-}
+};
