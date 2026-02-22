@@ -76,10 +76,10 @@ function LearningGrid(){
                 )
             })}
         </div>
-    )
-}
+    );
+};
 
 
 export {
     LearningGrid
-}
+};
