@@ -13,8 +13,8 @@ const rootReducer = combineReducers({
     cart: cartReducer,
     loadingBar: loadingBarReducer,
     viewCourse: viewCourseReducer
-})
+});
 
 export {
     rootReducer
-}
+};
