@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { ContactUsForm } from '../../contactUs/ContactUsForm';
 
 const ContactFormSection = () => {
@@ -15,8 +15,8 @@ const ContactFormSection = () => {
       </div>
     </div>
   )
-}
+};
 
 export { 
     ContactFormSection
-}
+};
