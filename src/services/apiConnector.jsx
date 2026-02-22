@@ -4,8 +4,6 @@ const axiosInstance = axios.create({});
 
 function apiConnector(method, url, bodyData, headers, params){
 
-    console.log("Api connector called", method, url, bodyData, headers, params)
-
     return axiosInstance({
         method: method,
         url: url,
@@ -14,10 +12,10 @@ function apiConnector(method, url, bodyData, headers, params){
             "Content-Type": "application/json"
         },
         params: params ? params : null
-    })
-}
+    });
+};
 
 export { 
     axiosInstance,
     apiConnector
-}
+};
