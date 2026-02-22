@@ -711,8 +711,8 @@ const CountryCode = [
         "code": "+691", 
         "country": "Micronesia" 
     }
-]
+];
 
 export {
     CountryCode
-}
+};
