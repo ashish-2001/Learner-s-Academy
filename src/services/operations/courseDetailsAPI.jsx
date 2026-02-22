@@ -31,19 +31,19 @@ async function getAllCourses(){
     let result = [];
 
     try{
-        const response = await apiConnector("GET", GET_ALL_COURSE_API)
+        const response = await apiConnector("GET", GET_ALL_COURSE_API);
         if(!response?.data?.success){
-            throw new Error("Could not fetch course categories")
+            throw new Error("Could not fetch course categories");
         }
-        result = response?.data?.data
+        result = response?.data?.data;
     }
     catch(error){
         console.log("GET_ALL_COURSE_API API ERROR..........", error)
         toast.error(error.message)
-    }
+    };
     toast.dismiss(toastId)
     return result;
-}
+};
 
 async function fetchCourseDetails(courseId, dispatch){
     
@@ -53,22 +53,19 @@ async function fetchCourseDetails(courseId, dispatch){
     try{
         const response = await apiConnector("GET", `${COURSE_DETAILS_API}?courseId=${courseId}`);
 
-        console.log("COURSE_DETAILS_API API RESPONSE............", response.data);
-
         if(!response?.data?.success){
-            throw new Error(response.data.message || "Failed to fetch course details")
-        }
+            throw new Error(response.data.message || "Failed to fetch course details");
+        };
 
         result = response.data.data;
 
-        } catch(error){
-            console.log("COURSE_DETAIL_API API ERROR..........", error)
-            result = error.response.data
-        }
+    } catch(error){
+        result = error.response.data;
+    };
 
-        dispatch(setProgress(100));
-        return result;
-}
+    dispatch(setProgress(100));
+    return result;
+};
 
 async function fetchCourseCategories(){
     let result = []
