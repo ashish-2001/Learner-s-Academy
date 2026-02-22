@@ -34,8 +34,8 @@ const signUp = async (req, res) =>{
             return res.status(403).json({
                 message: "Incorrect input",
                 success: false
-            })
-        }
+            });
+        };
         
         const { firstName, lastName, email, accountType, password, confirmPassword, otp } = parsedResult.data;
 
@@ -44,7 +44,7 @@ const signUp = async (req, res) =>{
                 success: false,
                 message: 'Password and confirm password does not match'
             });
-        }
+        };
 
         const existingUser = await User.findOne({
             email,
@@ -55,8 +55,8 @@ const signUp = async (req, res) =>{
             return res.status(411).json({
                 message: "User already exists",
                 success: false
-            })
-        }
+            });
+        };
 
         const otpRecord = await Otp.findOne({ email, accountType, otp: otp.toString() })
         .sort({createdAt: -1});
@@ -65,8 +65,8 @@ const signUp = async (req, res) =>{
             return res.status(400).json({
                 success: false,
                 message: "Invalid Otp"
-            })
-        }
+            });
+        };
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -96,56 +96,53 @@ const signUp = async (req, res) =>{
             userId: user._id,
             accountType: user.accountType,
             email: user.email
-        }, JWT_SECRET)
+        }, JWT_SECRET);
 
         return res.status(200).json({
             message: "User registered successfully",
             user,
             token,
             success: true
-        })
-    }
-    catch(e){
+        });
+    } catch(e){
         console.error(e)
         return res.status(500).json({
             message: "User not registered! Please try again",
             success: false
-        })
-    }
-}
+        });
+    };
+};
 
 const signInValidator = z.object({
     email: z.string().email("Invalid email address"),
     password: z.string().min(6, "Password must be at least 6 characters")
-})
+});
 
 const signIn = async(req, res) => {
 
-        const result = signInValidator.safeParse(req.body);
-        
-        if(!result.success){
-            return res.status(403).json({
-                message: "All the fields are required",
-                success: false
-            })
-        }
+    const result = signInValidator.safeParse(req.body);
+    
+    if(!result.success){
+        return res.status(403).json({
+            message: "All the fields are required",
+            success: false
+        });
+    };
 
-        const { email, password } = result.data;
+    const { email, password } = result.data;
 
-        const user = await User.findOne({
-            email
-        }).populate("additionalDetails");
+    const user = await User.findOne({
+        email
+    }).populate("additionalDetails");
 
-        if(!user){
-            return res.status(404).json({
-                message: "User does not exist! Signup first",
-                success: false
-            })
-        }
-
-        const isPasswordMatch = await bcrypt.compare(password, user.password);
-
-        if(isPasswordMatch){
+    if(!user){
+        return res.status(404).json({
+            message: "User does not exist! Signup first",
+            success: false
+        });
+    };
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    if(isPasswordMatch){
             const token = jwt.sign({
             userId: user._id,
             accountType: user.accountType,
@@ -153,15 +150,12 @@ const signIn = async(req, res) => {
         }, JWT_SECRET, {
             expiresIn: "24h"
         });
-
         user.token = token;
         user.password = undefined;
-
         const options = {
             expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
             httpOnly: true
-        }
-
+        };
         return res.cookie("token", token, options).status(200).json({
             token,
             user,
@@ -172,14 +166,14 @@ const signIn = async(req, res) => {
         return res.status(401).json({
             success: false,
             message: "Password is incorrect"
-        })
-    }
+        });
+    };
 };
 
 const otpValidator = z.object({
     email: z.string().email("Invalid Email Address"),
     accountType: z.enum([ACCOUNT_TYPE.STUDENT, ACCOUNT_TYPE.INSTRUCTOR, ACCOUNT_TYPE.ADMIN])
-})
+});
 
 const sendOtp = async (req, res) => {
 
@@ -190,22 +184,22 @@ const sendOtp = async (req, res) => {
             return res.status(400).json({
                 message: "Input field is required",
                 success: false
-            })
-        }
+            });
+        };
 
         const { email, accountType } = result1.data;
 
         const checkUserPresent = await User.findOne({
             email,
             accountType
-        })
+        });
 
         if(checkUserPresent){
             return res.status(401).json({
                 message: "User already exists!",
                 success: false
-            })
-        }
+            });
+        };
 
         let otp;
         let otpExists;
@@ -224,69 +218,58 @@ const sendOtp = async (req, res) => {
             success: true,
             message: "Otp sent successfully",
             otp
-        })
-            
-        }catch(e){
-            console.error(e);
-            return res.status(500).json({
-                success: false,
-                message: e.message
-            })
-        }
-
-    }
+        }); 
+    } catch(e){
+        console.error(e);
+        return res.status(500).json({
+            success: false,
+            message: e.message
+        });
+    };
+};
 
 const changePassword = async (req, res) =>{
 
     try{
         const userDetails = await User.findById(req.user.userId);
-
         if(!userDetails){
             return res.status(404).json({
                 success: false,
                 message: "User not found"
-            })
-        }
-
+            });
+        };
         const { oldPassword, newPassword, confirmPassword } = req.body;
-
         const isPasswordMatch = await bcrypt.compare(
             oldPassword, 
             userDetails.password
         );
-
         if(oldPassword === newPassword){
             return res.status(400).json({
                 success: false,
                 message: "New Password cannot be same as old password"
-            })
-        }
-
+            });
+        };
         if(!isPasswordMatch){
             return res.status(401).json({
                 message: "Password is Incorrect",
                 success: false
-            })
+            });
         };
-
         if(newPassword !== confirmPassword){
             return res.status(400).json({
                 success: false,
                 message: "The password and confirm password does not match"
             });
-        }
+        };
 
         const encryptedPassword = await bcrypt.hash(newPassword, 10);
-        const updatedUserDetails = await User.findByIdAndUpdate(
-            req.user.userId,
-            {
+        const updatedUserDetails = await User.findByIdAndUpdate( req.user.userId, {
                 password: encryptedPassword,
             }, 
             {
                 new: true
             }
-        )
-
+        );
         try{
             const emailResponse = await mailSender(
                 updatedUserDetails.email,
@@ -295,30 +278,27 @@ const changePassword = async (req, res) =>{
                     updatedUserDetails.email,
                     `Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
                 )
-            )
+            );
             console.log("Email sent successfully", emailResponse.response)
-        }
-        catch(e){
+        } catch(e){
             console.error(e)
             return res.status(500).json({
                 success: false,
                 message: "Error occurred while sending email!"
-            })
-            }
-
-            return res.status(200).json({
-                success: true,
-                message: "Password updated successfully"
-            })
-    }
-    catch(e){
+            });
+        };
+        return res.status(200).json({
+            success: true,
+            message: "Password updated successfully"
+        });
+    } catch(e){
         console.error(e);
         return res.status(500).json({
             message: "Error occurred while updating password",
             success: false,
             error: e.message
         });
-    }
+    };
 };
 
 
@@ -327,4 +307,4 @@ export {
     signIn,
     sendOtp,
     changePassword
-}
+};
