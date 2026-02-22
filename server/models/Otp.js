@@ -34,17 +34,15 @@ async function sendVerificationEmail(email, otp){
             email,
             "Verification Email",
             otpTemplate(otp)
-        )
-        console.log("Email sent successfully:-", mailResponse)
+        );
+        console.log("Email sent successfully:-", mailResponse);
     }catch(e){
-        console.log("Error occurred while sending email:-", e.message)
-        throw new Error("Failed to send verification email")
-    }
-}
+        console.log("Error occurred while sending email:-", e.message);
+        throw new Error("Failed to send verification email");
+    };
+};
 
 otpSchema.pre("save", async function (next){
-    console.log("New document saved to the database")
-
     if(this.isNew){
         await sendVerificationEmail(this.email, this.otp);
     }
@@ -55,4 +53,4 @@ const Otp = mongoose.model("Otp", otpSchema);
 
 export {
     Otp
-}
+};
