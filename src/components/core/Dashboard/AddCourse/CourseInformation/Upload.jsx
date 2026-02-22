@@ -1,12 +1,12 @@
-import React from 'react'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import { useFormContext } from 'react-hook-form'
-import { useSelector } from 'react-redux'
+import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 
 const Upload = ({ name, label }) => {
 
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState(null);
     const {editCourse, course} = useSelector((state) => state.course);
 
     const {
@@ -15,28 +15,28 @@ const Upload = ({ name, label }) => {
     } = useFormContext();
 
     const handelOnChange = (e) => {
-        const file = e.target.files[0];
-        if(!file) return;
-        setValue(name, file, { shouldValidate: true })
+      const file = e.target.files[0];
+      if(!file) return;
+      setValue(name, file, { shouldValidate: true });
 
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setImage(reader.result);
-            }
-            reader.readAsDataURL(file);
-    }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+          setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    };
 
     useEffect(() => {
         if(editCourse && course?.thumbnailImage) {
             setImage(course?.thumbnailImage);
             setValue(name, course.thumbnailImage);
-        }
+        };
     }, [editCourse, course, name, setValue]);
 
     const removeImage = () => {
       setImage(null);
       setValue(name, null, { shouldValidate: true });
-    }
+    };
 
   return (
     <div>
@@ -114,9 +114,9 @@ const Upload = ({ name, label }) => {
 ) 
 }
 </div>
-)
-}
+);
+};
 
 export {
     Upload
-}
+};
