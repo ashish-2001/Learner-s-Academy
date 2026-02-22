@@ -42,7 +42,6 @@ router.post("/searchCourse", searchCourse);
 router.post("/updateCourseProgress", auth, isStudent, markLectureAsComplete);
 
 
-
 export {
     router
-}
+};
