@@ -7,7 +7,7 @@ const createRatingValidator = z.object({
     rating: z.number().min(1, "Rating must be at least 1").max(5, "Rating can not be more than 5"),
     review: z.string().min(1, "Review can not be empty"),
     courseId: z.string().min(1, "Course id is required")
-})
+});
 
 async function createRating(req, res){
 
@@ -19,8 +19,8 @@ async function createRating(req, res){
             return res.status(400).json({
                 success: false,
                 message: "Validation failed",
-            })
-        }
+            });
+        };
 
         const { rating, review, courseId } = parsed.data;
 
@@ -37,8 +37,8 @@ async function createRating(req, res){
             return res.status(404).json({
                 success: false,
                 message: "Student is not enrolled in this course"
-            })
-        }
+            });
+        };
 
         const alreadyReviewed = await RatingAndReview.findOne({
             user: userId,
@@ -49,7 +49,7 @@ async function createRating(req, res){
             return res.status(404).json({
                 success: false,
                 message: "Course already reviewed by user"
-            })
+            });
         };
 
         const ratingAndReview = await RatingAndReview.create({
@@ -60,16 +60,16 @@ async function createRating(req, res){
         });
 
         await Course.findByIdAndUpdate(courseId, {
-                $push: {
-                    ratingAndReviews: ratingAndReview._id
-                }
+            $push: {
+                ratingAndReviews: ratingAndReview._id
+            }
         }, { new: true });
 
         return res.status(200).json({
             success: true,
             message: "Rating added successfully",
             data: ratingAndReview
-        })
+        });
     } catch(e){
         return res.status(500).json({
             success: false,
@@ -104,22 +104,20 @@ async function getAverageRating(req, res){
             return res.status(200).json({
                 success: true,
                 averageRating: result[0].averageRating
-            })
-        }
-        else{
+            });
+        } else{
             return res.status(200).json({
                 success: true,
                 averageRating: 0
             });
-        }
-    }
-    catch(e){
+        };
+    } catch(e){
         return res.status(500).json({
             success: false,
             errors: e.message
-        })
-    }
-}
+        });
+    };
+};
 
 async function getAllRating(req, res){
     try{
@@ -136,21 +134,18 @@ async function getAllRating(req, res){
             success: true,
             message: "All reviews fetched successfully",
             data: allReviews
-        })
-    }
-    catch(e){
+        });
+    } catch(e){
         return res.status(500).json({
             success: false,
             message: "Failed to retrieve the rating and review for the course",
             error: e.message
-        })
-    }
-}
-
-
+        });
+    };
+};
 
 export {
     createRating,
     getAverageRating,
     getAllRating
-}
+};
