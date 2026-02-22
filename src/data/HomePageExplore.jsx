@@ -118,4 +118,4 @@ const HomePageExplore = [
 
 export {
     HomePageExplore
-}
+};
