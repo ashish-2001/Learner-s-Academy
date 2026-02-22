@@ -29,8 +29,8 @@ async function capturePayment(req, res) {
                     return res.status(404).json({
                         success: false,
                         message: "Could not find the course"
-                    })
-                }
+                    });
+                };
 
                 const uid = new mongoose.Types.ObjectId(userId);
                 if(course.studentsEnrolled.includes(uid)){
@@ -40,14 +40,13 @@ async function capturePayment(req, res) {
                     });
                 };
                 totalAmount += course.price;
-            }
-            catch(error){
+            } catch(error){
                 return res.status(500).json({
                     success: false,
                     message: error.message
                 });
-            }
-        }
+            };
+        };
 
         const options = {
             amount: totalAmount * 100,
@@ -94,8 +93,8 @@ async function verifyPayment(req, res){
             return res.status(404).json({
                 success: false,
                 message: "Payment Failed"
-            })
-        }
+            });
+        };
 
         let body = razorpay_order_id + "|" + razorpay_payment_id;
 
@@ -106,22 +105,21 @@ async function verifyPayment(req, res){
             return res.status(200).json({
                 success: true,
                 message: "Payment verified"
-            })
-        }
+            });
+        };
 
         return res.status(403).json({
             success: true,
             message: "Payment Failed"
-        })
-    }
-    catch(e){
+        });
+    } catch(e){
         return res.status(500).json({
             success: false,
             message: "Internal server error",
             error: e.message
-        })
-    }
-}
+        });
+    };
+};
 
 async function sendPaymentSuccessfulEmail(req, res){
 
@@ -135,8 +133,8 @@ async function sendPaymentSuccessfulEmail(req, res){
             return res.status(400).json({
                 success: false,
                 message: "Please provide all the details"
-            })
-        }
+            });
+        };
 
         try{
             const enrolledStudent = await User.findById(userId);
@@ -150,21 +148,20 @@ async function sendPaymentSuccessfulEmail(req, res){
                     orderId,
                     paymentId
                 )
-            )
-        }catch(error){
+            );
+        } catch(error){
             console.log("Error in sending email:", error);
             return res.status(400).json({
                 success: false,
                 message: "Could not send email"
-            })
-        }
-    }
-    catch(e){
+            });
+        };
+    } catch(e){
         return res.status(500).json({
             success: false,
             message: "Internal server error",
             error: e.message
-        })
+        });
     };
 };
 
