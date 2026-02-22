@@ -36,9 +36,9 @@ function InstructorSection(){
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export {
     InstructorSection
-}
+};

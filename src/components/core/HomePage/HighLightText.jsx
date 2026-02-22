@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 function HighLightText({ text }){
     return(
@@ -6,9 +6,9 @@ function HighLightText({ text }){
             {" "}
             {text}
         </span>
-    )
-}
+    );
+};
 
 export { 
     HighLightText
-}
+};
