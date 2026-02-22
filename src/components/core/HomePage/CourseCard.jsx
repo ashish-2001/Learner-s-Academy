@@ -2,11 +2,8 @@ import React from "react";
 import { HiUsers } from "react-icons/hi";
 import { ImTree } from "react-icons/im";
 
-function CourseCard({ 
-    cardData, 
-    currentCard, 
-    setCurrentCard 
-}) {
+function CourseCard({ cardData, currentCard, setCurrentCard }) {
+
     return (
         <div
             className={`w-[360px] lg:w-[30%] ${
@@ -47,8 +44,8 @@ function CourseCard({
             </div>
         </div>
     );
-}
+};
 
 export { 
     CourseCard
-}
+};
