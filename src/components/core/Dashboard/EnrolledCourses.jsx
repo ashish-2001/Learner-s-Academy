@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { getUserCourses as getUserEnrolledCourses } from "../../../services/operations/profileAPI";
 
 function EnrolledCourses(){
-    const { token } = useSelector((state) => state.auth)
+    const { token } = useSelector((state) => state.auth);
     const navigate = useNavigate();
     const [progressData, setProgressData] = useState();
     const dispatch = useDispatch();
@@ -21,7 +21,7 @@ function EnrolledCourses(){
         setLoading(false);
         setEnrolledCourses(response?.courses);
         setProgressData(response?.courseProgress);
-    }
+    };
 
     const totalNoOfLectures = (course) => {
         let total = 0;
@@ -29,7 +29,7 @@ function EnrolledCourses(){
             total += section.subSection.length;
         });
         return total;
-    }
+    };
 
     useEffect(() => {
         getEnrolledCourses();
@@ -40,8 +40,8 @@ function EnrolledCourses(){
             <div className="flex h-[calc(100vh)] w-full justify-center items-center">
                 <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-[#585D69]"></div>
             </div>
-        )
-    }
+        );
+    };
 
     return(
         <div className="mx-auto w-11/12 max-w-[1000px] py-10">
@@ -112,9 +112,9 @@ function EnrolledCourses(){
                 </div>
             )}
         </div>
-    )
-}
+    );
+};
 
 export {
     EnrolledCourses
-}
+};
