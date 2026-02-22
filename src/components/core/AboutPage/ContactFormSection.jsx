@@ -14,7 +14,7 @@ const ContactFormSection = () => {
         <ContactUsForm />
       </div>
     </div>
-  )
+  );
 };
 
 export { 
