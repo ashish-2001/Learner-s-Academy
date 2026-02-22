@@ -1,11 +1,11 @@
-import React from 'react'
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { resetPassword } from '../services/operations/authAPI'
-import { useDispatch } from 'react-redux'
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
-import toast from 'react-hot-toast'
+import React from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { resetPassword } from '../services/operations/authAPI';
+import { useDispatch } from 'react-redux';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import toast from 'react-hot-toast';
 
 const ResetPassword = () => {
     const location = useLocation();
@@ -13,10 +13,10 @@ const ResetPassword = () => {
     const token = location.pathname.split("/").at(-1);
     const navigate = useNavigate();
 
-    const { loading } = useSelector((state) => state.auth)
-    const [resetComplete, setResetComplete] = useState(false)
-    const [showPassword, setShowPassword] = useState(false)
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+    const { loading } = useSelector((state) => state.auth);
+    const [resetComplete, setResetComplete] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
         const [formData, setFormData] = useState({
         password: "",
         confirmPassword: "",
@@ -29,18 +29,16 @@ const ResetPassword = () => {
             toast.error("Password do not match");
             return;
         }
-        
         dispatch(resetPassword(password, confirmPassword, token, setResetComplete));
-
     };
 
     if(resetComplete){
         setTimeout(() => navigate("/login"), 2000);
-    }
+    };
 
     const handleOnChange = (e) => {
         setFormData((formData) => ({ ...formData, [e.target.name] : e.target.value }));
-        };
+    };
 
 return (
     <div className='grid min-h-[calc(100vh-3.5rem)] place-items-center'>
@@ -156,10 +154,10 @@ return (
                 </div>
                 )
             }
-    </div>
-)
-}
+        </div>
+    );
+};
 
 export {
     ResetPassword
-}
+};
