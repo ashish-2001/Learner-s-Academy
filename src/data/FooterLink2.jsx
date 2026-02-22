@@ -40,4 +40,4 @@ const FooterLink2 = [
 
 export {
     FooterLink2
-}
+};
