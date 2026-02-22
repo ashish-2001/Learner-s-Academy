@@ -21,10 +21,10 @@ const profileSchema = new mongoose.Schema({
         type: Number,
         required: false
     }
-})
+});
 
 const Profile = mongoose.model("Profile", profileSchema);
 
 export {
     Profile
-}
+};
