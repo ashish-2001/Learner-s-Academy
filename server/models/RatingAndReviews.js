@@ -36,4 +36,4 @@ const RatingAndReview = mongoose.model("RatingAndReview", ratingAndReviewSchema)
 
 export {
     RatingAndReview
-}
+};
