@@ -40,82 +40,79 @@ const Upload = ({ name, label }) => {
 
   return (
     <div>
-        { image ? (
-                <div className="flex flex-col space-y-2">
-                    <img src={image} alt="Course thumbnail" className="h-full w-full rounded-md object-cover"/>
-                    <button 
-                      type="button" 
-                      onClick={removeImage} 
-                      className="text-sm text-[#F1F2FF]"
-                    >
-                        Remove
-                    </button>
-                </div>
-            ) : (
-  <div className="flex flex-col space-y-2">
-  <label className="text-sm text-[#F1F2FF]" htmlFor={label}>
-    <div>
-      {label} <sup className="text-[#EF476F]">*</sup>
-    </div>
+      { image ? (
+        <div className="flex flex-col space-y-2">
+            <img src={image} alt="Course thumbnail" className="h-full w-full rounded-md object-cover"/>
+            <button 
+              type="button" 
+              onClick={removeImage} 
+              className="text-sm text-[#F1F2FF]"
+            >
+                Remove
+            </button>
+        </div>
+        ) : (
+      <div className="flex flex-col space-y-2">
+        <label className="text-sm text-[#F1F2FF]" htmlFor={label}>
+        <div>
+          {label} <sup className="text-[#EF476F]">*</sup>
+        </div>
   
-  <div className="bg-[#2C333F] flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-[#585D69]">
-    <div
-      className="flex w-full flex-col items-center p-6"
-      role="presentation"
-      tabIndex={0}
-    >
-      <input 
-        id={label} 
-        name={name} 
-        type="file" 
-        accept="image/*,.jpeg,.jpg,.png" 
-        // tabIndex="-1" multiple=""  
-        onChange={handelOnChange} 
-        className="hidden" 
-      />
-
-
-      <div className="grid aspect-square w-14 place-items-center rounded-full bg-[#171717]">
-        <svg
-          stroke="currentColor"
-          fill="none"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="text-2xl text-[#FFD60A]"
-          height="1em"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <polyline points="16 16 12 12 8 16"></polyline>
-          <line x1="12" y1="12" x2="12" y2="21"></line>
-          <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
-          <polyline points="16 16 12 12 8 16"></polyline>
-        </svg>
+        <div className="bg-[#2C333F] flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-[#585D69]">
+          <div
+            className="flex w-full flex-col items-center p-6"
+            role="presentation"
+            tabIndex={0}
+          >
+          <input 
+            id={label} 
+            name={name} 
+            type="file" 
+            accept="image/*,.jpeg,.jpg,.png" 
+            onChange={handelOnChange} 
+            className="hidden" 
+          />
+          <div className="grid aspect-square w-14 place-items-center rounded-full bg-[#171717]">
+          <svg
+            stroke="currentColor"
+            fill="none"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-2xl text-[#FFD60A]"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polyline points="16 16 12 12 8 16"></polyline>
+            <line x1="12" y1="12" x2="12" y2="21"></line>
+            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
+            <polyline points="16 16 12 12 8 16"></polyline>
+          </svg>
+        </div>
+        <p className="mt-2 max-w-[200px] text-center text-sm text-[#999DAA]">
+          Drag and drop an image, or click to{" "}
+          <span className="font-semibold text-[#FFD60A]">Browse</span> a file
+        </p>
+        <ul className="mt-10 flex list-disc justify-between space-x-12 text-center  text-xs text-[#999DAA]">
+          <li>Aspect ratio 16:9</li>
+          <li>Recommended size 1024x576</li>
+        </ul>
       </div>
-      <p className="mt-2 max-w-[200px] text-center text-sm text-[#999DAA]">
-        Drag and drop an image, or click to{" "}
-        <span className="font-semibold text-[#FFD60A]">Browse</span> a file
-      </p>
-      <ul className="mt-10 flex list-disc justify-between space-x-12 text-center  text-xs text-[#999DAA]">
-        <li>Aspect ratio 16:9</li>
-        <li>Recommended size 1024x576</li>
-      </ul>
     </div>
-  </div>
-</label>
-{
-  errors[name] && (<span className='ml-2 text-xs tracking-wide text-[#EF476F]'>
-      {label} is required**
-  </span>)
-}
+      </label>
+        {
+          errors[name] && (
+          <span className='ml-2 text-xs tracking-wide text-[#EF476F]'>
+            {label} is required**
+          </span>)  
+        }
+      </div>
+    ) 
+  }
 </div>
-) 
-}
-</div>
-);
-};
+)};
 
 export {
     Upload
