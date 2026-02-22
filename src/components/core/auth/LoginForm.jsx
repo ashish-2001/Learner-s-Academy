@@ -10,10 +10,7 @@ import { setProgress } from "../../../slices/loadingBarSlice";
 function LoginForm(){
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [formData, setFormData] = useState({
-        email: "",
-        password: ""
-    })
+    const [formData, setFormData] = useState({ email: "", password: "" });
 
     const [showPassword, setShowPassword] = useState(false);
 
