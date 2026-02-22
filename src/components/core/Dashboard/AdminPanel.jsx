@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { createCategory } from '../../../services/operations/courseDetailsAPI';
 import { useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
@@ -9,23 +9,21 @@ const AdminPanel = () => {
         name: '',
         description: ''
     });
+
     const [loading, setLoading] = useState(false);
     
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!category.name || !category.description) {
-            toast.error("All the fields are required")
+            toast.error("All the fields are required");
             return;
-        }
+        };
         setLoading(true);
-        console.log(category)
         try{
             const response = await createCategory({
                 name: category.name,
                 description: category.description
             }, token);
-
-            console.log("Create Category response", response);
 
             if(response?.success){
                 toast.success("Category created successfully");
@@ -38,12 +36,11 @@ const AdminPanel = () => {
                 toast.error(response?.message || "Failed to create category");
             }
         } catch(error){
-            console.error("Error creating category", error);
-            toast.error("Something went wrong");
+            toast.error("Something went wrong", error.message);
         }  finally {
             setLoading(false);
-        }
-    }
+        };
+    };
 
     return (
         // create categories
@@ -84,9 +81,9 @@ const AdminPanel = () => {
                 </button>
             </form>
         </div>
-    )
-}
+    );
+};
 
 export {
     AdminPanel
-}
+};
