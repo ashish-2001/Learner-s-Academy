@@ -17,7 +17,7 @@ function Quote(){
                 unparalleled educational experience.
             </span>
         </div>
-    )
+    );
 };
 
 
