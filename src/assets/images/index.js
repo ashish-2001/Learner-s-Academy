@@ -35,4 +35,4 @@ export {
     Plan_your_lessons,
     signup,
     TimelineImage
-}
+};
