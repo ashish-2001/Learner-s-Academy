@@ -25,15 +25,15 @@ const RatingSlider = () => {
           ratingsEndpoints.REVIEWS_DETAILS_API
         );
         setReviews(res.data.data);
-        console.log("LOGGING REVIEWS", res);
       } catch (error) {
         console.log("LOGGING Review ERROR", error);
       } finally {
         setLoading(false);
-      }
+      };
     };
     getReviews();
   }, []);
+
   return (
     <div>
         <Swiper
@@ -101,4 +101,4 @@ const RatingSlider = () => {
 
 export {
   RatingSlider
-}
+};
