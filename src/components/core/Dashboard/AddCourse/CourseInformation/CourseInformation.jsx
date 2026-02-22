@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
+import React, { useEffect, useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCourseDetails, editCourseDetails, fetchCourseCategories } from '.././../../../../services/operations/courseDetailsAPI';
 import { HiOutlineCurrencyRupee } from 'react-icons/hi';
@@ -8,7 +8,7 @@ import { setStep, setCourse } from '../../../../../slices/courseSlice';
 import { IconBtn } from '../../../../common/IconBtn';
 import { COURSE_STATUS } from '../../../../../utils/constants.js';
 import { toast } from 'react-hot-toast';
-import { Upload } from './Upload'
+import { Upload } from './Upload';
 import { ChipInput } from './ChipInput';
 
 const CourseInformationForm = () => {
@@ -38,7 +38,7 @@ const CourseInformationForm = () => {
         setValue,
         getValues,
         formState: { errors },
-    } = methods
+    } = methods;
 
     useEffect(()=> { 
         (async () => {
@@ -69,7 +69,7 @@ const CourseInformationForm = () => {
 
         if(editCourse){
             formData.append("courseId", course._id);
-        }
+        };
 
         try{
             formData.append("courseName", data.courseTitle);
@@ -83,29 +83,29 @@ const CourseInformationForm = () => {
 
             if(data.thumbnailImage && data.thumbnailImage instanceof File ){
                 formData.append("thumbnailImage", data.thumbnailImage);
-            }
+            };
                 
             let result = null;
 
             if(editCourse){
                 result = await editCourseDetails(formData, token);
-            }else{
+            } else{
                 result = await addCourseDetails(formData, token);
-            }
+            };
 
             if(result){ 
                 dispatch(setStep(2));
                 dispatch(setCourse(result));
                 toast.success("Course details saved successfully");
-            }
+            };
         }
         catch(error){
             console.error("Course form submit error", error);
             toast.error("Failed to save course details")
         } finally{
             setLoading(false);
-        }
-    }
+        };
+    };
 
     return (
         <FormProvider {...methods}>
@@ -248,9 +248,9 @@ const CourseInformationForm = () => {
             </div>
         </form>
         </FormProvider>
-    )
-}
+    );
+};
 
 export {
     CourseInformationForm
-}
+};
