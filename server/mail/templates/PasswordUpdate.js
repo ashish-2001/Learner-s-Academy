@@ -72,8 +72,8 @@ function passwordUpdate(email, name){
     </body>
     
     </html>`;
-}
+};
 
 export {
     passwordUpdate
-}
+};
