@@ -4,13 +4,11 @@ import { resetCart } from "../../slices/cartSlice";
 import { apiConnector } from "../apiConnector";
 import { studentEndpoints } from "../apis";
 
-
 const { 
     COURSE_PAYMENT_API,
     COURSE_VERIFY_API,
     SEND_PAYMENT_SUCCESS_EMAIL_API
 } = studentEndpoints;
-
 
 function loadScript(src){
     return new Promise ((resolve) => {
