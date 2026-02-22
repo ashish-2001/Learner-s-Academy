@@ -10,23 +10,21 @@ async function mailSender(email, title, body){
                 pass: process.env.MAIL_PASS
             },
             secure: false
-        })
+        });
 
         const info = await transporter.sendMail({
             from: `"Learner's Academy <${process.env.MAIL_USER}>"`,
             to: `${email}`,
             subject: `${title}`, 
             html: `${body}`
-        })
-        console.log(info)
+        });
         return info;
-    }
-    catch(e){
+    } catch(e){
         console.log(e.message);
         return e;
-    }
-}
+    };
+};
 
 export {
     mailSender
-}
+};
