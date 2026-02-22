@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.post("/capturePayment", auth, isStudent, capturePayment);
 router.post("/verifyPayment", auth, verifyPayment);
-router.post("/sendPaymentSuccessfulEmail", auth, sendPaymentSuccessfulEmail)
+router.post("/sendPaymentSuccessfulEmail", auth, sendPaymentSuccessfulEmail);
 
 export {
     router
-}
+};
