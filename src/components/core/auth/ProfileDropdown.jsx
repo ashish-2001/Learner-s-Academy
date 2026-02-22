@@ -18,9 +18,8 @@ function ProfileDropdown(){
     useOnClickOutside(ref, () => setOpen(false));
 
     if(!user){
-        console.log("no user");
         return localStorage.setItem("token", null);
-    }
+    };
 
     return(
         <button className="relative" onClick={() => setOpen(true)}>
@@ -57,9 +56,9 @@ function ProfileDropdown(){
                 </div>
             )}
         </button>
-    )
-}
+    );
+};
 
 export {
     ProfileDropdown
-}
+};
