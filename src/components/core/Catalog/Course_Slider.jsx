@@ -71,9 +71,9 @@ function Course_Slider({ courses }){
                 </div>
             )}
         </>
-    )
-}
+    );
+};
 
 export {
     Course_Slider
-}
+};
