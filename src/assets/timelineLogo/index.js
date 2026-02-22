@@ -9,4 +9,4 @@ export {
     Logo2,
     Logo3,
     Logo4
-}
+};
