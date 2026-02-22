@@ -1,12 +1,12 @@
-import React from 'react'
-import { HighLightText } from '../components/core/HomePage/HighLightText'
-import { Quote } from "../components/core/AboutPage/Quote"
-import { FoundingStory } from "../assets/images/index.js"
-import { StatsComponent } from '../components/core/AboutPage/Stats'
-import { LearningGrid } from '../components/core/AboutPage/LearningGrid'
-import { ContactFormSection } from '../components/core/AboutPage/ContactFormSection'
-import { RatingSlider } from '../components/core/Ratings/RatingsSlider'
-import { aboutus1, aboutus2, aboutus3 } from '../assets/images/index.js'
+import React from 'react';
+import { HighLightText } from '../components/core/HomePage/HighLightText';
+import { Quote } from "../components/core/AboutPage/Quote";
+import { FoundingStory } from "../assets/images/index.js";
+import { StatsComponent } from '../components/core/AboutPage/Stats';
+import { LearningGrid } from '../components/core/AboutPage/LearningGrid';
+import { ContactFormSection } from '../components/core/AboutPage/ContactFormSection';
+import { RatingSlider } from '../components/core/Ratings/RatingsSlider';
+import { aboutus1, aboutus2, aboutus3 } from '../assets/images/index.js';
 
 const About = () => {
   return (
@@ -94,9 +94,9 @@ const About = () => {
       </section>
 
     </div>
-  )
-}
+  );
+};
 
 export {
     About
-}
+};
