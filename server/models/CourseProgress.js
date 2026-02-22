@@ -22,4 +22,4 @@ const CourseProgress = mongoose.model("courseProgress", courseProgressSchema);
 
 export {
     CourseProgress
-}
+};
