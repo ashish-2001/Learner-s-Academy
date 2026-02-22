@@ -1,11 +1,10 @@
-import React from "react"
-import { useEffect, useRef, useState } from "react"
-import { useDropzone } from "react-dropzone"
-import { FiUploadCloud } from "react-icons/fi"
-import { useSelector } from "react-redux"
-
-import "video-react/dist/video-react.css"
-import { Player } from "video-react"
+import React from "react";
+import { useEffect, useRef, useState } from "react";
+import { useDropzone } from "react-dropzone";
+import { FiUploadCloud } from "react-icons/fi";
+import { useSelector } from "react-redux";
+import "video-react/dist/video-react.css";
+import { Player } from "video-react";
 
  function Upload({
   name,
@@ -17,43 +16,43 @@ import { Player } from "video-react"
   viewData = null,
   editData = null,
 }) {
-  const { course } = useSelector((state) => state.course)
-  const [selectedFile, setSelectedFile] = useState(null)
+  const { course } = useSelector((state) => state.course);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [previewSource, setPreviewSource] = useState(
     viewData ? viewData : editData ? editData : ""
-  )
-  const inputRef = useRef(null)
+  );
+  const inputRef = useRef(null);
 
   const onDrop = (acceptedFiles) => {
-    const file = acceptedFiles[0]
+    const file = acceptedFiles[0];
     if (file) {
       previewFile(file)
       setSelectedFile(file)
-    }
-  }
+    };
+  };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: !video
       ? { "image/*": [".jpeg", ".jpg", ".png"] }
       : { "video/*": [".mp4"] },
     onDrop,
-  })
+  });
 
   const previewFile = (file) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setPreviewSource(reader.result)
-    }
-  }
+      setPreviewSource(reader.result);
+    };
+  };
 
   useEffect(() => {
     register(name, { required: true });
-  }, [register])
+  }, [register]);
 
   useEffect(() => {
     setValue(name, selectedFile);
-  }, [selectedFile, setValue])
+  }, [selectedFile, setValue]);
 
   return (
     <div className="flex flex-col space-y-2">
@@ -120,9 +119,9 @@ import { Player } from "video-react"
         </span>
       )}
     </div>
-  )
-}
+  );
+};
 
 export {
   Upload
-}
+};
