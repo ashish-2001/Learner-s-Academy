@@ -10,56 +10,45 @@ const categoryValidator = z.object({
 
 
 async function createCategory(req, res){
-
     try{
-            const parsedResult = categoryValidator.safeParse(req.body);
-
+        const parsedResult = categoryValidator.safeParse(req.body);
         if(!parsedResult.success){
             return res.status(400).json({
                 success: false,
                 message: "All the fields are required",
                 errors: parsedResult.error.errors
             });
-        }
-
+        };
         const { name, description } = parsedResult.data;
-
         const existingCategory = await Category.findOne({
             name: name.trim()
         });
-
         if(existingCategory){
             return res.status(409).json({
                 success: false,
                 message: "Category with this name already exists"
-            })
-        }
-
+            });
+        };
         const CategoryDetails = await Category.create({
             name: name.trim(), 
             description: description
         });
-
-        console.log(CategoryDetails);
-
         return res.status(200).json({
             success: true,
             message: "Category created successfully",
             data: CategoryDetails
-        })
-    }
-    catch(e){
+        });
+    } catch(e){
         return res.status(500).json({
             success: false,
             message: "Something went wrong while creating category",
             error: e.message
-        })
-    }
-}
+        });
+    };
+};
 
 async function showAllCategories(req, res){
     try{
-        console.log("Inside show all categories")
         const allCategories = await Category.find({}, {
             name: true,
             description: true
@@ -69,36 +58,32 @@ async function showAllCategories(req, res){
             return res.status(404).json({
                 success: false,
                 message: "No categories found"
-            })
-        }
+            });
+        };
 
         return res.status(200).json({
             success: true,
             message: "All Categories fetched successfully",
             data: allCategories
         });
-    }
-    catch(e){
+    } catch(e){
         return res.status(500).json({
             success: false,
             message: "Something went wrong while fetching categories",
             error:e.message
-        })
-    }
-}
+        });
+    };
+};
 
 async function categoryPageDetails(req, res){
     try{
-
         const { categoryId } = req.body;
-
         if(!categoryId || !mongoose.Types.ObjectId.isValid(categoryId)){
             return res.status(400).json({
                 success: false,
                 message: "Invalid or missing categoryId"
-            })
-        }
-
+            });
+        };
         const selectedCategory = await Category.findById(categoryId).populate({
             path: "courses",
             match: {
@@ -112,31 +97,26 @@ async function categoryPageDetails(req, res){
                 path:"ratingAndReviews",
                 select: "rating review user"
             }])
-        }).exec()
-
+        }).exec();
         if(!selectedCategory){
             return res.status(404).json({
                 success: false,
                 message: "Category not found"
-            })
-        }
-
+            });
+        };
         if(!selectedCategory.courses || selectedCategory.courses.length === 0){
             return res.status(404).json({
                 success: false,
                 message: "No courses found for the selected category"
             });
-        }
-
+        };
         const selectedCourses = selectedCategory.courses;
-
         if(!selectedCourses){
             return res.status(404).json({
                 success: false,
                 message: "Courses not found!"
             });
         };
-
         const categoriesExceptSelected = await Category.find({
             _id: {
                 $ne: categoryId
@@ -155,15 +135,12 @@ async function categoryPageDetails(req, res){
                 select: "rating review user"
             }])
         });
-
         let differentCourses = [];
-
         for(const category of categoriesExceptSelected){
             if(category.courses?.length){
                 differentCourses.push(...category.courses);
-            }
-        }
-        
+            };
+        };
         const allCategories = await Category.find().populate({
             path: "courses",
             match: { 
@@ -173,33 +150,33 @@ async function categoryPageDetails(req, res){
                 path: "instructor",
                 select: "firstName lastName image"
             },
-        {
-            path: "ratingAndReviews",
-            select: "rating review user"
-        }])
+            {
+                path: "ratingAndReviews",
+                select: "rating review user"
+            }
+        ])
     });
 
-        const allCourses = allCategories.flatMap((category) => category.courses)
-        const mostSellingCourses = allCourses
-        .sort((a, b) => (b.sold || 0) - (a.sold || 0))
-        .slice(0, 10);
+    const allCourses = allCategories.flatMap((category) => category.courses)
+    const mostSellingCourses = allCourses
+    .sort((a, b) => (b.sold || 0) - (a.sold || 0))
+    .slice(0, 10);
 
-        return res.status(200).json({
-            success: true,
-            data: {
-                selectedCourses: selectedCategory.courses,
-                differentCourses,
-                mostSellingCourses
-            }
-        })
+    return res.status(200).json({
+        success: true,
+        data: {
+            selectedCourses: selectedCategory.courses,
+            differentCourses,
+            mostSellingCourses
+        }});
     } catch(e){
         return res.status(500).json({
             success: false,
             message: "Internal sever error",
             error: e.message
-        })
-    }
-}
+        });
+    };
+};
 
 async function addCourseToCategory(req, res){
 
@@ -213,8 +190,8 @@ async function addCourseToCategory(req, res){
             return res.status(404).json({
                 success: false,
                 message: "Category not found"
-            })
-        }
+            });
+        };
 
         const course = await Course.findById(courseId);
 
@@ -223,14 +200,14 @@ async function addCourseToCategory(req, res){
                 success: false,
                 message: "Course not found"
             });
-        }
+        };
 
         if(category.courses.includes(courseId)){
             return res.status(200).json({
                 success: true,
                 message: "Course already exists in the category"
             });
-        }
+        };
 
         category.courses.push(courseId);
 
@@ -245,8 +222,8 @@ async function addCourseToCategory(req, res){
             success: false,
             message: "Internal server error",
             error: error.message
-        })
-    }
+        });
+    };
 };
 
 export {
