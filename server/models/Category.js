@@ -21,4 +21,4 @@ const Category = mongoose.model("Category", categorySchema);
 
 export {
     Category
-}
+};
