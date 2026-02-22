@@ -9,7 +9,7 @@ const subSectionValidator = z.object({
     title: z.string().min(1, "Title is required"),
     description: z.string().min(1, "Description is required"),
     courseId: z.string().min(1, "Course id is required")
-})
+});
 
 async function createSubSection(req, res){
 
@@ -21,8 +21,8 @@ async function createSubSection(req, res){
                 success: false,
                 message: "All the fields are required",
                 errors: parsedResult.error.errors
-            })
-        }
+            });
+        };
 
         const { sectionId, title, description, courseId } = parsedResult.data;
 
@@ -33,33 +33,34 @@ async function createSubSection(req, res){
             return res.status(404).json({
                 success: false,
                 message: "Section not found"
-            })
-        }
+            });
+        };
 
         const uploadDetails = await uploadImageToCloudinary(
             video,
             process.env.FOLDER_NAME || "default"
-        )
-        console.log(uploadDetails)
+        );
 
         const SubSectionDetails = await SubSection.create({
             title: title,
             timeDuration: `${uploadDetails.duration}`,
             description: description,
             videoUrl: uploadDetails.secure_url
-        })
+        });
 
         const updatedSection = await Section.findByIdAndUpdate({
-            _id: sectionId
-        }, {
-            $push: {
-                subSection: SubSectionDetails._id
-            }
-        }, {
-            new: true
+                _id: sectionId
+            }, 
+            {
+                $push: {
+                    subSection: SubSectionDetails._id
+                }
+            }, 
+            {
+                new: true
         }).populate("subSection");
 
-        console.log(updatedSection)
+        console.log(updatedSection);
 
         const updatedCourse = await Course.findById(courseId).populate({
             path: "courseContent",
@@ -72,23 +73,22 @@ async function createSubSection(req, res){
             success: true,
             message: "Sub-section created successfully",
             data: updatedCourse
-        })
-    }
-    catch(e){
+        });
+    } catch(e){
         return res.status(500).json({
             success: false,
             message: "Internal server error",
             error: e.message
-        })
-    }
-}
+        });
+    };
+};
 
 const updateSubSectionValidator = z.object({
     sectionId: z.string().min(1, "Section id is required"),
     subSectionId: z.string().min(1, "Sub Section id is required"),
     title: z.string().optional(),
     description: z.string().optional()
-})
+});
 
 async function updateSubSection(req, res) {
 
@@ -101,8 +101,8 @@ async function updateSubSection(req, res) {
                 success: false,
                 message: "All fields are required",
                 errors: parsedResult.error.errors
-            })
-        }
+            });
+        };
 
         const { subSectionId, title, description, courseId } = parsedResult.data;
 
@@ -114,8 +114,8 @@ async function updateSubSection(req, res) {
             uploadDetails = await uploadImageToCloudinary(
                 video,
                 process.env.FOLDER_VIDEO
-            )
-        }
+            );
+        };
 
         await SubSection.findByIdAndUpdate({ _id: subSectionId}, {
             title: title || SubSection.title,
@@ -131,20 +131,19 @@ async function updateSubSection(req, res) {
             data: updatedCourse
         });
         
-    }
-    catch(e){
+    } catch(e){
         return res.status(500).json({
             success: false,
             message: "Internal server error",
             error: e.message
-        })
-    }
-}
+        });
+    };
+};
 
 const deleteSubSectionValidator = z.object({
     subSectionId: z.string().min(1, "Sub-section is required"),
     courseId: z.string().min(1, "Section id is required")
-})
+});
 
 async function deleteSubSection(req, res){
     try{
@@ -156,8 +155,8 @@ async function deleteSubSection(req, res){
                 success: false,
                 message: "All fields are required",
                 errors: parsedResult.error.errors
-            })
-        }
+            });
+        };
 
         const{ subSectionId, courseId } = parsedResult.data;
 
@@ -167,8 +166,8 @@ async function deleteSubSection(req, res){
             return res.status(404).json({
                 success: false,
                 message: "all fields are required"
-            })
-        }
+            });
+        };
 
         const ifSubSection = await SubSection.findById({ _id: subSectionId});
         const ifSection = await Section.findById({ _id: sectionId });
@@ -178,14 +177,14 @@ async function deleteSubSection(req, res){
                 success: false,
                 message: "Sub section not found"
             });
-        }
+        };
 
         if(!ifSection){
             return res.status(404).json({
                 success: false,
                 message: "Section not found"
-            })
-        }
+            });
+        };
 
         await SubSection.findByIdAndDelete(subSectionId);
         await Section.findByIdAndUpdate({
@@ -207,20 +206,18 @@ async function deleteSubSection(req, res){
             success: true,
             message: "Sub section deleted successfully",
             data: updatedCourse
-        })
-    }
-    catch(e){
+        });
+    } catch(e){
         return res.status(500).json({
             success: true,
             message: "internal server error",
             error: e.message
-        })
-    }
-}
-
+        });
+    };
+};
 
 export {
     createSubSection,
     updateSubSection,
     deleteSubSection
-}
+};
