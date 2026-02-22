@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 function RenderCartCourses(){
 
-    const { cart } = useSelector((state) => state.cart)
+    const { cart } = useSelector((state) => state.cart);
     const dispatch = useDispatch();
 
     return(
@@ -64,10 +64,10 @@ function RenderCartCourses(){
                 </div>
             ))}
         </div>
-    )
-}
+    );
+};
 
 
 export {
     RenderCartCourses
-}
+};
