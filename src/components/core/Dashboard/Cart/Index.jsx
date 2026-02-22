@@ -27,4 +27,4 @@ function Cart(){
 
 export {
     Cart
-}
+};
