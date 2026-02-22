@@ -6,6 +6,7 @@ import { Plan_your_lessons } from "../../../assets/images/index"
 import { Compare_with_others } from "../../../assets/images/index";
 
 function LearningLanguageSection(){
+
     return(
         <div>
             <div className="text-4xl font-semibold text-center my-10">
@@ -40,9 +41,9 @@ function LearningLanguageSection(){
                 </CTAButton>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export {
     LearningLanguageSection
-}
+};
