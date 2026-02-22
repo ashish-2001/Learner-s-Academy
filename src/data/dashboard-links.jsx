@@ -49,8 +49,8 @@ const sidebarLinks = [
         type: ACCOUNT_TYPE.ADMIN,
         icon: "VscHistory"
     }
-]
+];
 
 export {
     sidebarLinks
-}
+};
