@@ -34,7 +34,7 @@ const CourseBuilderForm = () => {
       }
     } else {
       toast.error("Please add at least one section to continue");
-    }
+    };
   };
 
   const {
@@ -66,12 +66,12 @@ const CourseBuilderForm = () => {
         },
         token
       );
-    }
+    };
     if (result) {
       dispatch(setCourse(result));
       setValue("sectionName", "");
       setEditSectionName(false);
-    }
+    };
     setLoading(false);
   };
 
@@ -81,7 +81,7 @@ const CourseBuilderForm = () => {
       setEditSectionName(false);
       setValue("sectionName", "");
       return;
-    }
+    };
     setEditSectionName(sectionId);
     setValue("sectionName", sectionName);
   };
@@ -163,4 +163,4 @@ const CourseBuilderForm = () => {
 
 export {
   CourseBuilderForm
-}
+};
