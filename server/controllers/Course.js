@@ -29,7 +29,7 @@ async function createCourse(req, res){
                 success: false,
                 message: "Thumbnail image is missing. Please upload a file."
             });
-        }
+        };
 
         const thumbnail = req.files.thumbnailImage;
 
@@ -48,14 +48,14 @@ async function createCourse(req, res){
             });
         };
 
-        const instructorDetails = await User.findById(userId)
+        const instructorDetails = await User.findById(userId);
 
         if(!instructorDetails){
             return res.status(404).json({
                 success: false,
                 message: "Instructor details not found!"
-            })
-        }
+            });
+        };
 
         const categoryDetails = await Category.findById(category);
 
@@ -64,7 +64,7 @@ async function createCourse(req, res){
                 success: false,
                 message: "Category details not found"
             });
-        }
+        };
 
         const thumbnailImage = await uploadImageToCloudinary(
             thumbnail,
@@ -104,23 +104,22 @@ async function createCourse(req, res){
             {
                 new: true
             }
-        )
+        );
 
         return res.status(200).json({
             success: true,
             data: newCourse,
             message: "Course created successfully"
-        })
-        }
-        catch(e){
-            console.error(e)
-            res.status(500).json({
-                success: false,
-                message: "Failed to create course",
-                error: e.message
-            })
-        }
-}
+        });
+    } catch(e){
+        console.error(e)
+        res.status(500).json({
+            success: false,
+            message: "Failed to create course",
+            error: e.message
+        });
+    };
+};
 
 async function getAllCourses(req, res){
 
@@ -145,9 +144,9 @@ async function getAllCourses(req, res){
             success: false,
             message: "Failed to fetch courses",
             error: e.message
-        })
-    }
-}
+        });
+    };
+};
 
 async function getCourseDetails(req, res){
     try{
@@ -158,8 +157,8 @@ async function getCourseDetails(req, res){
             return res.status(400).json({
                 success: false,
                 message: "Course ID is required"
-            })
-        }
+            });
+        };
 
         const courseDetails = await Course.findById(courseId)
         .populate({
@@ -199,10 +198,9 @@ async function getCourseDetails(req, res){
             success: false,
             message: "Can not fetch course data",
             error: e.message
-        })
-    }
-}
-
+        });
+    };
+};
 
 async function getInstructorCourses(req, res) {
 
@@ -216,16 +214,15 @@ async function getInstructorCourses(req, res) {
         return res.status(200).json({
             success: true,
             data: allCourses
-        })
-    }
-    catch(e){
+        });
+    } catch(e){
         res.status(500).json({
             success: false,
             message: "Failed to fetch instructor courses",
             error: e.message
-        })
-    }
-}
+        });
+    };
+};
 
 async function editCourse(req, res){
 
@@ -256,7 +253,7 @@ async function editCourse(req, res){
                 success: false,
                 error: "Course not found"
             });
-        }
+        };
         
         let parsedTags = course.tag;
 
@@ -265,8 +262,8 @@ async function editCourse(req, res){
                 parsedTags = typeof tag === "string" ? JSON.parse(tag) : tag;
             } catch {
                 parsedTags = [tag];
-            }
-        }
+            };
+        };
 
         let parsedInstructions = course.instructions;
 
@@ -275,8 +272,8 @@ async function editCourse(req, res){
                 parsedInstructions = typeof instructions === "string" ? JSON.parse(instructions) : instructions
             } catch {
                 parsedInstructions = [instructions]
-            }
-        }
+            };
+        };
 
         if(category){
             const categoryId = typeof category === "object" ? category._id: category;
@@ -286,9 +283,9 @@ async function editCourse(req, res){
                     success: false,
                     message: "Category not found"
                 });
-            }
+            };
             course.category = categoryId;
-        }
+        };
 
         if(req.files && req.files.thumbnailImage){
             console.log("Thumbnail update");
@@ -296,31 +293,31 @@ async function editCourse(req, res){
             const thumbnailImage = await uploadImageToCloudinary(
                 thumbnail,
                 process.env.FOLDER_NAME || "default"
-            )
+            );
             course.thumbnailImage = thumbnailImage.secure_url;
-        }
+        };
 
         if(courseName) {
             course.courseName = courseName;
-        }
+        };
         if(courseDescription){
             course.courseDescription = courseDescription;
-        }
+        };
         if(whatWillYouLearn){
             course.whatWillYouLearn = whatWillYouLearn;
-        }
+        };
         if(price){
             course.price = price;
-        }
+        };
         if(status){
             course.status = status;
-        }
+        };
         if(parsedTags){
             course.tag = parsedTags;
-        }
+        };
         if(parsedInstructions){
             course.instructions = parsedInstructions;
-        }
+        };
 
         await course.save();
 
@@ -344,17 +341,15 @@ async function editCourse(req, res){
             success: true,
             message: "Course updated successfully",
             data: updatedCourse
-        })
-    }
-    catch(e){
-        console.error("Edit course error:", e)
+        });
+    } catch(e){
         return res.status(500).json({
             success: false,
             message: "Interval server error",
             error: e.message
-        })
-    }
-}
+        });
+    };
+};
 
 
 async function getFullCourseDetails(req, res) {
@@ -387,8 +382,8 @@ async function getFullCourseDetails(req, res) {
             return res.status(400).json({
                 success: false,
                 message: `Could not find course with id: ${courseId}`
-            })
-        }
+            });
+        };
 
         if(courseDetails.status === "Draft" && courseDetails.instructor._id.toString() !== req.user.userId){
             if(courseDetails.status === "Draft"){
@@ -397,7 +392,7 @@ async function getFullCourseDetails(req, res) {
                     message: "Accessing a draft course is forbidden"
                 });
             };
-        }
+        };
 
         let totalDurationInSeconds = 0;
 
@@ -405,12 +400,9 @@ async function getFullCourseDetails(req, res) {
                 content.subSection.forEach((subSection) => {
                 const timeDurationSeconds = parseInt(subSection.timeDuration);
                 totalDurationInSeconds += timeDurationSeconds
-            })
-        })
-    
-
+            });
+        });
         const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
-
         return res.status(200).json({
             success: true,
             data: {
@@ -425,9 +417,9 @@ async function getFullCourseDetails(req, res) {
         return res.status(500).json({
             success: false,
             message: e.message
-        })
-    }
-}
+        });
+    };
+};
 
 async function deleteCourse(req, res){
 
@@ -440,31 +432,28 @@ async function deleteCourse(req, res){
             return res.status(404).json({
                 success: false,
                 message: "Course not found"
-            })
-        }
-        
+            });
+        };
         const studentsEnrolled = course.studentsEnrolled;
         for(const studentId of studentsEnrolled){
             await User.findByIdAndUpdate(studentId, {
                 $pull: {
                     courses: courseId
                 }
-            })
-        }
-
+            });
+        };
         const courseSections = course.courseContent;
-
         for(const sectionId of courseSections){
             const section = await Section.findById(sectionId);
             if(section){
                 const subSections = section.subSection;
                 for(const subSectionId of subSections){
                     await SubSection.findByIdAndDelete(subSectionId)
-                }
-            }
+                };
+            };
 
             await Section.findByIdAndDelete(sectionId);
-        }
+        };
 
         await Course.findByIdAndDelete(courseId);
         await Category.findByIdAndUpdate(course.category._id, {
@@ -483,15 +472,14 @@ async function deleteCourse(req, res){
             success: true,
             message: "Course deleted successfully"
         });
-    }
-    catch(e){
+    } catch(e){
         return res.status(500).json({
             success: false,
             message: "Server Error",
             error: e.message
-        })
-    }
-}
+        });
+    };
+};
 
 async function searchCourse(req, res){
 
@@ -504,7 +492,7 @@ async function searchCourse(req, res){
                 success: false,
                 message: "Search query is required"
             });
-        }
+        };
 
         const courses = await Course.find({
             $or: [
@@ -540,8 +528,8 @@ async function searchCourse(req, res){
         return res.status(500).json({
             success: false,
             message: error.message
-        })
-    }
+        });
+    };
 };
 
 async function markLectureAsComplete(req, res){
@@ -552,7 +540,7 @@ async function markLectureAsComplete(req, res){
         return res.status(400).json({
             success: false,
             message: "All the fields are required"
-        })
+        });
     };
     
     try{
@@ -580,7 +568,7 @@ async function markLectureAsComplete(req, res){
                 success: false,
                 message: "Lecture already marked as complete"
             });
-        }
+        };
 
         await CourseProgress.findOneAndUpdate(
             {
@@ -590,18 +578,18 @@ async function markLectureAsComplete(req, res){
             {
                 completedVideos: completedVideos
             }
-        )
+        );
 
         return res.status(200).json({
             success: true,
             message: "Lecture marked as complete"
-        })
+        });
     } catch(error){
         return res.status(500).json({
             success: false,
             message: error.message
-        })
-    }
+        });
+    };
 };
 
 
