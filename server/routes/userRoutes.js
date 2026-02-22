@@ -22,4 +22,4 @@ router.post("/reset-password-token", resetPasswordToken);
 
 export {
     router
-}
+};
