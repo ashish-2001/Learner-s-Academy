@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+
+
 const initialState = {
     courseSectionData: [],
     courseEntireData: [],
     completedLecture: [],
     totalNoOfLectures: 0
-}
-
+};
 
 const viewCourseSlice = createSlice({
     name: "viewCourse",
@@ -27,7 +28,7 @@ const viewCourseSlice = createSlice({
             State.completedLecture = [...State.completedLecture, action.payload]
         }
     }
-})
+});
 
 export const {
     setCourseSectionData,
@@ -35,6 +36,6 @@ export const {
     setTotalNoOfLectures,
     setCompletedLectures,
     updateCompletedLectures
-} = viewCourseSlice.actions
+} = viewCourseSlice.actions;
 
-export default viewCourseSlice.reducer
+export default viewCourseSlice.reducer;
