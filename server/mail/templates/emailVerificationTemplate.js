@@ -84,8 +84,8 @@ function otpTemplate(otp){
 	</body>
 	
 	</html>`;
-} 
+};
 
 export { 
     otpTemplate
-}
+};
