@@ -14,12 +14,12 @@ const store = configureStore({
 });
 
 createRoot(document.getElementById('root')).render(
-        <Provider store={store}>
-            <BrowserRouter>
-                <ScrollToTop/>
-                <App />
-                <Toaster/>
-            </BrowserRouter>
-        </Provider>
+    <Provider store={store}>
+        <BrowserRouter>
+            <ScrollToTop/>
+            <App />
+            <Toaster/>
+        </BrowserRouter>
+    </Provider>
 );
 
