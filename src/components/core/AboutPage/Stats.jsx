@@ -28,7 +28,7 @@ function StatsComponent(){
                 </div>
             </div>
         </section>
-    )
+    );
 };
 
 export {
