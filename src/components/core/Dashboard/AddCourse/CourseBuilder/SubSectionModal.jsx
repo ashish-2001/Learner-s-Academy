@@ -20,10 +20,10 @@ function SubSectionModal({
     edit = false
 }){
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
-    const { token } = useSelector((state) => state.auth)
-    const { course } = useSelector((state) => state.course) 
+    const { token } = useSelector((state) => state.auth);
+    const { course } = useSelector((state) => state.course);
 
     const {
         register,
@@ -50,20 +50,20 @@ function SubSectionModal({
             return true;
         }
         return false;
-    }
+    };
 
     const handleEditSubSection = async (data) => {
         const currentValues = getValues();
         const formData = new FormData();
         formData.append("SubSectionId", modalData._id);
         if(currentValues.lectureTitle !== modalData.title){
-            formData.append("title", data.lectureTitle)
+            formData.append("title", data.lectureTitle);
         }
         if(currentValues.lectureDesc !== modalData.description){
-            formData.append("description", data.lectureDesc)
+            formData.append("description", data.lectureDesc);
         }
         if(currentValues.lectureVideo !== modalData.videoUrl){
-            formData.append("videoFile", data.lectureVideo)
+            formData.append("videoFile", data.lectureVideo);
         }
         formData.append("courseId", course._id);
         
@@ -74,41 +74,37 @@ function SubSectionModal({
         }
 
         setModalData(null);
-    }
+    };
 
 
     const onSubmit = async (data) => {
         if(view){
             return;
-        }
+        };
         if(edit){
             if(!isFormUpdated()){
-                toast.error("No changes made")
+                toast.error("No changes made");
             }
             else{
                 handleEditSubSection(data);
             }
             return;
-        }
+        };
 
         const formData = new FormData();
         formData.append("sectionId", modalData);
         formData.append("title", data.lectureTitle);
-        formData.append("description", data.lectureDesc)
-        formData.append("videoFile", data.lectureVideo)
+        formData.append("description", data.lectureDesc);
+        formData.append("videoFile", data.lectureVideo);
         formData.append("courseId", course._id);
-
-        console.log("Form data", [...formData]);
         
         const result = await createSubSection(formData, token);
-
-        console.log("Result", result);
 
         if(result){
             dispatch(setCourse(result));
         }
         setModalData(null);
-    }
+    };
         return (
         <div className="fixed inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm">
             <div className="my-10 w-11/12 max-w-[700px] rounded-lg border border-[#6E727F] bg-[#161D29]">
@@ -175,10 +171,9 @@ function SubSectionModal({
                 </form>
             </div>
         </div>
-    )
-}
-    
+    );
+};
 
 export {
     SubSectionModal
-}
+};
