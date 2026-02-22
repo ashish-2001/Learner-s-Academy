@@ -23,8 +23,7 @@ const ReviewModal = ({ setReviewModal }) => {
   useEffect(()=>{
     setValue("userExperience","");
     setValue("userRating",undefined);
-  }
-  ,[])
+  }, []);
 
   const ratingChanged = (newRating) => {
     setValue("userRating",newRating);
@@ -37,12 +36,11 @@ const ReviewModal = ({ setReviewModal }) => {
       review:data.userExperience,
       rating:data.userRating
     },token);
+
     setReviewModal(false);
     console.log(res);
-  }
 
-
-
+  };
 
   return (
     <div>
@@ -79,9 +77,9 @@ const ReviewModal = ({ setReviewModal }) => {
       </div>
       <div className='fixed inset-0 z-10 !mt-0 grid place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm over'></div>
     </div>
-  )
-}
+  );
+};
 
 export {
     ReviewModal
-}
+};
