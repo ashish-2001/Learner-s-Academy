@@ -24,14 +24,11 @@ function Catalog(){
             if(category){
                 setCategoryId(category._id);
                 setDesc(category);
-            } else{
-                console.log("Category not found for:", Catalog.catalog);
-            }
-            
+            };
         } catch(error){
             console.log("Could not fetch subLinks", error);
-        }
-    }
+        };
+    };
 
     useEffect(() => {
         fetchSubLinks()
@@ -40,13 +37,12 @@ function Catalog(){
     useEffect(() => {
         const fetchCatalogPageData = async () => {
             const result = await getCatalogPageData(categoryId, dispatch);
-            console.log("Result", result);
             setCatalogPageData(result);
-        }
+        };
 
         if(categoryId){
             fetchCatalogPageData();
-        }
+        };
     }, [categoryId]);
 
 return(
@@ -93,10 +89,10 @@ return(
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 
 export {
     Catalog
-}
+};
