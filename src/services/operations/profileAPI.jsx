@@ -5,23 +5,19 @@ import { logout } from "./authAPI";
 import { setProgress } from "../../slices/loadingBarSlice";
 
 async function getUserCourses(token, dispatch){
-        dispatch(setProgress(50));
-        let result = [];
-        try{
-            console.log("BEFORE CALLING BACKEND API FOR ENROLLED COURSES");
-            const response = await apiConnector("GET", profileEndpoints.GET_USER_ENROLLED_COURSES_API, null, 
-                {
-                    Authorization: `Bearer ${token}` 
-                }
-        );
-
+    dispatch(setProgress(50));
+    let result = [];
+    try{
+        const response = await apiConnector("GET", profileEndpoints.GET_USER_ENROLLED_COURSES_API, null, {
+            Authorization: `Bearer ${token}` 
+        });
         if(!response.data.success){
             throw new Error(response.data.message);
-        }
+        };
         result = response.data.data;
     } catch(error){
         toast.error("Could not get Enrolled courses", error.message);
-    }
+    };
     dispatch(setProgress(100));
     return result;
 };
@@ -32,11 +28,9 @@ async function getProfilePicture(token, profilePicture){
         const formData = new FormData();
         formData.append("displayPicture", profilePicture);
 
-        const response = await apiConnector("PUT", settingsEndpoints.UPDATE_DISPLAY_PICTURE_API, formData, 
-            {
-                Authorization: `Bearer ${token}` 
-            }
-    );
+        const response = await apiConnector("PUT", settingsEndpoints.UPDATE_DISPLAY_PICTURE_API, formData, {
+            Authorization: `Bearer ${token}` 
+        });
         if(!response.data.success){
             throw new Error(response.data.message);
         };
@@ -64,21 +58,14 @@ async function updateAdditionalDetails(token, additionalDetails){
 
     try{
 
-        const response = await apiConnector("PUT", settingsEndpoints.UPDATE_PROFILE_API, { firstName, lastName, dateOfBirth, gender, contactNumber, about }, 
-                {
-                    Authorization: `Bearer ${token}` 
-                }
-            );
-        
-        
+        const response = await apiConnector("PUT", settingsEndpoints.UPDATE_PROFILE_API, { firstName, lastName, dateOfBirth, gender, contactNumber, about }, {
+            Authorization: `Bearer ${token}` 
+        });
         if(!response.data.success){
             throw new Error(response.data.message);
         };
-
         toast.success("Additional Details updated successfully");
-
         const user = JSON.parse(localStorage.getItem("user")) || {};
-
         const updatedUser = {
             ...user,
             firstName: firstName || user.firstName,
@@ -91,11 +78,8 @@ async function updateAdditionalDetails(token, additionalDetails){
                 gender: gender || user.additionalDetails?.gender
             }
         };
-    
         localStorage.setItem("user", JSON.stringify(updatedUser));
-
         return updatedUser;
-
     } catch(error){
         toast.error(error.response.data.message);
     } finally{
@@ -109,34 +93,30 @@ async function updatePassword(token, password){
     const toastId = toast.loading("Updating Password...");
 
     try{
-        const response = await apiConnector("PUT", settingsEndpoints.CHANGE_PASSWORD_API, { oldPassword, newPassword, confirmPassword }, 
-            {
-                Authorization: `Bearer ${token}` 
-            }
-    );
+        const response = await apiConnector("PUT", settingsEndpoints.CHANGE_PASSWORD_API, { oldPassword, newPassword, confirmPassword }, {
+            Authorization: `Bearer ${token}` 
+        });
         if(!response.data.success){
             throw new Error(response.data.message);
-        }
+        };
         toast.success("Password updated successfully");
     }catch(error){
         toast.error(error?.response?.data?.message);
-    }
+    };
     toast.dismiss(toastId);
 };
 
 async function deleteAccount(token, dispatch, navigate){
     const toastId = toast.loading("Deleting Account...");
     try{
-        const response = await apiConnector("DELETE", settingsEndpoints.DELETE_PROFILE_API, null, 
-        {
+        const response = await apiConnector("DELETE", settingsEndpoints.DELETE_PROFILE_API, null, {
             Authorization: `Bearer ${token}` 
-        }
-    );
-    if(!response.data.success){
-        throw new Error(response.data.message);
-    }
-    toast.success("Account Deleted successfully");
-    dispatch(logout(navigate));
+        });
+        if(!response.data.success){
+            throw new Error(response.data.message);
+        };
+        toast.success("Account Deleted successfully");
+        dispatch(logout(navigate));
     } catch(error){
         toast.error(error?.response?.data?.message);
     } finally {
@@ -150,22 +130,18 @@ async function getInstructorDashboard(token, dispatch){
     let result = [];
 
     try{
-        const response = await apiConnector("GET", profileEndpoints.GET_ALL_INSTRUCTOR_DASHBOARD_DETAILS_API, null, 
-            {
-                Authorization: `Bearer ${token}` 
-            }
-        );
-
+        const response = await apiConnector("GET", profileEndpoints.GET_ALL_INSTRUCTOR_DASHBOARD_DETAILS_API, null, {
+            Authorization: `Bearer ${token}` 
+        });
         if(!response.data.success){
             throw new Error(response.data.message);
-        }
+        };
         result = response.data.data;
     }catch(error){
         toast.error(error?.response?.data?.message);
     } finally {
         dispatch(setProgress(100));
-    }
-    
+    };
     return result;
 };
 
