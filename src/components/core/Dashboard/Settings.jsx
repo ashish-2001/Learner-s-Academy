@@ -1,21 +1,19 @@
-import React from 'react'
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { updateAdditionalDetails, updatePassword, getProfilePicture, deleteAccount } from '../../../services/operations/profileAPI'
-import { AiOutlineEyeInvisible } from 'react-icons/ai'
-import { AiOutlineEye } from 'react-icons/ai'
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import React from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { updateAdditionalDetails, updatePassword, getProfilePicture, deleteAccount } from '../../../services/operations/profileAPI';
+import { AiOutlineEyeInvisible } from 'react-icons/ai';
+import { AiOutlineEye } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Settings = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(state => state.profile.user);
 
-
-  //update profile picture
   const pfp = useSelector(state => state.profile.user.image);
-  const [profilePicture, setProfilePicture] = useState(pfp)
+  const [profilePicture, setProfilePicture] = useState(pfp);
   const token= useSelector(state=>state.auth.token);
 
 
@@ -23,14 +21,13 @@ const Settings = () => {
     e.preventDefault();
     const file = e.target[0].files[0];
     getProfilePicture(token,file);
-  }
+  };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setProfilePicture(URL.createObjectURL(file));
-  }
+  };
 
-  //update additional info
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -38,35 +35,34 @@ const Settings = () => {
     gender: "",
     contactNumber: "",
     about: "",
-  })
+  });
 
   const handleOnChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.value,
-    }))
-  }
+    }));
+  };
 
   const handelAdditionalDetails = (e) => {
     e.preventDefault()
     updateAdditionalDetails(token, formData);
-  }
+  };
 
-  //update password
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [password, setPassword] = useState({
     oldPassword: "",
     newPassword: "",
     confirmPassword: "",
-  })
+  });
 
   const handleOnChangePassword = (e) => {
     setPassword((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.value,
-    }))
-  }
+    }));
+  };
 
   const handlePassword = (e) => {
     e.preventDefault()
@@ -75,15 +71,14 @@ const Settings = () => {
       updatePassword(token, password);
     } else {
       alert("Password does not match")
-    }
-  }
+    };
+  };
 
-  //delete account
   const onDeleteAccount = () => {
     if(window.confirm("Are you sure you want to delete your account?")){
-        deleteAccount( token, dispatch, navigate );
-      }
-  }
+      deleteAccount( token, dispatch, navigate );
+    }
+  };
 
   return (
     <div className=''>
@@ -250,9 +245,9 @@ const Settings = () => {
       </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export {
     Settings
-}
+};
