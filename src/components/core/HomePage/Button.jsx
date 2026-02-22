@@ -10,9 +10,9 @@ function CTAButton({ children, active, linkTo }){
                 {children}
             </div>
         </Link>
-    )
-}
+    );
+};
 
 export {
     CTAButton
-}
+};
