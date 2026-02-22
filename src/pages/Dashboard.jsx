@@ -5,7 +5,7 @@ import { Sidebar } from "../components/core/Dashboard/Sidebar";
 
 function Dashboard(){
 
-    const { loading: profileLoading} = useSelector((state)=> state.profile)
+    const { loading: profileLoading} = useSelector((state)=> state.profile);
     const { loading: authLoading } = useSelector((state) => state.auth);
 
     if(profileLoading || authLoading){
@@ -25,9 +25,9 @@ function Dashboard(){
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export {
     Dashboard
-}
+};
