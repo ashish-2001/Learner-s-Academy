@@ -10,8 +10,8 @@ function SidebarLink({ link, iconName }){
     const dispatch = useDispatch();
 
     const matchRoute = (route) => {
-        return matchPath({ path: route }, location.pathname)
-    }
+        return matchPath({ path: route }, location.pathname);
+    };
 
     return (
         <NavLink
@@ -29,9 +29,9 @@ function SidebarLink({ link, iconName }){
                 <span>{link.name}</span>
             </div>
         </NavLink>
-    )
-}
+    );
+};
 
 export {
     SidebarLink
-}
+};
