@@ -10,12 +10,12 @@ function cloudinaryConnect(){
         console.log("Connected to Cloudinary");
     }
     catch(e){
-        console.log(e)
-    }
-}
+        console.log(e);
+    };
+};
 
 export {
     cloudinaryConnect
-}
+};
 
 
