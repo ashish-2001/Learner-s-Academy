@@ -81,7 +81,7 @@ function courseEnrollmentEmail(courseName, name){
                 </div>
         </body>
         </html>
-    `
+    `;
 };
 
 export {
