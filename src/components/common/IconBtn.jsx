@@ -14,7 +14,11 @@ function IconBtn({
             disabled={disabled} 
             onClick={onClick} 
             className={`
-                flex items-center ${outline ? "border border-[#FFD60A] bg-[#ffffff00]" : "bg-[#FFD60A]"} cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-[#000814] ${customClasses}`} 
+                flex items-center 
+                ${outline ? "border border-[#FFD60A] bg-[#ffffff00]" : "bg-[#FFD60A]"} 
+                cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-[#000814] 
+                ${customClasses}`
+            } 
             type={type}
         >
             {children ? (
@@ -27,8 +31,8 @@ function IconBtn({
             )}
         </button>
     )
-}
+};
 
 export {
     IconBtn
-}
+};

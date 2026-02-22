@@ -23,7 +23,7 @@ function Footer(){
                             <div className="flex flex-col gap-2">
                                 {["About", "Careers", "Affiliates"].map((ele, i) => {
                                     return (
-                                        <div className="text-[14px] cursor-pointer hover:text-[#C5C7D4] transition-all duration-200" key={i}>
+                                        <div  key={i} className="text-[14px] cursor-pointer hover:text-[#C5C7D4] transition-all duration-200">
                                             <Link to={ele.toLowerCase()}>{ele}</Link>
                                         </div>
                                     );
@@ -41,7 +41,7 @@ function Footer(){
                     <div className="lg:w-[50%] flex flex-wrap flex-row justify-between pl-3 lg:pl-5 gap-3">
                         {FooterLink2.map((ele, i) => {
                             return (
-                                <div className="w-[48%] lg:[30%] mb-7 lg:pl-0" key={i}>
+                                <div key={i} className="w-[48%] lg:[30%] mb-7 lg:pl-0">
                                     <h1 className="text-[#C5C7D4] font-semibold text-[16px]">
                                         {ele.title}
                                     </h1>

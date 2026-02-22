@@ -20,8 +20,8 @@ function Tab({ tabData, field, setField }){
             })}
         </div>
     )
-}
+};
 
 export {
     Tab
-}
+};
