@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Outlet } from 'react-router';
 import { setCompletedLectures, setCourseSectionData, setEntireCourseData, setTotalNoOfLectures } from '../slices/viewCourseSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,12 +10,10 @@ import { VideoDetailsSidebar } from '../components/core/ViewCourse/VideoDetailsS
 import { getFullDetailsOfCourse } from '../services/operations/courseDetailsAPI';
 
 const ViewCourse = () => {
-
-    const [reviewModal, setReviewModal] = useState(false)
+    const [reviewModal, setReviewModal] = useState(false);
     const { courseId } = useParams();
     const { token } = useSelector(state => state.auth);
     const dispatch = useDispatch();
-
     useEffect(() => {
         const setCourseSpecifics = async () => {
             const courseData = await getFullDetailsOfCourse(courseId, token);
@@ -27,9 +25,10 @@ const ViewCourse = () => {
                 lecture += section?.subSection?.length;
             });
             dispatch(setTotalNoOfLectures(lecture));
-        }
+        };
         setCourseSpecifics();
     }, [courseId, token, dispatch]);
+    
     return (
         <div className=' flex w-screen'>
             <div className=''>
@@ -42,7 +41,7 @@ const ViewCourse = () => {
                 reviewModal && <ReviewModal setReviewModal={setReviewModal} />
             }
         </div>
-    )
+    );
 };
 
 export {
