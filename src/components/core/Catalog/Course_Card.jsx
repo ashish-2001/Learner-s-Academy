@@ -31,7 +31,7 @@ return (
                             <RatingStars Review_Count={avgReviewCount.length} />
                             <span className='md:block hidden md:text-xl text-[#F1F2FF]'> Ratings</span>
                         </div>
-                        <p className='text-sm md:text-xl text-green-500'><span className='text-white'>Rs. </span> {course?.price}/-</p>
+                        <p className='text-sm md:text-xl text-white'><span className='text-white'>Rs. </span> {course?.price}/-</p>
                     </div>
                 </div>
             </Link>
