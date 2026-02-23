@@ -51,7 +51,7 @@ function Footer(){
                                                 <div className="text-[14px] cursor-pointer hover:text-[#C5C7D4] transition-all duration-200" key={index}>
                                                     <Link to={link.link}>{link.title}</Link>
                                                 </div>
-                                            )
+                                            );
                                         })}
                                     </div>
                                 </div>
