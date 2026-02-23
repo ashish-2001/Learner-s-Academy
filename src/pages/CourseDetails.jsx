@@ -223,7 +223,7 @@ return (
                                         toast.success('URL copied to clipboard');
                                     }}
                                 >
-                                    <FaShareSquare className='text-xl text-[#CFAB08]'/>
+                                    <FaShareSquare className='text-xl text-[#CFAB08] cursor-pointer'/>
                                     <span>Share</span>
                                 </button>
                             </div>
