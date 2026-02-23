@@ -44,12 +44,12 @@ const LearningGridArray = [
 
 
 function LearningGrid(){
-    
+
     return(
         <div className="grid mx-auto w-[350px] xl:w-fit grid-cols-1 xl:grid-cols-4 mb-12">
             {LearningGridArray.map((card, index) => {
                 return (
-                    <div className={`${index === 0 && "lg:col-span-2 lg:h-[294px] p-5"} ${ card.order % 2 === 1 ? "bg-[#2C333F] lg:h-[294px] p-5" : "bg-[#161D29] lg:h-[294px] p-5"} ${ card.order === 3 && "lg:col-start-2"} ${card.order < 0 && "bg-[#ffff00]"}`} key={index}> 
+                    <div className={`${index === 0 && "lg:col-span-2 lg:h-[294px] p-5"} ${ card.order % 2 === 1 ? "bg-[#2C333F] lg:h-[294px] p-5" : "bg-[#161D29] lg:h-[294px] p-5"} ${ card.order === 3 && "lg:col-start-2"} ${card.order < 0 && "bg-[#161D29]"}`} key={index}> 
                             { card.order < 0 ? (
                             <div className="xl:w-[90%] flex flex-col gap-3 pb-10 xl:pb-0">
                                 <div className="text-4xl font-semibold">
