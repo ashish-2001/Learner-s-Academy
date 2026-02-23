@@ -50,8 +50,7 @@ const ContactUsForm = () => {
 
             if(res.data.success === true){
                 toast.success("Message sent successfully");
-            }
-            else{
+            } else{
                 toast.error("Failed to send message");
             };
         } catch(error){
@@ -120,7 +119,6 @@ return (
                         </div>
                     </div>
                 </div>
-
                 <div className="flex flex-col gap-2"><label htmlFor="message" className="text-[14px] text-[#F1F2FF]">Message</label><textarea name="message" id="message" cols="30" rows="7" placeholder="Enter your message here" className="rounded-lg bg-[#2C333F] p-3 text-[16px] leading-[24px] text-[#F1F2FF] shadow-[0_1px_0_0] shadow-[#fff]/50 placeholder:text-[#6E727F] focus:outline-none"  {...register("message",{required:true})}/>
                     {
                         errors.message && <span className=" text-[#FFE83D]">Enter your message *</span>
