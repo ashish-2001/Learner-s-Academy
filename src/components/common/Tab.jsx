@@ -1,4 +1,6 @@
-import React from "react"
+import React from "react";
+
+
 function Tab({ tabData, field, setField }){
 
     return(
@@ -19,7 +21,7 @@ function Tab({ tabData, field, setField }){
                 )
             })}
         </div>
-    )
+    );
 };
 
 export {
