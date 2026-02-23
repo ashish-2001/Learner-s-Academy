@@ -172,7 +172,7 @@ return (
                                 {ACCOUNT_TYPE.INSTRUCTOR !== user?.accountType &&
                                 <>
                                 {
-                                    alreadyEnrolled ? <button onClick={()=>{navigate("/dashboard/enrolled-courses")}} className='cursor-pointer rounded-md bg-[#FFD60A] px-[20px] py-[8px] font-semibold text-[#000814]'>Go to Course</button> : <button onClick={handelPayment} className='cursor-pointer rounded-md bg-#FFD60A px-[20px] py-[8px] font-semibold text-[#000814]'>Buy Now</button>
+                                    alreadyEnrolled ? <button onClick={()=>{navigate("/dashboard/enrolled-courses")}} className='cursor-pointer rounded-md bg-[#FFD60A] px-[20px] py-[8px] font-semibold text-[#000814]'>Go to Course</button> : <button onClick={handelPayment} className='cursor-pointer rounded-md bg-[#FFD60A] px-[20px] py-[8px] font-semibold text-[#000814]'>Buy Now</button>
                                 }
                                 {
                                 !alreadyEnrolled && 
