@@ -35,12 +35,12 @@ const ContactUsForm = () => {
     const onSubmit = async (data) => {
         try{
             setLoading(true);
-            const contactNumber = data.countryCode+" "+data.contactNumber;
+            const contactNumber = data.countryCode + " " + data.contactNumber;
             const countryCode = data.countryCode;
             const payload = { 
                 firstName: data.firstName, 
                 lastName: data.lastName, 
-                email: data.email, 
+                email: data.email,
                 message: data.message, 
                 contactNumber, 
                 countryCode
@@ -54,8 +54,7 @@ const ContactUsForm = () => {
                 toast.error("Failed to send message");
             };
         } catch(error){
-            console.log(error);
-            toast.error("Failed to send message");
+            toast.error("Failed to send message", error.message);
             setLoading(false);
         } finally{
             setLoading(false);
