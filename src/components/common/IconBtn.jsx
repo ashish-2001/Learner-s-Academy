@@ -30,7 +30,7 @@ function IconBtn({
                 text
             )}
         </button>
-    )
+    );
 };
 
 export {
