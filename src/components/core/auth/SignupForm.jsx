@@ -10,6 +10,7 @@ import { ACCOUNT_TYPE } from "../../../utils/constants.js";
 import { Tab } from "../../common/Tab.jsx";
 
 function SignupForm(){
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT);
@@ -54,8 +55,7 @@ function SignupForm(){
             password:"",
             confirmPassword: ""
         });
-
-            setAccountType(ACCOUNT_TYPE.STUDENT);
+        setAccountType(ACCOUNT_TYPE.STUDENT);
         };
 
     const tabData = [
