@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../../services/operations/authAPI";
 import { setProgress } from "../../../slices/loadingBarSlice";
 
-
 function LoginForm(){
 
     const navigate = useNavigate();
