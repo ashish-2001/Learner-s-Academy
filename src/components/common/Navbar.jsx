@@ -120,7 +120,7 @@ return(
                             {
                                 token == null && (
                                     <Link to='/login' className='' onClick={() => { dispatch(setProgress(100)) }} >
-                                        <button onClick={showNav} className='mt-4 text-center text-[15px] px-6 py-2 rounded-md font-semibold bg-yellow-50 text-black hover:scale-95 transition-all duration-200'>
+                                        <button onClick={showNav} className='mt-4 text-center text-[15px] px-6 py-2 rounded-md font-semibold bg-yellow-500 text-black hover:scale-95 transition-all duration-200'>
                                             Login
                                         </button>
                                     </Link>
@@ -128,7 +128,7 @@ return(
                             }
                             {
                                 token == null && (
-                                    <Link to='/signup' className='text-yellow-50' onClick={() => { dispatch(setProgress(100)) }} >
+                                    <Link to='/signup' className='text-yellow-500' onClick={() => { dispatch(setProgress(100)) }} >
                                         <button onClick={showNav} className='mt-4 text-center text-[15px] px-5 py-2 rounded-md font-semibold bg-yellow-50 text-black hover:scale-95 transition-all duration-200' >
                                             Signup
                                         </button>
