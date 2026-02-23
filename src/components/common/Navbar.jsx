@@ -22,7 +22,7 @@ function Navbar(){
     const [subLinks, setSubLinks] = useState([]);
     const [searchValue, setSearchValue] = useState("");
     const [prevScrollPos, setPrevScrollPos] = useState(0);
-    const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -31,7 +31,7 @@ function Navbar(){
 
     function matchRoute(route){
         return matchPath({ path: route }, location.pathname)
-    }
+    };
     
 
     useEffect(()=> {
