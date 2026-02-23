@@ -39,7 +39,7 @@ function Navbar(){
         const cached = localStorage.getItem("subLinks");
         if(cached){
             setSubLinks(JSON.parse(cached));
-        }
+        };
         (async () => {
             try {
                 const result = await apiConnector("GET", categories.CATEGORIES_API);
@@ -47,11 +47,10 @@ function Navbar(){
                     setSubLinks(result.data.data);
                 }
                 localStorage.setItem("subLinks", JSON.stringify(result.data.data));
-            }
-            catch(error){
+            } catch(error){
                 console.log("Could not fetch Categories.", error)
-            }
-        })()
+            };
+        })();
     }, []);
 
     const show = useRef();
@@ -60,19 +59,19 @@ function Navbar(){
     const showNav = () => {
         show.current.classList.toggle("navshow");
         overlay.current.classList.toggle("hidden");
-    }
+    };
 
     const handleScroll = () => {
-        const currentScrollPos = window.scrollY
+        const currentScrollPos = window.scrollY;
 
         if(currentScrollPos > prevScrollPos){
             setVisible(false);
         } else{
             setVisible(true);
-        }
+        };
 
         setPrevScrollPos(currentScrollPos);
-    }
+    };
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -85,24 +84,23 @@ function Navbar(){
         if(searchValue?.length > 0){
             navigate(`/search/${searchValue}`);
             setSearchValue("");
-        }
-    }
+        };
+    };
 
 
-    return(
-<div className={"flex sm:relative bg-[#000814] w-screen relative z-50 h-14 items-center justify-center border-b-[1px] border-b-[#2C333F] translate-y-  transition-all duration-500"}>
-    <div className='flex w-11/12 max-w-["1260px"] items-center justify-between'>
-        <Link to='/' onClick={() => { dispatch(setProgress(100)) }}>
-            <img src={Learners_Academy} width={160} alt="Learners-Academy" height={42} className="h-[45px] w-[50px] rounded-full"/>
-        </Link>
-                
-            {
-                user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
-                    <div className='md:hidden'>
-                        <Link to='/dashboard/cart' className='relative left-10' onClick={() => { dispatch(setProgress(100)) }} >
-                            <div className=''>
-                                <TiShoppingCart className=' fill-[#DBDDEA] w-8 h-8' />
-                            </div>
+return(
+    <div className={"flex sm:relative bg-[#000814] w-screen relative z-50 h-14 items-center justify-center border-b-[1px] border-b-[#2C333F] translate-y-  transition-all duration-500"}>
+        <div className='flex w-11/12 max-w-["1260px"] items-center justify-between'>
+            <Link to='/' onClick={() => { dispatch(setProgress(100)) }}>
+                <img src={Learners_Academy} width={160} alt="Learners-Academy" height={42} className="h-[45px] w-[50px] rounded-full"/>
+            </Link>    
+                {
+                    user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
+                        <div className='md:hidden'>
+                            <Link to='/dashboard/cart' className='relative left-10' onClick={() => { dispatch(setProgress(100)) }} >
+                                <div className=''>
+                                    <TiShoppingCart className=' fill-[#DBDDEA] w-8 h-8' />
+                                </div>
                                 {
                                     totalItems > 0 && (
                                         <span className='font-medium text-[12px] shadow-[3px ] shadow-black bg-yellow-100 text-[#000814] rounded-full px-[4px] absolute -top-[2px] right-[1px]'>
@@ -110,7 +108,7 @@ function Navbar(){
                                         </span>
                                     )
                                 }
-                        </Link>
+                            </Link>
                         </div>
                     )
                 }
@@ -268,10 +266,10 @@ function Navbar(){
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 
 export {
     Navbar
-}
+};
