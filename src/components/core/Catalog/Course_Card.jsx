@@ -23,7 +23,7 @@ return (
                             className={`${Height} w-[600px] p-[20px] rounded-xl object-cover`}
                         />
                     </div>
-                    <div className='flex flex-col gap-2 px-1 py-3 bg-gray-800 rounded-b-3xl pl-5'>
+                    <div className='flex flex-col gap-2 px-1 py-3 bg-gray-950 rounded-b-3xl pl-5'>
                         <p className='text-sm md:text-xl bg-gray-700 text-white mr-4 text-center rounded-md font-semibold'>{course?.courseName}</p>
                         <p className='text-[12px] md:text-xl text-[#F1F2FF]'>By <span className='text-[#FFD60A]'>{course?.instructor?.firstName} {course?.instructor?.lastName}</span></p>
                         <div className='flex gap-x-3  items-center'>
