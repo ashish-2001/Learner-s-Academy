@@ -24,14 +24,14 @@ return (
                         />
                     </div>
                     <div className='flex flex-col gap-2 px-1 py-3 bg-gray-800 rounded-b-3xl pl-5'>
-                        <p className='text-sm md:text-xl text-gray-700 bg-white mr-4 text-center rounded-md font-semibold'>{course?.courseName}</p>
+                        <p className='text-sm md:text-xl bg-gray-700 text-white mr-4 text-center rounded-md font-semibold'>{course?.courseName}</p>
                         <p className='text-[12px] md:text-xl text-[#F1F2FF]'>By <span className='text-[#FFD60A]'>{course?.instructor?.firstName} {course?.instructor?.lastName}</span></p>
                         <div className='flex gap-x-3  items-center'>
                             <span className='text-[#FFD60A]'>{avgReviewCount}</span>
                             <RatingStars Review_Count={avgReviewCount.length} />
                             <span className='md:block hidden md:text-xl text-[#F1F2FF]'> Ratings</span>
                         </div>
-                        <p className='text-sm md:text-xl text-green-500'><span className='text-red-500'>Rs. </span> {course?.price}/-</p>
+                        <p className='text-sm md:text-xl text-green-500'><span className='text-white'>Rs. </span> {course?.price}/-</p>
                     </div>
                 </div>
             </Link>
