@@ -191,8 +191,34 @@ return(
                             </Link>
                         )
                     }
+
                     {
                         token ? <ProfileDropdown/> : null
+                    }
+                    {
+                        token == null && (
+                            <Link to='/login' className='text-[#DBDDEA]' onClick={() => { dispatch(setProgress(100)) }} >
+                                <button className='cursor-pointer rounded-[8px] border border-[#2C333F] bg-[#161D29] px-[12px] py-[7px] text-[#AFB2BF]'>
+                                    Login
+                                </button>
+                            </Link>
+                        )
+                    }
+                    {
+                        token == null && (
+                            <Link to='/signup' className='text-[#DBDDEA]' onClick={() => { dispatch(setProgress(100)) }} >
+                                <button className='cursor-pointer rounded-[8px] border border-[#2C333F] bg-[#161D29] px-[12px] py-[7px] text-[#AFB2BF]' >
+                                    Signup
+                                </button>
+                            </Link>
+                        )
+                    }
+                    {
+                        token !== null && (
+                            <div className='pt-2' >
+                                <ProfileDropdown />
+                            </div>
+                        )
                     }
                 </div>
             </div>
