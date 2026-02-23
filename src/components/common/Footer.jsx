@@ -78,9 +78,9 @@ function Footer(){
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export {
     Footer
-}
+};
