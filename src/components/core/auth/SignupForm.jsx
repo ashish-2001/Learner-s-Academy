@@ -139,7 +139,7 @@ function SignupForm(){
                             />
                             <span onClick={() => setShowPassword((prev) => !prev)} className="absolute right-3 top-[38px] z-[10px] cursor-pointer">
                                 {showPassword ? (
-                                    <AiOutlineEyeInvisible fontSize={24} fill="#AFB@BF"/>
+                                    <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF"/>
                                 ): (
                                     <AiOutlineEye fontSize={24} fill="#AFB2BF"/>
                                 )}
