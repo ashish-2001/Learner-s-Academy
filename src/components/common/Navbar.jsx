@@ -113,7 +113,7 @@ return(
                     )
                 }
                 <div className={`flex md:hidden`}>
-                    <GiHamburgerMenu className={`w-16 h-8 fill-[#DBDDEA] `} onClick={showNav} />
+                    <GiHamburgerMenu className={`cursor-pointer w-16 h-8 fill-[#DBDDEA] `} onClick={showNav} />
                     <div ref={overlay} className=' fixed inset-0 z-30 bg hidden  bg-[rgba(0,0,0,0.5)] ' onClick={showNav}></div>
                     <div ref={show} className='mobNav z-50'>
                         <nav className='items-center flex flex-col absolute w-[200px] -left-[80px] -top-7  glass2'>
