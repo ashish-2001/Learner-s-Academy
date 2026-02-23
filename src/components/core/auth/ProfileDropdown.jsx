@@ -21,7 +21,7 @@ function ProfileDropdown(){
         return localStorage.setItem("token", null);
     };
 
-    return(
+    return (
         <button className="relative" onClick={() => setOpen(true)}>
             <div className="flex items-center gap-x-1">
                 <img 
