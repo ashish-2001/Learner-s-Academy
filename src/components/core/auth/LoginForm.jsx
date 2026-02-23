@@ -8,6 +8,7 @@ import { setProgress } from "../../../slices/loadingBarSlice";
 
 
 function LoginForm(){
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({ email: "", password: "" });
@@ -20,13 +21,13 @@ function LoginForm(){
         setFormData((prevData) => ({
             ...prevData,
             [e.target.name]: e.target.value
-        }))
-    }
+        }));
+    };
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
         dispatch(login(email, password, navigate));
-    }
+    };
 
     return (
         <form onSubmit={handleOnSubmit} className="mt-6 flex w-full flex-col gap-y-4 ">
@@ -78,10 +79,10 @@ function LoginForm(){
                 Sign in
             </button>
         </form>
-    )
-}
+    );
+};
 
 
 export {
     LoginForm
-}
+};
