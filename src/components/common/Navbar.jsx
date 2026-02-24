@@ -172,7 +172,7 @@ return(
                 </div>
 
                 <nav>
-                    <ul className=' flex-row gap-x-6 text-["#DBDDEA"] gap-5 hidden md:flex'>
+                    <ul className='flex-row gap-x-6 text-[#DBDDEA] gap-5 hidden md:flex'>
                         {
                             NavbarLinks?.map((element, index) => (
                                 <li key={index} >
@@ -182,7 +182,7 @@ return(
                                             <svg width="25px" height="20px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0)" stroke="#000000" strokeWidth="0.00024000000000000003"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" stroke="#CCCCCC" strokeWidth="0.384"></g><g id="SVGRepo_iconCarrier"> <path fillRule="evenodd" clipRule="evenodd" d="M4.29289 8.29289C4.68342 7.90237 5.31658 7.90237 5.70711 8.29289L12 14.5858L18.2929 8.29289C18.6834 7.90237 19.3166 7.90237 19.7071 8.29289C20.0976 8.68342 20.0976 9.31658 19.7071 9.70711L12.7071 16.7071C12.3166 17.0976 11.6834 17.0976 11.2929 16.7071L4.29289 9.70711C3.90237 9.31658 3.90237 8.68342 4.29289 8.29289Z" fill="#ffffff"></path> </g></svg>
 
                                             <div className='invisible absolute left-[50%] top-[50%] z-[1000] flex w-[200px] translate-x-[-50%] translate-y-[3em] flex-col rounded-lg bg-["#F1F2FF"] p-4 text-["#000814"] opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px]'>
-                                                <div className='absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-["#F1F2FF"]'></div>
+                                                <div className='absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-[#F1F2FF]'></div>
                                                 {
                                                     sublinks?.length < 0 ? (<div></div>) : (
                                                         sublinks?.map((element, index) => (
@@ -197,7 +197,7 @@ return(
                                             </div>
                                         </div>) : (
                                             <Link to={element?.path} onClick={() => { dispatch(setProgress(100)) }} >
-                                                <p className={`${matchRoutes(element?.path) ? " text-yellow-25" : " text-["#DBDDEA"] hidden md:block"}`} >
+                                                <p className={`${matchRoutes(element?.path) ? " text-yellow-25" : "text-[DBDDEA] hidden md:block"}`} >
                                                     {element?.title}
                                                 </p>
                                             </Link>
