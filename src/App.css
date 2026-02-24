@@ -35,7 +35,7 @@
     animation:inherit; 
     animation-duration: 1s;
     animation-direction: reverse;
-};
+}
 
 .custom-loader::after {
     margin:16px;
