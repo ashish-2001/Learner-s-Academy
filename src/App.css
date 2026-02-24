@@ -14,8 +14,14 @@
     border-color:#E4E4ED #0000;
     animation: s6 2s infinite linear;
 };
+#searchinput:focus {
+    width: 130px;
+    scale: 1;
+    transition: all 0.2s linear;
+    transform-origin: left;
+}
 
-#searchinput: focus + #searchicon {
+#searchinput:focus + #searchicon {
     transition: all 0.2s linear;
     scale: 1.1;
     transform: translate(21px, 2px);

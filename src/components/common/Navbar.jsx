@@ -15,7 +15,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 function Navbar(){
 
-     const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const { token } = useSelector(state => state.auth);
     const { user } = useSelector(state => state.profile);
