@@ -15,79 +15,79 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 function Navbar(){
 
-    const { token } = useSelector((state) => state.auth);
-    const { user } = useSelector((state) => state.profile);
-    const { totalItems } = useSelector((state) => state.cart);
-    
-    const [subLinks, setSubLinks] = useState([]);
-    const [searchValue, setSearchValue] = useState("");
+     const dispatch = useDispatch();
+
+    const { token } = useSelector(state => state.auth);
+    const { user } = useSelector(state => state.profile);
+    const { totalItems } = useSelector(state => state.cart);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
-    const [visible, setVisible] = useState(true);
-
+    const [visible, setVisible] = useState(true)
+    const [searchValue, setSearchValue] = useState("")
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const location = useLocation();
 
-    function matchRoute(route){
-        return matchPath({ path: route }, location.pathname)
-    };
-    
 
-    useEffect(()=> {
 
-        const cached = localStorage.getItem("subLinks");
-        if(cached){
-            setSubLinks(JSON.parse(cached));
-        };
-        (async () => {
-            try {
-                const result = await apiConnector("GET", categories.CATEGORIES_API);
-                if(Array.isArray(result?.data?.data)){
-                    setSubLinks(result.data.data);
-                    localStorage.setItem("subLinks", JSON.stringify(result.data.data));
-                }
-            } catch(error){
-                console.log("Could not fetch Categories.", error)
-            };
-        })();
-    }, []);
+    const location = useLocation()
+    const matchRoutes = (routes) => {
+        return matchPath({ path: routes }, location.pathname)
+    }
 
-    const show = useRef(null);
-    const overlay = useRef(null);
 
-    const showNav = () => {
+    const [sublinks, setsublinks] = useState([]);
+    const fetchSublinks = async () => {
+        try {
+            const result = await apiConnector("GET", categories.CATEGORIES_API);
+            if (result?.data?.data?.length > 0) {
+                setsublinks(result?.data?.data);
+            }
+            localStorage.setItem("sublinks", JSON.stringify(result.data.data));
 
-        if(window.innerWidth >= 768) return;
-        show.current?.classList.toggle("navshow");
-        overlay.current?.classList.toggle("hidden");
-    };
+        } catch (error) {
+            // setsublinks(JSON.parse(localStorage.getItem("sublinks")));
+            // console.log("could not fetch sublinks",localStorage.getItem("sublinks"));
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        fetchSublinks();
+    }, [])
 
+    const show = useRef();
+    const overlay = useRef();
+
+    const shownav = () => {
+        show.current.classList.toggle('navshow');
+        overlay.current.classList.toggle('hidden');
+    }
+
+
+
+    //handeling navbar scroll
     const handleScroll = () => {
-        const currentScrollPos = window.scrollY;
+        const currentScrollPos = window.scrollY
 
-        if(currentScrollPos > prevScrollPos){
-            setVisible(false);
-        } else{
-            setVisible(true);
-        };
+        if (currentScrollPos > prevScrollPos) {
+            setVisible(false)
+        } else {
+            setVisible(true)
+        }
 
-        setPrevScrollPos(currentScrollPos);
-    };
+        setPrevScrollPos(currentScrollPos)
+    }
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
 
-        return () => window.removeEventListener('scroll', handleScroll);
-    });
+        return () => window.removeEventListener('scroll', handleScroll)
+    })
 
-    const handleSearch = (e) => {
+    const handelSearch = (e) => {
         e.preventDefault();
-        if(searchValue.length > 0){
+        if (searchValue?.length > 0) {
             navigate(`/search/${searchValue}`);
             setSearchValue("");
-        };
-    };
-
+        }
+    }
 
 return(
     <div className={`flex sm:relative bg-[#000814] w-screen relative z-50 h-14 items-center justify-center border-b-[1px] border-b-[#2C333F] translate-y-3 transition-all duration-500`}>
@@ -112,14 +112,14 @@ return(
                     )
                 }
                 <div className={`flex md:hidden relative gap flex-row ${token !== null && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR ? "-left-12" : ""}`}>
-                    <GiHamburgerMenu className={`cursor-pointer w-16 h-8 fill-[#DBDDEA] absolute left-10 -bottom-4`} onClick={showNav} />
-                    <div ref={overlay} className='fixed top-0 bottom-0 left-0 right-0 z-30 hidden bg-[rgba(0,0,0,0.5)]' onClick={showNav}></div>
+                    <GiHamburgerMenu className={`cursor-pointer w-16 h-8 fill-[#DBDDEA] absolute left-10 -bottom-4`} onClick={shownav} />
+                    <div ref={overlay} className='fixed top-0 bottom-0 left-0 right-0 z-30 hidden bg-[rgba(0,0,0,0.5)]' onClick={shownav}></div>
                     <div ref={show} className='mobNav z-50'>
                         <nav className='items-center flex flex-col absolute w-[200px] -left-[80px] -top-7 glass2'>
                             {
                                 token == null && (
                                     <Link to='/login' className='' onClick={() => { dispatch(setProgress(100)) }} >
-                                        <button onClick={showNav} className='cursor-pointer mt-4 text-center text-[15px] px-6 py-2 rounded-md font-semibold bg-yellow-500 text-black hover:scale-95 transition-all duration-200'>
+                                        <button onClick={shownav} className='cursor-pointer mt-4 text-center text-[15px] px-6 py-2 rounded-md font-semibold bg-yellow-500 text-black hover:scale-95 transition-all duration-200'>
                                             Login
                                         </button>
                                     </Link>
@@ -128,7 +128,7 @@ return(
                             {
                                 token == null && (
                                     <Link to='/signup' className='text-yellow-500' onClick={() => { dispatch(setProgress(100)) }} >
-                                        <button onClick={showNav} className=' cursor-pointer mt-4 text-center text-[15px] px-5 py-2 rounded-md font-semibold bg-yellow-500 text-black hover:scale-95 transition-all duration-200' >
+                                        <button onClick={shownav} className=' cursor-pointer mt-4 text-center text-[15px] px-5 py-2 rounded-md font-semibold bg-yellow-500 text-black hover:scale-95 transition-all duration-200' >
                                             Signup
                                         </button>
                                     </Link>
@@ -146,9 +146,9 @@ return(
                             <p className='text-xl text-yellow-50 font-semibold'>Courses</p>
                             <div>
                                 {
-                                    subLinks?.length < 0 ? (<div></div>) : (
-                                        subLinks?.map((element, index) => (
-                                        <Link to={`/catalog/${element?.name}`} key={index} onClick={() => {dispatch(setProgress(30)); showNav() }} className="p-2 text-sm">
+                                    sublinks?.length < 0 ? (<div></div>) : (
+                                        sublinks?.map((element, index) => (
+                                        <Link to={`/catalog/${element?.name}`} key={index} onClick={() => {dispatch(setProgress(30)); shownav() }} className="p-2 text-sm">
                                             <p className="text-[#F1F2FF]">
                                                 {element?.name}                                          
                                             </p>
@@ -157,12 +157,12 @@ return(
                                 }
                             </div>
                             <div className="mt-4 mb-4 bg-[#DBDDEA] w-[200px] h-[2px]"></div>
-                            <Link to={"/about"} onClick={() => { dispatch(setProgress(100)); showNav() }} className="p-2">
+                            <Link to={"/about"} onClick={() => { dispatch(setProgress(100)); shownav() }} className="p-2">
                                 <p className="text-[#F1F2FF]">
                                     About
                                 </p>
                             </Link>
-                            <Link to={'/contact'} onClick={() => { dispatch(setProgress(100)); showNav()}} className="p-2">
+                            <Link to={'/contact'} onClick={() => { dispatch(setProgress(100)); shownav()}} className="p-2">
                                 <p className="text-[#F1F2FF]">
                                     Contact
                                 </p>
