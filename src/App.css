@@ -15,6 +15,12 @@
     animation: s6 2s infinite linear;
 };
 
+#searchinput: focus + #searchicon {
+    transition: all 0.2s linear;
+    scale: 1.1;
+    transform: translate(21px, 2px);
+}
+
 .custom-loader::before,
 .custom-loader::after {    
     content:"";
