@@ -30,7 +30,7 @@
 .mobNav {
     transition: all;
     transition: 500ms;
-    transform: translate(100vw);
+    transform: translateX(100vw);
 }
 
 .mobNav.navshow {
