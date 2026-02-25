@@ -90,7 +90,8 @@ function Navbar(){
 return(
     <div className={`flex sm:relative bg-[#000814] w-screen relative z-50 h-14 items-center justify-center border-b-[1px] border-b-[#2C333F] translate-y-3 transition-all duration-500`}>
         <div className='flex max-w-["1260px"] items-center justify-between'>
-            <Link to='/' onClick={() => { dispatch(setProgress(100)) }}>
+            <div>
+                <Link to='/' onClick={() => { dispatch(setProgress(100)) }}>
                 <img src={Learners_Academy} width={160} alt="Learners-Academy" height={42} className="h-[45px] w-[50px] rounded-full"/>
             </Link>    
                 {
@@ -109,6 +110,7 @@ return(
                         </div>
                     )
                 }
+            </div>
                 <div className={`flex md:hidden relative flex-row ${token !== null && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR ? "" : ""}`}>
                     <GiHamburgerMenu className={`cursor-pointer w-8 h-8 fill-[#DBDDEA] absolute -bottom-4`} onClick={shownav}/>
                     <div ref={overlay} className='fixed top-0 bottom-0 left-0 right-0 z-30 hidden bg-[rgba(0,0,0,0.5)]' onClick={shownav}></div>
