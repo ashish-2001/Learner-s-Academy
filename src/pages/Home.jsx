@@ -53,14 +53,14 @@ function Home() {
     
 return (
     <div>
-        <div className=' mx-auto relative flex flex-col w-11/12 items-center justify-between text-white '>
-                <Link onClick={()=>{dispatch(setProgress(100))}}  to={"/signup"}>
-            <div className=' group p-1 mx-auto rounded-full bg-[#161D29] font-bold transition-all duration-200 hover: scale-95 w-fit max-w-[1260px]'>
-                <div className='flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-[#000814]'>
-                    <p>Become an Instructor</p>
-                    <FaArrowRight/>
+        <div className='mx-auto relative flex flex-col w-11/12 items-center justify-between text-white mt-3'>
+            <Link onClick={()=>{dispatch(setProgress(100))}}  to={"/signup"}>
+                <div className=' group p-1 mx-auto rounded-full bg-[#161D29] font-bold transition-all duration-200 hover: scale-95 w-fit max-w-[1260px]'>
+                    <div className='flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-[#000814]'>
+                        <p>Become an Instructor</p>
+                        <FaArrowRight/>
+                    </div>
                 </div>
-            </div>
             </Link>
 
             <div className='text-center text-3xl md:text-4xl font-semibold mt-7'>
