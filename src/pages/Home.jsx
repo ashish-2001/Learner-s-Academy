@@ -78,7 +78,7 @@ return (
             </div>
 
             <div className='mx-3 my-15 shadow-[#118AB2] shadow-[100_-5px_50px_-5px] w-[70%]'>
-                <div className='relative w-[772.95px] h-[457.05px] left-[calc(50%-372.95px/2-76.53px)] top-[calc(18%-257.05px/2-47.47px)] bg-[linear-gradient(118.19deg,#1FA2FF_-3.62%,#12D8FA_50.44%,#A6FFCB_104.51%)] opacity-20 blur-[34px] [transform:matrix(1,0,-0.03,1,0,0)] z-0'></div>
+                <div className='relative w-[772.95px] h-[457.05px] left-[calc(50%-320.95px/2-76.53px)] top-[calc(18%-257.05px/2-47.47px)] bg-[linear-gradient(118.19deg,#1FA2FF_-3.62%,#12D8FA_50.44%,#A6FFCB_104.51%)] opacity-20 blur-[34px] [transform:matrix(1,0,-0.03,1,0,0)] z-0'></div>
                 <video className='absolute h-[480px] top-[330px]'
                     muted
                     loop
