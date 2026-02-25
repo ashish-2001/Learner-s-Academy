@@ -109,9 +109,9 @@ return(
                         </div>
                     )
                 }
-                <div className={`flex md:hidden relative gap flex-row ${token !== null && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR ? "" : ""}`}>
-                    <GiHamburgerMenu className={`cursor-pointer w-8 h-8 fill-[#DBDDEA] absolute -bottom-4`} onClick={shownav}/>
-                    <div ref={overlay} className='fixed top-0 bottom-0 left-0 right-0 z-30 hidden bg-[rgba(0,0,0,0.5)]' onClick={shownav}></div>
+                <div className={`flex md:hidden relative flex-row ${token !== null && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR ? "" : ""}`}>
+                    <GiHamburgerMenu className={`cursor-pointer fill-[#DBDDEA] absolute -bottom-4`} onClick={shownav}/>
+                    <div ref={overlay} className='fixed w-screen h-screen z-30 hidden bg-[rgba(0,0,0,0.5)]' onClick={shownav}></div>
                     <div ref={show} className='mobNav z-50 bg-[rgba(0,0,0,0.5)]'>
                         <nav className='items-center flex flex-col absolute w-[200px] -left-[0px] -top-7 glass2'>
                             {
