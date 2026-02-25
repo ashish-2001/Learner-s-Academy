@@ -125,7 +125,7 @@ return(
                             {
                                 token == null && (
                                     <Link to='/signup' className='text-yellow-500' onClick={() => { dispatch(setProgress(100)) }} >
-                                        <button onClick={shownav} className=' cursor-pointer mt-4 text-center text-[15px] px-5 py-2 rounded-md font-semibold bg-yellow-500 text-black hover:scale-95 transition-all duration-200' >
+                                        <button onClick={shownav} className=' cursor-pointer mt-4 text-center text-[15px] px-5 py-2 rounded-md font-semibold bg-yellow-500 text-black hover:scale-0.2 transition-all duration-200' >
                                             Signup
                                         </button>
                                     </Link>
