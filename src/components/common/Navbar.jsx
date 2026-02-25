@@ -109,7 +109,7 @@ return(
                         </div>
                     )
                 }
-                <div className={`flex md:hidden relative flex-row ${token !== null && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR ? "" : ""}`}>
+                <div className={`flex md:hidden relative justify-between ${token !== null && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR ? "" : ""}`}>
                     <GiHamburgerMenu className={`cursor-pointer w-8 h-8 fill-[#DBDDEA] absolute -bottom-4`} onClick={shownav}/>
                     <div ref={show} className='mobNav z-50 bg-[rgba(0,0,0,0.5)]'>
                         <nav className='items-center justify-center flex flex-col absolute w-[200px] -left-[0px] -top-7 glass2'>
