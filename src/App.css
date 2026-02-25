@@ -33,6 +33,15 @@
     transform: translateX(100vw);
 }
 
+.glass2{
+    background: rgba(13, 18, 30, 0.75);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(7.3px);
+    -webkit-backdrop-filter: blur(7.3px);
+    border: 1px solid rgba(13, 18, 30, 0.3);
+}
+
 .mobNav.navshow {
     transition: all;
     transition: 500ms;
