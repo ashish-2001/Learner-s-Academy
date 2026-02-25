@@ -27,13 +27,13 @@
     transform: translate(21px, 2px);
 }
 
-.mobnav {
+.mobNav {
     transition: all;
     transition: 500ms;
     transform: translate(100vw);
 }
 
-.mobnav.navshow {
+.mobNav.navshow {
     transition: all;
     transition: 500ms;
     transform: translateX(0vw)
