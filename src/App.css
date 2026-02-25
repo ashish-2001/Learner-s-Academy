@@ -27,6 +27,18 @@
     transform: translate(21px, 2px);
 }
 
+.mobnav {
+    transition: all;
+    transition: 500ms;
+    transform: translate(100vw);
+}
+
+.mobnav.navshow {
+    transition: all;
+    transition: 500ms;
+    transform: translateX(0vw)
+}
+
 .custom-loader::before,
 .custom-loader::after {    
     content:"";

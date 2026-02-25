@@ -43,8 +43,6 @@ function Navbar(){
             localStorage.setItem("sublinks", JSON.stringify(result.data.data));
 
         } catch (error) {
-            // setsublinks(JSON.parse(localStorage.getItem("sublinks")));
-            // console.log("could not fetch sublinks",localStorage.getItem("sublinks"));
             console.log(error);
         }
     }
