@@ -56,7 +56,7 @@ function Navbar(){
     const overlay = useRef();
 
     const shownav = () => {
-        show.current.classList.toggle('shownav');
+        show.current.classList.toggle('navshow');
         overlay.current.classList.toggle('hidden');
     }
 
