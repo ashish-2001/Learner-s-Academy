@@ -11,21 +11,18 @@ import { setProgress } from "../../slices/loadingBarSlice";
 import { HiSearch } from "react-icons/hi";
 import { TiShoppingCart } from "react-icons/ti";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useOnClickOutside } from "../../hooks/useOnClickOutside.jsx";
 
 
 function Navbar(){
 
-    const [visible, setVisible] = useState(true);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [prevScrollPos, setPrevScrollPos] = useState(0);
-    const [searchValue, setSearchValue] = useState("")
-
     const dispatch = useDispatch();
-    const menuRef = useRef(null);
+
     const { token } = useSelector(state => state.auth);
     const { user } = useSelector(state => state.profile);
     const { totalItems } = useSelector(state => state.cart);
+    const [prevScrollPos, setPrevScrollPos] = useState(0);
+    const [visible, setVisible] = useState(true)
+    const [searchValue, setSearchValue] = useState("")
     const navigate = useNavigate();
 
 
@@ -33,11 +30,8 @@ function Navbar(){
     const location = useLocation()
     const matchRoutes = (routes) => {
         return matchPath({ path: routes }, location.pathname)
-    };
+    }
 
-    useOnClickOutside(menuRef, () => {
-        setIsMenuOpen(false);
-    });
 
     const [sublinks, setsublinks] = useState([]);
     const fetchSublinks = async () => {
@@ -118,9 +112,9 @@ return(
                     )
                 }
                 <div className={`flex md:hidden relative gap flex-row ${token !== null && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR ? "-left-12" : ""}`}>
-                    <GiHamburgerMenu className={`cursor-pointer w-16 h-8 fill-[#DBDDEA] absolute left-10 -bottom-4`} onClick={() => setIsMenuOpen(true)} />
+                    <GiHamburgerMenu className={`cursor-pointer w-16 h-8 fill-[#DBDDEA] absolute left-10 -bottom-4`} onClick={shownav} />
                     <div ref={overlay} className='fixed top-0 bottom-0 left-0 right-0 z-30 hidden bg-[rgba(0,0,0,0.5)]' onClick={shownav}></div>
-                    <div ref={menuRef} className={`mobNav z-50 ${isMenuOpen ? "navshow" : ""}`}>
+                    <div ref={show} className='mobNav z-50'>
                         <nav className='items-center flex flex-col absolute w-[200px] -left-[80px] -top-7 glass2'>
                             {
                                 token == null && (
