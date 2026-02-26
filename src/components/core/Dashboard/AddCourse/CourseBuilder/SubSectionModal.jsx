@@ -27,7 +27,7 @@ function SubSectionModal({
         handleSubmit,
         formState: { 
             errors 
-        }, 
+        },
         setValue,
         getValues
     } = useForm();
