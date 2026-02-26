@@ -4,6 +4,7 @@ import { useFormContext } from 'react-hook-form';
 
 
 const RequirementField = ({ name, label }) => {
+
     const [requirement, setRequirement] = useState("");
     const [requirementList, setRequirementList] = useState([]);
     const {editCourse, course} = useSelector((state) => state.course);
@@ -44,7 +45,7 @@ const RequirementField = ({ name, label }) => {
         setRequirementList(updatedRequirementList);
     };
 
-return (
+    return (
         <div className=''>
             <label className='text-sm text-[#F1F2FF]' htmlFor={name}>{label}<sup className='text-[#EF476F]'>*</sup></label>
             <div>
