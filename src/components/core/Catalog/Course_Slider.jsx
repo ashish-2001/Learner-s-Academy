@@ -36,7 +36,8 @@ function Course_Slider({ courses }){
                         300: { slidesPerView:2.1, spaceBetween:10},
                         640: { slidesPerView: 2.2 },
                         1024: { slidesPerView: 3.1 }
-                }}
+                    }
+                }
                 className="max-h-[30rem]">
                     {courses?.map((course, index) => (
                         <SwiperSlide key={index}>
