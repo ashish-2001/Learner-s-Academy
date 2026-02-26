@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import "video-react/dist/video-react.css";
 import { Player } from "video-react";
 
- function Upload({
+function Upload({
   name,
   label,
   register,
@@ -15,7 +15,7 @@ import { Player } from "video-react";
   video = false,
   viewData = null,
   editData = null,
-}) {
+}){
   const { course } = useSelector((state) => state.course);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewSource, setPreviewSource] = useState(
