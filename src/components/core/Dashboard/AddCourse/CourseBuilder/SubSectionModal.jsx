@@ -160,7 +160,7 @@ function SubSectionModal({
                             </span>
                         )}
                     </div>
-                    {!view && (
+                    { !view && (
                         <div className="flex justify-end">
                             <IconBtn text={loading ? "Loading..." : edit ? "Save Changes" : "Save"}
                             />
