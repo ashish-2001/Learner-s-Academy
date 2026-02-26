@@ -29,7 +29,7 @@ const ChipInput = ({ name, label, register, errors, setValue }) => {
         };
     }, []);
 
-return (
+    return (
         <div>
             <label className='text-sm text-[#F1F2FF]' htmlFor={name}>{label}<sup className='text-[#EF476F]'>*</sup></label>
             <div className='flex flex-wrap gap-2 m-2'>
