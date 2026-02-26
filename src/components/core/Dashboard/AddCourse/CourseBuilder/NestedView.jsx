@@ -9,7 +9,7 @@ import { useState } from "react";
 import { VscAdd, VscEdit, VscTrash, VscTriangleDown } from "react-icons/vsc";
 
 function NestedView({ handleChangeEditSectionName }){
-    
+
     const { course } = useSelector((state) => state.course);
     const { token } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
@@ -80,7 +80,6 @@ function NestedView({ handleChangeEditSectionName }){
                         <div className="px-6 pb-4">
                             {
                                 section.subSection.map((subSection) => (
-                                
                                     <div 
                                         key={subSection?.id} 
                                         onClick={(e) => {
