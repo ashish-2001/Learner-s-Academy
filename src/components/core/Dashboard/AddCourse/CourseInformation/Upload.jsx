@@ -100,18 +100,18 @@ const Upload = ({ name, label }) => {
           <li>Recommended size 1024x576</li>
         </ul>
       </div>
-    </div>
-      </label>
-        {
-          errors[name] && (
-          <span className='ml-2 text-xs tracking-wide text-[#EF476F]'>
-            {label} is required**
-          </span>)  
-        }
       </div>
-    ) 
-  }
-</div>
+        </label>
+          {
+            errors[name] && (
+            <span className='ml-2 text-xs tracking-wide text-[#EF476F]'>
+              {label} is required**
+            </span>)  
+          }
+        </div>
+      ) 
+    }
+  </div>
 )};
 
 export {
