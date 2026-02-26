@@ -64,7 +64,7 @@ const ContactUsForm = () => {
     };
 
 return (
-    loading ? (<div className=".custom-loader w-[100%] pt-[30%] pb-[30%]"><div className="custom-loader"></div></div>) : (
+    loading ? (<div className="custom-loader w-[100%] pt-[30%] pb-[30%]"><div className="custom-loader"></div></div>) : (
         <div>
             <form onSubmit={handleSubmit(onSubmit)} className={"flex flex-col gap-7"}>
                 <div className="flex flex-col gap-5 lg:flex-row">
