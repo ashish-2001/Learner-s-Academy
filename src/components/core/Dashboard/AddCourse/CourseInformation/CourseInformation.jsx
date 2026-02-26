@@ -187,7 +187,6 @@ const CourseInformationForm = () => {
                 )}
             </div>
 
-            {/* custom component for handling tags input */}
             <ChipInput
                 label="Tags"
                 name="courseTags"
@@ -198,7 +197,6 @@ const CourseInformationForm = () => {
                 getValues = {getValues}
             />
 
-            {/*component for uploading and showing preview of media */}
             <Upload
                 name={"thumbnailImage"}
                 label={"Course Thumbnail"}
@@ -207,7 +205,6 @@ const CourseInformationForm = () => {
                 setValue={setValue}
             />
             
-            {/*     Benefits of the Course */}
             <div className='flex flex-col space-y-2'>
                 <label className='text-sm text-[#F1F2FF]'>Benefits of the course<sup className='text-[#EF476F]'>*</sup></label>
                 <textarea
