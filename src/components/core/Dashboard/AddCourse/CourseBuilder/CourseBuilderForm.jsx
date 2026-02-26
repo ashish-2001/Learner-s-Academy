@@ -11,11 +11,11 @@ import { createSection, updateSection } from "../../../../../services/operations
 
 const CourseBuilderForm = () => {
   
-  const [editSectionName, setEditSectionName] = useState(false);
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const { course } = useSelector((state) => state.course);
   const { token } = useSelector((state) => state.auth);
+  const [editSectionName, setEditSectionName] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const goNext = () => {
     if (course.courseContent.length > 0) {
@@ -50,7 +50,7 @@ const CourseBuilderForm = () => {
         },
         token
       );
-    } else {
+    } else{
       result = await createSection(
         {
           sectionName: data.sectionName,
