@@ -77,6 +77,7 @@ function SubSectionModal({
 
 
     const onSubmit = async (data) => {
+        setLoading(true);
         if(view){
             return;
         };
