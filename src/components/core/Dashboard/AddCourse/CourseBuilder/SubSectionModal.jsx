@@ -71,7 +71,6 @@ function SubSectionModal({
         if(result){
             dispatch(setCourse(result));
         }
-
         setModalData(null);
     };
 
