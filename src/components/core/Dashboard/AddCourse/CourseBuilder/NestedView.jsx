@@ -9,6 +9,7 @@ import { useState } from "react";
 import { VscAdd, VscEdit, VscTrash, VscTriangleDown } from "react-icons/vsc";
 
 function NestedView({ handleChangeEditSectionName }){
+    
     const { course } = useSelector((state) => state.course);
     const { token } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
