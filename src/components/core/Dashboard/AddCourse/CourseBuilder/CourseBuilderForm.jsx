@@ -4,17 +4,10 @@ import { useState } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import {
-  setCourse,
-  setEditCourse,
-  setStep,
-} from "../../../../../slices/courseSlice";
+import { setCourse, setEditCourse, setStep } from "../../../../../slices/courseSlice";
 import { NestedView } from "./NestedView";
 import { toast } from "react-hot-toast";
-import {
-  createSection,
-  updateSection,
-} from "../../../../../services/operations/courseDetailsAPI";
+import { createSection, updateSection } from "../../../../../services/operations/courseDetailsAPI";
 
 const CourseBuilderForm = () => {
   const { token } = useSelector((state) => state.auth);
