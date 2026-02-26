@@ -29,7 +29,7 @@ return (
                         <div className='flex gap-x-3  items-center'>
                             <span className='text-[#FFD60A]'>{avgReviewCount}</span>
                             <RatingStars Review_Count={avgReviewCount.length} />
-                            <span className='md:block hidden md:text-xl text-[#F1F2FF]'> Ratings</span>
+                            <span className='md:block hidden md:text-xl text-[#F1F2FF]'>Ratings</span>
                         </div>
                         <p className='text-sm md:text-xl text-white'><span className='text-white'>Rs. </span> {course?.price}/-</p>
                     </div>
