@@ -25,7 +25,9 @@ function SubSectionModal({
     const {
         register,
         handleSubmit,
-        formState: { errors }, 
+        formState: { 
+            errors 
+        }, 
         setValue,
         getValues
     } = useForm();
