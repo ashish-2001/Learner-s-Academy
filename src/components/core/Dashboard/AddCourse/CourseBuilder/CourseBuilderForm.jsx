@@ -10,11 +10,12 @@ import { toast } from "react-hot-toast";
 import { createSection, updateSection } from "../../../../../services/operations/courseDetailsAPI";
 
 const CourseBuilderForm = () => {
-  const { token } = useSelector((state) => state.auth);
+  
   const [editSectionName, setEditSectionName] = useState(false);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const { course } = useSelector((state) => state.course);
+  const { token } = useSelector((state) => state.auth);
 
   const goNext = () => {
     if (course.courseContent.length > 0) {
@@ -23,10 +24,10 @@ const CourseBuilderForm = () => {
       ) {
         dispatch(setStep(3));
       } else {
-        toast.error("Please add at least one lesson to each section");
+        toast.error("Please add at least one lesson to each section to continue!");
       }
     } else {
-      toast.error("Please add at least one section to continue");
+      toast.error("Please add at least one section to continue!");
     };
   };
 
@@ -34,7 +35,6 @@ const CourseBuilderForm = () => {
     register,
     handleSubmit,
     setValue,
-    getValues,
     formState: { errors },
   } = useForm();
 
