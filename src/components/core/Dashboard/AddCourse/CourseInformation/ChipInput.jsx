@@ -6,10 +6,9 @@ import { useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 
 const ChipInput = ({ name, label, register, errors, setValue }) => {
+
     const [tags, setTags] = useState([]);
     const {editCourse, course} = useSelector((state) => state.course);
-
-    
 
     useEffect(()=> {
         register(name, {
@@ -21,7 +20,6 @@ const ChipInput = ({ name, label, register, errors, setValue }) => {
                 const parsedTags = Array.isArray(course?.tag)
                 ? course.tag
                 : JSON.parse(course?.tag || "[]");
-
                 setTags(parsedTags);
                 setValue(name, parsedTags);
             } catch(error){
@@ -74,7 +72,6 @@ return (
         />
         {
             errors[name] && <span className='text-xs text-[#EF476F]'>Tags are required</span>
-            
         }
         </div>
     );
