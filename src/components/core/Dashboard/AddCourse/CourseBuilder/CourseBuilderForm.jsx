@@ -60,7 +60,7 @@ const CourseBuilderForm = () => {
         token
       );
     };
-    if (result) {
+    if(result) {
       dispatch(setCourse(result));
       setValue("sectionName", "");
       setEditSectionName(false);
