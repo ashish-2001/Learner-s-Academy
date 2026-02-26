@@ -21,8 +21,9 @@ function Upload({
   const [previewSource, setPreviewSource] = useState(
     viewData ? viewData : editData ? editData : ""
   );
-  const inputRef = useRef(null);
 
+  const inputRef = useRef(null);
+  
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
     if (file) {
