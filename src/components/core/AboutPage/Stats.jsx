@@ -15,16 +15,17 @@ function StatsComponent(){
                     {
                         Stats.map((data, index) => {
                             return (
-                            <div className="flex flex-col py-10" key={index}>
-                                <h1 className="text-[30px] font-bold text-[#F1F2FF]">
-                                    {data.count}
-                                </h1>
-                                <h2 className="font-semibold text-[16px] text-[#585D69]">
-                                    {data.label}
-                                </h2>
-                            </div>
-                        )
-                    })}
+                                <div className="flex flex-col py-10" key={index}>
+                                    <h1 className="text-[30px] font-bold text-[#F1F2FF]">
+                                        {data.count}
+                                    </h1>
+                                    <h2 className="font-semibold text-[16px] text-[#585D69]">
+                                        {data.label}
+                                    </h2>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
             </div>
         </section>
