@@ -23,7 +23,7 @@ function Upload({
   );
 
   const inputRef = useRef(null);
-  
+
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
     if (file) {
@@ -114,7 +114,7 @@ function Upload({
           </label>
         )}
       </div>
-      {errors[name] && (
+      { errors[name] && (
         <span className="ml-2 text-xs tracking-wide text-[#EF476F]">
           {label} is required
         </span>
