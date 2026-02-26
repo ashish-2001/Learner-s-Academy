@@ -12,8 +12,7 @@ const ChipInput = ({ name, label, register, errors, setValue }) => {
 
     useEffect(()=> {
         register(name, {
-            required:true,
-            // validate: (value) => value.length > 0
+            required:true
         });
         if(editCourse ) {
             try{
